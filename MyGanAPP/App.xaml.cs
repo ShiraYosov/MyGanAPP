@@ -13,6 +13,13 @@ namespace MyGanAPP
             MainPage = new MainPage();
         }
 
+        public static bool IsDevEnv
+        {
+            get
+            {
+                return true;
+            }
+        }
         protected override void OnStart()
         {
         }
