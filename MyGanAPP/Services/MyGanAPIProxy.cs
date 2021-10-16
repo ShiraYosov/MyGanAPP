@@ -34,7 +34,7 @@ namespace MyGanApp.Services
         {
             string baseUri;
             string basePhotosUri;
-
+            
             if (App.IsDevEnv)
             {
                 if (Device.RuntimePlatform == Device.Android)
