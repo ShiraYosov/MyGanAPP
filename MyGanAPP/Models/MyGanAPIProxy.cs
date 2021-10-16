@@ -31,6 +31,7 @@ namespace MyGanAPP.Services
         private static MyGanAPIProxy proxy = null;
 
         public static MyGanAPIProxy CreateProxy()
+
         {
             string baseUri;
             string basePhotosUri;
@@ -79,6 +80,7 @@ namespace MyGanAPP.Services
             this.basePhotosUri = basePhotosUri;
         }
 
+
         //Login - if email and password are correct User object is returned. otherwise a null will be returned
         public async Task<User> LoginAsync(string email, string pass)
         {
@@ -108,4 +110,3 @@ namespace MyGanAPP.Services
         }
     }
 }
-
