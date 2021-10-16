@@ -9,11 +9,11 @@ namespace MyGanAPP
 {
     public partial class App : Application
     {
-        public User CurrentUser { get; set; }
+        public User User { get; set; }
         public App()
         {
             InitializeComponent();
-            CurrentUser = null;
+            User = null;
             
             MainPage = new LoginView();
            
