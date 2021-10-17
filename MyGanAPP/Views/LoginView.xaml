@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Login" TextColor="Black" FontSize="50" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
-
+           
 
             <Grid RowSpacing="40" >
                 <Grid.RowDefinitions>
@@ -19,12 +19,12 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Entry x:Name="email" Placeholder="Please enter Email" Text="{Binding Email}" TextColor="Black" Grid.Row="1" Grid.Column="0"/>
-                <Entry x:Name="pass" Placeholder="Please enter Password" IsPassword="True" TextColor="Black" Text="{Binding Password}" Grid.Row="2" Grid.Column="0"/>
+                <Entry x:Name="email" Placeholder="הכנס כתובת אימייל" Text="{Binding Email}" TextColor="Black" Grid.Row="1" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                <Entry x:Name="pass" Placeholder="הכנס סיסמא" IsPassword="True" TextColor="Black" Text="{Binding Password}" Grid.Row="2" Grid.Column="0" HorizontalTextAlignment="Center"/>
             </Grid>
 
-            <Frame HeightRequest = "50" Padding="4" CornerRadius="25" WidthRequest = "100" HorizontalOptions="Center" VerticalOptions="Center">
-                <Button x:Name="submit" Text="Submit" CornerRadius="25"  Command="{Binding LoginCommand}" HorizontalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="White" BackgroundColor="Black"/>
+            <Frame HeightRequest = "50" Padding="4" CornerRadius="25" WidthRequest = "110" HorizontalOptions="Center" VerticalOptions="Center">
+                <Button x:Name="submit" Text="התחברות" CornerRadius="25"  Command="{Binding LoginCommand}" HorizontalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="White" BackgroundColor="Black"/>
             </Frame>
 
             <Label x:Name="msg" Text="{Binding Message}" HorizontalOptions="Center" TextColor="Red" FontSize="30"/>

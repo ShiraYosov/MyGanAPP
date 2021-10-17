@@ -5,13 +5,13 @@ namespace MyGanAPP.Models
 {
     public partial class User
     {
-        public User()
-        {
-            Groups = new HashSet<Group>();
-            KindergartenManagers = new HashSet<KindergartenManager>();
-            Signatures = new HashSet<Signature>();
-            StudentOfUsers = new HashSet<StudentOfUser>();
-        }
+        //public User()
+        //{
+        //    Groups = new HashSet<Group>();
+        //    KindergartenManagers = new HashSet<KindergartenManager>();
+        //    Signatures = new HashSet<Signature>();
+        //    StudentOfUsers = new HashSet<StudentOfUser>();
+        //}
 
         public int UserId { get; set; }
         public string Email { get; set; }
@@ -21,9 +21,9 @@ namespace MyGanAPP.Models
         public string PhoneNumber { get; set; }
         public bool IsSystemManager { get; set; }
 
-        public virtual ICollection<Group> Groups { get; set; }
-        public virtual ICollection<KindergartenManager> KindergartenManagers { get; set; }
-        public virtual ICollection<Signature> Signatures { get; set; }
-        public virtual ICollection<StudentOfUser> StudentOfUsers { get; set; }
+        //public virtual ICollection<Group> Groups { get; set; }
+        //public virtual ICollection<KindergartenManager> KindergartenManagers { get; set; }
+        //public virtual ICollection<Signature> Signatures { get; set; }
+        //public virtual ICollection<StudentOfUser> StudentOfUsers { get; set; }
     }
 }

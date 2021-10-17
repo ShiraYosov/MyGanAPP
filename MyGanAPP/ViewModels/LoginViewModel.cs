@@ -96,7 +96,7 @@ namespace MyGanAPP.ViewModels
                     PhoneNumber=u.PhoneNumber
                 };
 
-                this.Message = "Logged in!";
+                this.Message = "הנך מחובר למערכת";
                 //Page p = new UsersPageView();
 
                 //await a.MainPage.Navigation.PushAsync(p);
@@ -104,7 +104,7 @@ namespace MyGanAPP.ViewModels
             }
             else
             {
-                this.Message = "INVALID USER INFO!";
+                this.Message = "פרטי משתמש אינם נכונים!";
             }
 
         }

@@ -11,6 +11,7 @@ using System.Text.Encodings.Web;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.IO;
+using MyGanAPP;
 
 namespace MyGanApp.Services
 {
@@ -34,7 +35,7 @@ namespace MyGanApp.Services
         {
             string baseUri;
             string basePhotosUri;
-            
+
             if (App.IsDevEnv)
             {
                 if (Device.RuntimePlatform == Device.Android)
@@ -81,6 +82,7 @@ namespace MyGanApp.Services
         }
 
         public string GetBasePhotoUri() { return this.basePhotosUri; }
+
 
         //Login!
         public async Task<User> LoginAsync(string email, string pass)
