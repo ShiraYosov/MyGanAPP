@@ -21,9 +21,9 @@ namespace MyGanAPP.Services
         private const string DEV_ANDROID_EMULATOR_URL = "http://10.0.2.2:34516/MyGanAPI"; //API url when using emulator on android
         private const string DEV_ANDROID_PHYSICAL_URL = "http://10.58.55.60:34516/MyGanAPI"; //API url when using physucal device on android
         private const string DEV_WINDOWS_URL = "https://localhost:44351/MyGanAPI"; //API url when using windoes on development
-        private const string DEV_ANDROID_EMULATOR_PHOTOS_URL = "http://10.0.2.2:34516/Images/"; //API url when using emulator on android
-        private const string DEV_ANDROID_PHYSICAL_PHOTOS_URL = "http://10.58.55.60:34516/Images/"; //API url when using physucal device on android
-        private const string DEV_WINDOWS_PHOTOS_URL = "https://localhost:44351/Images/"; //API url when using windoes on development
+        private const string DEV_ANDROID_EMULATOR_PHOTOS_URL = "http://10.0.2.2:34516/KidsPhotos/"; //API url when using emulator on android
+        private const string DEV_ANDROID_PHYSICAL_PHOTOS_URL = "http://10.58.55.60:34516/KidsPhotos/"; //API url when using physucal device on android
+        private const string DEV_WINDOWS_PHOTOS_URL = "https://localhost:44351/KidsPhotos/"; //API url when using windoes on development
 
         private HttpClient client;
         private string baseUri;

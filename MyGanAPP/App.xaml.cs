@@ -21,6 +21,7 @@ namespace MyGanAPP
         public App()
         {
             InitializeComponent();
+
             User = null;
             
             MainPage = new LoginView();

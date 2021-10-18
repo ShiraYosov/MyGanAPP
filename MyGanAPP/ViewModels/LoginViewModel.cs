@@ -94,6 +94,11 @@ namespace MyGanAPP.ViewModels
                     Password=u.Password,
                     IsSystemManager=u.IsSystemManager,
                     PhoneNumber=u.PhoneNumber
+                    //Groups= u.Groups,
+                    //KindergartenManagers=u.KindergartenManagers,
+                    //Signatures=u.Signatures,
+                    //StudentOfUsers=u.StudentOfUsers
+                    
                 };
 
                 this.Message = "הנך מחובר למערכת";

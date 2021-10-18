@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MyGanApp.Services;
 
 
 namespace MyGanAPP.Models
@@ -8,8 +9,8 @@ namespace MyGanAPP.Models
     {
         public Student()
         {
-            StudentAllergies = new HashSet<StudentAllergy>();
-            StudentOfUsers = new HashSet<StudentOfUser>();
+            StudentAllergies = new List<StudentAllergy>();
+            StudentOfUsers = new List<StudentOfUser>();
         }
 
         public int StudentId { get; set; }
@@ -24,7 +25,17 @@ namespace MyGanAPP.Models
 
         public virtual Grade Grade { get; set; }
         public virtual Group Group { get; set; }
-        public virtual ICollection<StudentAllergy> StudentAllergies { get; set; }
-        public virtual ICollection<StudentOfUser> StudentOfUsers { get; set; }
+        public virtual List<StudentAllergy> StudentAllergies { get; set; }
+        public virtual List<StudentOfUser> StudentOfUsers { get; set; }
+
+        public string PhotoURL
+        {
+            get
+            {
+                MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
+                string url = $"{proxy.BaseKidsPhotosUri}{this.StudentId}.jpg";
+                return url;
+            }
+        }
     }
 }
