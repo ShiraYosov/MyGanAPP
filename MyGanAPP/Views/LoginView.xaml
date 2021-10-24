@@ -4,6 +4,7 @@
              x:Class="MyGanAPP.Views.LoginView">
     <ContentPage.Content>
         <StackLayout>
+            <Image Source="Logo1.png"></Image>
             <Label Text="Login" TextColor="Black" FontSize="50" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
            
 
