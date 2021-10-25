@@ -1,16 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyGanAPP.Views.LoginView">
+             x:Class="MyGanAPP.Views.LoginView"
+             BackgroundColor="#bcd4e6">
+    
+    
     <ContentPage.Content>
+        
         <StackLayout>
-            <Image Source="Logo1.png"></Image>
-            <Label Text="Login" TextColor="Black" FontSize="50" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
-           
-
-            <Grid RowSpacing="40" >
+            
+            <Image Source="logo1.png"  HeightRequest="300" ></Image>
+            
+            <Grid RowSpacing="15" > 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="1"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="20"></RowDefinition>
@@ -20,16 +23,17 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Entry x:Name="email" Placeholder="הכנס כתובת אימייל" Text="{Binding Email}" TextColor="Black" Grid.Row="1" Grid.Column="0" HorizontalTextAlignment="Center"/>
-                <Entry x:Name="pass" Placeholder="הכנס סיסמא" IsPassword="True" TextColor="Black" Text="{Binding Password}" Grid.Row="2" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                <Entry x:Name="email" Placeholder="הכנס כתובת אימייל" FontSize="23" Text="{Binding Email}" TextColor="Black" Grid.Row="1" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                <Entry x:Name="pass" Placeholder="הכנס סיסמא" FontSize="23" IsPassword="True" TextColor="Black" Text="{Binding Password}" Grid.Row="2" Grid.Column="0" HorizontalTextAlignment="Center"/>
             </Grid>
 
-            <Frame HeightRequest = "50" Padding="4" CornerRadius="25" WidthRequest = "110" HorizontalOptions="Center" VerticalOptions="Center">
-                <Button x:Name="submit" Text="התחברות" CornerRadius="25"  Command="{Binding LoginCommand}" HorizontalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="White" BackgroundColor="Black"/>
+            <Frame HeightRequest = "50" Padding="4" CornerRadius="25" WidthRequest = "110" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="#ffba08">
+                <Button x:Name="submit" Text="התחברות"  CornerRadius="25"  Command="{Binding LoginCommand}" HorizontalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="#ffba08" BackgroundColor="Black"/>
             </Frame>
 
             <Label x:Name="msg" Text="{Binding Message}" HorizontalOptions="Center" TextColor="Red" FontSize="30"/>
 
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
