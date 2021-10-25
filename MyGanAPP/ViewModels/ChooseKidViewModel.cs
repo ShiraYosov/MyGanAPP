@@ -27,22 +27,37 @@ namespace MyGanAPP.ViewModels
 
 
 
-        public ObservableCollection<ImageSource> ChildrenPicsList { get; set; }
-
+        public ObservableCollection<Student> ChildrenList { get; set; }
+        public ObservableCollection<Group> GroupsList { get; set; }
+        public ObservableCollection<Kindergarten> KindergartensList { get; set; }
 
         public ChooseKidViewModel()
         {
-            ChildrenPicsList = new ObservableCollection<ImageSource>();
-
+            ChildrenList = new ObservableCollection<Student>();
+            GroupsList = new ObservableCollection<Group>();
+            KindergartensList = new ObservableCollection<Kindergarten>();
         }
 
-        private void CreateQuestionCollection()
+        private void CreateStudentCollection()
         {
             App a = (App)App.Current;
+           
             List<StudentOfUser> theStudents = a.User.StudentOfUsers;
             foreach (StudentOfUser s in theStudents)
             {
-                this.ChildrenPicsList.Add(s.Student.PhotoURL);
+                this.ChildrenList.Add(s.Student);
+            }
+
+            List<Group> theGroups = a.User.Groups;
+            foreach (Group g in theGroups )
+            {
+                this.GroupsList.Add(g);
+            }
+
+            List<KindergartenManager> Kindergartens = a.User.KindergartenManagers;
+            foreach (KindergartenManager k in Kindergartens)
+            {
+                this.KindergartensList.Add(k.Kindergarten);
             }
         }
 

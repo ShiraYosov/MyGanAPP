@@ -27,8 +27,8 @@
                 <Entry x:Name="pass" Placeholder="הכנס סיסמא" FontSize="23" IsPassword="True" TextColor="Black" Text="{Binding Password}" Grid.Row="2" Grid.Column="0" HorizontalTextAlignment="Center"/>
             </Grid>
 
-            <Frame HeightRequest = "50" Padding="4" CornerRadius="25" WidthRequest = "110" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="#ffba08">
-                <Button x:Name="submit" Text="התחברות"  CornerRadius="25"  Command="{Binding LoginCommand}" HorizontalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="#ffba08" BackgroundColor="Black"/>
+            <Frame HeightRequest = "50" Padding="4" CornerRadius="25" WidthRequest = "110" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="#495057">
+                <Button x:Name="submit" Text="התחברות"  CornerRadius="25"  Command="{Binding LoginCommand}" HorizontalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="Black" BackgroundColor="#457b9d"/>
             </Frame>
 
             <Label x:Name="msg" Text="{Binding Message}" HorizontalOptions="Center" TextColor="Red" FontSize="30"/>
