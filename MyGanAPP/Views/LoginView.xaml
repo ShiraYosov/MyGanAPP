@@ -3,37 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyGanAPP.Views.LoginView"
              BackgroundColor="#bcd4e6">
-    
-    
+
+
     <ContentPage.Content>
-        
+
         <StackLayout>
-            
-            <Image Source="logo1.png"  HeightRequest="300" ></Image>
-            
-            <Grid RowSpacing="15" > 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="20"></RowDefinition>
-                </Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
+            <Image Source="photos//logo1.png"  HeightRequest="300" ></Image>
 
-                <Entry x:Name="email" Placeholder="הכנס כתובת אימייל" FontSize="23" Text="{Binding Email}" TextColor="Black" Grid.Row="1" Grid.Column="0" HorizontalTextAlignment="Center"/>
-                <Entry x:Name="pass" Placeholder="הכנס סיסמא" FontSize="23" IsPassword="True" TextColor="Black" Text="{Binding Password}" Grid.Row="2" Grid.Column="0" HorizontalTextAlignment="Center"/>
-            </Grid>
+            <StackLayout Padding="0" Margin="10" HorizontalOptions="Center">
+                <Frame  BackgroundColor="White" HasShadow="True" Padding="0" Margin="0" CornerRadius="20">
 
-            <Frame HeightRequest = "50" Padding="4" CornerRadius="25" WidthRequest = "110" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="#495057">
-                <Button x:Name="submit" Text="התחברות"  CornerRadius="25"  Command="{Binding LoginCommand}" HorizontalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="Black" BackgroundColor="#457b9d"/>
-            </Frame>
+                    <StackLayout Padding="0" Margin="20">
+                        <Grid RowSpacing="15" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="50"></RowDefinition>
+                                <RowDefinition Height="50"></RowDefinition>
+                            </Grid.RowDefinitions>
 
-            <Label x:Name="msg" Text="{Binding Message}" HorizontalOptions="Center" TextColor="Red" FontSize="30"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="30"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
 
-            
+                            <Entry x:Name="email" Placeholder="הכנס כתובת אימייל" FontSize="23" Text="{Binding Email}" TextColor="Black" Grid.Row="1" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                            <Entry x:Name="pass" Placeholder="הכנס סיסמא" FontSize="23" IsPassword="True" TextColor="Black" Text="{Binding Password}" Grid.Row="2" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                        </Grid>
+
+                        <StackLayout  Padding="20">
+                            <Button Text="התחברות" Command="{Binding Binding LoginCommand}" BackgroundColor="#7C97F8" TextColor="White"  Margin="6" FontAttributes="Bold" FontSize="20" CornerRadius="30"/>
+                        </StackLayout>
+
+                    </StackLayout>
+
+
+
+                </Frame>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
+
+              

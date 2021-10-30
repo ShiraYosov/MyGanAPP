@@ -25,20 +25,7 @@ namespace MyGanAPP.ViewModels
         }
 
 
-        private string message;
-        public string Message
-        {
-            get { return this.message; }
-
-            set
-            {
-                if (this.message != value)
-                {
-                    this.message = value;
-                    OnPropertyChanged(nameof(Message));
-                }
-            }
-        }
+      
 
         private string email;
         public string Email
@@ -71,45 +58,44 @@ namespace MyGanAPP.ViewModels
         }
         public LoginViewModel()
         {
-            this.Email = "";
-            this.Password = "";
-            this.Message = "";
+            //this.Email = "";
+            //this.Password = "";
+            LoginCommand = new Command(Login);
         }
 
-        public ICommand LoginCommand => new Command(Login);
+        public ICommand LoginCommand { protected set; get; }
+       
 
         public async void Login()
         {
-            MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
-            User u = await proxy.LoginAsync(Email, Password);
 
-            if (u != null)
+            MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
+            User user = await proxy.LoginAsync(Email, Password);
+
+            if (user != null)
             {
                 App a = (App)App.Current;
                 a.User = new User
                 {
-                    Fname= u.Fname,
-                    LastName= u.LastName,
-                    Email=u.Email,
-                    Password=u.Password,
-                    IsSystemManager=u.IsSystemManager,
-                    PhoneNumber=u.PhoneNumber,
-                    Groups = u.Groups,
-                    KindergartenManagers = u.KindergartenManagers,
-                    Signatures = u.Signatures,
-                    StudentOfUsers = u.StudentOfUsers
+                    Fname= user.Fname,
+                    LastName= user.LastName,
+                    Email= user.Email,
+                    Password= user.Password,
+                    IsSystemManager= user.IsSystemManager,
+                    PhoneNumber= user.PhoneNumber,
+                    Groups = user.Groups,
+                    KindergartenManagers = user.KindergartenManagers,
+                    Signatures = user.Signatures,
+                    StudentOfUsers = user.StudentOfUsers
 
                 };
 
-                this.Message = "הנך מחובר למערכת";
-                //Page p = new UsersPageView();
-
-                //await a.MainPage.Navigation.PushAsync(p);
+               
 
             }
             else
             {
-                this.Message = "פרטי משתמש אינם נכונים!";
+                await App.Current.MainPage.DisplayAlert("שגיאה", "התחברות נכשלה, בדוק שם משתמש וסיסמה ונסה שוב", "בסדר");
             }
 
         }
