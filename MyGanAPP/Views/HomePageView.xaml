@@ -5,7 +5,7 @@
              BackgroundColor="#bcd4e6">
     <ContentPage.Content>
         <StackLayout>
-            <Image Source="photos\\logo1.png"  HeightRequest="300" ></Image>
+            <Image Source="logo1.png"  HeightRequest="300" ></Image>
 
             <StackLayout Spacing="10" Padding="20">
                 <Frame Padding="0" BackgroundColor="#7678ed">

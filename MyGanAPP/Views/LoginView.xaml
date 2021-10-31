@@ -9,7 +9,7 @@
 
         <StackLayout>
 
-            <Image Source="photos\\logo1.png"  HeightRequest="300" ></Image>
+            <Image Source="logo1.png"  HeightRequest="300" ></Image>
 
             <StackLayout Padding="0" Margin="10" HorizontalOptions="Center">
                 <Frame  BackgroundColor="White" HasShadow="True" Padding="0" Margin="0" CornerRadius="20">
