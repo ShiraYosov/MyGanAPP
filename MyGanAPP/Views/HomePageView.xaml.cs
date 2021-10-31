@@ -10,13 +10,17 @@ using Xamarin.Forms.Xaml;
 namespace MyGanAPP.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginView : ContentPage
+    public partial class HomePageView : ContentPage
     {
-        public LoginView()
+        public HomePageView()
         {
-            this.BindingContext = new LoginViewModel();
             InitializeComponent();
-            
+            this.BindingContext = new HomePageViewModel();
+        }
+
+        private void Login_Pressed(object sender, EventArgs e)
+        {
+            App.Current.MainPage.Navigation.PushAsync(new LoginView());
         }
     }
 }

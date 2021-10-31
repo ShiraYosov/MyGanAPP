@@ -58,9 +58,7 @@ namespace MyGanAPP.ViewModels
         }
         public LoginViewModel()
         {
-            //this.Email = "";
-            //this.Password = "";
-            LoginCommand = new Command(Login);
+           LoginCommand = new Command(Login);
         }
 
         public ICommand LoginCommand { protected set; get; }
@@ -75,7 +73,7 @@ namespace MyGanAPP.ViewModels
             if (user != null)
             {
                 App a = (App)App.Current;
-                a.User = new User
+                a.CurrUser = new User
                 {
                     Fname= user.Fname,
                     LastName= user.LastName,

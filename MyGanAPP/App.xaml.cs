@@ -6,7 +6,6 @@ using MyGanAPP.Services;
 using MyGanAPP.Models;
 using System.Threading.Tasks;
 using MyGanAPP.Views;
-
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -17,14 +16,14 @@ namespace MyGanAPP
 {
     public partial class App : Application, INotifyPropertyChanged
     {
-        public User User { get; set; }
+        public User CurrUser { get; set; }
         public App()
         {
             InitializeComponent();
 
-            User = null;
-            
-            MainPage = new LoginView();
+            CurrUser = null;
+
+            MainPage = new NavigationPage(new HomePageView());
            
         }
 

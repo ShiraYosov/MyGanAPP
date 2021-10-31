@@ -42,19 +42,19 @@ namespace MyGanAPP.ViewModels
         {
             App a = (App)App.Current;
            
-            List<StudentOfUser> theStudents = a.User.StudentOfUsers;
+            List<StudentOfUser> theStudents = a.CurrUser.StudentOfUsers;
             foreach (StudentOfUser s in theStudents)
             {
                 this.ChildrenList.Add(s.Student);
             }
 
-            List<Group> theGroups = a.User.Groups;
+            List<Group> theGroups = a.CurrUser.Groups;
             foreach (Group g in theGroups )
             {
                 this.GroupsList.Add(g);
             }
 
-            List<KindergartenManager> Kindergartens = a.User.KindergartenManagers;
+            List<KindergartenManager> Kindergartens = a.CurrUser.KindergartenManagers;
             foreach (KindergartenManager k in Kindergartens)
             {
                 this.KindergartensList.Add(k.Kindergarten);

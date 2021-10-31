@@ -7,15 +7,16 @@ using MyGanAPP.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
 namespace MyGanAPP.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ChooseKidView : ContentView
+    public partial class ChooseView : ContentPage
     {
-        public ChooseKidView()
+        public ChooseView()
         {
             InitializeComponent();
-            this.BindingContext = new ChooseKidViewModel(); 
+            this.BindingContext = new ChooseKidViewModel();
         }
     }
 }
