@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyGanAPP.Views.ParentRegistrationView"
+             FlowDirection="RightToLeft"
+              BackgroundColor="#bcd4e6">
+    <ContentPage.Content>
+        <StackLayout Style="{StaticResource Stack}">
+            <ScrollView>
+                <StackLayout>
+                    <Image Source="logo1.png"  HeightRequest="300" ></Image>
+
+                    <Frame Style="{StaticResource logInSignUp}">
+                        <StackLayout>
+
+
+                            <Frame>
+                                <StackLayout>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="30"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <ImageButton Source="{Binding ImgSource}" Command="{Binding ButtonPressedCommand}"  Grid.Column="0" HorizontalOptions="Start" HeightRequest="25" WidthRequest="25"></ImageButton>
+                                        <Label Text="פרטי הילד\ה" Grid.Column="1" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" TextColor="Black" ></Label>
+                                    </Grid>
+                                    
+                                    <StackLayout IsVisible="{Binding Button1}">
+                                        <!-- ChildFirstName-->
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Label Text="שם פרטי" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                            <Label Text="{Binding ChildNameError}" IsVisible="{Binding ShowChildNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                                        </Grid>
+                                        <Entry  Placeholder="שם פרטי" MaxLength="30" Text="{Binding ChildName}" Style="{StaticResource entry}"/>
+
+                                        <!-- ChildLastName-->
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Label Text="שם משפחה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                            <Label Text="{Binding ChildLastNameError}" IsVisible="{Binding ShowChildLastNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                                        </Grid>
+                                        <Entry Placeholder="שם משפחה" MaxLength="30" Text="{Binding ChildLastName}" Style="{StaticResource entry}"/>
+
+                                    </StackLayout>
+
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+                           <!-- Email-->
+                            <!--<Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="אימייל" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                            </Grid>
+                            <Entry Placeholder="אימייל" MaxLength="30" Text="{Binding Email}" Style="{StaticResource entry}"/>
+
+                            --><!-- User Name--><!--
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="שם משתמש" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding UserNameError}" IsVisible="{Binding ShowUserNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                            </Grid>
+                            <Entry Placeholder="שם משתמש" MaxLength="30" Text="{Binding UserName}" Style="{StaticResource entry}"/>
+
+                            --><!-- Password--><!--
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="סיסמה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                            </Grid>
+                            <Entry Placeholder="סיסמה" MaxLength="30" IsPassword="True" Text="{Binding Password}" Style="{StaticResource entry}"/>
+
+                            --><!-- First Name --><!--
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="שם פרטי" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                            </Grid>
+                            <Entry Placeholder="שם פרטי" MaxLength="30" Text="{Binding Name}" Style="{StaticResource entry}"/>
+
+                            --><!-- Last Name --><!--
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="שם משפחה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding LastNameError}" IsVisible="{Binding ShowLastNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                            </Grid>
+                            <Entry Placeholder="שם משפחה" MaxLength="30" Text="{Binding LastName}" Style="{StaticResource entry}"/>
+
+                            --><!-- Birth Date --><!--
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="תאריך לידה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding BirthDateError}" IsVisible="{Binding ShowBirthDateError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                            </Grid>
+                            <DatePicker Date="{Binding BirthDate}" Style="{StaticResource entry}"/>
+
+                            --><!-- Phone Number --><!--
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="טלפון" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding PhoneNumError}" IsVisible="{Binding ShowPhoneNumError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                            </Grid>
+                            <Entry Placeholder="טלפון" MaxLength="30" Text="{Binding PhoneNum}" Style="{StaticResource entry}"/>
+
+                            --><!-- City --><!--
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="עיר" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                            </Grid>
+                            <Entry Placeholder="עיר" MaxLength="30" Text="{Binding City}" Style="{StaticResource entry}"/>
+
+                            --><!-- Neighborhood --><!--
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="שכונה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding NeighborhoodError}" IsVisible="{Binding ShowNeighborhoodError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                            </Grid>
+                            <Entry Placeholder="שכונה" MaxLength="30" Text="{Binding Neighborhood}" Style="{StaticResource entry}"/>
+
+                            --><!-- Street --><!--
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="רחוב" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding StreetError}" IsVisible="{Binding ShowStreetError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                            </Grid>
+                            <Entry Placeholder="רחוב" MaxLength="30" Text="{Binding Street}" Style="{StaticResource entry}"/>
+
+                            --><!-- HouseNumber --><!--
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="מספר בית" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding StringHouseNumError}" IsVisible="{Binding ShowStringHouseNumError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                            </Grid>
+                            <Entry Placeholder="מספר בית" MaxLength="30" Text="{Binding StringHouseNum}" Style="{StaticResource entry}"/>
+
+                        </StackLayout>
+                    </Frame>
+                    <Button Text="הירשם" Style="{StaticResource Button}" Command="{Binding SaveDataCommand}"></Button>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>-->
+ 

@@ -8,18 +8,27 @@
             <Image Source="logo1.png"  HeightRequest="300" ></Image>
 
             <StackLayout Spacing="10" Padding="20">
-                <Frame Padding="0" BackgroundColor="#7678ed">
-                    <Button Text="התחברות" BackgroundColor="#7C97F8" TextColor="White"  Margin="6" Pressed="Login_Pressed" FontAttributes="Bold" FontSize="20"/>
+                <Frame Padding="0" BackgroundColor="#7678ed" CornerRadius="20">
+                    <Button Text="התחברות" CornerRadius="20" BackgroundColor="#7C97F8" TextColor="White"  Margin="6" Pressed="Login_Pressed" FontAttributes="Bold" FontSize="20"/>
                 </Frame>
-                
-                <Button Text="הרשמה לגן - אני הורה" BackgroundColor="#ffd166" TextColor="White"  Margin="6" FontAttributes="Bold" FontSize="20"/>
-                <Button Text="הרשמה לגן - אני גננת" BackgroundColor="#78c6a3" TextColor="White"  Margin="6" FontAttributes="Bold" FontSize="20"/>
-                <Button Text="פתיחת גן - אני מנהל גן" BackgroundColor="#fa9f42" TextColor="White"  Margin="6" FontAttributes="Bold" FontSize="20"/>
+
+                <Frame Padding="0" CornerRadius="20" BackgroundColor="#ffd972" >
+                    <Button Text="אני הורה - הרשמה לגן" CornerRadius="20" BackgroundColor="#ffd166" TextColor="White" Pressed="Parent_Pressed"  Margin="6" FontAttributes="Bold" FontSize="20"/>
+                </Frame>
+
+                <Frame Padding="0" BackgroundColor="#06d6a0" CornerRadius="20">
+                    <Button Text="אני גננת - הרשמה לגן" CornerRadius="20" BackgroundColor="#78c6a3" TextColor="White"  Margin="6" FontAttributes="Bold" FontSize="20"/>
+                </Frame>
+
+                <Frame Padding="0" BackgroundColor="#f7b801" CornerRadius="20">
+                    <Button Text="אני מנהל גן - פתיחת גן" CornerRadius="20" BackgroundColor="#fa9f42" TextColor="White"  Margin="6" FontAttributes="Bold" FontSize="20"/>
+                </Frame>
+            
             </StackLayout>
 
-            
 
-            
+
+
 
         </StackLayout>
     </ContentPage.Content>

@@ -15,12 +15,16 @@ namespace MyGanAPP.Views
         public HomePageView()
         {
             InitializeComponent();
-            this.BindingContext = new HomePageViewModel();
         }
 
         private void Login_Pressed(object sender, EventArgs e)
         {
             App.Current.MainPage.Navigation.PushAsync(new LoginView());
+        }
+
+        private void Parent_Pressed(object sender, EventArgs e)
+        {
+            App.Current.MainPage.Navigation.PushAsync(new ParentRegistrationView());
         }
     }
 }
