@@ -20,7 +20,7 @@ namespace MyGanAPP.ViewModels
         public const string BAD_EMAIL = "אימייל לא תקין";
         public const string SHORT_PASS = "הסיסמה חייבת להכיל לפחות 6 תווים";
         public const string BAD_PHONE = "טלפון לא תקין";
-        public const string BAD_DATE = "עלייך להיות מעל גיל 18";
+        public const string BAD_DATE = "על הילד להיות מעל גיל שנה";
         public const string BAD_HOUSE_NUM = "מספר בית לא תקין";
     }
 
@@ -125,6 +125,96 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
+        #region ChildID
+        private bool showChildIDError;
+
+        public bool ShowChildIDError
+        {
+            get => showChildIDError;
+            set
+            {
+                showChildIDError = value;
+                OnPropertyChanged("ShowChildIDError");
+            }
+        }
+
+        private string childID;
+
+        public string ChildID
+        {
+            get => childID;
+            set
+            {
+                childID = value;
+                ValidateChildID();
+                OnPropertyChanged("ChildID");
+            }
+        }
+
+        private string childIDError;
+
+        public string ChildIDError
+        {
+            get => childIDError;
+            set
+            {
+                childIDError = value;
+                OnPropertyChanged("ChildIDError");
+            }
+        }
+
+        private void ValidateChildID()
+        {
+            this.ShowChildIDError = string.IsNullOrEmpty(ChildID);
+        }
+        #endregion
+
+        #region BirthDate
+        private bool showBirthDateError;
+
+        public bool ShowBirthDateError
+        {
+            get => showBirthDateError;
+            set
+            {
+                showBirthDateError = value;
+                OnPropertyChanged("ShowBirthDateError");
+            }
+        }
+
+        private DateTime birthDate;
+
+        public DateTime BirthDate
+        {
+            get => birthDate;
+            set
+            {
+                birthDate = value;
+                ValidateBirthDate();
+                OnPropertyChanged("BirthDate");
+            }
+        }
+
+        private string birthDateError;
+
+        public string BirthDateError
+        {
+            get => birthDateError;
+            set
+            {
+                birthDateError = value;
+                OnPropertyChanged("BirthDateError");
+            }
+        }
+
+        private const int MIN_AGE = 1;
+        private void ValidateBirthDate()
+        {
+            TimeSpan ts = DateTime.Now - this.BirthDate;
+            this.ShowBirthDateError = ts.TotalDays < (MIN_AGE * 365);
+        }
+        #endregion
+
         #region ButtonPressed
         private bool button1;
         public bool Button1
@@ -163,12 +253,17 @@ namespace MyGanAPP.ViewModels
             Button1 = false;
             ImgSource = Source1;
             ButtonPressedCommand = new Command(ButtonPressed);
+            this.BirthDate = DateTime.Today;
 
             this.ShowChildNameError = false;
             this.ShowChildLastNameError = false;
+            this.ShowChildIDError = false;
+            this.ShowBirthDateError = false;
 
             this.ChildLastNameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ChildNameError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.ChildIDError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.BirthDateError = ERROR_MESSAGES.BAD_DATE;
 
 
         }
