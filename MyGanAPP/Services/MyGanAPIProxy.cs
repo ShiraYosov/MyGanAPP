@@ -125,7 +125,7 @@ namespace MyGanAPP.Services
         {
             try
             {
-                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/Getlookups");
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetLookups");
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions

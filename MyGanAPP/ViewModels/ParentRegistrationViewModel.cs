@@ -351,13 +351,19 @@ namespace MyGanAPP.ViewModels
             }
         }
 
-        //public List<Grade> GradeTypes
-        //{
-        //    get
-        //    {
-        //        return; 
-        //    }
-        //}
+        public List<Grade> GradeTypes
+        {
+            get
+            {
+                App theApp = (App)App.Current;
+                List<Grade> grades= new List<Grade>();
+                foreach (Grade g in theApp.LookupTables.Grades)
+                {
+                    grades.Add(g);
+                }
+                return grades;
+            }
+        }
         #endregion
 
         #region UserName
