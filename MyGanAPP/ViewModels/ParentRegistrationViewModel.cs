@@ -21,7 +21,6 @@ namespace MyGanAPP.ViewModels
         public const string SHORT_PASS = "הסיסמה חייבת להכיל לפחות 6 תווים";
         public const string BAD_PHONE = "טלפון לא תקין";
         public const string BAD_DATE = "על הילד להיות מעל גיל שנה";
-        public const string BAD_HOUSE_NUM = "מספר בית לא תקין";
     }
 
     class ParentRegistrationViewModel : INotifyPropertyChanged
@@ -79,6 +78,21 @@ namespace MyGanAPP.ViewModels
         {
             this.ShowChildLastNameError = string.IsNullOrEmpty(ChildLastName);
         }
+        #endregion
+
+        #region UserImgSrc
+        private string userImgSrc;
+
+        public string UserImgSrc
+        {
+            get => userImgSrc;
+            set
+            {
+                userImgSrc = value;
+                OnPropertyChanged("UserImgSrc");
+            }
+        }
+        private const string DEFAULT_PHOTO_SRC = "user.png";
         #endregion
 
         #region ChildFirstName
@@ -230,53 +244,317 @@ namespace MyGanAPP.ViewModels
                 }
             }
         }
-        #endregion
 
-        #region imgChange
-        private string imgSource;
-        public string ImgSource
+        private bool button2;
+        public bool Button2
         {
-            get { return this.imgSource; }
+            get { return this.button2; }
 
             set
             {
-                if (this.imgSource != value)
+                if (this.button2 != value)
                 {
-                    this.imgSource = value;
-                    OnPropertyChanged(nameof(ImgSource));
+                    this.button2 = value;
+                    OnPropertyChanged(nameof(Button2));
                 }
             }
         }
         #endregion
+
+        #region imgChange
+        private string imgSource1;
+        public string ImgSource1
+        {
+            get { return this.imgSource1; }
+
+            set
+            {
+                if (this.imgSource1 != value)
+                {
+                    this.imgSource1 = value;
+                    OnPropertyChanged(nameof(ImgSource1));
+                }
+            }
+        }
+
+        private string imgSource2;
+        public string ImgSource2
+        {
+            get { return this.imgSource2; }
+
+            set
+            {
+                if (this.imgSource2 != value)
+                {
+                    this.imgSource2 = value;
+                    OnPropertyChanged(nameof(ImgSource2));
+                }
+            }
+        }
+        #endregion
+
+        #region Gender
+        private bool showGenderError;
+
+        public bool ShowGenderError
+        {
+            get => showGenderError;
+            set
+            {
+                showGenderError = value;
+                OnPropertyChanged("ShowGenderError");
+            }
+        }
+
+        private string gender;
+
+        public string Gender
+        {
+            get => gender;
+            set
+            {
+                gender = value;
+                ValidateGender();
+                OnPropertyChanged("Gender");
+            }
+        }
+
+        private string genderError;
+
+        public string GenderError
+        {
+            get => genderError;
+            set
+            {
+                genderError = value;
+                OnPropertyChanged("GenderError");
+            }
+        }
+
+        private void ValidateGender()
+        {
+            this.ShowGenderError = string.IsNullOrEmpty(Gender);
+        }
+        #endregion
+
+        #region Grade
+
+        private Grade grade;
+
+        public Grade Grade
+        {
+            get => grade;
+            set
+            {
+                grade = value;
+                OnPropertyChanged("Grade");
+            }
+        }
+
+        //public List<Grade> GradeTypes
+        //{
+        //    get
+        //    {
+        //        return; 
+        //    }
+        //}
+        #endregion
+
+        #region UserName
+        private bool showUserNameError;
+
+        public bool ShowUserNameError
+        {
+            get => showUserNameError;
+            set
+            {
+                showUserNameError = value;
+                OnPropertyChanged("ShowUserNameError");
+            }
+        }
+
+        private string userName;
+
+        public string UserName
+        {
+            get => userName;
+            set
+            {
+                userName = value;
+                ValidateUserName();
+                OnPropertyChanged("UserName");
+            }
+        }
+
+        private string userNameError;
+
+        public string UserNameError
+        {
+            get => userNameError;
+            set
+            {
+                userNameError = value;
+                OnPropertyChanged("UserNameError");
+            }
+        }
+
+        private void ValidateUserName()
+        {
+            this.ShowUserNameError = string.IsNullOrEmpty(UserName);
+        }
+        #endregion
+
+        #region Email
+        private bool showEmailError;
+
+        public bool ShowEmailError
+        {
+            get => showEmailError;
+            set
+            {
+                showEmailError = value;
+                OnPropertyChanged("ShowEmailError");
+            }
+        }
+
+        private string email;
+
+        public string Email
+        {
+            get => email;
+            set
+            {
+                email = value;
+                ValidateEmail();
+                OnPropertyChanged("Email");
+            }
+        }
+
+        private string emailError;
+
+        public string EmailError
+        {
+            get => emailError;
+            set
+            {
+                emailError = value;
+                OnPropertyChanged("EmailError");
+            }
+        }
+
+        private void ValidateEmail()
+        {
+            this.ShowEmailError = string.IsNullOrEmpty(Email);
+            if (!this.ShowEmailError)
+            {
+                if (!Regex.IsMatch(this.Email, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"))
+                {
+                    this.ShowEmailError = true;
+                    this.EmailError = ERROR_MESSAGES.BAD_EMAIL;
+                }
+            }
+            else
+                this.EmailError = ERROR_MESSAGES.REQUIRED_FIELD;
+        }
+        #endregion
+
+
         public ParentRegistrationViewModel()
         {
             Button1 = false;
-            ImgSource = Source1;
-            ButtonPressedCommand = new Command(ButtonPressed);
+            Button2 = false;
+            ImgSource1 = Source1;
+            ImgSource2 = Source1;
+            Button1PressedCommand = new Command(Button1Pressed);
+            Button2PressedCommand = new Command(Button2Pressed);
             this.BirthDate = DateTime.Today;
 
             this.ShowChildNameError = false;
             this.ShowChildLastNameError = false;
             this.ShowChildIDError = false;
             this.ShowBirthDateError = false;
+            this.ShowGenderError = false;
+            this.ShowUserNameError = false;
+            this.ShowEmailError = false;
 
             this.ChildLastNameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ChildNameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ChildIDError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.BirthDateError = ERROR_MESSAGES.BAD_DATE;
+            this.GenderError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.UserNameError = ERROR_MESSAGES.REQUIRED_FIELD;
 
+            //Setup default image photo
+            this.UserImgSrc = DEFAULT_PHOTO_SRC;
+            this.imageFileResult = null; //mark that no picture was chosen
 
         }
 
-        public ICommand ButtonPressedCommand { protected set; get; }
-        public void ButtonPressed()
+        //The following command handle the pick photo button
+        #region PhotoButton
+
+        FileResult imageFileResult;
+        public event Action<ImageSource> SetImageSourceEvent;
+        public ICommand PickImageCommand => new Command(OnPickImage);
+        public async void OnPickImage()
+        {
+            FileResult result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions()
+            {
+                Title = "בחר תמונה"
+            });
+
+            if (result != null)
+            {
+                this.imageFileResult = result;
+
+                var stream = await result.OpenReadAsync();
+                ImageSource imgSource = ImageSource.FromStream(() => stream);
+                if (SetImageSourceEvent != null)
+                    SetImageSourceEvent(imgSource);
+            }
+        }
+
+        //The following command handle the take photo button
+        public ICommand CameraImageCommand => new Command(OnCameraImage);
+        public async void OnCameraImage()
+        {
+            var result = await MediaPicker.CapturePhotoAsync(new MediaPickerOptions()
+            {
+                Title = "צלם תמונה"
+            });
+
+            if (result != null)
+            {
+                this.imageFileResult = result;
+                var stream = await result.OpenReadAsync();
+                ImageSource imgSource = ImageSource.FromStream(() => stream);
+                if (SetImageSourceEvent != null)
+                    SetImageSourceEvent(imgSource);
+            }
+        }
+        #endregion
+
+        #region ButtonCommands
+        public ICommand Button1PressedCommand { protected set; get; }
+        public void Button1Pressed()
         {
             if (Button1 == false) { Button1 = true; }
             else { Button1 = false; }
 
-            if (ImgSource == Source1) { ImgSource = Source2; }
-            else { ImgSource = Source1; }
+            if (ImgSource1 == Source1) { ImgSource1 = Source2; }
+            else { ImgSource1 = Source1; }
         }
+
+        public ICommand Button2PressedCommand { protected set; get; }
+        public void Button2Pressed()
+        {
+            if (Button2 == false) { Button2 = true; }
+            else { Button2 = false; }
+
+            if (ImgSource2 == Source1) { ImgSource2 = Source2; }
+            else { ImgSource2 = Source1; }
+        }
+        #endregion
     }
 }
 
