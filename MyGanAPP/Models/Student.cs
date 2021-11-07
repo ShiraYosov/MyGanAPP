@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using MyGanApp.Services;
+using MyGanAPP.Services;
 
 
 namespace MyGanAPP.Models

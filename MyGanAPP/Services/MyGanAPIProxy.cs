@@ -11,9 +11,9 @@ using System.Text.Encodings.Web;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.IO;
-using MyGanAPP;
 
-namespace MyGanApp.Services
+
+namespace MyGanAPP.Services
 {
     class MyGanAPIProxy
     {
@@ -107,6 +107,35 @@ namespace MyGanApp.Services
                     string content = await response.Content.ReadAsStringAsync();
                     User u = JsonSerializer.Deserialize<User>(content, options);
                     return u;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        //GetLookups!
+        public async Task<Lookups> GetLookupsAsync()
+        {
+            try
+            {
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/Getlookups");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve, //avoid reference loops!
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    Lookups obj = JsonSerializer.Deserialize<Lookups>(content, options);
+                    return obj;
                 }
                 else
                 {
