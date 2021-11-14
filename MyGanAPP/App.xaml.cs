@@ -26,7 +26,7 @@ namespace MyGanAPP
             CurrUser = null;
 
             MainPage = new NavigationPage(new HomePageView());
-           
+
         }
 
         public static bool IsDevEnv
@@ -38,7 +38,6 @@ namespace MyGanAPP
         }
         protected async override void OnStart()
         {
-
             MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
             this.LookupTables = await proxy.GetLookupsAsync();
         }

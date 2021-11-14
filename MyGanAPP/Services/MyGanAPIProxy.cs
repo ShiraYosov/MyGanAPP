@@ -76,6 +76,7 @@ namespace MyGanAPP.Services
         }
 
 
+        public string GetBasePhotoUri() { return this.basePhotosUri; }
         private MyGanAPIProxy(string baseUri, string basePhotosUri)
         {
             //Set client handler to support cookies!!
@@ -88,7 +89,7 @@ namespace MyGanAPP.Services
             this.basePhotosUri = basePhotosUri;
         }
 
-        public string GetBasePhotoUri() { return this.basePhotosUri; }
+      
 
 
         //Login!
@@ -146,6 +147,29 @@ namespace MyGanAPP.Services
             {
                 Console.WriteLine(e.Message);
                 return null;
+            }
+        }
+
+        //Upload file to server (only images!)
+        public async Task<bool> UploadImage(Models.FileInfo fileInfo, string targetFileName)
+        {
+            try
+            {
+                var multipartFormDataContent = new MultipartFormDataContent();
+                var fileContent = new ByteArrayContent(File.ReadAllBytes(fileInfo.Name));
+                multipartFormDataContent.Add(fileContent, "file", targetFileName);
+                HttpResponseMessage response = await client.PostAsync($"{this.baseUri}/UploadImage", multipartFormDataContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
             }
         }
     }

@@ -10,20 +10,7 @@
                 <StackLayout >
                     <Image Source="logo1.png"  HeightRequest="300" ></Image>
 
-                    <!-- Photo -->
-                    <!--<Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="150" />
-                        </Grid.RowDefinitions>
-                        <Image x:Name="theImage" Source="{Binding UserImgSrc}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"/>
-                        <ImageButton Source="camera.jpg" HorizontalOptions="End" BackgroundColor="White" Grid.Column="0" Grid.Row="0" Command="{Binding PickImageCommand}"/>
-                        <ImageButton Source="camera.jpg" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>
-                    </Grid>-->
+
 
                     <Frame Style="{StaticResource logInSignUp}">
                         <StackLayout>
@@ -119,6 +106,21 @@
                                         <!--Grade-->
                                         <Label Text="לאיזה גן עולה?" Style="{StaticResource labelNameStyle}"/>
                                         <Picker Title="סוג גן" ItemsSource="{Binding GradeTypes}" ItemDisplayBinding="{Binding GradeName}" SelectedItem="{Binding Grade}"/>
+
+                                        <!--Photo-->
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30" />
+                                                <RowDefinition Height="150" />
+                                            </Grid.RowDefinitions>
+                                            <Image x:Name="theImage" Source="{Binding UserImgSrc}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"/>
+                                            <ImageButton Source="camera.jpg" HorizontalOptions="End" BackgroundColor="White" Grid.Column="0" Grid.Row="0" Command="{Binding PickImageCommand}"/>
+                                            <ImageButton Source="camera.jpg" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>
+                                        </Grid>
 
                                     </StackLayout>
 
