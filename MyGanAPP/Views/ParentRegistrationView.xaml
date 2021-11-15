@@ -31,7 +31,7 @@
 
                                     <StackLayout IsVisible="{Binding Button1}">
 
-                                        <Frame BackgroundColor="#dfe7fd" HorizontalOptions="Start" VerticalOptions="Start" HasShadow="True" CornerRadius="80" >
+                                        <Frame BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" HasShadow="True" BorderColor="DarkBlue" CornerRadius="80" >
                                             <!--Photo-->
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -40,15 +40,24 @@
                                                 </Grid.ColumnDefinitions>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="150" />
-                                                    <RowDefinition Height="30" />
+                                                    <!--<RowDefinition Height="30" />-->
                                                 </Grid.RowDefinitions>
                                                 <Image x:Name="theImage" Source="{Binding UserImgSrc}" VerticalOptions="Start" HeightRequest="150" WidthRequest="150" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"/>
-                                                <ImageButton Source="camera.jpg" HeightRequest="30"   VerticalOptions="Center" WidthRequest="30" HorizontalOptions="End" BackgroundColor="White" Grid.Column="0" Grid.Row="1" Command="{Binding PickImageCommand}"/>
-                                                <ImageButton Source="camera.jpg" HeightRequest="30"  VerticalOptions="Center" WidthRequest="30" HorizontalOptions="Start" Grid.Column="1" Grid.Row="1" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>
                                             </Grid>
                                         </Frame>
-                                        
-                                        
+                                        <Grid HorizontalOptions="Center">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="30"/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="60" />
+                                            </Grid.RowDefinitions>
+
+                                            <ImageButton Source="camera.jpg" HeightRequest="30"   VerticalOptions="Center" WidthRequest="30" HorizontalOptions="End" BackgroundColor="White" Grid.Column="0" Grid.Row="0" Command="{Binding PickImageCommand}"/>
+                                            <ImageButton Source="camera.jpg" HeightRequest="30"  VerticalOptions="Center" WidthRequest="30" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>
+                                        </Grid>
+                                       
                                         <!-- ChildFirstName-->
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -126,7 +135,7 @@
                                         <!--<Label Text="לאיזה גן עולה?" Style="{StaticResource labelNameStyle}"/>
                                         <Picker Title="סוג גן" ItemsSource="{Binding GradeTypes}" ItemDisplayBinding="{Binding GradeName}" SelectedItem="{Binding Grade}"/>-->
 
-                                        
+
 
                                     </StackLayout>
 
