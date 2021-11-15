@@ -24,8 +24,8 @@ namespace MyGanAPP
             InitializeComponent();
 
             CurrUser = null;
-
             MainPage = new NavigationPage(new HomePageView());
+            //MainPage = new Views.ServerStatusPage();
 
         }
 
@@ -40,6 +40,7 @@ namespace MyGanAPP
         {
             MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
             this.LookupTables = await proxy.GetLookupsAsync();
+            //MainPage = new NavigationPage(new HomePageView());
         }
 
         protected override void OnSleep()

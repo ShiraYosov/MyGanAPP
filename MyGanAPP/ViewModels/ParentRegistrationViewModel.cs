@@ -356,7 +356,7 @@ namespace MyGanAPP.ViewModels
             get
             {
                 App theApp = (App)App.Current;
-                List<Grade> grades= new List<Grade>();
+                List<Grade> grades = new List<Grade>();
                 foreach (Grade g in theApp.LookupTables.Grades)
                 {
                     grades.Add(g);
@@ -464,9 +464,42 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
-
-        public ParentRegistrationViewModel()
+        //This contact is a reference to the updated or new created contact
+        private User theUser;
+        public ParentRegistrationViewModel(User u = null)
         {
+            //create a new user contact if this is an add operation
+            if (theUser == null)
+            {
+                App theApp = (App)App.Current;
+                u = new User()
+                {
+                    LastName = "",
+                    Fname = "",
+                    Email = "",
+                    PhoneNumber = "",
+                    Password = "",
+                    Groups = new List<Models.Group>(),
+                    Signatures = new List<Signature>(),
+                    IsSystemManager = false,
+                    StudentOfUsers = new List<StudentOfUser>(),
+                };
+
+                //Setup default image photo
+                this.UserImgSrc = DEFAULT_PHOTO_SRC;
+                this.imageFileResult = null; //mark that no picture was chosen
+
+            }
+            else
+            {
+                //set the path url to the contact photo
+                MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
+                //Create a source with cache busting!
+                Random r = new Random();
+                this.UserImgSrc = proxy.GetBasePhotoUri() + ChildID + $".jpg?{r.Next()}";
+            }
+
+            this.theUser = u;
             Button1 = false;
             Button2 = false;
             ImgSource1 = Source1;
