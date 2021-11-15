@@ -31,20 +31,20 @@
 
                                     <StackLayout IsVisible="{Binding Button1}">
 
-                                        <Frame BackgroundColor="#dfe7fd" Padding="30" CornerRadius="30" HorizontalOptions="Center">
+                                        <Frame BackgroundColor="#dfe7fd" HorizontalOptions="Start" VerticalOptions="Start" HasShadow="True" CornerRadius="80" >
                                             <!--Photo-->
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="75"/>
+                                                    <ColumnDefinition Width="75"/>
                                                 </Grid.ColumnDefinitions>
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition Height="30" />
                                                     <RowDefinition Height="150" />
+                                                    <RowDefinition Height="30" />
                                                 </Grid.RowDefinitions>
-                                                <Image x:Name="theImage" Source="{Binding UserImgSrc}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"/>
-                                                <ImageButton Source="camera.jpg" HorizontalOptions="End" BackgroundColor="White" Grid.Column="0" Grid.Row="0" Command="{Binding PickImageCommand}"/>
-                                                <ImageButton Source="camera.jpg" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>
+                                                <Image x:Name="theImage" Source="{Binding UserImgSrc}" VerticalOptions="Start" HeightRequest="150" WidthRequest="150" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"/>
+                                                <ImageButton Source="camera.jpg" HeightRequest="30"   VerticalOptions="Center" WidthRequest="30" HorizontalOptions="End" BackgroundColor="White" Grid.Column="0" Grid.Row="1" Command="{Binding PickImageCommand}"/>
+                                                <ImageButton Source="camera.jpg" HeightRequest="30"  VerticalOptions="Center" WidthRequest="30" HorizontalOptions="Start" Grid.Column="1" Grid.Row="1" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>
                                             </Grid>
                                         </Frame>
                                         
