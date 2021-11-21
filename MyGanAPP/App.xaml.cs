@@ -18,6 +18,7 @@ namespace MyGanAPP
     public partial class App : Application, INotifyPropertyChanged
     {
         public User CurrUser { get; set; }
+        public const int Code = 451014618;
         public Lookups LookupTables { get; set; }
         public App()
         {
