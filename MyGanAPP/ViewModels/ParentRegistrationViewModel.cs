@@ -464,6 +464,60 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
+        #region Password
+        private bool showPasswordError;
+
+        public bool ShowPasswordError
+        {
+            get => showPasswordError;
+            set
+            {
+                showPasswordError = value;
+                OnPropertyChanged("ShowPasswordError");
+            }
+        }
+
+        private string password;
+
+        public string Password
+        {
+            get => password;
+            set
+            {
+                password = value;
+                ValidatePassword();
+                OnPropertyChanged("Password");
+            }
+        }
+
+        private string passwordError;
+
+        public string PasswordError
+        {
+            get => passwordError;
+            set
+            {
+                passwordError = value;
+                OnPropertyChanged("PasswordError");
+            }
+        }
+
+        private void ValidatePassword()
+        {
+            this.ShowPasswordError = string.IsNullOrEmpty(Password);
+            if (!this.ShowPasswordError)
+            {
+                if (this.Password.Length < 6)
+                {
+                    this.ShowPasswordError = true;
+                    this.PasswordError = ERROR_MESSAGES.SHORT_PASS;
+                }
+            }
+            else
+                this.PasswordError = ERROR_MESSAGES.REQUIRED_FIELD;
+        }
+        #endregion
+
         //This contact is a reference to the updated or new created contact
         private User theUser;
         public ParentRegistrationViewModel(User u = null)
@@ -515,6 +569,7 @@ namespace MyGanAPP.ViewModels
             this.ShowGenderError = false;
             this.ShowUserNameError = false;
             this.ShowEmailError = false;
+            this.ShowPasswordError = false;
 
             this.ChildLastNameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ChildNameError = ERROR_MESSAGES.REQUIRED_FIELD;

@@ -30,7 +30,7 @@
                                     </Grid>
 
                                     <StackLayout IsVisible="{Binding Button1}">
-
+                                        <Label Text="בחירת תמונה" HorizontalOptions="Center" Style="{StaticResource labelNameStyle}"/>
                                         <Frame BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" HasShadow="True" BorderColor="DarkBlue" CornerRadius="80" >
                                             <!--Photo-->
                                             <Grid>
@@ -47,15 +47,15 @@
                                         </Frame>
                                         <Grid HorizontalOptions="Center">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="30"/>
-                                                <ColumnDefinition Width="30"/>
+                                                <ColumnDefinition Width="35"/>
+                                                <ColumnDefinition Width="35"/>
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="60" />
                                             </Grid.RowDefinitions>
 
-                                            <ImageButton Source="camera.jpg" HeightRequest="30"   VerticalOptions="Center" WidthRequest="30" HorizontalOptions="End" BackgroundColor="White" Grid.Column="0" Grid.Row="0" Command="{Binding PickImageCommand}"/>
-                                            <ImageButton Source="camera.jpg" HeightRequest="30"  VerticalOptions="Center" WidthRequest="30" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>
+                                            <ImageButton Source="gallery.png" HeightRequest="35"   VerticalOptions="Center" WidthRequest="35" HorizontalOptions="End" BackgroundColor="White" Grid.Column="0" Grid.Row="0" Command="{Binding PickImageCommand}"/>
+                                            <ImageButton Source="camera.jpg" HeightRequest="35"  VerticalOptions="Center" WidthRequest="35" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>
                                         </Grid>
                                        
                                         <!-- ChildFirstName-->
@@ -181,6 +181,19 @@
                                         </Grid>
                                         <Entry Placeholder="אימייל" MaxLength="30" Text="{Binding Email}" Style="{StaticResource entry}"/>
 
+                                        <!-- Password-->
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Label Text="סיסמה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                            <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                                        </Grid>
+                                        <Entry Placeholder="סיסמה" MaxLength="30" IsPassword="True" Text="{Binding Password}" Style="{StaticResource entry}"/>
 
                                     </StackLayout>
 

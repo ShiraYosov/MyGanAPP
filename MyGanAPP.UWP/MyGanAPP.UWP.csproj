@@ -135,6 +135,7 @@
     <Content Include="photos\arrow2.png" />
     <Content Include="photos\camera.jpg" />
     <Content Include="photos\email.jpg" />
+    <Content Include="photos\gallery.png" />
     <Content Include="photos\logo1.png" />
     <Content Include="photos\pass.png" />
     <Content Include="photos\user.png" />

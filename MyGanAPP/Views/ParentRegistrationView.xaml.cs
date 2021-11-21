@@ -15,10 +15,15 @@ namespace MyGanAPP.Views
        
         public ParentRegistrationView()
         {
+            ParentRegistrationViewModel vm = new ParentRegistrationViewModel();
+            vm.SetImageSourceEvent += Vm_SetImageSourceEvent;
             InitializeComponent();
-            this.BindingContext = new ParentRegistrationViewModel();
+            this.BindingContext = vm;
         }
 
-        
+        private void Vm_SetImageSourceEvent(ImageSource obj)
+        {
+            theImage.Source = obj;
+        }
     }
 }
