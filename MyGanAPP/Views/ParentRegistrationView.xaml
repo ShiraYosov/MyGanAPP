@@ -31,20 +31,23 @@
 
                                     <StackLayout IsVisible="{Binding Button1}">
                                         <Label Text="בחירת תמונה" HorizontalOptions="Center" Style="{StaticResource labelNameStyle}"/>
-                                        <Frame BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" HasShadow="True" BorderColor="DarkBlue" CornerRadius="80" >
+                                        
                                             <!--Photo-->
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="75"/>
-                                                    <ColumnDefinition Width="75"/>
+                                                    <ColumnDefinition Width="0.3*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="0.3*"/>
                                                 </Grid.ColumnDefinitions>
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition Height="150" />
+                                                    <RowDefinition Height="*" />
                                                     <!--<RowDefinition Height="30" />-->
                                                 </Grid.RowDefinitions>
-                                                <Image x:Name="theImage" Source="{Binding UserImgSrc}" VerticalOptions="Start" HeightRequest="150" WidthRequest="150" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"/>
+                                                <Frame BorderColor="white"  CornerRadius="100"  Grid.Column="1" Grid.Row="0" IsClippedToBounds="True" Padding="0" HeightRequest="150" WidthRequest="150" HorizontalOptions="CenterAndExpand">
+                                                    <Image x:Name="theImage" Source="{Binding UserImgSrc}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" HeightRequest="150" WidthRequest="150"/>
+                                                </Frame>
                                             </Grid>
-                                        </Frame>
+                                        
                                         <Grid HorizontalOptions="Center">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="35"/>
@@ -153,7 +156,7 @@
                                     </Grid>
 
                                     <StackLayout IsVisible="{Binding Button2}">
-                                        <!-- UserName-->
+                                        <!-- UserName1-->
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
@@ -193,7 +196,64 @@
                                             <Label Text="סיסמה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
                                             <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                                         </Grid>
-                                        <Entry Placeholder="סיסמה" MaxLength="30" IsPassword="True" Text="{Binding Password}" Style="{StaticResource entry}"/>
+                                        <Entry Placeholder="סיסמה" HorizontalTextAlignment="End" MaxLength="30"  IsPassword="True" Text="{Binding Password}" Style="{StaticResource entry}"/>
+
+                                        <!-- PhoneNumber1-->
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Label Text="מספר טלפון" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                            <Label Text="{Binding PhoneNumberError}" IsVisible="{Binding ShowPhoneNumberError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                                        </Grid>
+                                        <Entry Placeholder="מספר טלפון" HorizontalTextAlignment="End" MaxLength="30" Text="{Binding PhoneNumber}" Style="{StaticResource entry}"/>
+
+
+                                        <Label Text="פרטי הורה 2" TextColor="DarkBlue" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start"  ></Label>
+                                        <!-- UserName2-->
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Label Text="שם פרטי" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                         </Grid>
+                                        <Entry  Placeholder="הקלד שם פרטי" MaxLength="30" Text="{Binding UserName2}" Style="{StaticResource entry}"/>
+
+                                        <!-- Email2-->
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Label Text="אימייל" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                            
+                                        </Grid>
+                                        <Entry Placeholder="אימייל" MaxLength="30" Text="{Binding Email2}" Style="{StaticResource entry}"/>
+
+                                        <!-- Password2-->
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Label Text="סיסמה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                            
+                                        </Grid>
+                                        <Entry Placeholder="סיסמה" HorizontalTextAlignment="End" MaxLength="30"  IsPassword="True" Text="{Binding Password2}" Style="{StaticResource entry}"/>
 
                                     </StackLayout>
 

@@ -21,6 +21,7 @@ namespace MyGanAPP.ViewModels
         public const string SHORT_PASS = "הסיסמה חייבת להכיל לפחות 6 תווים";
         public const string BAD_PHONE = "טלפון לא תקין";
         public const string BAD_DATE = "על הילד להיות מעל גיל שנה";
+        public const string BAD_PHONE_NUMBER = "מספר הטלפון חייב להכיל 10 מספרים";
     }
 
     class ParentRegistrationViewModel : INotifyPropertyChanged
@@ -366,7 +367,7 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
-        #region UserName
+        #region UserName1
         private bool showUserNameError;
 
         public bool ShowUserNameError
@@ -464,7 +465,7 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
-        #region Password
+        #region Password1
         private bool showPasswordError;
 
         public bool ShowPasswordError
@@ -515,6 +516,104 @@ namespace MyGanAPP.ViewModels
             }
             else
                 this.PasswordError = ERROR_MESSAGES.REQUIRED_FIELD;
+        }
+        #endregion
+
+        #region UserName2
+       private string userName2;
+
+        public string UserName2
+        {
+            get => userName2;
+            set
+            {
+                userName2 = value;
+                OnPropertyChanged("UserName2");
+            }
+        }
+
+        #endregion
+
+        #region Password2
+        private string password2;
+
+        public string Password2
+        {
+            get => password2;
+            set
+            {
+                password2 = value;
+                OnPropertyChanged("Password2");
+            }
+        }
+        #endregion
+
+        #region Email2
+        private string email2;
+
+        public string Email2
+        {
+            get => email2;
+            set
+            {
+                email2 = value;
+                OnPropertyChanged("Email2");
+            }
+        }
+        #endregion
+
+        #region PhoneNumber1
+        private bool showPhoneNumberError;
+
+        public bool ShowPhoneNumberError
+        {
+            get => showPhoneNumberError;
+            set
+            {
+                showPhoneNumberError = value;
+                OnPropertyChanged("ShowPhoneNumberError");
+            }
+        }
+
+        private string phoneNumber;
+
+        public string PhoneNumber
+        {
+            get => phoneNumber;
+            set
+            {
+                phoneNumber = value;
+                ValidatePhoneNumber();
+                OnPropertyChanged("PhoneNumber");
+            }
+        }
+
+        private string phoneNumberError;
+
+        public string PhoneNumberError
+        {
+            get => phoneNumberError;
+            set
+            {
+                phoneNumberError = value;
+                OnPropertyChanged("PhoneNumberError");
+            }
+        }
+
+        private void ValidatePhoneNumber()
+        {
+            this.ShowPhoneNumberError = string.IsNullOrEmpty(PhoneNumber);
+            if (!this.ShowPhoneNumberError)
+            {
+                if (this.PhoneNumber.Length < 10)
+                {
+                    this.ShowPhoneNumberError = true;
+                    this.PhoneNumberError = ERROR_MESSAGES.BAD_PHONE_NUMBER;
+                }
+
+            }
+            else
+                this.PhoneNumberError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 
@@ -570,6 +669,7 @@ namespace MyGanAPP.ViewModels
             this.ShowUserNameError = false;
             this.ShowEmailError = false;
             this.ShowPasswordError = false;
+            this.ShowPhoneNumberError = false;
 
             this.ChildLastNameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ChildNameError = ERROR_MESSAGES.REQUIRED_FIELD;

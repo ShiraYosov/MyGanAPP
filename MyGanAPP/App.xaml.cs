@@ -44,7 +44,16 @@ namespace MyGanAPP
         {
             MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
             this.LookupTables = await proxy.GetLookupsAsync();
-            MainPage = new NavigationPage(new HomePageView());
+            if(LookupTables != null)
+            {
+                MainPage = new NavigationPage(new HomePageView());
+            }
+            else
+            {
+                ViewModels.ServerStatusPageViewModel vm = new ViewModels.ServerStatusPageViewModel();
+                vm.ServerStatus = "אירעה שגיאה בהתחברות לשרת";
+                MainPage = new Views.ServerStatusPage(vm);
+            }
             //Guid.NewGuid().ToString();
         }
 
