@@ -10,7 +10,12 @@ using MyGanAPP.Models;
 using Xamarin.Essentials;
 using System.Linq;
 using MyGanAPP.Views;
+using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
+
+
+
+
 
 namespace MyGanAPP.ViewModels
 {
@@ -520,7 +525,7 @@ namespace MyGanAPP.ViewModels
         #endregion
 
         #region UserName2
-       private string userName2;
+        private string userName2;
 
         public string UserName2
         {
@@ -617,6 +622,172 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
+
+
+
+        #region try
+
+        private List<Allergy> allAllergies;
+        private ObservableCollection<Allergy> filteredAllergies;
+        public ObservableCollection<Allergy> FilteredAllergies
+        {
+            get
+            {
+                return this.filteredAllergies;
+            }
+            set
+            {
+                if (this.filteredAllergies != value)
+                {
+
+                    this.filteredAllergies = value;
+                    OnPropertyChanged("FilteredAllergies");
+                }
+            }
+        }
+
+        private string searchTerm;
+        public string SearchTerm
+        {
+            get
+            {
+                return this.searchTerm;
+            }
+            set
+            {
+                if (this.searchTerm != value)
+                {
+
+                    this.searchTerm = value;
+                    OnTextChanged(value);
+                    OnPropertyChanged("SearchTerm");
+                }
+            }
+        }
+        
+
+        private void InitAllergies()
+        {
+            IsRefreshing = true;
+            App theApp = (App)App.Current;
+            this.allAllergies = theApp.LookupTables.Allergies;
+
+
+            //Copy list to the filtered list
+            this.FilteredAllergies = new ObservableCollection<Allergy>(this.allAllergies.OrderBy(a => a.AllergyName));
+            SearchTerm = String.Empty;
+            IsRefreshing = false;
+        }
+
+        //Commands
+
+        #region Search
+        public void OnTextChanged(string search)
+        {
+            //Filter the list of contacts based on the search term
+            if (this.allAllergies == null)
+                return;
+            if (String.IsNullOrWhiteSpace(search) || String.IsNullOrEmpty(search))
+            {
+                foreach (Allergy a in this.allAllergies)
+                {
+                    if (!this.FilteredAllergies.Contains(a))
+                        this.FilteredAllergies.Add(a);
+
+
+                }
+            }
+            else
+            {
+                foreach (Allergy a in this.allAllergies)
+                {
+                    string allergyString = $"{a.AllergyName}";
+
+                    if (!this.FilteredAllergies.Contains(a) &&
+                        allergyString.Contains(search))
+                        this.FilteredAllergies.Add(a);
+                    else if (this.FilteredAllergies.Contains(a) &&
+                        !allergyString.Contains(search))
+                        this.FilteredAllergies.Remove(a);
+                }
+            }
+
+            this.FilteredAllergies = new ObservableCollection<Allergy>(this.FilteredAllergies.OrderBy(a => a.AllergyName));
+        }
+        #endregion
+        #region Refresh
+        private bool isRefreshing;
+        public bool IsRefreshing
+        {
+            get => isRefreshing;
+            set
+            {
+                if (this.isRefreshing != value)
+                {
+                    this.isRefreshing = value;
+                    OnPropertyChanged(nameof(IsRefreshing));
+                }
+            }
+        }
+        public ICommand RefreshCommand => new Command(OnRefresh);
+        public void OnRefresh()
+        {
+            InitAllergies();
+        }
+        #endregion
+       
+        //#region Add New Contact
+        //public ICommand AddContact => new Command(OnAddContact);
+        //public async void OnAddContact()
+        //{
+        //    App theApp = (App)App.Current;
+        //    AddContactViewModel vm = new AddContactViewModel();
+        //    vm.ContactUpdatedEvent += OnContactAdded;
+        //    Page p = new Views.AddContact(vm);
+        //    await theApp.MainPage.Navigation.PushAsync(p);
+        //}
+        ////This event is fired by the AddContact view model object and send the old contact to be removed and new contact to be added
+        //public void OnContactAdded(UserContact newUc, UserContact oldUc)
+        //{
+        //    //Change the Phone type objects to be the same instance of the PhoneTypes in App level
+        //    //This is a must in order to send the server the same objects
+        //    foreach (ContactPhone cp in newUc.ContactPhones)
+        //        cp.PhoneType = PhoneTypes.Where(pt => pt.TypeId == cp.PhoneTypeId).FirstOrDefault();
+
+        //    //Add the new contact, remove the old one from both lists and refresh the filtered list
+        //    this.allContacts.Remove(oldUc);
+        //    this.allContacts.Add(newUc);
+        //    this.FilteredContacts.Remove(oldUc);
+        //    OnTextChanged(SearchTerm);
+        //}
+
+        //#endregion
+        
+        //#region Update Existing Contact
+        //public ICommand UpdateContact => new Command<UserContact>(OnUpdateContact);
+        //public async void OnUpdateContact(UserContact uc)
+        //{
+        //    if (uc != null)
+        //    {
+        //        App theApp = (App)App.Current;
+        //        AddContactViewModel vm = new AddContactViewModel(uc);
+        //        vm.ContactUpdatedEvent += OnContactAdded;
+        //        Page p = new Views.AddContact(vm);
+        //        await theApp.MainPage.Navigation.PushAsync(p);
+        //        if (ClearSelection != null)
+        //            ClearSelection();
+        //    }
+        //}
+
+        //public event Action ClearSelection;
+        //#endregion
+
+
+
+        #endregion
+
+
+
         //This contact is a reference to the updated or new created contact
         private User theUser;
         public ParentRegistrationViewModel(User u = null)
@@ -651,6 +822,9 @@ namespace MyGanAPP.ViewModels
                 Random r = new Random();
                 this.UserImgSrc = proxy.GetBasePhotoUri() + ChildID + $".jpg?{r.Next()}";
             }
+
+            this.SearchTerm = String.Empty;
+            InitAllergies();
 
             this.theUser = u;
             Button1 = false;

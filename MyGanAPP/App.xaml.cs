@@ -26,7 +26,7 @@ namespace MyGanAPP
 
             CurrUser = null;
             MainPage = new NavigationPage(new HomePageView());
-
+           
             ViewModels.ServerStatusPageViewModel vm = new ViewModels.ServerStatusPageViewModel();
             vm.ServerStatus = "מתחבר לשרת...";
             MainPage = new Views.ServerStatusPage(vm);
@@ -44,7 +44,7 @@ namespace MyGanAPP
         {
             MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
             this.LookupTables = await proxy.GetLookupsAsync();
-            if(LookupTables != null)
+            if (LookupTables != null)
             {
                 MainPage = new NavigationPage(new HomePageView());
             }
@@ -54,7 +54,7 @@ namespace MyGanAPP
                 vm.ServerStatus = "אירעה שגיאה בהתחברות לשרת";
                 MainPage = new Views.ServerStatusPage(vm);
             }
-            //Guid.NewGuid().ToString();
+
         }
 
         protected override void OnSleep()

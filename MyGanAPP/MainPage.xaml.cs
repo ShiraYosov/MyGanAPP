@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Rg.Plugins.Popup.Services;
 
 namespace MyGanAPP
 {
@@ -14,5 +15,7 @@ namespace MyGanAPP
         {
             InitializeComponent();
         }
+
+       
     }
 }

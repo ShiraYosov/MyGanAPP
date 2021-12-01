@@ -134,6 +134,8 @@
                                         </Grid>
 
 
+                                        <Button Text="רשימת אלרגיות" Clicked="Allergy_Clicked"></Button>
+                                        
                                         <!--Grade-->
                                         <!--<Label Text="לאיזה גן עולה?" Style="{StaticResource labelNameStyle}"/>
                                         <Picker Title="סוג גן" ItemsSource="{Binding GradeTypes}" ItemDisplayBinding="{Binding GradeName}" SelectedItem="{Binding Grade}"/>-->

@@ -19,6 +19,7 @@
                 </FormattedString>
             </Label.FormattedText>
         </Label>
+        
     </StackLayout>
-
+    
 </ContentPage>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MyGanAPP.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Rg.Plugins.Popup.Services;
 
 namespace MyGanAPP.Views
 {
@@ -24,6 +25,11 @@ namespace MyGanAPP.Views
         private void Vm_SetImageSourceEvent(ImageSource obj)
         {
             theImage.Source = obj;
+        }
+
+        private void Allergy_Clicked(object sender, EventArgs e)
+        {
+            PopupNavigation.Instance.PushAsync(new AllergyPopup());
         }
     }
 }
