@@ -3,12 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyGanAPP.Views.ParentRegistrationView"
              FlowDirection="RightToLeft"
-              BackgroundColor="#bcd4e6">
+             BackgroundColor="#bcd4e6">
     <ContentPage.Content>
         <StackLayout Style="{StaticResource Stack}">
             <ScrollView>
                 <StackLayout >
                     <Image Source="logo1.png"  HeightRequest="300" ></Image>
+
+                    <Frame Style="{StaticResource logInSignUp}" BorderColor="DarkSlateGray" BackgroundColor="#bee9e8">
+                        <StackLayout>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="קוד גן" Grid.Column="0" FontSize="17" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding CodeError}" IsVisible="{Binding ShowCodeError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                            </Grid>
+                            <Entry  Placeholder="הקלד קוד גן" HorizontalTextAlignment="Start" MaxLength="30" Text="{Binding Code}"  Style="{StaticResource entry}"/>
+
+                        </StackLayout>
+                    </Frame>
 
 
 
@@ -31,23 +49,23 @@
 
                                     <StackLayout IsVisible="{Binding Button1}">
                                         <Label Text="בחירת תמונה" HorizontalOptions="Center" Style="{StaticResource labelNameStyle}"/>
-                                        
-                                            <!--Photo-->
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="0.3*"/>
+
+                                        <!--Photo-->
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.3*"/>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="0.3*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="*" />
-                                                    <!--<RowDefinition Height="30" />-->
-                                                </Grid.RowDefinitions>
-                                                <Frame BorderColor="white"  CornerRadius="100"  Grid.Column="1" Grid.Row="0" IsClippedToBounds="True" Padding="0" HeightRequest="150" WidthRequest="150" HorizontalOptions="CenterAndExpand">
-                                                    <Image x:Name="theImage" Source="{Binding UserImgSrc}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" HeightRequest="150" WidthRequest="150"/>
-                                                </Frame>
-                                            </Grid>
-                                        
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <!--<RowDefinition Height="30" />-->
+                                            </Grid.RowDefinitions>
+                                            <Frame BorderColor="white"  CornerRadius="100"  Grid.Column="1" Grid.Row="0" IsClippedToBounds="True" Padding="0" HeightRequest="150" WidthRequest="150" HorizontalOptions="CenterAndExpand">
+                                                <Image x:Name="theImage" Source="{Binding UserImgSrc}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" HeightRequest="150" WidthRequest="150"/>
+                                            </Frame>
+                                        </Grid>
+
                                         <Grid HorizontalOptions="Center">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="35"/>
@@ -60,7 +78,7 @@
                                             <ImageButton Source="gallery.png" HeightRequest="35"   VerticalOptions="Center" WidthRequest="35" HorizontalOptions="End" BackgroundColor="White" Grid.Column="0" Grid.Row="0" Command="{Binding PickImageCommand}"/>
                                             <ImageButton Source="camera.jpg" HeightRequest="35"  VerticalOptions="Center" WidthRequest="35" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>
                                         </Grid>
-                                       
+
                                         <!-- ChildFirstName-->
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -70,7 +88,7 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
-                                            <Label Text="שם פרטי" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                            <Label Text="שם פרטי" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
                                             <Label Text="{Binding ChildNameError}" IsVisible="{Binding ShowChildNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                                         </Grid>
                                         <Entry  Placeholder="הקלד שם פרטי" MaxLength="30" Text="{Binding ChildName}" Style="{StaticResource entry}"/>
@@ -84,7 +102,7 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
-                                            <Label Text="שם משפחה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                            <Label Text="שם משפחה" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
                                             <Label Text="{Binding ChildLastNameError}" IsVisible="{Binding ShowChildLastNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                                         </Grid>
                                         <Entry Placeholder="הקלד שם משפחה" MaxLength="30" Text="{Binding ChildLastName}" Style="{StaticResource entry}"/>
@@ -98,7 +116,7 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
-                                            <Label Text="תעודת זהות" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                            <Label Text="תעודת זהות" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
                                             <Label Text="{Binding ChildIDError}" IsVisible="{Binding ShowChildIDError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                                         </Grid>
                                         <Entry Placeholder="הקלד תעודת זהות" MaxLength="30" Text="{Binding ChildID}" Style="{StaticResource entry}"/>
@@ -112,10 +130,15 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
-                                            <Label Text="תאריך לידה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                            <Label Text="תאריך לידה" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
                                             <Label Text="{Binding BirthDateError}" IsVisible="{Binding ShowBirthDateError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                                         </Grid>
                                         <DatePicker Date="{Binding BirthDate}" Style="{StaticResource entry}"/>
+
+                                        <!--Grade-->
+                                        <Label Text="לאיזה גן עולה?" Style="{StaticResource labelNameStyle}"/>
+                                        <Picker ItemsSource="{Binding GradeTypes}" ItemDisplayBinding="{Binding GradeName}" SelectedItem="{Binding Grade}"></Picker>
+
 
                                         <!--Gender-->
                                         <Grid>
@@ -127,21 +150,15 @@
                                                 <RowDefinition Height="*" />
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
-                                            <Label Text="מגדר" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                            <Label Text="מגדר" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
                                             <Label Text="{Binding GenderError}" IsVisible="{Binding ShowGenderError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                                             <RadioButton GroupName="Gender" RadioButtonGroup.SelectedValue="{Binding Gender}" Content="נקבה" Grid.Column="0" Grid.Row="1" HorizontalOptions="Start"/>
                                             <RadioButton GroupName="Gender" BindingContext="{ Binding CheckedGender}" Content="זכר" Grid.Column="1" HorizontalOptions="Start" Grid.Row="1"/>
                                         </Grid>
 
-
-                                        <Button Text="רשימת אלרגיות" Clicked="Allergy_Clicked"></Button>
-                                        
-                                        <!--Grade-->
-                                        <!--<Label Text="לאיזה גן עולה?" Style="{StaticResource labelNameStyle}"/>
-                                        <Picker Title="סוג גן" ItemsSource="{Binding GradeTypes}" ItemDisplayBinding="{Binding GradeName}" SelectedItem="{Binding Grade}"/>-->
-
-
-
+                                        <!--Allergies-->
+                                        <Label Text="אלרגיות" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
+                                        <Button Text="רשימת אלרגיות" Clicked="Allergy_Clicked" BackgroundColor="#bee9e8" FontSize="16" CornerRadius="10"></Button>
                                     </StackLayout>
 
                                     <Grid>
@@ -167,12 +184,12 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
-                                            <Label Text="שם פרטי" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                            <Label Text="שם פרטי" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
                                             <Label Text="{Binding UserNameError}" IsVisible="{Binding ShowUserNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                                         </Grid>
                                         <Entry  Placeholder="הקלד שם פרטי" MaxLength="30" Text="{Binding UserName}" Style="{StaticResource entry}"/>
 
-                                        <!-- Email-->
+                                        <!-- Email1-->
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
@@ -181,12 +198,12 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
-                                            <Label Text="אימייל" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                            <Label Text="אימייל" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
                                             <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                                         </Grid>
                                         <Entry Placeholder="אימייל" MaxLength="30" Text="{Binding Email}" Style="{StaticResource entry}"/>
 
-                                        <!-- Password-->
+                                        <!-- Password1-->
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
@@ -195,7 +212,7 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
-                                            <Label Text="סיסמה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                            <Label Text="סיסמה" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
                                             <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                                         </Grid>
                                         <Entry Placeholder="סיסמה" HorizontalTextAlignment="End" MaxLength="30"  IsPassword="True" Text="{Binding Password}" Style="{StaticResource entry}"/>
@@ -209,10 +226,10 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
-                                            <Label Text="מספר טלפון" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                            <Label Text="מספר טלפון" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
                                             <Label Text="{Binding PhoneNumberError}" IsVisible="{Binding ShowPhoneNumberError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                                         </Grid>
-                                        <Entry Placeholder="מספר טלפון" HorizontalTextAlignment="End" MaxLength="30" Text="{Binding PhoneNumber}" Style="{StaticResource entry}"/>
+                                        <Entry Placeholder="מספר טלפון" HorizontalTextAlignment="Start" MaxLength="30" Text="{Binding PhoneNumber}" Style="{StaticResource entry}"/>
 
 
                                         <Label Text="פרטי הורה 2" TextColor="DarkBlue" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start"  ></Label>
@@ -225,8 +242,8 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
-                                            <Label Text="שם פרטי" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
-                                         </Grid>
+                                            <Label Text="שם פרטי" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
+                                        </Grid>
                                         <Entry  Placeholder="הקלד שם פרטי" MaxLength="30" Text="{Binding UserName2}" Style="{StaticResource entry}"/>
 
                                         <!-- Email2-->
@@ -238,8 +255,8 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
-                                            <Label Text="אימייל" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
-                                            
+                                            <Label Text="אימייל" Grid.Column="0"  HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
+
                                         </Grid>
                                         <Entry Placeholder="אימייל" MaxLength="30" Text="{Binding Email2}" Style="{StaticResource entry}"/>
 
@@ -252,10 +269,25 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
-                                            <Label Text="סיסמה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
-                                            
+                                            <Label Text="סיסמה" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
+
                                         </Grid>
                                         <Entry Placeholder="סיסמה" HorizontalTextAlignment="End" MaxLength="30"  IsPassword="True" Text="{Binding Password2}" Style="{StaticResource entry}"/>
+
+
+                                        <!-- PhoneNumber2-->
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Label Text="מספר טלפון" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
+                                            <Label Text="{Binding PhoneNumber2Error}" IsVisible="{Binding ShowPhoneNumber2Error}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                                        </Grid>
+                                        <Entry Placeholder="מספר טלפון" HorizontalTextAlignment="Start" MaxLength="30" Text="{Binding PhoneNumber2}" Style="{StaticResource entry}"/>
 
                                     </StackLayout>
 

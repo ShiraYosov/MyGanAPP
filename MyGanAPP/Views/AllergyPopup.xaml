@@ -17,29 +17,7 @@ x:Class="MyGanAPP.Views.AllergyPopup">
                                    ScaleOut="0.8" />
     </pages:PopupPage.Animation>
 
-    <!--  You can use any elements here which are extended from Xamarin.Forms.View  -->
-    <!--<StackLayout Margin="12"
-                 Padding="24"
-                 BackgroundColor="White"
-                 HorizontalOptions="Center"
-                 VerticalOptions="Center">
-        <StackLayout>
-            <Label Text="Login" />
-            <Entry FontSize="30"
-                   Text="username@email.com" />
-        </StackLayout>
-        <StackLayout>
-            <Label Text="Password" />
-            <Entry FontSize="30"
-                   IsPassword="True"
-                   Text="password123" />
-        </StackLayout>
-        <Button BackgroundColor="DodgerBlue"
-                FontSize="30"
-                Text="Login"
-                TextColor="White" />
-    </StackLayout>-->
-
+    
 
 
     <StackLayout Margin="60"
@@ -54,7 +32,7 @@ x:Class="MyGanAPP.Views.AllergyPopup">
             <RefreshView x:Name="refreshView"
              Command="{Binding RefreshCommand}"
              IsRefreshing="{Binding IsRefreshing}">
-                <CollectionView EmptyView="אין אלרגיות בשם זה" x:Name="collectionName" ItemsSource="{Binding FilteredAllergies}" SelectionMode="Multiple" BackgroundColor="White"
+                <CollectionView EmptyView="אין אלרגיה בשם זה" x:Name="collectionName" ItemsSource="{Binding FilteredAllergies}" SelectionMode="Multiple" SelectedItems="{Binding SelectedAllergies}" BackgroundColor="White"
                                 SelectionChangedCommand="{Binding UpdateAllergy}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Span="1" Orientation="Vertical" />
@@ -77,7 +55,9 @@ x:Class="MyGanAPP.Views.AllergyPopup">
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
-            <Button Text="הוסף אלרגיה" Command="{Binding AddContact}"></Button>
+            <Button Text="שמור אלרגיות" Command="{Binding SaveAllergies}"></Button>
+            <Entry Placeholder="רשום אלרגיה חדשה שתרצה להוסיף" MaxLength="30" Text="{Binding NewAllergy}" Style="{StaticResource entry}"></Entry>
+            <Button Text=" הוסף אלרגיה לרשימה" Command="{Binding AddAllergy}"></Button>
         </StackLayout>
 
 

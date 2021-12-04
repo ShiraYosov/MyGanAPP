@@ -29,7 +29,7 @@ namespace MyGanAPP.Views
 
         private void Allergy_Clicked(object sender, EventArgs e)
         {
-            PopupNavigation.Instance.PushAsync(new AllergyPopup());
+            PopupNavigation.Instance.PushAsync(new AllergyPopup(this.BindingContext));
         }
     }
 }

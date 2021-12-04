@@ -12,10 +12,12 @@ namespace MyGanAPP.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AllergyPopup : Rg.Plugins.Popup.Pages.PopupPage
     {
-        public AllergyPopup()
+        public AllergyPopup(object context)
         {
             InitializeComponent();
-            this.BindingContext = new ParentRegistrationViewModel() ;
+            this.BindingContext = context;
         }
+
+        
     }
 }

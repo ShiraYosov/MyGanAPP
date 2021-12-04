@@ -370,6 +370,8 @@ namespace MyGanAPP.ViewModels
                 return grades;
             }
         }
+
+
         #endregion
 
         #region UserName1
@@ -622,10 +624,101 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
+        #region PhoneNumber2
+        private bool showPhoneNumber2Error;
 
+        public bool ShowPhoneNumber2Error
+        {
+            get => showPhoneNumber2Error;
+            set
+            {
+                showPhoneNumber2Error = value;
+                OnPropertyChanged("ShowPhoneNumber2Error");
+            }
+        }
 
+        private string phoneNumber2;
 
-        #region try
+        public string PhoneNumber2
+        {
+            get => phoneNumber2;
+            set
+            {
+                phoneNumber2 = value;
+                ValidatePhoneNumber2();
+                OnPropertyChanged("PhoneNumber2");
+            }
+        }
+
+        private string phoneNumber2Error;
+
+        public string PhoneNumber2Error
+        {
+            get => phoneNumber2Error;
+            set
+            {
+                phoneNumber2Error = value;
+                OnPropertyChanged("PhoneNumber2Error");
+            }
+        }
+
+        private void ValidatePhoneNumber2()
+        {
+            if (this.PhoneNumber2.Length < 10)
+            {
+                this.ShowPhoneNumber2Error = true;
+                this.PhoneNumber2Error = ERROR_MESSAGES.BAD_PHONE_NUMBER;
+            }
+        }
+        #endregion
+
+        #region GanCode
+
+        private bool showCodeError;
+
+        public bool ShowCodeError
+        {
+            get => showCodeError;
+            set
+            {
+                showCodeError = value;
+                OnPropertyChanged("ShowCodeError");
+            }
+        }
+
+        private string code;
+
+        public string Code
+        {
+            get => code;
+            set
+            {
+                code = value;
+                ValidateCode();
+                OnPropertyChanged("Code");
+            }
+        }
+
+        private string codeError;
+
+        public string CodeError
+        {
+            get => codeError;
+            set
+            {
+                codeError = value;
+                OnPropertyChanged("CodeError");
+            }
+        }
+
+        private void ValidateCode()
+        {
+            this.ShowCodeError = string.IsNullOrEmpty(Code);
+        }
+
+        #endregion
+
+        #region Allergies
 
         private List<Allergy> allAllergies;
         private ObservableCollection<Allergy> filteredAllergies;
@@ -664,7 +757,7 @@ namespace MyGanAPP.ViewModels
                 }
             }
         }
-        
+
 
         private void InitAllergies()
         {
@@ -679,9 +772,20 @@ namespace MyGanAPP.ViewModels
             IsRefreshing = false;
         }
 
+        private string newAllergy;
+        public string NewAllergy
+        {
+            get => newAllergy;
+            set
+            {
+               newAllergy = value;
+                OnPropertyChanged("NewAllergy");
+            }
+        }
+
         //Commands
 
-        #region Search
+            #region Search
         public void OnTextChanged(string search)
         {
             //Filter the list of contacts based on the search term
@@ -735,59 +839,49 @@ namespace MyGanAPP.ViewModels
             InitAllergies();
         }
         #endregion
-       
-        //#region Add New Contact
-        //public ICommand AddContact => new Command(OnAddContact);
-        //public async void OnAddContact()
-        //{
-        //    App theApp = (App)App.Current;
-        //    AddContactViewModel vm = new AddContactViewModel();
-        //    vm.ContactUpdatedEvent += OnContactAdded;
-        //    Page p = new Views.AddContact(vm);
-        //    await theApp.MainPage.Navigation.PushAsync(p);
-        //}
-        ////This event is fired by the AddContact view model object and send the old contact to be removed and new contact to be added
-        //public void OnContactAdded(UserContact newUc, UserContact oldUc)
-        //{
-        //    //Change the Phone type objects to be the same instance of the PhoneTypes in App level
-        //    //This is a must in order to send the server the same objects
-        //    foreach (ContactPhone cp in newUc.ContactPhones)
-        //        cp.PhoneType = PhoneTypes.Where(pt => pt.TypeId == cp.PhoneTypeId).FirstOrDefault();
 
-        //    //Add the new contact, remove the old one from both lists and refresh the filtered list
-        //    this.allContacts.Remove(oldUc);
-        //    this.allContacts.Add(newUc);
-        //    this.FilteredContacts.Remove(oldUc);
-        //    OnTextChanged(SearchTerm);
-        //}
+        #region Add New Allergy
+        public ICommand AddAllergy => new Command(OnAddAllergy);
+        public async void OnAddAllergy()
+        {
 
-        //#endregion
-        
-        //#region Update Existing Contact
-        //public ICommand UpdateContact => new Command<UserContact>(OnUpdateContact);
-        //public async void OnUpdateContact(UserContact uc)
-        //{
-        //    if (uc != null)
-        //    {
-        //        App theApp = (App)App.Current;
-        //        AddContactViewModel vm = new AddContactViewModel(uc);
-        //        vm.ContactUpdatedEvent += OnContactAdded;
-        //        Page p = new Views.AddContact(vm);
-        //        await theApp.MainPage.Navigation.PushAsync(p);
-        //        if (ClearSelection != null)
-        //            ClearSelection();
-        //    }
-        //}
+            if(string.IsNullOrEmpty(NewAllergy))
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", "לא ניתן להוסיף ערך זה!", "בסדר");
+                return;
+            }
 
-        //public event Action ClearSelection;
-        //#endregion
+            Allergy NewAllrg = new Allergy
+            {
+                AllergyName = NewAllergy
+            };
+            
+            bool IsExist = false;
+            if( allAllergies.Contains(NewAllrg)) { IsExist = true; }
 
+            if (!IsExist)
+            {
+                MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
+                bool ok = await proxy.AddAllergy(NewAllrg);
 
+                if (ok)
+                {
+                    await App.Current.MainPage.DisplayAlert("", "הוספת אלרגיה בהצלחה!", "בסדר");
+                }
+                else if (!ok)
+                {
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת אלרגיה נכשלה", "בסדר");
+                }
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", "אלרגיה זו כבר קיימת במערכת", "בסדר");
+            }
 
+        }
         #endregion
 
-
-
+       
         //This contact is a reference to the updated or new created contact
         private User theUser;
         public ParentRegistrationViewModel(User u = null)
@@ -844,6 +938,8 @@ namespace MyGanAPP.ViewModels
             this.ShowEmailError = false;
             this.ShowPasswordError = false;
             this.ShowPhoneNumberError = false;
+            this.ShowPhoneNumber2Error = false;
+            this.ShowCodeError = false;
 
             this.ChildLastNameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ChildNameError = ERROR_MESSAGES.REQUIRED_FIELD;
@@ -851,6 +947,7 @@ namespace MyGanAPP.ViewModels
             this.BirthDateError = ERROR_MESSAGES.BAD_DATE;
             this.GenderError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.UserNameError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.CodeError = ERROR_MESSAGES.REQUIRED_FIELD;
 
             //Setup default image photo
             this.UserImgSrc = DEFAULT_PHOTO_SRC;
@@ -926,3 +1023,4 @@ namespace MyGanAPP.ViewModels
     }
 }
 
+#endregion
