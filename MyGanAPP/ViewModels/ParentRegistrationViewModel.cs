@@ -345,15 +345,15 @@ namespace MyGanAPP.ViewModels
 
         #region Grade
 
-        private Grade grade;
+        private Grade chosenGrade;
 
-        public Grade Grade
+        public Grade ChosenGrade
         {
-            get => grade;
+            get => chosenGrade;
             set
             {
-                grade = value;
-                OnPropertyChanged("Grade");
+                chosenGrade = value;
+                OnPropertyChanged("ChosenGrade");
             }
         }
 
@@ -369,6 +369,37 @@ namespace MyGanAPP.ViewModels
                 }
                 return grades;
             }
+        }
+
+        private bool showGradeError;
+
+        public bool ShowGradeError
+        {
+            get => showGradeError;
+            set
+            {
+                showGradeError = value;
+                OnPropertyChanged("ShowGradeError");
+            }
+        }
+
+        
+
+        private string gradeError;
+
+        public string GradeError
+        {
+            get => gradeError;
+            set
+            {
+                gradeError = value;
+                OnPropertyChanged("GradeError");
+            }
+        }
+
+        private void ValidateGrade()
+        {
+            this.ShowGradeError = (ChosenGrade == null);
         }
 
 
@@ -782,10 +813,11 @@ namespace MyGanAPP.ViewModels
                 OnPropertyChanged("NewAllergy");
             }
         }
+        #endregion
 
         //Commands
 
-            #region Search
+        #region Search
         public void OnTextChanged(string search)
         {
             //Filter the list of contacts based on the search term
@@ -881,7 +913,49 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
-       
+        #region Register
+        private bool ValidateForm()
+        {
+            //Validate all fields first
+            ValidateChildID();
+            ValidateBirthDate();
+            ValidateChildLastName();
+            ValidateChildName();
+            ValidateCode();
+            ValidateEmail();
+            ValidateGender();
+            ValidatePassword();
+            ValidatePhoneNumber();
+            ValidateUserName();
+            ValidateGrade();
+
+
+            //check if any validation failed
+            if (showBirthDateError || showChildIDError || showChildLastNameError || showChildNameError || showCodeError || showEmailError || showGenderError||
+                showGradeError || showPasswordError || showPhoneNumberError || showUserNameError)
+
+                return false;
+            return true;
+        }
+
+        public ICommand RegisterCommand { protected set; get; }
+
+        public async void Register()
+        {
+
+            //MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
+           
+            //if(ValidateForm())
+            //{
+            //    User NewUser = new User
+            //    {
+
+            //    };
+            //}
+
+        }
+        #endregion
+
         //This contact is a reference to the updated or new created contact
         private User theUser;
         public ParentRegistrationViewModel(User u = null)
@@ -917,6 +991,7 @@ namespace MyGanAPP.ViewModels
                 this.UserImgSrc = proxy.GetBasePhotoUri() + ChildID + $".jpg?{r.Next()}";
             }
 
+            RegisterCommand = new Command(Register);
             this.SearchTerm = String.Empty;
             InitAllergies();
 
@@ -940,6 +1015,7 @@ namespace MyGanAPP.ViewModels
             this.ShowPhoneNumberError = false;
             this.ShowPhoneNumber2Error = false;
             this.ShowCodeError = false;
+            this.showGradeError = false;
 
             this.ChildLastNameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ChildNameError = ERROR_MESSAGES.REQUIRED_FIELD;
@@ -948,6 +1024,7 @@ namespace MyGanAPP.ViewModels
             this.GenderError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.UserNameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.CodeError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.GradeError = ERROR_MESSAGES.REQUIRED_FIELD;
 
             //Setup default image photo
             this.UserImgSrc = DEFAULT_PHOTO_SRC;
@@ -1023,4 +1100,3 @@ namespace MyGanAPP.ViewModels
     }
 }
 
-#endregion

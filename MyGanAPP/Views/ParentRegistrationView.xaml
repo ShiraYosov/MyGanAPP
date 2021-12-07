@@ -137,7 +137,7 @@
 
                                         <!--Grade-->
                                         <Label Text="לאיזה גן עולה?" Style="{StaticResource labelNameStyle}"/>
-                                        <Picker ItemsSource="{Binding GradeTypes}" ItemDisplayBinding="{Binding GradeName}" SelectedItem="{Binding Grade}"></Picker>
+                                        <Picker ItemsSource="{Binding GradeTypes}" ItemDisplayBinding="{Binding GradeName}" SelectedItem="{Binding ChosenGrade}"></Picker>
 
 
                                         <!--Gender-->
@@ -289,11 +289,11 @@
                                         </Grid>
                                         <Entry Placeholder="מספר טלפון" HorizontalTextAlignment="Start" MaxLength="30" Text="{Binding PhoneNumber2}" Style="{StaticResource entry}"/>
 
+                                        <Button Text="הרשמה" Command="{Binding RegisterCommand}" BackgroundColor="#bee9e8" TextColor="Black"  Margin="15" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
+
                                     </StackLayout>
 
-
-
-                                </StackLayout>
+                               </StackLayout>
 
 
                             </Frame>
