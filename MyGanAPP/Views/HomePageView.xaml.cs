@@ -26,5 +26,10 @@ namespace MyGanAPP.Views
         {
             App.Current.MainPage.Navigation.PushAsync(new ParentRegistrationView());
         }
+
+        private void Teacher_Preseed(object sender, EventArgs e)
+        {
+            App.Current.MainPage.Navigation.PushAsync(new AddTeacherView());
+        }
     }
 }

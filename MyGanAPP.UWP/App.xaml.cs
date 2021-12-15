@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+
 namespace MyGanAPP.UWP
 {
     /// <summary>
@@ -28,8 +29,10 @@ namespace MyGanAPP.UWP
         /// </summary>
         public App()
         {
+            //Rg.Plugins.Popup.Popup.Init();
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            //Rg.Plugins.Popup.Popup.Init();
         }
 
         /// <summary>

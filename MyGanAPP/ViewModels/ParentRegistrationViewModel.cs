@@ -872,10 +872,34 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
+        List<Allergy> selectedAllergies;
+        public List<Allergy> SelectedAllergies
+        {
+            get
+            {
+                return selectedAllergies;
+            }
+            set
+            {
+                if (selectedAllergies != value)
+                {
+                    selectedAllergies = value;
+                }
+            }
+        }
+
         public ICommand UpdateAllergy => new Command(OnPressedAllergy);
         public async void OnPressedAllergy(object allergyList)
         {
-
+            if (allergyList is List<Allergy>)
+            {
+                SelectedAllergies.Clear();
+                List<Allergy> alergies = (List<Allergy>)allergyList;
+                foreach(Allergy a in alergies)
+                {
+                    SelectedAllergies.Add(a);
+                }
+            }
         }
 
         #region Add New Allergy

@@ -22,6 +22,7 @@ namespace MyGanAPP
         public Lookups LookupTables { get; set; }
         public App()
         {
+            
             InitializeComponent();
 
             CurrUser = null;

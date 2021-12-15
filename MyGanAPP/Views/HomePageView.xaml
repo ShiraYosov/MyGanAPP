@@ -17,7 +17,7 @@
                 </Frame>
 
                 <Frame Padding="0" BackgroundColor="#06d6a0" CornerRadius="20">
-                    <Button Text="אני גננת - הרשמה לגן" CornerRadius="20" BackgroundColor="#78c6a3" TextColor="White"  Margin="6" FontAttributes="Bold" FontSize="20"/>
+                    <Button Text="אני גננת - הרשמה לגן" CornerRadius="20" BackgroundColor="#78c6a3" TextColor="White" Pressed="Teacher_Preseed"  Margin="6" FontAttributes="Bold" FontSize="20"/>
                 </Frame>
 
                 <Frame Padding="0" BackgroundColor="#f7b801" CornerRadius="20">

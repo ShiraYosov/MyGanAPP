@@ -33,7 +33,7 @@ x:Class="MyGanAPP.Views.AllergyPopup">
              Command="{Binding RefreshCommand}"
              IsRefreshing="{Binding IsRefreshing}">
                 <CollectionView EmptyView="אין אלרגיה בשם זה" x:Name="collectionName" ItemsSource="{Binding FilteredAllergies}" SelectionMode="Multiple" SelectedItems="{Binding SelectedAllergies}" BackgroundColor="White"
-                                SelectionChangedCommand="{Binding UpdateAllergy}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">
+                                SelectionChangedCommand="{Binding UpdateAllergy}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItems}">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Span="1" Orientation="Vertical" />
                     </CollectionView.ItemsLayout>
