@@ -872,6 +872,7 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
+        #region AllergySelection
         List<Allergy> selectedAllergies;
         public List<Allergy> SelectedAllergies
         {
@@ -901,6 +902,7 @@ namespace MyGanAPP.ViewModels
                 }
             }
         }
+        #endregion
 
         #region Add New Allergy
         public ICommand AddAllergy => new Command(OnAddAllergy);
@@ -970,20 +972,26 @@ namespace MyGanAPP.ViewModels
 
         public ICommand RegisterCommand { protected set; get; }
 
-        //public async void Register()
-        //{
+        public async void Register()
+        {
 
-            //MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
-           
-            //if(ValidateForm())
-            //{
-            //    User NewUser = new User
-            //    {
+            MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
 
-            //    };
-            //}
+            if (ValidateForm())
+            {
+                User NewUser = new User
+                {
+                    Email= Email,
+                    Password= Password,
+                    Fname= UserName,
+                    LastName= ChildLastName,
+                    PhoneNumber= PhoneNumber,
+                    IsSystemManager= false,
 
-        //}
+                };
+            }
+
+        }
         #endregion
 
         //This contact is a reference to the updated or new created contact

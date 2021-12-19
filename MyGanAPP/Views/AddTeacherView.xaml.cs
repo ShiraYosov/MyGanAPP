@@ -14,8 +14,17 @@ namespace MyGanAPP.Views
     {
         public AddTeacherView()
         {
+            AddTeacherViewModel vm = new AddTeacherViewModel();
+            vm.SetImageSourceEvent += Vm_SetImageSourceEvent;
+            this.BindingContext = vm;
             InitializeComponent();
-            this.BindingContext = new AddTeacherViewModel();
+
+            vm.ChangeBools();
+            
+        }
+        private void Vm_SetImageSourceEvent(ImageSource obj)
+        {
+            theImage.Source = obj;
         }
     }
 }

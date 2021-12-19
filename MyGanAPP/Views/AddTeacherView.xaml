@@ -70,9 +70,9 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Label Text="שם פרטי" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
-                                <Label Text="{Binding TeacherNameError}" IsVisible="{Binding ShowTeacherNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                                <Label Text="{Binding TeacherFirstNameError}" IsVisible="{Binding ShowTeacherFirstNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                             </Grid>
-                            <Entry Placeholder="הקלד תעודת זהות" MaxLength="30" Text="{Binding TeacherName}" Style="{StaticResource entry}"/>
+                            <Entry Placeholder="הקלד שם פרטי" MaxLength="30" Text="{Binding TeacherFirstName}" Style="{StaticResource entry}"/>
 
                             <!-- TeacherLastName-->
                             <Grid>
