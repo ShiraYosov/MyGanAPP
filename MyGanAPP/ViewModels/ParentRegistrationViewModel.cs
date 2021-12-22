@@ -815,6 +815,81 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
+        #region ServerStatus
+        private string serverStatus;
+        public string ServerStatus
+        {
+            get { return serverStatus; }
+            set
+            {
+                serverStatus = value;
+                OnPropertyChanged("ServerStatus");
+            }
+        }
+        #endregion
+
+        #region RelationToStudent
+
+        private RelationToStudent chosenRelation;
+
+        public RelationToStudent ChosenRelation
+        {
+            get => chosenRelation;
+            set
+            {
+                chosenRelation = value;
+                OnPropertyChanged("ChosenRelation");
+            }
+        }
+
+        public List<RelationToStudent> RelationTypes
+        {
+            get
+            {
+                App theApp = (App)App.Current;
+                List<RelationToStudent> relations = new List<RelationToStudent>();
+                foreach (RelationToStudent r in theApp.LookupTables.Relations)
+                {
+                    relations.Add(r);
+                }
+                return relations;
+            }
+        }
+
+        private bool showRelationError;
+
+        public bool ShowRelationError
+        {
+            get => showRelationError;
+            set
+            {
+                showRelationError = value;
+                OnPropertyChanged("ShowRelationError");
+            }
+        }
+
+
+
+        private string relationError;
+
+        public string RelationError
+        {
+            get => relationError;
+            set
+            {
+                relationError = value;
+                OnPropertyChanged("RelationError");
+            }
+        }
+
+        private void ValidateRelation()
+        {
+            this.ShowRelationError = (ChosenRelation == null);
+        }
+
+
+        #endregion
+
         //Commands
 
         #region Search
@@ -974,21 +1049,52 @@ namespace MyGanAPP.ViewModels
 
         public async void Register()
         {
-
+            int groupId = GanCode.CodeToGroupID(Code);
             MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
 
             if (ValidateForm())
             {
-                User NewUser = new User
+                App app = (App)App.Current;
+                if ( ValidateForm())
                 {
-                    Email= Email,
-                    Password= Password,
-                    Fname= UserName,
-                    LastName= ChildLastName,
-                    PhoneNumber= PhoneNumber,
-                    IsSystemManager= false,
+                    User newUser = new User
+                    {
+                        Email = Email,
+                        Password = Password,
+                        Fname = UserName,
+                        LastName = ChildLastName,
+                        PhoneNumber = PhoneNumber,
+                    };
 
-                };
+                    ServerStatus = "מתחבר לשרת...";
+                    await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
+                    User newU = await proxy.Register(newUser);
+
+                    if (newU != null)
+                    {
+                        Student newStudent = new Student
+                        {
+                            FirstName = ChildName,
+                            LastName = ChildLastName,
+                            BirthDate = BirthDate,
+                            StudentId = int.Parse(ChildID),
+                            Gender = Gender,
+                            GroupId = groupId,
+                            GradeId = ChosenGrade.GradeId
+                        };
+
+                        //newU.StudentOfUsers.Add(newStudent);
+                    }
+                    else
+                    {
+                        //SubmitError = "ההרשמה נכשלה! נסה שנית";
+                        //ShowError = true;
+                    }
+                }
+                
+               
+
+                
             }
 
         }
@@ -1018,7 +1124,7 @@ namespace MyGanAPP.ViewModels
                 //Setup default image photo
                 this.UserImgSrc = DEFAULT_PHOTO_SRC;
                 this.imageFileResult = null; //mark that no picture was chosen
-
+                
             }
             else
             {
@@ -1054,6 +1160,7 @@ namespace MyGanAPP.ViewModels
             this.ShowPhoneNumber2Error = false;
             this.ShowCodeError = false;
             this.showGradeError = false;
+            this.showRelationError = false;
 
             this.ChildLastNameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ChildNameError = ERROR_MESSAGES.REQUIRED_FIELD;
@@ -1063,6 +1170,7 @@ namespace MyGanAPP.ViewModels
             this.UserNameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.CodeError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.GradeError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.RelationError = ERROR_MESSAGES.REQUIRED_FIELD;
 
             //Setup default image photo
             this.UserImgSrc = DEFAULT_PHOTO_SRC;

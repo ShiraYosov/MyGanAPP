@@ -8,13 +8,13 @@ namespace MyGanAPP.Models
     {
         private const int HASHCODE = 9973;
 
-        public static string CreateGanCode(int ID)
+        public static string CreateGroupCode(int ID)
         {
            return "G" + $"{HASHCODE / ID}" + "N" + $" {HASHCODE % ID}";
             
         }
 
-        public static int CodeToGanID(string code)
+        public static int CodeToGroupID(string code)
         {
             int gPos = code.IndexOf('G');
             int nPos = code.IndexOf('N');

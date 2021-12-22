@@ -9,24 +9,22 @@ namespace MyGanAPP.Models
     {
         public Student()
         {
-            StudentAllergies = new List<StudentAllergy>();
-            StudentOfUsers = new List<StudentOfUser>();
+            StudentAllergies = new HashSet<StudentAllergy>();
+            StudentOfUsers = new HashSet<StudentOfUser>();
         }
 
         public int StudentId { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
-        public int FirstName { get; set; }
+        public string FirstName { get; set; }
         public string Gender { get; set; }
-        public string ArrivedFrom { get; set; }
-        public int PhotoId { get; set; }
         public int GradeId { get; set; }
         public int GroupId { get; set; }
 
         public virtual Grade Grade { get; set; }
         public virtual Group Group { get; set; }
-        public virtual List<StudentAllergy> StudentAllergies { get; set; }
-        public virtual List<StudentOfUser> StudentOfUsers { get; set; }
+        public virtual ICollection<StudentAllergy> StudentAllergies { get; set; }
+        public virtual ICollection<StudentOfUser> StudentOfUsers { get; set; }
 
         public string PhotoURL
         {

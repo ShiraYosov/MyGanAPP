@@ -134,10 +134,13 @@
                                         </Grid>
                                         <DatePicker Date="{Binding BirthDate}" Style="{StaticResource entry}"/>
 
+                                        <!--Relation-->
+                                        <Label Text="סוג הקשר" Style="{StaticResource labelNameStyle}"/>
+                                        <Picker ItemsSource="{Binding RelationTypes}" ItemDisplayBinding="{Binding RelationType}" SelectedItem="{Binding ChosenRelation}"></Picker>
+
                                         <!--Grade-->
                                         <Label Text="לאיזה גן עולה?" Style="{StaticResource labelNameStyle}"/>
                                         <Picker ItemsSource="{Binding GradeTypes}" ItemDisplayBinding="{Binding GradeName}" SelectedItem="{Binding ChosenGrade}"></Picker>
-
 
                                         <!--Gender-->
                                         <Grid>

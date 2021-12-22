@@ -18,8 +18,8 @@ namespace MyGanAPP.Views
         {
             ParentRegistrationViewModel vm = new ParentRegistrationViewModel();
             vm.SetImageSourceEvent += Vm_SetImageSourceEvent;
-            InitializeComponent();
             this.BindingContext = vm;
+            InitializeComponent();
         }
 
         private void Vm_SetImageSourceEvent(ImageSource obj)

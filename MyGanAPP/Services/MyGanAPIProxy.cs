@@ -202,5 +202,38 @@ namespace MyGanAPP.Services
                 return false;
             }
         }
+
+        public async Task<User> Register(User user)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                    PropertyNameCaseInsensitive = true
+                };
+                string jsonObject = JsonSerializer.Serialize<User>(user, options);
+                StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/Register", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    jsonObject = await response.Content.ReadAsStringAsync();
+                    User u = JsonSerializer.Deserialize<User>(jsonObject, options);
+                    return u;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+
+        }
     }
 }

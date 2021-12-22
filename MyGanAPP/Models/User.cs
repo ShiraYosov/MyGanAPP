@@ -20,6 +20,7 @@ namespace MyGanAPP.Models
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public bool IsSystemManager { get; set; }
+        public bool IsApproved { get; set; }
 
         public virtual List<Group> Groups { get; set; }
         public virtual List<KindergartenManager> KindergartenManagers { get; set; }
