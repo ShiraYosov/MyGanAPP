@@ -383,7 +383,7 @@ namespace MyGanAPP.ViewModels
             }
         }
 
-        
+
 
         private string gradeError;
 
@@ -809,7 +809,7 @@ namespace MyGanAPP.ViewModels
             get => newAllergy;
             set
             {
-               newAllergy = value;
+                newAllergy = value;
                 OnPropertyChanged("NewAllergy");
             }
         }
@@ -971,7 +971,7 @@ namespace MyGanAPP.ViewModels
             {
                 SelectedAllergies.Clear();
                 List<Allergy> alergies = (List<Allergy>)allergyList;
-                foreach(Allergy a in alergies)
+                foreach (Allergy a in alergies)
                 {
                     SelectedAllergies.Add(a);
                 }
@@ -984,7 +984,7 @@ namespace MyGanAPP.ViewModels
         public async void OnAddAllergy()
         {
 
-            if(string.IsNullOrEmpty(NewAllergy))
+            if (string.IsNullOrEmpty(NewAllergy))
             {
                 await App.Current.MainPage.DisplayAlert("שגיאה", "לא ניתן להוסיף ערך זה!", "בסדר");
                 return;
@@ -994,9 +994,9 @@ namespace MyGanAPP.ViewModels
             {
                 AllergyName = NewAllergy
             };
-            
+
             bool IsExist = false;
-            if( allAllergies.Contains(NewAllrg)) { IsExist = true; }
+            if (allAllergies.Contains(NewAllrg)) { IsExist = true; }
 
             if (!IsExist)
             {
@@ -1038,7 +1038,7 @@ namespace MyGanAPP.ViewModels
 
 
             //check if any validation failed
-            if (showBirthDateError || showChildIDError || showChildLastNameError || showChildNameError || showCodeError || showEmailError || showGenderError||
+            if (showBirthDateError || showChildIDError || showChildLastNameError || showChildNameError || showCodeError || showEmailError || showGenderError ||
                 showGradeError || showPasswordError || showPhoneNumberError || showUserNameError)
 
                 return false;
@@ -1052,197 +1052,190 @@ namespace MyGanAPP.ViewModels
             int groupId = GanCode.CodeToGroupID(Code);
             MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
 
+            App app = (App)App.Current;
             if (ValidateForm())
             {
-                App app = (App)App.Current;
-                if ( ValidateForm())
+                User newUser = new User
                 {
-                    User newUser = new User
-                    {
-                        Email = Email,
-                        Password = Password,
-                        Fname = UserName,
-                        LastName = ChildLastName,
-                        PhoneNumber = PhoneNumber,
-                    };
-
-                    ServerStatus = "מתחבר לשרת...";
-                    await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
-                    User newU = await proxy.Register(newUser);
-
-                    if (newU != null)
-                    {
-                        Student newStudent = new Student
-                        {
-                            FirstName = ChildName,
-                            LastName = ChildLastName,
-                            BirthDate = BirthDate,
-                            StudentId = int.Parse(ChildID),
-                            Gender = Gender,
-                            GroupId = groupId,
-                            GradeId = ChosenGrade.GradeId
-                        };
-
-                        //newU.StudentOfUsers.Add(newStudent);
-                    }
-                    else
-                    {
-                        //SubmitError = "ההרשמה נכשלה! נסה שנית";
-                        //ShowError = true;
-                    }
-                }
-                
-               
-
-                
-            }
-
-        }
-        #endregion
-
-        //This contact is a reference to the updated or new created contact
-        private User theUser;
-        public ParentRegistrationViewModel(User u = null)
-        {
-            //create a new user contact if this is an add operation
-            if (theUser == null)
-            {
-                App theApp = (App)App.Current;
-                u = new User()
-                {
-                    LastName = "",
-                    Fname = "",
-                    Email = "",
-                    PhoneNumber = "",
-                    Password = "",
-                    Groups = new List<Models.Group>(),
-                    Signatures = new List<Signature>(),
-                    IsSystemManager = false,
-                    StudentOfUsers = new List<StudentOfUser>(),
+                    Email = Email,
+                    Password = Password,
+                    Fname = UserName,
+                    LastName = ChildLastName,
+                    PhoneNumber = PhoneNumber,
                 };
 
-                //Setup default image photo
-                this.UserImgSrc = DEFAULT_PHOTO_SRC;
-                this.imageFileResult = null; //mark that no picture was chosen
-                
-            }
-            else
+                ServerStatus = "מתחבר לשרת...";
+                await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
+                User newU = await proxy.Register(newUser);
+
+                if (newU != null)
+                {
+                    Student newStudent = new Student
+                    {
+                        FirstName = ChildName,
+                        LastName = ChildLastName,
+                        BirthDate = BirthDate,
+                        StudentId = int.Parse(ChildID),
+                        Gender = Gender,
+                        GroupId = groupId,
+                        GradeId = ChosenGrade.GradeId
+                    };
+
+                    //newU.StudentOfUsers.Add(newStudent);
+                }
+                else
+                {
+                    //SubmitError = "ההרשמה נכשלה! נסה שנית";
+                    //ShowError = true;
+                }
+        }
+
+    }
+    #endregion
+
+    //This contact is a reference to the updated or new created contact
+    private User theUser;
+    public ParentRegistrationViewModel(User u = null)
+    {
+        //create a new user contact if this is an add operation
+        if (theUser == null)
+        {
+            App theApp = (App)App.Current;
+            u = new User()
             {
-                //set the path url to the contact photo
-                MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
-                //Create a source with cache busting!
-                Random r = new Random();
-                this.UserImgSrc = proxy.GetBasePhotoUri() + ChildID + $".jpg?{r.Next()}";
-            }
-
-            //RegisterCommand = new Command(Register);
-            this.SearchTerm = String.Empty;
-            InitAllergies();
-
-            this.theUser = u;
-            Button1 = false;
-            Button2 = false;
-            ImgSource1 = Source1;
-            ImgSource2 = Source1;
-            Button1PressedCommand = new Command(Button1Pressed);
-            Button2PressedCommand = new Command(Button2Pressed);
-            this.BirthDate = DateTime.Today;
-
-            this.ShowChildNameError = false;
-            this.ShowChildLastNameError = false;
-            this.ShowChildIDError = false;
-            this.ShowBirthDateError = false;
-            this.ShowGenderError = false;
-            this.ShowUserNameError = false;
-            this.ShowEmailError = false;
-            this.ShowPasswordError = false;
-            this.ShowPhoneNumberError = false;
-            this.ShowPhoneNumber2Error = false;
-            this.ShowCodeError = false;
-            this.showGradeError = false;
-            this.showRelationError = false;
-
-            this.ChildLastNameError = ERROR_MESSAGES.REQUIRED_FIELD;
-            this.ChildNameError = ERROR_MESSAGES.REQUIRED_FIELD;
-            this.ChildIDError = ERROR_MESSAGES.REQUIRED_FIELD;
-            this.BirthDateError = ERROR_MESSAGES.BAD_DATE;
-            this.GenderError = ERROR_MESSAGES.REQUIRED_FIELD;
-            this.UserNameError = ERROR_MESSAGES.REQUIRED_FIELD;
-            this.CodeError = ERROR_MESSAGES.REQUIRED_FIELD;
-            this.GradeError = ERROR_MESSAGES.REQUIRED_FIELD;
-            this.RelationError = ERROR_MESSAGES.REQUIRED_FIELD;
+                LastName = "",
+                Fname = "",
+                Email = "",
+                PhoneNumber = "",
+                Password = "",
+                Groups = new List<Models.Group>(),
+                Signatures = new List<Signature>(),
+                IsSystemManager = false,
+                StudentOfUsers = new List<StudentOfUser>(),
+            };
 
             //Setup default image photo
             this.UserImgSrc = DEFAULT_PHOTO_SRC;
             this.imageFileResult = null; //mark that no picture was chosen
 
         }
-
-        //The following command handle the pick photo button
-        #region PhotoButton
-
-        FileResult imageFileResult;
-        public event Action<ImageSource> SetImageSourceEvent;
-        public ICommand PickImageCommand => new Command(OnPickImage);
-        public async void OnPickImage()
+        else
         {
-            FileResult result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions()
-            {
-                Title = "בחר תמונה"
-            });
-
-            if (result != null)
-            {
-                this.imageFileResult = result;
-
-                var stream = await result.OpenReadAsync();
-                ImageSource imgSource = ImageSource.FromStream(() => stream);
-                if (SetImageSourceEvent != null)
-                    SetImageSourceEvent(imgSource);
-            }
+            //set the path url to the contact photo
+            MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
+            //Create a source with cache busting!
+            Random r = new Random();
+            this.UserImgSrc = proxy.GetBasePhotoUri() + ChildID + $".jpg?{r.Next()}";
         }
 
-        //The following command handle the take photo button
-        public ICommand CameraImageCommand => new Command(OnCameraImage);
-        public async void OnCameraImage()
-        {
-            var result = await MediaPicker.CapturePhotoAsync(new MediaPickerOptions()
-            {
-                Title = "צלם תמונה"
-            });
+        //RegisterCommand = new Command(Register);
+        this.SearchTerm = String.Empty;
+        InitAllergies();
 
-            if (result != null)
-            {
-                this.imageFileResult = result;
-                var stream = await result.OpenReadAsync();
-                ImageSource imgSource = ImageSource.FromStream(() => stream);
-                if (SetImageSourceEvent != null)
-                    SetImageSourceEvent(imgSource);
-            }
-        }
-        #endregion
+        this.theUser = u;
+        Button1 = false;
+        Button2 = false;
+        ImgSource1 = Source1;
+        ImgSource2 = Source1;
+        Button1PressedCommand = new Command(Button1Pressed);
+        Button2PressedCommand = new Command(Button2Pressed);
+        this.BirthDate = DateTime.Today;
 
-        #region ButtonCommands
-        public ICommand Button1PressedCommand { protected set; get; }
-        public void Button1Pressed()
-        {
-            if (Button1 == false) { Button1 = true; }
-            else { Button1 = false; }
+        this.ShowChildNameError = false;
+        this.ShowChildLastNameError = false;
+        this.ShowChildIDError = false;
+        this.ShowBirthDateError = false;
+        this.ShowGenderError = false;
+        this.ShowUserNameError = false;
+        this.ShowEmailError = false;
+        this.ShowPasswordError = false;
+        this.ShowPhoneNumberError = false;
+        this.ShowPhoneNumber2Error = false;
+        this.ShowCodeError = false;
+        this.showGradeError = false;
+        this.showRelationError = false;
 
-            if (ImgSource1 == Source1) { ImgSource1 = Source2; }
-            else { ImgSource1 = Source1; }
-        }
+        this.ChildLastNameError = ERROR_MESSAGES.REQUIRED_FIELD;
+        this.ChildNameError = ERROR_MESSAGES.REQUIRED_FIELD;
+        this.ChildIDError = ERROR_MESSAGES.REQUIRED_FIELD;
+        this.BirthDateError = ERROR_MESSAGES.BAD_DATE;
+        this.GenderError = ERROR_MESSAGES.REQUIRED_FIELD;
+        this.UserNameError = ERROR_MESSAGES.REQUIRED_FIELD;
+        this.CodeError = ERROR_MESSAGES.REQUIRED_FIELD;
+        this.GradeError = ERROR_MESSAGES.REQUIRED_FIELD;
+        this.RelationError = ERROR_MESSAGES.REQUIRED_FIELD;
 
-        public ICommand Button2PressedCommand { protected set; get; }
-        public void Button2Pressed()
-        {
-            if (Button2 == false) { Button2 = true; }
-            else { Button2 = false; }
+        //Setup default image photo
+        this.UserImgSrc = DEFAULT_PHOTO_SRC;
+        this.imageFileResult = null; //mark that no picture was chosen
 
-            if (ImgSource2 == Source1) { ImgSource2 = Source2; }
-            else { ImgSource2 = Source1; }
-        }
-        #endregion
     }
+
+    //The following command handle the pick photo button
+    #region PhotoButton
+
+    FileResult imageFileResult;
+    public event Action<ImageSource> SetImageSourceEvent;
+    public ICommand PickImageCommand => new Command(OnPickImage);
+    public async void OnPickImage()
+    {
+        FileResult result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions()
+        {
+            Title = "בחר תמונה"
+        });
+
+        if (result != null)
+        {
+            this.imageFileResult = result;
+
+            var stream = await result.OpenReadAsync();
+            ImageSource imgSource = ImageSource.FromStream(() => stream);
+            if (SetImageSourceEvent != null)
+                SetImageSourceEvent(imgSource);
+        }
+    }
+
+    //The following command handle the take photo button
+    public ICommand CameraImageCommand => new Command(OnCameraImage);
+    public async void OnCameraImage()
+    {
+        var result = await MediaPicker.CapturePhotoAsync(new MediaPickerOptions()
+        {
+            Title = "צלם תמונה"
+        });
+
+        if (result != null)
+        {
+            this.imageFileResult = result;
+            var stream = await result.OpenReadAsync();
+            ImageSource imgSource = ImageSource.FromStream(() => stream);
+            if (SetImageSourceEvent != null)
+                SetImageSourceEvent(imgSource);
+        }
+    }
+    #endregion
+
+    #region ButtonCommands
+    public ICommand Button1PressedCommand { protected set; get; }
+    public void Button1Pressed()
+    {
+        if (Button1 == false) { Button1 = true; }
+        else { Button1 = false; }
+
+        if (ImgSource1 == Source1) { ImgSource1 = Source2; }
+        else { ImgSource1 = Source1; }
+    }
+
+    public ICommand Button2PressedCommand { protected set; get; }
+    public void Button2Pressed()
+    {
+        if (Button2 == false) { Button2 = true; }
+        else { Button2 = false; }
+
+        if (ImgSource2 == Source1) { ImgSource2 = Source2; }
+        else { ImgSource2 = Source1; }
+    }
+    #endregion
+}
 }
 

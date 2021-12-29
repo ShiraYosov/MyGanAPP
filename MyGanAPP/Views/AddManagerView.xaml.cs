@@ -6,31 +6,24 @@ using System.Threading.Tasks;
 using MyGanAPP.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Rg.Plugins.Popup.Services;
 
 namespace MyGanAPP.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ParentRegistrationView : ContentPage
+    public partial class AddManagerView : ContentPage
     {
-       
-        public ParentRegistrationView()
+        public AddManagerView()
         {
-            ParentRegistrationViewModel vm = new ParentRegistrationViewModel();
+            AddManagerViewModel vm = new AddManagerViewModel();
             vm.SetImageSourceEvent += Vm_SetImageSourceEvent;
             this.BindingContext = vm;
             InitializeComponent();
-            
-        }
 
+            vm.ChangeBools();
+        }
         private void Vm_SetImageSourceEvent(ImageSource obj)
         {
             theImage.Source = obj;
-        }
-
-        private void Allergy_Clicked(object sender, EventArgs e)
-        {
-            PopupNavigation.Instance.PushAsync(new AllergyPopup(this.BindingContext));
         }
     }
 }

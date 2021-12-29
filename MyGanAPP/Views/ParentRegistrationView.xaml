@@ -28,8 +28,6 @@
                         </StackLayout>
                     </Frame>
 
-
-
                     <Frame Style="{StaticResource logInSignUp}">
                         <StackLayout>
                             <Frame>
@@ -136,7 +134,7 @@
 
                                         <!--Relation-->
                                         <Label Text="סוג הקשר" Style="{StaticResource labelNameStyle}"/>
-                                        <Picker ItemsSource="{Binding RelationTypes}" ItemDisplayBinding="{Binding RelationType}" SelectedItem="{Binding ChosenRelation}"></Picker>
+                                        <!--<Picker ItemsSource="{Binding RelationTypes}" ItemDisplayBinding="{Binding RelationType}" SelectedItem="{Binding ChosenRelation}"></Picker>-->
 
                                         <!--Grade-->
                                         <Label Text="לאיזה גן עולה?" Style="{StaticResource labelNameStyle}"/>
@@ -295,12 +293,16 @@
 
                                     </StackLayout>
 
-                               </StackLayout>
+                                </StackLayout>
 
 
                             </Frame>
                         </StackLayout>
                     </Frame>
+
+
+
+
 
 
                 </StackLayout>

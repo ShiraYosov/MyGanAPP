@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyGanAPP.Views.AddTeacherView"
-             FlowDirection="RightToLeft"
+             x:Class="MyGanAPP.Views.AddManagerView"
+              FlowDirection="RightToLeft"
              BackgroundColor="#bcd4e6">
     <ContentPage.Content>
+
         <StackLayout Style="{StaticResource Stack}">
             <ScrollView>
                 <StackLayout >
@@ -20,10 +21,10 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Label Text="קוד גן" Grid.Column="0" FontSize="17" Style="{StaticResource labelNameStyle}"/>
-                                <Label Text="{Binding CodeError}" IsVisible="{Binding ShowCodeError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                                <Label Text="שם הגן" Grid.Column="0" FontSize="17" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding KindergartenNameError}" IsVisible="{Binding ShowKindergartenNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                             </Grid>
-                            <Entry  Placeholder="הקלד קוד גן" HorizontalTextAlignment="Start" MaxLength="30" Text="{Binding Code}"  Style="{StaticResource entry}"/>
+                            <Entry  Placeholder="הקלד שם גן" HorizontalTextAlignment="Start" MaxLength="30" Text="{Binding KindergartenName}"  Style="{StaticResource entry}"/>
 
                         </StackLayout>
                     </Frame>
@@ -60,7 +61,7 @@
                             </Grid>
 
 
-                            <!-- TeacherName-->
+                            <!-- ManagerName-->
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -70,11 +71,11 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Label Text="שם פרטי" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
-                                <Label Text="{Binding TeacherFirstNameError}" IsVisible="{Binding ShowTeacherFirstNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                                <Label Text="{Binding ManagerFirstNameError}" IsVisible="{Binding ShowManagerFirstNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                             </Grid>
-                            <Entry Placeholder="הקלד שם פרטי" MaxLength="30" Text="{Binding TeacherFirstName}" Style="{StaticResource entry}"/>
+                            <Entry Placeholder="הקלד שם פרטי" MaxLength="30" Text="{Binding ManagerFirstName}" Style="{StaticResource entry}"/>
 
-                            <!-- TeacherLastName-->
+                            <!-- ManagerLastName-->
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -84,9 +85,9 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Label Text="שם משפחה" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
-                                <Label Text="{Binding TeacherLastNameError}" IsVisible="{Binding ShowTeacherLastNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                                <Label Text="{Binding ManagerLastNameError}" IsVisible="{Binding ShowManagerLastNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                             </Grid>
-                            <Entry Placeholder="הקלד שם משפחה" MaxLength="30" Text="{Binding TeacherLastName}" Style="{StaticResource entry}"/>
+                            <Entry Placeholder="הקלד שם משפחה" MaxLength="30" Text="{Binding ManagerLastName}" Style="{StaticResource entry}"/>
 
                             <!-- Email-->
                             <Grid>
@@ -102,7 +103,7 @@
                             </Grid>
                             <Entry Placeholder="אימייל" MaxLength="30" Text="{Binding Email}" Style="{StaticResource entry}"/>
 
-                           
+
                             <!-- PhoneNumber-->
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -138,8 +139,8 @@
                     </Frame>
                 </StackLayout>
 
-                
-          
+
+
             </ScrollView>
         </StackLayout>
     </ContentPage.Content>

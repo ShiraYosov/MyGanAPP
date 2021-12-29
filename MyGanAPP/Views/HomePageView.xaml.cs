@@ -31,5 +31,10 @@ namespace MyGanAPP.Views
         {
             App.Current.MainPage.Navigation.PushAsync(new AddTeacherView());
         }
+
+        private void Manager_Pressed(object sender, EventArgs e)
+        {
+            App.Current.MainPage.Navigation.PushAsync(new AddManagerView());
+        }
     }
 }

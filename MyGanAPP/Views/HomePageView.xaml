@@ -21,7 +21,7 @@
                 </Frame>
 
                 <Frame Padding="0" BackgroundColor="#f7b801" CornerRadius="20">
-                    <Button Text="אני מנהל גן - פתיחת גן" CornerRadius="20" BackgroundColor="#fa9f42" TextColor="White"  Margin="6" FontAttributes="Bold" FontSize="20"/>
+                    <Button Text="אני מנהל גן - פתיחת גן" CornerRadius="20" BackgroundColor="#fa9f42" TextColor="White" Pressed="Manager_Pressed"  Margin="6" FontAttributes="Bold" FontSize="20"/>
                 </Frame>
             
             </StackLayout>
