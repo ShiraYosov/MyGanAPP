@@ -8,26 +8,10 @@
 
         <StackLayout Style="{StaticResource Stack}">
             <ScrollView>
-                <StackLayout >
+                <StackLayout>
                     <Image Source="logo1.png"  HeightRequest="300" ></Image>
 
-                    <Frame Style="{StaticResource logInSignUp}" BorderColor="DarkSlateGray" BackgroundColor="#bee9e8">
-                        <StackLayout>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <Label Text="שם הגן" Grid.Column="0" FontSize="17" Style="{StaticResource labelNameStyle}"/>
-                                <Label Text="{Binding KindergartenNameError}" IsVisible="{Binding ShowKindergartenNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
-                            </Grid>
-                            <Entry  Placeholder="הקלד שם גן" HorizontalTextAlignment="Start" MaxLength="30" Text="{Binding KindergartenName}"  Style="{StaticResource entry}"/>
-
-                        </StackLayout>
-                    </Frame>
+                    
 
                     <Frame Style="{StaticResource logInSignUp}">
                         <StackLayout>
@@ -59,6 +43,24 @@
                                 <ImageButton Source="gallery.png" HeightRequest="35"   VerticalOptions="Center" WidthRequest="35" HorizontalOptions="End" BackgroundColor="White" Grid.Column="0" Grid.Row="0" Command="{Binding PickImageCommand}"/>
                                 <ImageButton Source="camera.jpg" HeightRequest="35"  VerticalOptions="Center" WidthRequest="35" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>
                             </Grid>
+
+                            <Frame Style="{StaticResource logInSignUp}" BorderColor="DarkSlateGray" BackgroundColor="#bee9e8">
+                                <StackLayout>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Label Text="שם הגן" Grid.Column="0" FontSize="17" Style="{StaticResource labelNameStyle}"/>
+                                        <Label Text="{Binding KindergartenNameError}" IsVisible="{Binding ShowKindergartenNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                                    </Grid>
+                                    <Entry  Placeholder="הקלד שם גן" HorizontalTextAlignment="Start" MaxLength="30" Text="{Binding KindergartenName}"  Style="{StaticResource entry}"/>
+
+                                </StackLayout>
+                            </Frame>
 
 
                             <!-- ManagerName-->
