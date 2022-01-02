@@ -411,13 +411,37 @@ namespace MyGanAPP.ViewModels
                 await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
                 User newU = await proxy.Register(newUser);
 
-                if(newU != null)
+                if(newU == null)
                 {
-
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
+                    await App.Current.MainPage.Navigation.PopModalAsync();
                 }
                 else
                 {
-                    await App.Current.MainPage.DisplayAlert("שגיאה","הרשמה נכשלה", "בסדר");
+                    Kindergarten newK = new Kindergarten
+                    {
+                        Name= kindergartenName
+                    };
+
+                    KindergartenManager KM = new KindergartenManager
+                    {
+                        UserId= newU.UserId,
+                        User=newU,
+                        Kindergarten= newK
+                    };
+
+                    KindergartenManager newManager = await proxy.ManagerRegister(KM);
+                    if (this.imageFileResult != null)
+                    {
+                        ServerStatus = "מעלה תמונה...";
+
+                        bool success = await proxy.UploadImage(new FileInfo()
+                        {
+                            Name = this.imageFileResult.FullPath
+                        }, $"{newU.PhoneNumber}.jpg");
+                    }
+                    ServerStatus = "שומר נתונים...";
+                   
                 }
             }
 

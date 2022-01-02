@@ -749,6 +749,7 @@ namespace MyGanAPP.ViewModels
 
         #endregion
 
+
         #region Allergies
 
         private List<Allergy> allAllergies;
@@ -1005,6 +1006,8 @@ namespace MyGanAPP.ViewModels
 
                 if (ok)
                 {
+                    App theApp= (App)App.Current;
+                    theApp.LookupTables = await proxy.GetLookupsAsync();
                     await App.Current.MainPage.DisplayAlert("", "הוספת אלרגיה בהצלחה!", "בסדר");
                 }
                 else if (!ok)
