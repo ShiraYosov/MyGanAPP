@@ -159,7 +159,15 @@
                                         <!--Allergies-->
                                         <Label Text="אלרגיות" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
                                         <Button Text="רשימת אלרגיות" Clicked="Allergy_Clicked" BackgroundColor="#bee9e8" FontSize="16" CornerRadius="10"></Button>
-                                        <Label Text="{Binding Allergies}" HorizontalOptions="Start" TextColor="Gray" FontSize="15"/>
+                                        <!--<Label Text="" HorizontalOptions="Start" TextColor="DarkSlateGray" FontSize="16"/>-->
+                                        <Label TextColor="DarkSlateGray" LineBreakMode="WordWrap" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" >
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="האלרגיות שנבחרו: " FontSize="16"/>
+                                                    <Span Text="{Binding Allergies}" FontSize="16" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
                                     </StackLayout>
                                     
                                     

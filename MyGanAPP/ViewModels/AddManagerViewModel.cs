@@ -390,7 +390,7 @@ namespace MyGanAPP.ViewModels
                 return false;
             return true;
         }
-        public ICommand RegisterCommand { protected set; get; }
+        public ICommand RegisterCommand => new Command(Register);
 
         public async void Register()
         {
@@ -414,7 +414,7 @@ namespace MyGanAPP.ViewModels
                 if(newU == null)
                 {
                     await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
-                    await App.Current.MainPage.Navigation.PopModalAsync();
+                    //await App.Current.MainPage.Navigation.PopModalAsync();
                 }
                 else
                 {
@@ -423,24 +423,37 @@ namespace MyGanAPP.ViewModels
                         Name= kindergartenName
                     };
 
-                    KindergartenManager KM = new KindergartenManager
-                    {
-                        UserId= newU.UserId,
-                        User=newU,
-                        Kindergarten= newK
-                    };
+                    Kindergarten k = await proxy.AddKindergarten(newK);
 
-                    KindergartenManager newManager = await proxy.ManagerRegister(KM);
-                    if (this.imageFileResult != null)
+                    if(k == null)
                     {
-                        ServerStatus = "מעלה תמונה...";
-
-                        bool success = await proxy.UploadImage(new FileInfo()
-                        {
-                            Name = this.imageFileResult.FullPath
-                        }, $"{newU.PhoneNumber}.jpg");
+                        await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
                     }
-                    ServerStatus = "שומר נתונים...";
+
+                    else
+                    {
+                        KindergartenManager KM = new KindergartenManager
+                        {
+                            UserId = newU.UserId,
+                            KindergartenId= k.KindergartenId,
+                            User = newU,
+                            Kindergarten = k
+                        };
+
+                        k.KindergartenManagers.Add(KM);
+                        
+                        if (this.imageFileResult != null)
+                        {
+                            ServerStatus = "מעלה תמונה...";
+
+                            bool success = await proxy.UploadImage(new FileInfo()
+                            {
+                                Name = this.imageFileResult.FullPath
+                            }, $"{newU.UserId}.jpg");
+                        }
+                        ServerStatus = "שומר נתונים...";
+                    }
+                    
                    
                 }
             }

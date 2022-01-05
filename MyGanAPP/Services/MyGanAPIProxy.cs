@@ -89,7 +89,7 @@ namespace MyGanAPP.Services
             this.basePhotosUri = basePhotosUri;
         }
 
-      
+
 
 
         //Login!
@@ -202,6 +202,39 @@ namespace MyGanAPP.Services
                 return false;
             }
         }
+
+        public async Task<Kindergarten> AddKindergarten(Kindergarten k)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                    PropertyNameCaseInsensitive = true
+                };
+                string jsonObject = JsonSerializer.Serialize<Kindergarten>(k, options);
+                StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/AddKindergarten", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    jsonObject = await response.Content.ReadAsStringAsync();
+                    Kindergarten newK = JsonSerializer.Deserialize<Kindergarten>(jsonObject, options);
+                    return newK;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
 
         public async Task<User> Register(User user)
         {

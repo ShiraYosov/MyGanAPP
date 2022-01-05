@@ -1001,8 +1001,9 @@ namespace MyGanAPP.ViewModels
         {
             foreach (Allergy a in selectedAllergies)
             {
-                Allergies += a.AllergyName + ",";
+                Allergies += a.AllergyName + "," + " ";
             }
+            Allergies = Allergies.Substring(0, Allergies.Length - 2);
             if (selectedAllergies.Count == 0) { Allergies = "לא נבחרו אלרגיות"; }
 
             await PopupNavigation.Instance.PopAsync();
