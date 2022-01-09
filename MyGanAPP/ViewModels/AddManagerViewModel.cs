@@ -407,6 +407,21 @@ namespace MyGanAPP.ViewModels
                     LastName = ManagerLastName,
                     PhoneNumber = PhoneNumber,
                 };
+
+                Kindergarten newK = new Kindergarten
+                {
+                    Name = kindergartenName
+                };
+
+                KindergartenManager KM = new KindergartenManager
+                {
+                    User = newUser,
+                    Kindergarten = newK
+                };
+
+                newUser.KindergartenManagers.Add(KM);
+
+
                 ServerStatus = "מתחבר לשרת...";
                 await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
                 User newU = await proxy.Register(newUser);
@@ -416,46 +431,46 @@ namespace MyGanAPP.ViewModels
                     await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
                     //await App.Current.MainPage.Navigation.PopModalAsync();
                 }
-                else
-                {
-                    Kindergarten newK = new Kindergarten
-                    {
-                        Name= kindergartenName
-                    };
+                //else
+                //{
+                //    Kindergarten newK = new Kindergarten
+                //    {
+                //        Name= kindergartenName
+                //    };
 
-                    Kindergarten k = await proxy.AddKindergarten(newK);
+                //    Kindergarten k = await proxy.AddKindergarten(newK);
 
-                    if(k == null)
-                    {
-                        await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
-                    }
+                //    if(k == null)
+                //    {
+                //        await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
+                //    }
 
-                    else
-                    {
-                        KindergartenManager KM = new KindergartenManager
-                        {
-                            UserId = newU.UserId,
-                            KindergartenId= k.KindergartenId,
-                            User = newU,
-                            Kindergarten = k
-                        };
+                //    else
+                //    {
+                //        KindergartenManager KM = new KindergartenManager
+                //        {
+                //            UserId = newU.UserId,
+                //            KindergartenId= k.KindergartenId,
+                //            User = newU,
+                //            Kindergarten = k
+                //        };
 
-                        k.KindergartenManagers.Add(KM);
+                //        k.KindergartenManagers.Add(KM);
                         
-                        if (this.imageFileResult != null)
-                        {
-                            ServerStatus = "מעלה תמונה...";
+                //        if (this.imageFileResult != null)
+                //        {
+                //            ServerStatus = "מעלה תמונה...";
 
-                            bool success = await proxy.UploadImage(new FileInfo()
-                            {
-                                Name = this.imageFileResult.FullPath
-                            }, $"{newU.UserId}.jpg");
-                        }
-                        ServerStatus = "שומר נתונים...";
-                    }
+                //            bool success = await proxy.UploadImage(new FileInfo()
+                //            {
+                //                Name = this.imageFileResult.FullPath
+                //            }, $"{newU.UserId}.jpg");
+                //        }
+                //        ServerStatus = "שומר נתונים...";
+                //    }
                     
                    
-                }
+                //}
             }
 
         }
