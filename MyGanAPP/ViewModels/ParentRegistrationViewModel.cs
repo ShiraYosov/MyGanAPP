@@ -1115,7 +1115,7 @@ namespace MyGanAPP.ViewModels
                         GradeId = ChosenGrade.GradeId
                     };
 
-                    //newU.StudentOfUsers.Add(newStudent);
+                    
                 }
                 else
                 {

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MyGanAPP.Models
 {
-    class GanCode
+    public class GanCode
     {
         private const int HASHCODE = 9973;
 
@@ -23,7 +23,7 @@ namespace MyGanAPP.Models
                 return 0;
 
             string param1 = code.Substring(1, nPos - 1);
-            string param2 = code.Substring(nPos);
+            string param2 = code.Substring(nPos + 1);
 
             int p1 = 0, p2 = 0;
             if (!int.TryParse(param1, out p1) ||

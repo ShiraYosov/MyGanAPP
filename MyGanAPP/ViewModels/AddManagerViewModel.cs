@@ -426,55 +426,31 @@ namespace MyGanAPP.ViewModels
                 await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
                 User newU = await proxy.Register(newUser);
 
-                if(newU == null)
+                if (newU == null)
                 {
                     await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
                     //await App.Current.MainPage.Navigation.PopModalAsync();
                 }
-                //else
-                //{
-                //    Kindergarten newK = new Kindergarten
-                //    {
-                //        Name= kindergartenName
-                //    };
+                else
+                {
+                    if (this.imageFileResult != null)
+                    {
+                        ServerStatus = "מעלה תמונה...";
 
-                //    Kindergarten k = await proxy.AddKindergarten(newK);
+                        bool success = await proxy.UploadImage(new FileInfo()
+                        {
+                            Name = this.imageFileResult.FullPath
+                        }, $"{newU.UserId}.jpg");
+                    }
+                    ServerStatus = "שומר נתונים...";
+                }
 
-                //    if(k == null)
-                //    {
-                //        await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
-                //    }
 
-                //    else
-                //    {
-                //        KindergartenManager KM = new KindergartenManager
-                //        {
-                //            UserId = newU.UserId,
-                //            KindergartenId= k.KindergartenId,
-                //            User = newU,
-                //            Kindergarten = k
-                //        };
-
-                //        k.KindergartenManagers.Add(KM);
-                        
-                //        if (this.imageFileResult != null)
-                //        {
-                //            ServerStatus = "מעלה תמונה...";
-
-                //            bool success = await proxy.UploadImage(new FileInfo()
-                //            {
-                //                Name = this.imageFileResult.FullPath
-                //            }, $"{newU.UserId}.jpg");
-                //        }
-                //        ServerStatus = "שומר נתונים...";
-                //    }
-                    
-                   
-                //}
             }
-
         }
+
         #endregion
+
 
         public void ChangeBools()
         {
@@ -508,6 +484,7 @@ namespace MyGanAPP.ViewModels
                     SetImageSourceEvent(imgSource);
             }
         }
+      
 
         //The following command handle the take photo button
         public ICommand CameraImageCommand => new Command(OnCameraImage);
@@ -528,6 +505,10 @@ namespace MyGanAPP.ViewModels
             }
         }
         #endregion
-
     }
 }
+
+
+
+
+

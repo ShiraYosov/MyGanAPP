@@ -266,40 +266,43 @@ namespace MyGanAPP.Services
                 Console.WriteLine(e.Message);
                 return null;
             }
-
         }
-
-        public async Task<KindergartenManager> ManagerRegister(KindergartenManager manager)
-        {
-            try
+            public async Task<User> TeacherRegister(User user)
             {
-                JsonSerializerOptions options = new JsonSerializerOptions
+                try
                 {
-                    ReferenceHandler = ReferenceHandler.Preserve,
-                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
-                    PropertyNameCaseInsensitive = true
-                };
-                string jsonObject = JsonSerializer.Serialize<KindergartenManager>(manager, options);
-                StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string jsonObject = JsonSerializer.Serialize<User>(user, options);
+                    StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/ManagerRegister", content);
-                if (response.IsSuccessStatusCode)
-                {
-                    jsonObject = await response.Content.ReadAsStringAsync();
-                    KindergartenManager km = JsonSerializer.Deserialize<KindergartenManager>(jsonObject, options);
-                    return km;
+                    HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/TeacherRegister", content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        jsonObject = await response.Content.ReadAsStringAsync();
+                        User u = JsonSerializer.Deserialize<User>(jsonObject, options);
+                        return u;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
-                else
+                catch (Exception e)
                 {
+                    Console.WriteLine(e.Message);
                     return null;
                 }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
+
             }
 
-        }
+       
+
+
     }
 }
+    

@@ -290,6 +290,142 @@ namespace MyGanAPP.ViewModels
         private const string DEFAULT_PHOTO_SRC = "user.png";
         #endregion
 
+        #region GanCode
+
+        private bool showCodeError;
+
+        public bool ShowCodeError
+        {
+            get => showCodeError;
+            set
+            {
+                showCodeError = value;
+                OnPropertyChanged("ShowCodeError");
+            }
+        }
+
+        private string code;
+
+        public string Code
+        {
+            get => code;
+            set
+            {
+                code = value;
+                ValidateCode();
+                OnPropertyChanged("Code");
+            }
+        }
+
+        private string codeError;
+
+        public string CodeError
+        {
+            get => codeError;
+            set
+            {
+                codeError = value;
+                OnPropertyChanged("CodeError");
+            }
+        }
+
+        private void ValidateCode()
+        {
+            this.ShowCodeError = string.IsNullOrEmpty(Code);
+        }
+
+        #endregion
+
+        #region ServerStatus
+        private string serverStatus;
+        public string ServerStatus
+        {
+            get { return serverStatus; }
+            set
+            {
+                serverStatus = value;
+                OnPropertyChanged("ServerStatus");
+            }
+        }
+        #endregion
+
+
+        #region Register
+
+        private bool ValidateForm()
+        {
+            //Validate all fields first
+
+            ValidateTeacherLastName();
+            ValidateTeacherFirstName();
+            ValidateCode();
+            ValidateEmail();
+            ValidatePassword();
+            ValidatePhoneNumber();
+
+
+
+            //check if any validation failed
+            if (showTeacherLastNameError || showTeacherFirstNameError || showCodeError || showEmailError ||
+                 showPasswordError || showPhoneNumberError)
+
+                return false;
+            return true;
+        }
+        public ICommand RegisterCommand => new Command(Register);
+
+        public async void Register()
+        {
+            MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
+
+            App app = (App)App.Current;
+            if (ValidateForm())
+            {
+                User newUser = new User
+                {
+                    Email = Email,
+                    Password = Password,
+                    Fname = TeacherFirstName,
+                    LastName = TeacherLastName,
+                    PhoneNumber = PhoneNumber,
+                };
+
+                int groupID = GanCode.CodeToGroupID(Code);
+
+                newUser.Groups.Add(new Models.Group 
+                {
+                    GroupId = groupID
+                });
+
+               
+                ServerStatus = "מתחבר לשרת...";
+                await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
+                User newU = await proxy.TeacherRegister(newUser);
+
+                if (newU == null)
+                {
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
+                    //await App.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else
+                {
+                    if (this.imageFileResult != null)
+                    {
+                        ServerStatus = "מעלה תמונה...";
+
+                        bool success = await proxy.UploadImage(new FileInfo()
+                        {
+                            Name = this.imageFileResult.FullPath
+                        }, $"{newU.UserId}.jpg");
+                    }
+                    ServerStatus = "שומר נתונים...";
+                }
+
+
+            }
+        }
+
+        #endregion
 
         public AddTeacherViewModel()
         {
