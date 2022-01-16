@@ -141,7 +141,7 @@
                                         <Picker ItemsSource="{Binding GradeTypes}" ItemDisplayBinding="{Binding GradeName}" SelectedItem="{Binding ChosenGrade}"></Picker>
 
                                         <!--Gender-->
-                                        <Grid>
+                                        <Grid RadioButtonGroup.SelectedValue="{Binding Gender}" RadioButtonGroup.GroupName="Gender">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="130"/>
                                                 <ColumnDefinition Width="130"/>
@@ -152,8 +152,8 @@
                                             </Grid.RowDefinitions>
                                             <Label Text="מגדר" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
                                             <Label Text="{Binding GenderError}" IsVisible="{Binding ShowGenderError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
-                                            <RadioButton GroupName="Gender" RadioButtonGroup.SelectedValue="{Binding Gender}" Content="נקבה" Grid.Column="0" Grid.Row="1" HorizontalOptions="Start"/>
-                                            <RadioButton GroupName="Gender" BindingContext="{ Binding CheckedGender}" Content="זכר" Grid.Column="1" HorizontalOptions="Start" Grid.Row="1"/>
+                                            <RadioButton Value="1" Content="נקבה" Grid.Column="0" Grid.Row="1" HorizontalOptions="Start"/>
+                                            <RadioButton Value="2" Content="זכר" Grid.Column="1" HorizontalOptions="Start" Grid.Row="1"/>
                                         </Grid>
 
                                         <!--Allergies-->

@@ -267,42 +267,71 @@ namespace MyGanAPP.Services
                 return null;
             }
         }
-            public async Task<User> TeacherRegister(User user)
+        public async Task<User> TeacherRegister(User user)
+        {
+            try
             {
-                try
+                JsonSerializerOptions options = new JsonSerializerOptions
                 {
-                    JsonSerializerOptions options = new JsonSerializerOptions
-                    {
-                        ReferenceHandler = ReferenceHandler.Preserve,
-                        Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
-                        PropertyNameCaseInsensitive = true
-                    };
-                    string jsonObject = JsonSerializer.Serialize<User>(user, options);
-                    StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                    PropertyNameCaseInsensitive = true
+                };
+                string jsonObject = JsonSerializer.Serialize<User>(user, options);
+                StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
 
-                    HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/TeacherRegister", content);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        jsonObject = await response.Content.ReadAsStringAsync();
-                        User u = JsonSerializer.Deserialize<User>(jsonObject, options);
-                        return u;
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-                catch (Exception e)
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/TeacherRegister", content);
+                if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine(e.Message);
+                    jsonObject = await response.Content.ReadAsStringAsync();
+                    User u = JsonSerializer.Deserialize<User>(jsonObject, options);
+                    return u;
+                }
+                else
+                {
                     return null;
                 }
-
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
             }
 
-       
+        }
 
+        public async Task<User> ParentRegister(User user)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                    PropertyNameCaseInsensitive = true
+                };
+                string jsonObject = JsonSerializer.Serialize<User>(user, options);
+                StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
 
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/ParentRegister", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    jsonObject = await response.Content.ReadAsStringAsync();
+                    User u = JsonSerializer.Deserialize<User>(jsonObject, options);
+                    return u;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+
+        }
     }
 }
-    
+

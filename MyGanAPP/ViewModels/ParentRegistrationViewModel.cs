@@ -183,7 +183,9 @@ namespace MyGanAPP.ViewModels
 
         private void ValidateChildID()
         {
-            this.ShowChildIDError = string.IsNullOrEmpty(ChildID);
+            int id;
+            bool ok = int.TryParse(ChildID, out id);
+            this.ShowChildIDError = string.IsNullOrEmpty(ChildID) || !ok;
         }
         #endregion
 
@@ -978,16 +980,16 @@ namespace MyGanAPP.ViewModels
         public ICommand UpdateAllergy => new Command(OnPressedAllergy);
         public async void OnPressedAllergy(object allergyList)
         {
-            
-                SelectedAllergies.Clear();
-                Allergies = string.Empty;
+
+            SelectedAllergies.Clear();
+            Allergies = string.Empty;
             if (allergyList is IList<object>)
             {
                 List<object> allergies = ((IList<object>)allergyList).ToList();
-                foreach ( object a in allergies)
+                foreach (object a in allergies)
                 {
                     SelectedAllergies.Add((Allergy)a);
-                   
+
                 }
                 if (selectedAllergies.Count == 0) { Allergies = "לא נבחרו אלרגיות"; }
             }
@@ -1079,7 +1081,7 @@ namespace MyGanAPP.ViewModels
             return true;
         }
 
-        public ICommand RegisterCommand { protected set; get; }
+        public ICommand RegisterCommand => new Command(Register);
 
         public async void Register()
         {
@@ -1097,31 +1099,65 @@ namespace MyGanAPP.ViewModels
                     LastName = ChildLastName,
                     PhoneNumber = PhoneNumber,
                 };
+                
+                int groupID = GanCode.CodeToGroupID(Code);
+
+                
+
+                Student newStudent = new Student
+                {
+                    FirstName = ChildName,
+                    LastName = ChildLastName,
+                    BirthDate = BirthDate,
+                    StudentId = int.Parse(ChildID),
+                    Gender = Gender,
+                    GroupId = groupId,
+                    GradeId = ChosenGrade.GradeId
+                };
+
+                foreach (Allergy a in selectedAllergies)
+                {
+                    StudentAllergy st = new StudentAllergy
+                    {
+                        Allergy = a,
+                        Student = newStudent
+                    };
+                    newStudent.StudentAllergies.Add(st);
+                }
+
+                StudentOfUser sou = new StudentOfUser
+                {
+                    User = newUser,
+                    Student = newStudent,
+                    RelationToStudent = ChosenRelation
+                };
+                newUser.StudentOfUsers.Add(sou);
+
 
                 ServerStatus = "מתחבר לשרת...";
                 await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
-                User newU = await proxy.Register(newUser);
+                User newU = await proxy.ParentRegister(newUser);
 
-                if (newU != null)
+                if (newU == null)
                 {
-                    Student newStudent = new Student
-                    {
-                        FirstName = ChildName,
-                        LastName = ChildLastName,
-                        BirthDate = BirthDate,
-                        StudentId = int.Parse(ChildID),
-                        Gender = Gender,
-                        GroupId = groupId,
-                        GradeId = ChosenGrade.GradeId
-                    };
-
-                    
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
+                    await App.Current.MainPage.Navigation.PopModalAsync();
                 }
                 else
                 {
-                    //SubmitError = "ההרשמה נכשלה! נסה שנית";
-                    //ShowError = true;
+                    if (this.imageFileResult != null)
+                    {
+                        ServerStatus = "מעלה תמונה...";
+
+                        bool success = await proxy.UploadImage(new FileInfo()
+                        {
+                            Name = this.imageFileResult.FullPath
+                        }, $"{newU.UserId}.jpg");
+                    }
+                    ServerStatus = "שומר נתונים...";
+                    await App.Current.MainPage.Navigation.PopModalAsync();
                 }
+
             }
 
         }
@@ -1166,7 +1202,7 @@ namespace MyGanAPP.ViewModels
             this.SearchTerm = String.Empty;
             InitAllergies();
             Allergies = "לא נבחרו אלרגיות";
-            
+
 
             this.theUser = u;
             Button1 = false;
@@ -1201,6 +1237,7 @@ namespace MyGanAPP.ViewModels
             this.GradeError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.RelationError = ERROR_MESSAGES.REQUIRED_FIELD;
 
+            this.Gender = "זכר";
             //Setup default image photo
             this.UserImgSrc = DEFAULT_PHOTO_SRC;
             this.imageFileResult = null; //mark that no picture was chosen
