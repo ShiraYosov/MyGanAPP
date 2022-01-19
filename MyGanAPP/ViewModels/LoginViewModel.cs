@@ -25,7 +25,7 @@ namespace MyGanAPP.ViewModels
         }
 
 
-      
+
 
         private string email;
         public string Email
@@ -58,11 +58,11 @@ namespace MyGanAPP.ViewModels
         }
         public LoginViewModel()
         {
-           LoginCommand = new Command(Login);
+            LoginCommand = new Command(Login);
         }
 
         public ICommand LoginCommand { protected set; get; }
-       
+
 
         public async void Login()
         {
@@ -73,22 +73,9 @@ namespace MyGanAPP.ViewModels
             if (user != null)
             {
                 App a = (App)App.Current;
-                a.CurrUser = new User
-                {
-                    Fname= user.Fname,
-                    LastName= user.LastName,
-                    Email= user.Email,
-                    Password= user.Password,
-                    IsSystemManager= user.IsSystemManager,
-                    PhoneNumber= user.PhoneNumber,
-                    Groups = user.Groups,
-                    KindergartenManagers = user.KindergartenManagers,
-                    Signatures = user.Signatures,
-                    StudentOfUsers = user.StudentOfUsers
+                a.CurrUser = user;
 
-                };
-
-               
+               await App.Current.MainPage.Navigation.PushAsync(new ChooseView());
 
             }
             else
@@ -98,6 +85,6 @@ namespace MyGanAPP.ViewModels
 
         }
 
-        
+
     }
 }

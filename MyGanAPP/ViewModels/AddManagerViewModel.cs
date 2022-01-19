@@ -429,7 +429,7 @@ namespace MyGanAPP.ViewModels
                 if (newU == null)
                 {
                     await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
-                    //await App.Current.MainPage.Navigation.PopModalAsync();
+                    await App.Current.MainPage.Navigation.PopModalAsync();
                 }
                 else
                 {

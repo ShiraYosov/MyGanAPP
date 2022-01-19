@@ -1109,7 +1109,7 @@ namespace MyGanAPP.ViewModels
                     FirstName = ChildName,
                     LastName = ChildLastName,
                     BirthDate = BirthDate,
-                    StudentId = int.Parse(ChildID),
+                    StudentId = ChildID,
                     Gender = Gender,
                     GroupId = groupId,
                     GradeId = ChosenGrade.GradeId

@@ -18,6 +18,9 @@ namespace MyGanAPP
     public partial class App : Application, INotifyPropertyChanged
     {
         public User CurrUser { get; set; }
+        public Student SelectedStudent { get; set; }
+        public Kindergarten SelectedKindergarten { get; set; }
+        public Group SelectedGroup { get; set; }
         
         public Lookups LookupTables { get; set; }
         public App()
@@ -26,8 +29,10 @@ namespace MyGanAPP
             InitializeComponent();
 
             CurrUser = null;
-            MainPage = new NavigationPage(new HomePageView());
-           
+            SelectedStudent = null;
+            SelectedGroup = null;
+            SelectedKindergarten = null;
+            
             ViewModels.ServerStatusPageViewModel vm = new ViewModels.ServerStatusPageViewModel();
             vm.ServerStatus = "מתחבר לשרת...";
             MainPage = new Views.ServerStatusPage(vm);

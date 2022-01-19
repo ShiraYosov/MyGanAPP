@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MyGanAPP.ViewModels;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MyGanAPP.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ChooseKidView : ContentView
+    public partial class MainTab : TabbedPage
     {
-        public ChooseKidView()
+        public MainTab()
         {
             InitializeComponent();
-            this.BindingContext = new ChooseKidViewModel(); 
         }
     }
 }
