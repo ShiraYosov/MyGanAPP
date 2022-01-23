@@ -8,7 +8,7 @@
             windows:TabbedPage.HeaderIconsEnabled="true"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            SelectedTabColor="Red"
+            SelectedTabColor="#03045e"
             UnselectedTabColor="Black"
             >
 
@@ -23,16 +23,16 @@
         </Size>
     </windows:TabbedPage.HeaderIconsSize>
     
-    <local:HomePageView Title="פרופיל">
-        <local:HomePageView.IconImageSource>
+    <local:ManagerProfileView>
+        <local:ManagerProfileView.IconImageSource>
             <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.User}"/>
-        </local:HomePageView.IconImageSource>
-    </local:HomePageView>
+        </local:ManagerProfileView.IconImageSource>
+    </local:ManagerProfileView>
     
-    <!--<local:Tab2 Title="Blog">
-        <local:Tab2.IconImageSource>
-            <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.Blog}"/>
-        </local:Tab2.IconImageSource>
-    </local:Tab2>-->
+    <!--<local:ChooseView>
+        <local:ChooseView.IconImageSource>
+            <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.HandPointer}"/>
+        </local:ChooseView.IconImageSource>
+    </local:ChooseView>-->
 
 </TabbedPage>

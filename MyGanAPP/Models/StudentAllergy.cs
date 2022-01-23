@@ -6,7 +6,7 @@ namespace MyGanAPP.Models
 {
     public partial class StudentAllergy
     {
-        public int StudentId { get; set; }
+        public string StudentId { get; set; }
         public int AllergyId { get; set; }
 
         public virtual Allergy Allergy { get; set; }

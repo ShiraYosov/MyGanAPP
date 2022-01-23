@@ -1237,7 +1237,7 @@ namespace MyGanAPP.ViewModels
             this.GradeError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.RelationError = ERROR_MESSAGES.REQUIRED_FIELD;
 
-            this.Gender = "זכר";
+           
             //Setup default image photo
             this.UserImgSrc = DEFAULT_PHOTO_SRC;
             this.imageFileResult = null; //mark that no picture was chosen

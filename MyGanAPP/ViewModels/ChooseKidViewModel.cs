@@ -56,6 +56,7 @@ namespace MyGanAPP.ViewModels
             List<KindergartenManager> Kindergartens = a.CurrUser.KindergartenManagers;
             foreach (KindergartenManager k in Kindergartens)
             {
+                //Kindergarten onList= 
                 this.KindergartensList.Add(k.Kindergarten);
             }
         }

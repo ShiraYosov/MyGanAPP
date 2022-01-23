@@ -1,12 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyGanAPP.Views.ManagerProfileView">
+             x:Class="MyGanAPP.Views.ManagerProfileView"
+             BackgroundImageSource="ProfileBackground.jfif"
+             FlowDirection="RightToLeft">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+
+            <!--Photo-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Frame BorderColor="white"  CornerRadius="100"  Grid.Column="1" Grid.Row="1" IsClippedToBounds="True" Padding="0" HeightRequest="180" WidthRequest="180" HorizontalOptions="CenterAndExpand">
+                    <Image x:Name="theImage" Source="{Binding UserImgSrc}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" HeightRequest="150" WidthRequest="150"/>
+                </Frame>
+            </Grid>
+
+
+            <StackLayout Padding="0" Margin="10" HorizontalOptions="Center">
+                <Frame  BackgroundColor="White" HasShadow="True" Padding="0" Margin="0" CornerRadius="20">
+
+                    <StackLayout Padding="0" Margin="50">
+
+                        <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="שם הגן: " FontSize="20"/>
+                                    <Span Text="{Binding KindergartenName}" FontSize="20" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="מספר הילדים בגן:" FontSize="20"/>
+                                    <Span Text="{Binding NumOfKids}" FontSize="20" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ImageButton BackgroundColor="Transparent" Source="AddButton.png" Command="{Binding ButtonPressedCommand}"  Grid.Column="0" HorizontalOptions="Start" HeightRequest="25" WidthRequest="25"></ImageButton>
+                            <Label Text="הוספת קבוצה" Grid.Column="1" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" TextColor="Black" ></Label>
+                        </Grid>
+                        
+                    </StackLayout>
+
+
+
+                </Frame>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
