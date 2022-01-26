@@ -405,7 +405,7 @@ namespace MyGanAPP.ViewModels
                 if (newU == null)
                 {
                     await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
-                    //await App.Current.MainPage.Navigation.PopModalAsync();
+                    await App.Current.MainPage.Navigation.PopModalAsync();
                 }
                 else
                 {
@@ -419,6 +419,9 @@ namespace MyGanAPP.ViewModels
                         }, $"{newU.UserId}.jpg");
                     }
                     ServerStatus = "שומר נתונים...";
+                    await App.Current.MainPage.Navigation.PopModalAsync();
+                    await App.Current.MainPage.Navigation.PopToRootAsync();
+                    await App.Current.MainPage.Navigation.PushAsync(new LoginView());
                 }
 
 

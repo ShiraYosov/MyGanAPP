@@ -4,7 +4,7 @@
              x:Class="MyGanAPP.Views.ChooseView">
     <ContentPage.Content>
         <StackLayout>
-            <!--<CollectionView x:Name="collec1" ItemsSource="{Binding ChildrenList}" SelectionMode="Single" SelectedItem="{Binding SelectedKid}" BackgroundColor="White"
+            <CollectionView x:Name="collec1" ItemsSource="{Binding ChildrenList}" SelectionMode="Single" SelectedItem="{Binding SelectedKid}" BackgroundColor="White"
                                 SelectionChangedCommand="{Binding OnSelection}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collec1}, Path=SelectedItem}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Span="1" Orientation="Vertical" />
@@ -49,7 +49,7 @@
                         </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>-->
+            </CollectionView>
 
             <CollectionView x:Name="collectionName3" ItemsSource="{Binding KindergartensList}" SelectionMode="Single" BackgroundColor="White"
                                 SelectionChangedCommand="{Binding OnSelection}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName3}, Path=SelectedItem}">

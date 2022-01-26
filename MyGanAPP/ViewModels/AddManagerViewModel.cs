@@ -443,6 +443,9 @@ namespace MyGanAPP.ViewModels
                         }, $"{newU.UserId}.jpg");
                     }
                     ServerStatus = "שומר נתונים...";
+                    await App.Current.MainPage.Navigation.PopModalAsync();
+                    await App.Current.MainPage.Navigation.PopToRootAsync();
+                    await App.Current.MainPage.Navigation.PushAsync(new LoginView());
                 }
 
 

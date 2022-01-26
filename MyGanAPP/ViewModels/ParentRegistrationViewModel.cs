@@ -1156,6 +1156,8 @@ namespace MyGanAPP.ViewModels
                     }
                     ServerStatus = "שומר נתונים...";
                     await App.Current.MainPage.Navigation.PopModalAsync();
+                    await App.Current.MainPage.Navigation.PopToRootAsync();
+                    await App.Current.MainPage.Navigation.PushAsync(new LoginView());
                 }
 
             }

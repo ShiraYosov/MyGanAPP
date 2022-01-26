@@ -24,7 +24,7 @@ namespace MyGanAPP.Views
 
         private void Parent_Pressed(object sender, EventArgs e)
         {
-            App.Current.MainPage.Navigation.PushAsync(new ParentRegistrationView());
+          App.Current.MainPage.Navigation.PushAsync(new ParentRegistrationView());
         }
 
         private void Teacher_Preseed(object sender, EventArgs e)
