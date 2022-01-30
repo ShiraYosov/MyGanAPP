@@ -159,7 +159,7 @@
                                         <!--Allergies-->
                                         <Label Text="אלרגיות" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
                                         <Button Text="רשימת אלרגיות" Clicked="Allergy_Clicked" BackgroundColor="#bee9e8" FontSize="16" CornerRadius="10"></Button>
-                                        <!--<Label Text="" HorizontalOptions="Start" TextColor="DarkSlateGray" FontSize="16"/>-->
+
                                         <Label TextColor="DarkSlateGray" LineBreakMode="WordWrap" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" >
                                             <Label.FormattedText>
                                                 <FormattedString>
@@ -168,9 +168,12 @@
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
+                                        <Button  Text="מחק את כל האלרגיות שנבחרו" HorizontalOptions="Center" FontAttributes="Bold" FontSize="16" Command="{Binding DeleteCommand}"></Button>
+                                       
+                                        
                                     </StackLayout>
-                                    
-                                    
+
+
 
                                     <Grid>
                                         <Grid.RowDefinitions>

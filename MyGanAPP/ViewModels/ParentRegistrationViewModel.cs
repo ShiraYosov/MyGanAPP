@@ -1013,6 +1013,16 @@ namespace MyGanAPP.ViewModels
 
         #endregion
 
+        #region
+
+        public ICommand DeleteCommand => new Command(OnDelete);
+        public void OnDelete()
+        {
+            selectedAllergies.Clear();
+            Allergies = "לא נבחרו אלרגיות";
+        }
+        #endregion
+
         #region Add New Allergy
         public ICommand AddAllergy => new Command(OnAddAllergy);
         public async void OnAddAllergy()
@@ -1152,7 +1162,7 @@ namespace MyGanAPP.ViewModels
                         bool success = await proxy.UploadImage(new FileInfo()
                         {
                             Name = this.imageFileResult.FullPath
-                        }, $"{newU.UserId}.jpg");
+                        }, $"{newU.StudentOfUsers.FirstOrDefault().StudentId}.jpg");
                     }
                     ServerStatus = "שומר נתונים...";
                     await App.Current.MainPage.Navigation.PopModalAsync();

@@ -30,8 +30,8 @@ namespace MyGanAPP.Models
             get
             {
                 MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
-                string url = $"{proxy.BaseKidsPhotosUri}{this.StudentId}.jpg";
-                return url;
+                Random r = new Random();
+                return $"{proxy.GetBasePhotoUri()}{this.StudentId}.jpg?" + r.Next();
             }
         }
     }

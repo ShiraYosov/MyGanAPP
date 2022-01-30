@@ -15,7 +15,7 @@ using Xamarin.Forms.Xaml;
 
 namespace MyGanAPP.ViewModels
 {
-    class ChooseKidViewModel: INotifyPropertyChanged
+    public class ChooseKidViewModel: INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -29,8 +29,46 @@ namespace MyGanAPP.ViewModels
         public ObservableCollection<Group> GroupsList { get;}
         public ObservableCollection<Kindergarten> KindergartensList { get;}
 
+        #region Visibility
+        private bool visible1;
+
+        public bool Visible1
+        {
+            get => visible1;
+            set
+            {
+                visible1 = value;
+                OnPropertyChanged("Visible1");
+            }
+        }
+
+        private bool visible2;
+        public bool Visible2
+        {
+            get => visible2;
+            set
+            {
+                visible2 = value;
+                OnPropertyChanged("Visible2");
+            }
+        }
+
+        private bool visible3;
+        public bool Visible3
+        {
+            get => visible3;
+            set
+            {
+                visible3 = value;
+                OnPropertyChanged("Visible3");
+            }
+        }
+        #endregion
+
+        
         public ChooseKidViewModel()
         {
+            Visible1 = false; Visible2 = false; Visible3 = false;   
             ChildrenList = new ObservableCollection<Student>();
             GroupsList = new ObservableCollection<Group>();
             KindergartensList = new ObservableCollection<Kindergarten>();
@@ -46,39 +84,51 @@ namespace MyGanAPP.ViewModels
             {
                 this.ChildrenList.Add(s.Student);
             }
+            if(this.ChildrenList.Count> 0) { Visible1 = true; }
 
             List<Group> theGroups = a.CurrUser.Groups;
             foreach (Group g in theGroups )
             {
                 this.GroupsList.Add(g);
             }
+            if (this.GroupsList.Count > 0) { Visible2 = true; }
 
             List<KindergartenManager> Kindergartens = a.CurrUser.KindergartenManagers;
             foreach (KindergartenManager k in Kindergartens)
             {
-                //Kindergarten onList= 
                 this.KindergartensList.Add(k.Kindergarten);
             }
+            if (this.KindergartensList.Count > 0) { Visible3 = true; }
         }
 
-        public ICommand SelctionChanged => new Command<Object>(OnSelection);
-        public void OnSelection(Object obj)
+        public ICommand SelectionChanged => new Command(OnSelection);
+        public async void OnSelection(object obj)
         {
+            if (obj is Group)
+            {
+                Group chosenGroup = (Group)obj;
+                App a = (App)App.Current;
+                a.SelectedGroup = chosenGroup;
+                await App.Current.MainPage.Navigation.PopToRootAsync();
+                await App.Current.MainPage.Navigation.PushAsync(new MainTab());
+            }
             if (obj is Kindergarten)
             {
                 Kindergarten chosenKindergarten = (Kindergarten)obj;
-                //Page monkeyPage = new ShowMonkey();
-                //ShowMonkeyViewModel monkeyContext = new ShowMonkeyViewModel
-                //{
-                //    Name = chosenMonkey.Name,
-                //    ImageUrl = chosenMonkey.ImageUrl,
-                //    Details = chosenMonkey.Details
-                //};
-                //monkeyPage.BindingContext = monkeyContext;
-                //monkeyPage.Title = monkeyContext.Name;
-                //if (NavigateToPageEvent != null)
-                //    NavigateToPageEvent(monkeyPage);
+                App a = (App)App.Current;
+                a.SelectedKindergarten = chosenKindergarten;
+                await App.Current.MainPage.Navigation.PopToRootAsync();
+                await App.Current.MainPage.Navigation.PushAsync(new MainTab());
             }
+            if (obj is Student)
+            {
+                Student chosenStudent = (Student)obj;
+                App a = (App)App.Current;
+                a.SelectedStudent = chosenStudent;
+                await App.Current.MainPage.Navigation.PopToRootAsync();
+                await App.Current.MainPage.Navigation.PushAsync(new MainTab());
+            }
+
         }
 
     }

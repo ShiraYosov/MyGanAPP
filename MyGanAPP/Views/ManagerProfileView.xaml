@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyGanAPP.Views.ManagerProfileView"
-             BackgroundImageSource="ProfileBackground.jfif"
+             BackgroundImageSource="BackgroundPic.jpg"
              FlowDirection="RightToLeft">
     <ContentPage.Content>
         <StackLayout>
@@ -23,6 +23,7 @@
                 </Frame>
             </Grid>
 
+           
 
             <StackLayout Padding="0" Margin="10" HorizontalOptions="Center">
                 <Frame  BackgroundColor="White" HasShadow="True" Padding="0" Margin="0" CornerRadius="20">
