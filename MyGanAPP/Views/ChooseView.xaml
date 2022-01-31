@@ -11,89 +11,82 @@
                 <Frame  BackgroundColor="Transparent" HasShadow="True" Padding="5" Margin="3" CornerRadius="15" HorizontalOptions="Center"  >
                     <ScrollView>
 
-                    <StackLayout Padding="0" Margin="15">
-                       
-                        <CollectionView x:Name="collec1" IsVisible="{Binding Visible1}"  ItemsSource="{Binding ChildrenList}" SelectionMode="Single" SelectedItem="{Binding SelectedKid}" BackgroundColor="Transparent"
+                        <StackLayout Padding="0" Margin="15">
+
+
+
+                            <CollectionView x:Name="collec1" IsVisible="{Binding Visible1}"  ItemsSource="{Binding ChildrenList}" SelectionMode="Single" SelectedItem="{Binding SelectedKid}" BackgroundColor="Transparent"
                                 SelectionChangedCommand="{Binding SelectionChanged}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collec1}, Path=SelectedItem}">
-                            <CollectionView.ItemsLayout>
-                                <GridItemsLayout Span="1" Orientation="Vertical" />
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Margin="7">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="90"/>
-                                        </Grid.RowDefinitions>
-
-                                        <Image Source="{Binding Path=PhotoURL}" HeightRequest="60" WidthRequest="60" ></Image>
-                                    </Grid>
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Span="1" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        
+                                            <Image Source="{Binding PhotoURL}"/>
+                                    
 
 
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
 
 
-                        </CollectionView>
-
-
-                        <Label Text="קבוצות:" TextColor="DarkBlue" FontSize="18" IsVisible="{Binding Visible2}"></Label>
-                        <CollectionView x:Name="collectionName2" IsVisible="{Binding Visible2}" ItemsSource="{Binding GroupsList}" SelectionMode="Single" SelectedItem="{Binding SelectedGroup}" BackgroundColor="Transparent"
+                            <Label Text="קבוצות:" TextColor="DarkBlue" FontSize="18" IsVisible="{Binding Visible2}"></Label>
+                            <CollectionView x:Name="collectionName2" IsVisible="{Binding Visible2}" ItemsSource="{Binding GroupsList}" SelectionMode="Single" SelectedItem="{Binding SelectedGroup}" BackgroundColor="Transparent"
                                 SelectionChangedCommand= "{Binding SelectionChanged}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName2}, Path=SelectedItem}">
-                            <CollectionView.ItemsLayout>
-                                <GridItemsLayout Span="1" Orientation="Vertical" />
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Frame BackgroundColor="#ecf8f8" BorderColor="Black">
-                                        <Grid Margin="0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="28"/>
-                                            </Grid.RowDefinitions>
-                                            <Label Text="{Binding Path=GroupName, StringFormat='{0}'}" HorizontalTextAlignment="Start" FontSize="25" TextColor="Black" Grid.Row="0" Grid.Column="0"/>
-                                        </Grid>
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Span="1" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame BackgroundColor="#ecf8f8" BorderColor="Black">
+                                            <Grid Margin="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="28"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Text="{Binding Path=GroupName, StringFormat='{0}'}" HorizontalTextAlignment="Start" FontSize="25" TextColor="Black" Grid.Row="0" Grid.Column="0"/>
+                                            </Grid>
 
-                                    </Frame>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
 
 
 
-                        <Label Text="גנים:" TextColor="DarkBlue" FontSize="18" IsVisible="{Binding Visible3}"></Label>
-                        <CollectionView x:Name="collectionName3"  IsVisible="{Binding Visible3}" ItemsSource="{Binding KindergartensList}" SelectionMode="Single" BackgroundColor="Transparent"
+                            <Label Text="גנים:" TextColor="DarkBlue" FontSize="18" IsVisible="{Binding Visible3}"></Label>
+                            <CollectionView x:Name="collectionName3"  IsVisible="{Binding Visible3}" ItemsSource="{Binding KindergartensList}" SelectionMode="Single" BackgroundColor="Transparent"
                                 SelectionChangedCommand="{Binding SelectionChanged}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName3}, Path=SelectedItem}">
-                            <CollectionView.ItemsLayout>
-                                <GridItemsLayout Span="1" Orientation="Vertical" />
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Span="1" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
 
-                                    <Frame BackgroundColor="#ecf8f8" BorderColor="Black">
-                                        <Grid Margin="0" >
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="30"/>
-                                            </Grid.RowDefinitions>
-                                            <Label Text="{Binding Path=Name, StringFormat='{0}'}" HorizontalTextAlignment="Start" FontSize="25" TextColor="Black" Grid.Row="0" Grid.Column="0"/>
-                                        </Grid>
-                                    </Frame>
+                                        <Frame BackgroundColor="#ecf8f8" BorderColor="Black">
+                                            <Grid Margin="0" >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Text="{Binding Path=Name, StringFormat='{0}'}" HorizontalTextAlignment="Start" FontSize="25" TextColor="Black" Grid.Row="0" Grid.Column="0"/>
+                                            </Grid>
+                                        </Frame>
 
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
 
 
 
-                        
-                    </StackLayout>
+
+                        </StackLayout>
                     </ScrollView>
                 </Frame>
             </StackLayout>

@@ -15,7 +15,7 @@ using Xamarin.Forms.Xaml;
 
 namespace MyGanAPP.ViewModels
 {
-    public class ChooseKidViewModel: INotifyPropertyChanged
+    public class ChooseKidViewModel : INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -24,10 +24,10 @@ namespace MyGanAPP.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        
-        public ObservableCollection<Student> ChildrenList { get;}
-        public ObservableCollection<Group> GroupsList { get;}
-        public ObservableCollection<Kindergarten> KindergartensList { get;}
+
+        public ObservableCollection<Student> ChildrenList { get; }
+        public ObservableCollection<Group> GroupsList { get; }
+        public ObservableCollection<Kindergarten> KindergartensList { get; }
 
         #region Visibility
         private bool visible1;
@@ -65,10 +65,10 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
-        
+      
         public ChooseKidViewModel()
         {
-            Visible1 = false; Visible2 = false; Visible3 = false;   
+            Visible1 = false; Visible2 = false; Visible3 = false;
             ChildrenList = new ObservableCollection<Student>();
             GroupsList = new ObservableCollection<Group>();
             KindergartensList = new ObservableCollection<Kindergarten>();
@@ -78,16 +78,16 @@ namespace MyGanAPP.ViewModels
         private void CreateCollection()
         {
             App a = (App)App.Current;
-           
+
             List<StudentOfUser> theStudents = a.CurrUser.StudentOfUsers;
             foreach (StudentOfUser s in theStudents)
             {
                 this.ChildrenList.Add(s.Student);
-            }
-            if(this.ChildrenList.Count> 0) { Visible1 = true; }
+             }
+            if (this.ChildrenList.Count > 0) { Visible1 = true; }
 
             List<Group> theGroups = a.CurrUser.Groups;
-            foreach (Group g in theGroups )
+            foreach (Group g in theGroups)
             {
                 this.GroupsList.Add(g);
             }
@@ -133,6 +133,6 @@ namespace MyGanAPP.ViewModels
 
     }
 
-   
+
 
 }
