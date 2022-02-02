@@ -22,11 +22,7 @@
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        
-                                            <Image Source="{Binding PhotoURL}"/>
-                                    
-
-
+                                        <Image Source="{Binding PhotoURL}"/>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
