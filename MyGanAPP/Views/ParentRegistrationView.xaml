@@ -222,15 +222,27 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
+                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
                                             <Label Text="סיסמה" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
                                             <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                                         </Grid>
-                                        <Entry Placeholder="סיסמה" HorizontalTextAlignment="End" MaxLength="30"  IsPassword="True" Text="{Binding Password}" Style="{StaticResource entry}"/>
+                                        
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
 
+                                            <Entry Placeholder="סיסמה" HorizontalTextAlignment="Center" MaxLength="30" Grid.Column="0" Grid.Row="0" IsPassword="{Binding ShowPass}" Text="{Binding Password}" Style="{StaticResource entry}"/>
+                                            <ImageButton BackgroundColor="Transparent" Source="{Binding EyeImg}" Grid.Column="1" Grid.Row="0" Command="{Binding PassCommand}" HeightRequest="25" WidthRequest="25"></ImageButton>
+                                        </Grid>
+                                       
                                         <!-- PhoneNumber1-->
                                         <Grid>
                                             <Grid.ColumnDefinitions>
