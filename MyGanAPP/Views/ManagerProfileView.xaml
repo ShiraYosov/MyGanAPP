@@ -6,6 +6,15 @@
              FlowDirection="RightToLeft">
     <ContentPage.Content>
         <StackLayout>
+            
+            <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="שם הגן: " FontSize="20"/>
+                        <Span Text="{Binding KindergartenName}" FontSize="20" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
             <!--Photo-->
             <Grid>
@@ -29,8 +38,11 @@
                 <Frame  BackgroundColor="White" HasShadow="True" Padding="0" Margin="0" CornerRadius="20">
 
                     <StackLayout Padding="0" Margin="50">
-
-                        <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                        <Label Text="פרטי משתמש" Grid.Column="1" TextDecorations="Underline" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" TextColor="Black" >
+                           
+                        </Label>
+                       
+                        <!--<Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="שם הגן: " FontSize="20"/>
@@ -45,9 +57,9 @@
                                     <Span Text="{Binding NumOfKids}" FontSize="20" />
                                 </FormattedString>
                             </Label.FormattedText>
-                        </Label>
+                        </Label>-->
 
-                        <Grid>
+                        <!--<Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
@@ -57,7 +69,7 @@
                             </Grid.ColumnDefinitions>
                             <ImageButton BackgroundColor="Transparent" Source="AddButton.png" Command="{Binding ButtonPressedCommand}"  Grid.Column="0" HorizontalOptions="Start" HeightRequest="25" WidthRequest="25"></ImageButton>
                             <Label Text="הוספת קבוצה" Grid.Column="1" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" TextColor="Black" ></Label>
-                        </Grid>
+                        </Grid>-->
                         
                     </StackLayout>
 

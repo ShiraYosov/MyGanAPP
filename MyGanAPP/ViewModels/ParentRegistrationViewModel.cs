@@ -1013,7 +1013,7 @@ namespace MyGanAPP.ViewModels
         }
 
         public ICommand UpdateAllergy => new Command(OnPressedAllergy);
-        public async void OnPressedAllergy(object allergyList)
+        public void OnPressedAllergy(object allergyList)
         {
 
             SelectedAllergies.Clear();
@@ -1048,7 +1048,7 @@ namespace MyGanAPP.ViewModels
 
         #endregion
 
-        #region
+        #region Delete all selected allergies
 
         public ICommand DeleteCommand => new Command(OnDelete);
         public void OnDelete()
@@ -1210,8 +1210,7 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
-        //This contact is a reference to the updated or new created contact
-        private User theUser;
+      
         public ParentRegistrationViewModel()
         {
             EyeImg = CLOSEDEYE_PHOTO_SRC;

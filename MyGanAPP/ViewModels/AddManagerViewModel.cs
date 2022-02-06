@@ -406,6 +406,7 @@ namespace MyGanAPP.ViewModels
                     Fname = ManagerFirstName,
                     LastName = ManagerLastName,
                     PhoneNumber = PhoneNumber,
+                    IsApproved = true
                 };
 
                 Kindergarten newK = new Kindergarten

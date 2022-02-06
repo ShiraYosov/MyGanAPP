@@ -27,7 +27,6 @@
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
-                                                <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
                                             <Frame  BorderColor="Black" CornerRadius="100"  Grid.Column="1" Grid.Row="0" IsClippedToBounds="True" Padding="0" HeightRequest="180" WidthRequest="180" HorizontalOptions="CenterAndExpand">
                                                 <Image Source="{Binding PhotoURL}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" />

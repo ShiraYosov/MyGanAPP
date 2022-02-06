@@ -35,10 +35,10 @@
         </local:ChooseView.IconImageSource>
     </local:ChooseView>
 
-    <local:ChooseView>
-        <local:ChooseView.IconImageSource>
+    <local:ApproveUsersView>
+        <local:ApproveUsersView.IconImageSource>
             <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.UserCheck}"/>
-        </local:ChooseView.IconImageSource>
-    </local:ChooseView>
+        </local:ApproveUsersView.IconImageSource>
+    </local:ApproveUsersView>
 
 </TabbedPage>

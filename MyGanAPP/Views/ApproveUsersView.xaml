@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyGanAPP.Views.ApproveUsersView"
+             FlowDirection="RightToLeft">
+    <ContentPage.Content>
+        <StackLayout>
+            <CollectionView ItemsSource="{Binding UsersList}" x:Name="collec">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Delete"
+                                               IconImageSource="bin.png"
+                                               BackgroundColor="OrangeRed"
+                                               Command="{Binding Source={x:Reference collec}, Path= BindingContext.DeleteCommand}"
+                                               CommandParameter="{Binding}"/>
+                                    <SwipeItem Text="Edit"
+                                               IconImageSource="edit.png"
+                                               BackgroundColor="LightGreen"
+                                                Command="{Binding Source={x:Reference collec}, Path= BindingContext.EditCommand}"
+                                               CommandParameter="{Binding}"/>
+                                </SwipeItems>
+
+                            </SwipeView.LeftItems>
+
+                            <Grid Padding="10" HorizontalOptions="FillAndExpand">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                
+                                <Frame BorderColor="white"  CornerRadius="100"  Grid.Column="1" Grid.Row="0" IsClippedToBounds="True" Padding="0" HeightRequest="180" WidthRequest="180" HorizontalOptions="CenterAndExpand">
+                                    <Image x:Name="theImage" Source="{Binding UserImgSrc}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" HeightRequest="150" WidthRequest="150"/>
+                                </Frame>
+
+                            </Grid>
+
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

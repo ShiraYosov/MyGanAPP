@@ -19,13 +19,14 @@ namespace MyGanAPP.Services
     {
         private const string CLOUD_URL = "TBD"; //API url when going on the cloud
         private const string CLOUD_PHOTOS_URL = "TBD";
-       private const string DEV_ANDROID_EMULATOR_URL = "http://10.0.2.2:34516/MyGanAPI"; //API url when using emulator on android
+        private const string DEV_ANDROID_EMULATOR_URL = "http://10.0.2.2:34516/MyGanAPI"; //API url when using emulator on android
         private const string DEV_ANDROID_PHYSICAL_URL = "http://192.168.1.14:34516/MyGanAPI"; //API url when using physucal device on android
         private const string DEV_WINDOWS_URL = "http://localhost:34516/MyGanAPI"; //API url when using windoes on development
         private const string DEV_ANDROID_EMULATOR_PHOTOS_URL = "http://10.0.2.2:34516/KidsPhotos/"; //API url when using emulator on android
         private const string DEV_ANDROID_PHYSICAL_PHOTOS_URL = "http://192.168.1.14:34516/KidsPhotos/"; //API url when using physucal device on android
         private const string DEV_WINDOWS_PHOTOS_URL = "http://localhost:34516/KidsPhotos/"; //API url when using windoes on development
        
+
 
         private HttpClient client;
         private string baseUri;
@@ -150,6 +151,41 @@ namespace MyGanAPP.Services
                 return null;
             }
         }
+
+        //GetTeachersList
+        public async Task<List<User>> GetTeachersAsync(Kindergarten kindergaten)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                    PropertyNameCaseInsensitive = true
+                };
+                string jsonObject = JsonSerializer.Serialize<Kindergarten>(kindergaten, options);
+                StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/GetTeachers", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    jsonObject = await response.Content.ReadAsStringAsync();
+                    List<User> Teachers = JsonSerializer.Deserialize<List<User>>(jsonObject, options);
+                    return Teachers;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+
+        }
+
 
         //Upload file to server (only images!)
         public async Task<bool> UploadImage(Models.FileInfo fileInfo, string targetFileName)

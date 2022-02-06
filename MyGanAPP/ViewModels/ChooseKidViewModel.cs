@@ -65,7 +65,7 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
-      
+
         public ChooseKidViewModel()
         {
             Visible1 = false; Visible2 = false; Visible3 = false;
@@ -83,7 +83,7 @@ namespace MyGanAPP.ViewModels
             foreach (StudentOfUser s in theStudents)
             {
                 this.ChildrenList.Add(s.Student);
-             }
+            }
             if (this.ChildrenList.Count > 0) { Visible1 = true; }
 
             List<Group> theGroups = a.CurrUser.Groups;
@@ -104,6 +104,11 @@ namespace MyGanAPP.ViewModels
         public ICommand SelectionChanged => new Command(OnSelection);
         public async void OnSelection(object obj)
         {
+            //App a = (App)App.Current;
+            //a.SelectedGroup = null;
+            //a.SelectedKindergarten = null;
+            //a.SelectedStudent = null;
+
             if (obj is Group)
             {
                 Group chosenGroup = (Group)obj;

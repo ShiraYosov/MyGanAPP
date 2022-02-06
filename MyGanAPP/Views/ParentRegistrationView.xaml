@@ -296,7 +296,7 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
-                                            <Label Text="סיסמה" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
+                                            <Label Text="סיסמה" Grid.Column="0" HorizontalTextAlignment="End" Style="{StaticResource labelNameStyle}"/>
 
                                         </Grid>
                                         <Entry Placeholder="סיסמה" HorizontalTextAlignment="End" MaxLength="30"  IsPassword="True" Text="{Binding Password2}" Style="{StaticResource entry}"/>

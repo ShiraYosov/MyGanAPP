@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MyGanAPP.Services;
 
 namespace MyGanAPP.Models
 {
@@ -26,5 +27,15 @@ namespace MyGanAPP.Models
         public virtual List<KindergartenManager> KindergartenManagers { get; set; }
         public virtual List<Signature> Signatures { get; set; }
         public virtual List<StudentOfUser> StudentOfUsers { get; set; }
+
+        public string PhotoURL
+        {
+            get
+            {
+                MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
+                Random r = new Random();
+                return $"{proxy.GetBasePhotoUri()}{this.UserId}.jpg?" + r.Next();
+            }
+        }
     }
 }

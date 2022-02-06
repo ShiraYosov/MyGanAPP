@@ -42,14 +42,14 @@ namespace MyGanAPP.ViewModels
         #region Constructor
         public ManagerProfileViewModel()
         {
-            this.UserImgSrc = DEFAULT_PHOTO_SRC;
+            //this.UserImgSrc = DEFAULT_PHOTO_SRC;
 
             App a = (App)App.Current;
             //set the path url to the contact photo
             MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
             //Create a source with cache busting!
             Random r = new Random();
-           // this.UserImgSrc = a.CurrUser.UserId + $"?{r.Next()}";
+            UserImgSrc = a.SelectedStudent.PhotoURL;
         }
 
         #endregion
