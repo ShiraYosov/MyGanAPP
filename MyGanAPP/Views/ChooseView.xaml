@@ -12,17 +12,27 @@
                     <ScrollView>
 
                         <StackLayout Padding="0" Margin="15">
-
-
-
-                            <CollectionView x:Name="collec1" IsVisible="{Binding Visible1}"  ItemsSource="{Binding ChildrenList}" SelectionMode="Single" SelectedItem="{Binding SelectedKid}" BackgroundColor="Transparent"
+                                <CollectionView x:Name="collec1" IsVisible="{Binding Visible1}"  ItemsSource="{Binding ChildrenList}" SelectionMode="Single" SelectedItem="{Binding SelectedKid}" BackgroundColor="Transparent"
                                 SelectionChangedCommand="{Binding SelectionChanged}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collec1}, Path=SelectedItem}">
                                 <CollectionView.ItemsLayout>
                                     <GridItemsLayout Span="1" Orientation="Vertical" />
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        <Image Source="{Binding PhotoURL}"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.3*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="0.3*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Frame  BorderColor="Black" CornerRadius="100"  Grid.Column="1" Grid.Row="0" IsClippedToBounds="True" Padding="0" HeightRequest="180" WidthRequest="180" HorizontalOptions="CenterAndExpand">
+                                                <Image Source="{Binding PhotoURL}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" />
+                                            </Frame>
+                                        </Grid>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
@@ -42,7 +52,7 @@
                                                     <ColumnDefinition Width="*" />
                                                 </Grid.ColumnDefinitions>
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition Height="28"/>
+                                                    <RowDefinition Height="*"/>
                                                 </Grid.RowDefinitions>
                                                 <Label Text="{Binding Path=GroupName, StringFormat='{0}'}" HorizontalTextAlignment="Start" FontSize="25" TextColor="Black" Grid.Row="0" Grid.Column="0"/>
                                             </Grid>

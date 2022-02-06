@@ -25,6 +25,8 @@ namespace MyGanAPP.ViewModels
         }
 
 
+        private const string OPENEYE_PHOTO_SRC = "OpenEye.png";
+        private const string CLOSEDEYE_PHOTO_SRC = "ClosedEye.png";
 
 
         private string email;
@@ -56,14 +58,57 @@ namespace MyGanAPP.ViewModels
                 }
             }
         }
+
+        private bool showPass;
+        public bool ShowPass
+        {
+            get { return showPass; }
+
+            set
+            {
+                if (this.showPass != value)
+                {
+                    this.showPass = value;
+                    OnPropertyChanged(nameof(ShowPass));
+                }
+            }
+        }
+
+        private string imgSource1;
+        public string ImgSource1
+        {
+            get => imgSource1;
+            set
+            {
+                imgSource1 = value;
+                OnPropertyChanged("ImgSource1");
+            }
+        }
         public LoginViewModel()
         {
             LoginCommand = new Command(Login);
+            PassCommand = new Command(OnShowPass);
+            ShowPass = true;
+            imgSource1 = CLOSEDEYE_PHOTO_SRC;
         }
 
         public ICommand LoginCommand { protected set; get; }
+        public ICommand PassCommand { protected set; get; }
 
+        public void OnShowPass()
+        {
+            if (ShowPass == false) 
+            { ShowPass = true; }
+           
+            else { ShowPass = false; }
 
+            if (imgSource1 == CLOSEDEYE_PHOTO_SRC) 
+            { ImgSource1 = OPENEYE_PHOTO_SRC; }
+
+            else { ImgSource1 = CLOSEDEYE_PHOTO_SRC; }
+        }
+
+       
         public async void Login()
         {
 

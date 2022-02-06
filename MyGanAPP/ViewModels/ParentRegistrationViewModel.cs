@@ -40,6 +40,10 @@ namespace MyGanAPP.ViewModels
         private const string Source1 = "arrow.png";
         private const string Source2 = "arrow2.png";
 
+        private const string OPENEYE_PHOTO_SRC = "OpenEye.png";
+        private const string CLOSEDEYE_PHOTO_SRC = "ClosedEye.png";
+
+
         #region ChildLastName
         private bool showChildLastNameError;
 
@@ -294,6 +298,21 @@ namespace MyGanAPP.ViewModels
                 {
                     this.imgSource2 = value;
                     OnPropertyChanged(nameof(ImgSource2));
+                }
+            }
+        }
+
+        private string eyeImg;
+        public string EyeImg
+        {
+            get { return this.eyeImg; }
+
+            set
+            {
+                if (this.eyeImg != value)
+                {
+                    this.eyeImg = value;
+                    OnPropertyChanged(nameof(EyeImg));
                 }
             }
         }
@@ -749,6 +768,22 @@ namespace MyGanAPP.ViewModels
 
         #endregion
 
+        #region ShowPass
+        private bool showPass;
+        public bool ShowPass
+        {
+            get { return showPass; }
+
+            set
+            {
+                if (this.showPass != value)
+                {
+                    this.showPass = value;
+                    OnPropertyChanged(nameof(ShowPass));
+                }
+            }
+        }
+        #endregion
 
         #region Allergies
 
@@ -1109,10 +1144,10 @@ namespace MyGanAPP.ViewModels
                     LastName = ChildLastName,
                     PhoneNumber = PhoneNumber,
                 };
-                
+
                 int groupID = GanCode.CodeToGroupID(Code);
 
-                
+
 
                 Student newStudent = new Student
                 {
@@ -1177,46 +1212,15 @@ namespace MyGanAPP.ViewModels
 
         //This contact is a reference to the updated or new created contact
         private User theUser;
-        public ParentRegistrationViewModel(User u = null)
+        public ParentRegistrationViewModel()
         {
-            //create a new user contact if this is an add operation
-            if (theUser == null)
-            {
-                App theApp = (App)App.Current;
-                u = new User()
-                {
-                    LastName = "",
-                    Fname = "",
-                    Email = "",
-                    PhoneNumber = "",
-                    Password = "",
-                    Groups = new List<Models.Group>(),
-                    Signatures = new List<Signature>(),
-                    IsSystemManager = false,
-                    StudentOfUsers = new List<StudentOfUser>(),
-                };
-
-                //Setup default image photo
-                this.UserImgSrc = DEFAULT_PHOTO_SRC;
-                this.imageFileResult = null; //mark that no picture was chosen
-
-            }
-            else
-            {
-                //set the path url to the contact photo
-                MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
-                //Create a source with cache busting!
-                Random r = new Random();
-                this.UserImgSrc = proxy.GetBasePhotoUri() + ChildID + $".jpg?{r.Next()}";
-            }
-
-            //RegisterCommand = new Command(Register);
+            EyeImg = CLOSEDEYE_PHOTO_SRC;
+            ShowPass = true;
             this.SearchTerm = String.Empty;
             InitAllergies();
             Allergies = "לא נבחרו אלרגיות";
 
 
-            this.theUser = u;
             Button1 = false;
             Button2 = false;
             ImgSource1 = Source1;
@@ -1249,7 +1253,7 @@ namespace MyGanAPP.ViewModels
             this.GradeError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.RelationError = ERROR_MESSAGES.REQUIRED_FIELD;
 
-           
+
             //Setup default image photo
             this.UserImgSrc = DEFAULT_PHOTO_SRC;
             this.imageFileResult = null; //mark that no picture was chosen
@@ -1301,6 +1305,17 @@ namespace MyGanAPP.ViewModels
         #endregion
 
         #region ButtonCommands
+
+        public ICommand PassCommand => new Command(OnPassChange);
+
+        public void OnPassChange()
+        {
+            if (ShowPass == false) { ShowPass = true; }
+            else { ShowPass = false; }
+
+            if (EyeImg == CLOSEDEYE_PHOTO_SRC) { EyeImg = OPENEYE_PHOTO_SRC; }
+            else { EyeImg = CLOSEDEYE_PHOTO_SRC; }
+        }
         public ICommand Button1PressedCommand { protected set; get; }
         public void Button1Pressed()
         {
