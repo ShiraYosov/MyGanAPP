@@ -1197,7 +1197,7 @@ namespace MyGanAPP.ViewModels
                         bool success = await proxy.UploadImage(new FileInfo()
                         {
                             Name = this.imageFileResult.FullPath
-                        }, $"{newU.StudentOfUsers.FirstOrDefault().StudentId}.jpg");
+                        }, $"k\\{newU.StudentOfUsers.FirstOrDefault().StudentId}.jpg");
                     }
                     ServerStatus = "שומר נתונים...";
                     await App.Current.MainPage.Navigation.PopModalAsync();

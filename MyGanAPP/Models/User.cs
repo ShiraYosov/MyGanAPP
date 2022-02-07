@@ -8,10 +8,10 @@ namespace MyGanAPP.Models
     {
         public User()
         {
-            Groups = new List<Group>();
-            KindergartenManagers = new List<KindergartenManager>();
-            Signatures = new List<Signature>();
-            StudentOfUsers = new List<StudentOfUser>();
+            Groups = new HashSet<Group>();
+            KindergartenManagers = new HashSet<KindergartenManager>();
+            Signatures = new HashSet<Signature>();
+            StudentOfUsers = new HashSet<StudentOfUser>();
         }
 
         public int UserId { get; set; }
@@ -21,12 +21,13 @@ namespace MyGanAPP.Models
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public bool IsSystemManager { get; set; }
-        public bool IsApproved { get; set; }
+        public int? StatusId { get; set; }
 
-        public virtual List<Group> Groups { get; set; }
-        public virtual List<KindergartenManager> KindergartenManagers { get; set; }
-        public virtual List<Signature> Signatures { get; set; }
-        public virtual List<StudentOfUser> StudentOfUsers { get; set; }
+        public virtual StatusType Status { get; set; }
+        public virtual ICollection<Group> Groups { get; set; }
+        public virtual ICollection<KindergartenManager> KindergartenManagers { get; set; }
+        public virtual ICollection<Signature> Signatures { get; set; }
+        public virtual ICollection<StudentOfUser> StudentOfUsers { get; set; }
 
         public string PhotoURL
         {
@@ -34,7 +35,7 @@ namespace MyGanAPP.Models
             {
                 MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
                 Random r = new Random();
-                return $"{proxy.GetBasePhotoUri()}{this.UserId}.jpg?" + r.Next();
+                return $"{proxy.GetBasePhotoUri()}t/{this.UserId}.jpg?" + r.Next();
             }
         }
     }

@@ -4,46 +4,53 @@
              x:Class="MyGanAPP.Views.ApproveUsersView"
              FlowDirection="RightToLeft">
     <ContentPage.Content>
-        <StackLayout>
-            <CollectionView ItemsSource="{Binding UsersList}" x:Name="collec">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <SwipeView>
-                            <SwipeView.LeftItems>
-                                <SwipeItems>
-                                    <SwipeItem Text="Delete"
+
+        <ScrollView>
+            <StackLayout Padding="10,30">
+                <CollectionView EmptyView="אין תלמידים בהמתנה" x:Name="collectionName" 
+                            ItemsSource="{Binding UsersList}" SelectionMode="Single"
+                        SelectionChangedCommand="{Binding SelctionChanged}"
+                        SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName}, Path=SelectedItem}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <SwipeView>
+                                <SwipeView.LeftItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Delete"
                                                IconImageSource="bin.png"
                                                BackgroundColor="OrangeRed"
                                                Command="{Binding Source={x:Reference collec}, Path= BindingContext.DeleteCommand}"
                                                CommandParameter="{Binding}"/>
-                                    <SwipeItem Text="Edit"
+                                        <SwipeItem Text="Edit"
                                                IconImageSource="edit.png"
                                                BackgroundColor="LightGreen"
                                                 Command="{Binding Source={x:Reference collec}, Path= BindingContext.EditCommand}"
                                                CommandParameter="{Binding}"/>
-                                </SwipeItems>
+                                    </SwipeItems>
 
-                            </SwipeView.LeftItems>
-
-                            <Grid Padding="10" HorizontalOptions="FillAndExpand">
+                                </SwipeView.LeftItems>
+                            
+                            <Grid Padding="10" HorizontalOptions="CenterAndExpand">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="66" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="70" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                
-                                <Frame BorderColor="white"  CornerRadius="100"  Grid.Column="1" Grid.Row="0" IsClippedToBounds="True" Padding="0" HeightRequest="180" WidthRequest="180" HorizontalOptions="CenterAndExpand">
-                                    <Image x:Name="theImage" Source="{Binding UserImgSrc}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" HeightRequest="150" WidthRequest="150"/>
-                                </Frame>
-
+                                <!--לשנות את הבינדינג ככה שיתאים לעמודות שיש בטבלת מורה-->
+                                <Image Grid.Column="0" Grid.Row="0" Source="{Binding PhotoURI}" HeightRequest="80" WidthRequest="80"/>
+                                <Label Grid.Column="0" Grid.Row="1" Text="{Binding Iname}" FontSize="15" FontAttributes="Bold" HorizontalOptions="Center"/>
+                                <Label Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Text="{Binding Details}" FontSize="15" HorizontalOptions="Center" VerticalOptions="Center"/>
                             </Grid>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-                        </SwipeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </StackLayout>
+            </StackLayout>
+        </ScrollView>
+     
     </ContentPage.Content>
 </ContentPage>

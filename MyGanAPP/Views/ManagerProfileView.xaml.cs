@@ -14,8 +14,9 @@ namespace MyGanAPP.Views
     {
         public ManagerProfileView()
         {
-            InitializeComponent();
             this.BindingContext = new ManagerProfileViewModel();
+            InitializeComponent();
+            
         }
     }
 }
