@@ -79,21 +79,21 @@ namespace MyGanAPP.ViewModels
         {
             App a = (App)App.Current;
 
-            List<StudentOfUser> theStudents = a.CurrUser.StudentOfUsers;
+            ICollection<StudentOfUser> theStudents = a.CurrUser.StudentOfUsers;
             foreach (StudentOfUser s in theStudents)
             {
                 this.ChildrenList.Add(s.Student);
             }
             if (this.ChildrenList.Count > 0) { Visible1 = true; }
 
-            List<Group> theGroups = a.CurrUser.Groups;
+            ICollection<Group> theGroups = a.CurrUser.Groups;
             foreach (Group g in theGroups)
             {
                 this.GroupsList.Add(g);
             }
             if (this.GroupsList.Count > 0) { Visible2 = true; }
 
-            List<KindergartenManager> Kindergartens = a.CurrUser.KindergartenManagers;
+            ICollection<KindergartenManager> Kindergartens = a.CurrUser.KindergartenManagers;
             foreach (KindergartenManager k in Kindergartens)
             {
                 this.KindergartensList.Add(k.Kindergarten);
@@ -104,34 +104,34 @@ namespace MyGanAPP.ViewModels
         public ICommand SelectionChanged => new Command(OnSelection);
         public async void OnSelection(object obj)
         {
-            //App a = (App)App.Current;
-            //a.SelectedGroup = null;
-            //a.SelectedKindergarten = null;
-            //a.SelectedStudent = null;
+            App a = (App)App.Current;
+            a.SelectedGroup = null;
+            a.SelectedKindergarten = null;
+            a.SelectedStudent = null;
 
             if (obj is Group)
             {
                 Group chosenGroup = (Group)obj;
-                App a = (App)App.Current;
                 a.SelectedGroup = chosenGroup;
                 await App.Current.MainPage.Navigation.PopToRootAsync();
-                await App.Current.MainPage.Navigation.PushAsync(new MainTab());
+                await App.Current.MainPage.Navigation.PushModalAsync(new MainTab());
+                //await App.Current.MainPage.Navigation.PushAsync(new MainTab());
             }
             if (obj is Kindergarten)
             {
                 Kindergarten chosenKindergarten = (Kindergarten)obj;
-                App a = (App)App.Current;
                 a.SelectedKindergarten = chosenKindergarten;
                 await App.Current.MainPage.Navigation.PopToRootAsync();
-                await App.Current.MainPage.Navigation.PushAsync(new MainTab());
+                await App.Current.MainPage.Navigation.PushModalAsync(new MainTab());
+                //await App.Current.MainPage.Navigation.PushAsync(new MainTab());
             }
             if (obj is Student)
             {
                 Student chosenStudent = (Student)obj;
-                App a = (App)App.Current;
                 a.SelectedStudent = chosenStudent;
                 await App.Current.MainPage.Navigation.PopToRootAsync();
-                await App.Current.MainPage.Navigation.PushAsync(new MainTab());
+                await App.Current.MainPage.Navigation.PushModalAsync(new MainTab());
+                //await App.Current.MainPage.Navigation.PushAsync(new MainTab());
             }
 
         }

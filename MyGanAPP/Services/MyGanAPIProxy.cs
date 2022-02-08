@@ -166,24 +166,25 @@ namespace MyGanAPP.Services
                 string jsonObject = JsonSerializer.Serialize<Kindergarten>(kindergaten, options);
                 StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/GetTeachers", content);
+
+               HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetTeachers"/*, content*/);
                 if (response.IsSuccessStatusCode)
                 {
-                    jsonObject = await response.Content.ReadAsStringAsync();
-                    List<User> Teachers = JsonSerializer.Deserialize<List<User>>(jsonObject, options);
-                    return Teachers;
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    List<User> teachers = JsonSerializer.Deserialize<List<User>>(jsonContent, options);
+
+                    return teachers;
                 }
                 else
                 {
                     return null;
                 }
             }
-            catch (Exception e)
+            catch (Exception ee)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(ee.Message);
                 return null;
             }
-
         }
 
 

@@ -26,6 +26,7 @@ namespace MyGanAPP.ViewModels
         public ObservableCollection<Student> StudentsList { get; }
         public ObservableCollection<User> TeachersList { get; }
 
+
         public ApproveUsersViewModel()
         {
             StudentsList = new ObservableCollection<Student>();
@@ -33,37 +34,37 @@ namespace MyGanAPP.ViewModels
             CreateCollection();
         }
 
-        private void CreateCollection()
+        private async void CreateCollection()
         {
             App a = (App)App.Current;
 
-            
-            if(a.SelectedGroup != null)
+
+            if (a.SelectedGroup != null)
             {
-               foreach (Student s in a.SelectedGroup.Students)
-               {
-                 foreach(StudentOfUser sou in s.StudentOfUsers)
+                foreach (Student s in a.SelectedGroup.Students)
+                {
+                    foreach (StudentOfUser sou in s.StudentOfUsers)
                     {
-                        if(sou.User.IsApproved == false)
+                        if (sou.User.StatusId == 3)
                             this.StudentsList.Add(s);
                     }
-               }
+                }
 
             }
 
-            if(a.SelectedKindergarten!= null)
+            if (a.SelectedKindergarten != null)
             {
                 MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
-               ICollection<User> teachers =  (ICollection<User>) proxy.GetTeachersAsync(a.SelectedKindergarten);
+                ICollection<User> teachers = (ICollection<User>) proxy.GetTeachersAsync(a.SelectedKindergarten);
 
-                foreach(User user in teachers)
+                foreach (User user in teachers)
                 {
-                    TeachersList.Add(user); 
+                    TeachersList.Add(user);
                 }
             }
-           
 
-            
+
+
         }
     }
 }

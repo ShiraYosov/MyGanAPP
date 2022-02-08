@@ -8,7 +8,7 @@
         <ScrollView>
             <StackLayout Padding="10,30">
                 <CollectionView EmptyView="אין תלמידים בהמתנה" x:Name="collectionName" 
-                            ItemsSource="{Binding UsersList}" SelectionMode="Single"
+                            ItemsSource="{Binding StudentsList}" SelectionMode="Single"
                         SelectionChangedCommand="{Binding SelctionChanged}"
                         SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName}, Path=SelectedItem}">
                     <CollectionView.ItemTemplate>
@@ -30,7 +30,7 @@
 
                                 </SwipeView.LeftItems>
                             
-                            <Grid Padding="10" HorizontalOptions="CenterAndExpand">
+                            <!--<Grid Padding="10" HorizontalOptions="CenterAndExpand">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="66" />
                                     <RowDefinition Height="Auto" />
@@ -38,12 +38,12 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="70" />
                                     <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
+                                </Grid.ColumnDefinitions>-->
                                 <!--לשנות את הבינדינג ככה שיתאים לעמודות שיש בטבלת מורה-->
-                                <Image Grid.Column="0" Grid.Row="0" Source="{Binding PhotoURI}" HeightRequest="80" WidthRequest="80"/>
+                                <!--<Image Grid.Column="0" Grid.Row="0" Source="{Binding PhotoURI}" HeightRequest="80" WidthRequest="80"/>
                                 <Label Grid.Column="0" Grid.Row="1" Text="{Binding Iname}" FontSize="15" FontAttributes="Bold" HorizontalOptions="Center"/>
-                                <Label Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Text="{Binding Details}" FontSize="15" HorizontalOptions="Center" VerticalOptions="Center"/>
-                            </Grid>
+                                <Label Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Text="{Binding Details}" FontSize="15" HorizontalOptions="Center" VerticalOptions="Center"/>-->
+                            <!--</Grid>-->
                             </SwipeView>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

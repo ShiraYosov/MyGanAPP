@@ -24,6 +24,8 @@ namespace MyGanAPP.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public const int WAITING_STATUS = 3;
+
         #region TeacherFirstName
         private bool showTeacherFirstNameError;
 
@@ -388,6 +390,7 @@ namespace MyGanAPP.ViewModels
                     Fname = TeacherFirstName,
                     LastName = TeacherLastName,
                     PhoneNumber = PhoneNumber,
+                    StatusId = WAITING_STATUS,
                 };
 
                 int groupID = GanCode.CodeToGroupID(Code);
@@ -416,7 +419,7 @@ namespace MyGanAPP.ViewModels
                         bool success = await proxy.UploadImage(new FileInfo()
                         {
                             Name = this.imageFileResult.FullPath
-                        }, $"t\\{newU.UserId}.jpg");
+                        }, $"users\\{newU.UserId}.jpg");
                     }
                     ServerStatus = "שומר נתונים...";
                     await App.Current.MainPage.Navigation.PopModalAsync();

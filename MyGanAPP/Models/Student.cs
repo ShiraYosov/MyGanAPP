@@ -31,7 +31,7 @@ namespace MyGanAPP.Models
             {
                 MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
                 Random r = new Random();
-                return $"{proxy.GetBasePhotoUri()}{this.StudentId}.jpg?" + r.Next();
+                return $"{proxy.GetBasePhotoUri()}kids/{this.StudentId}.jpg?" + r.Next();
             }
         }
     }

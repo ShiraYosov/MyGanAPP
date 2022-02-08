@@ -23,6 +23,8 @@ namespace MyGanAPP.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public const int WAITING_STATUS = 3;
+
         #region ManagerFirstName
         private bool showManagerFirstNameError;
 
@@ -406,7 +408,7 @@ namespace MyGanAPP.ViewModels
                     Fname = ManagerFirstName,
                     LastName = ManagerLastName,
                     PhoneNumber = PhoneNumber,
-                    IsApproved = true
+                    StatusId = WAITING_STATUS,
                 };
 
                 Kindergarten newK = new Kindergarten
@@ -441,7 +443,7 @@ namespace MyGanAPP.ViewModels
                         bool success = await proxy.UploadImage(new FileInfo()
                         {
                             Name = this.imageFileResult.FullPath
-                        }, $"t\\{newU.UserId}.jpg");
+                        }, $"users\\{newU.UserId}.jpg");
                     }
                     ServerStatus = "שומר נתונים...";
                     await App.Current.MainPage.Navigation.PopModalAsync();

@@ -43,6 +43,8 @@ namespace MyGanAPP.ViewModels
         private const string OPENEYE_PHOTO_SRC = "OpenEye.png";
         private const string CLOSEDEYE_PHOTO_SRC = "ClosedEye.png";
 
+        public const int WAITING_STATUS = 3;
+
 
         #region ChildLastName
         private bool showChildLastNameError;
@@ -1143,6 +1145,7 @@ namespace MyGanAPP.ViewModels
                     Fname = UserName,
                     LastName = ChildLastName,
                     PhoneNumber = PhoneNumber,
+                    StatusId = WAITING_STATUS
                 };
 
                 int groupID = GanCode.CodeToGroupID(Code);
@@ -1197,7 +1200,7 @@ namespace MyGanAPP.ViewModels
                         bool success = await proxy.UploadImage(new FileInfo()
                         {
                             Name = this.imageFileResult.FullPath
-                        }, $"k\\{newU.StudentOfUsers.FirstOrDefault().StudentId}.jpg");
+                        }, $"kids\\{newU.StudentOfUsers.FirstOrDefault().StudentId}.jpg");
                     }
                     ServerStatus = "שומר נתונים...";
                     await App.Current.MainPage.Navigation.PopModalAsync();

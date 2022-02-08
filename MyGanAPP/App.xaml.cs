@@ -17,6 +17,7 @@ namespace MyGanAPP
 {
     public partial class App : Application, INotifyPropertyChanged
     {
+       
         public User CurrUser { get; set; }
         public Student SelectedStudent { get; set; }
         public Kindergarten SelectedKindergarten { get; set; }
