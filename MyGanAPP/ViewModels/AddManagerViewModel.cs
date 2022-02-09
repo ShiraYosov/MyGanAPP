@@ -23,7 +23,7 @@ namespace MyGanAPP.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public const int WAITING_STATUS = 3;
+        public const int APPROVED_STATUS = 1;
 
         #region ManagerFirstName
         private bool showManagerFirstNameError;
@@ -408,7 +408,7 @@ namespace MyGanAPP.ViewModels
                     Fname = ManagerFirstName,
                     LastName = ManagerLastName,
                     PhoneNumber = PhoneNumber,
-                    StatusId = WAITING_STATUS,
+                    StatusId = APPROVED_STATUS,
                 };
 
                 Kindergarten newK = new Kindergarten

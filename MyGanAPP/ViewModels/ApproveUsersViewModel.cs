@@ -55,7 +55,7 @@ namespace MyGanAPP.ViewModels
             if (a.SelectedKindergarten != null)
             {
                 MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
-                ICollection<User> teachers = (ICollection<User>) proxy.GetTeachersAsync(a.SelectedKindergarten);
+                List<User> teachers = await proxy.GetTeachersWithWaitStatusAsync(a.SelectedKindergarten.KindergartenId);
 
                 foreach (User user in teachers)
                 {

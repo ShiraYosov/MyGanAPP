@@ -153,7 +153,7 @@ namespace MyGanAPP.Services
         }
 
         //GetTeachersList
-        public async Task<List<User>> GetTeachersAsync(Kindergarten kindergaten)
+        public async Task<List<User>> GetTeachersWithWaitStatusAsync(int kindergatenID)
         {
             try
             {
@@ -163,11 +163,8 @@ namespace MyGanAPP.Services
                     Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
                     PropertyNameCaseInsensitive = true
                 };
-                string jsonObject = JsonSerializer.Serialize<Kindergarten>(kindergaten, options);
-                StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
-
-
-               HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetTeachers"/*, content*/);
+              
+               HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetTeachersWithWaitStatus?kindergartenID={kindergatenID}");
                 if (response.IsSuccessStatusCode)
                 {
                     string jsonContent = await response.Content.ReadAsStringAsync();
