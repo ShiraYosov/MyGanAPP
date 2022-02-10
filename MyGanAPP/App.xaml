@@ -72,8 +72,8 @@
                 <Setter Property="CornerRadius" Value="100"></Setter>
                 <Setter Property="IsClippedToBounds" Value="True"></Setter>
                 <Setter Property="Padding" Value="0"></Setter>
-                <Setter Property="HeightRequest" Value="60"></Setter>
-                <Setter Property="WidthRequest" Value="60"></Setter>
+                <Setter Property="HeightRequest" Value="70"></Setter>
+                <Setter Property="WidthRequest" Value="70"></Setter>
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
             </Style>
 
@@ -82,8 +82,8 @@
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="Margin" Value="0"></Setter>
-                <Setter Property="HeightRequest" Value="60"></Setter>
-                <Setter Property="WidthRequest" Value="60"></Setter>
+                <Setter Property="HeightRequest" Value="70"></Setter>
+                <Setter Property="WidthRequest" Value="70"></Setter>
             </Style>
 
 

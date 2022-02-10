@@ -14,8 +14,9 @@ namespace MyGanAPP.Views
     {
         public ApproveUsersView()
         {
-            InitializeComponent();
             this.BindingContext = new ApproveUsersViewModel();
+            InitializeComponent();
+           
         }
     }
 }

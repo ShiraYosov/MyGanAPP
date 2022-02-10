@@ -25,6 +25,7 @@ namespace MyGanAPP.ViewModels
         public const string BAD_PHONE = "טלפון לא תקין";
         public const string BAD_DATE = "על הילד להיות מעל גיל שנה";
         public const string BAD_PHONE_NUMBER = "מספר הטלפון חייב להכיל 10 מספרים";
+        public const string BAD_CHILDID = "תעודת זהות אינה תקינה";
     }
 
     class ParentRegistrationViewModel : INotifyPropertyChanged
@@ -191,7 +192,18 @@ namespace MyGanAPP.ViewModels
         {
             int id;
             bool ok = int.TryParse(ChildID, out id);
-            this.ShowChildIDError = string.IsNullOrEmpty(ChildID) || !ok;
+            if (string.IsNullOrEmpty(ChildID))
+            {
+                this.ShowChildIDError = true;
+                this.ChildIDError = ERROR_MESSAGES.REQUIRED_FIELD;
+            }
+
+            else if (!ok)
+            {
+                this.ShowChildIDError = true;
+                this.ChildIDError = ERROR_MESSAGES.BAD_CHILDID;
+            }
+
         }
         #endregion
 
@@ -315,6 +327,21 @@ namespace MyGanAPP.ViewModels
                 {
                     this.eyeImg = value;
                     OnPropertyChanged(nameof(EyeImg));
+                }
+            }
+        }
+
+        private string eyeImg2;
+        public string EyeImg2
+        {
+            get { return this.eyeImg2; }
+
+            set
+            {
+                if (this.eyeImg2 != value)
+                {
+                    this.eyeImg2 = value;
+                    OnPropertyChanged(nameof(EyeImg2));
                 }
             }
         }
@@ -664,11 +691,24 @@ namespace MyGanAPP.ViewModels
             this.ShowPhoneNumberError = string.IsNullOrEmpty(PhoneNumber);
             if (!this.ShowPhoneNumberError)
             {
-                if (this.PhoneNumber.Length < 10)
+
+                int num;
+                bool ok = int.TryParse(PhoneNumber, out num);
+
+                if (!ok)
+                {
+                    this.ShowPhoneNumberError = true;
+                    this.PhoneNumberError = ERROR_MESSAGES.BAD_PHONE;
+                }
+
+
+                else if (this.PhoneNumber.Length != 10)
                 {
                     this.ShowPhoneNumberError = true;
                     this.PhoneNumberError = ERROR_MESSAGES.BAD_PHONE_NUMBER;
                 }
+
+
 
             }
             else
@@ -716,11 +756,31 @@ namespace MyGanAPP.ViewModels
 
         private void ValidatePhoneNumber2()
         {
-            if (this.PhoneNumber2.Length < 10)
+            this.ShowPhoneNumber2Error = string.IsNullOrEmpty(PhoneNumber2);
+            if (!this.ShowPhoneNumber2Error)
             {
-                this.ShowPhoneNumber2Error = true;
-                this.PhoneNumber2Error = ERROR_MESSAGES.BAD_PHONE_NUMBER;
+
+                int num;
+                bool ok = int.TryParse(PhoneNumber2, out num);
+
+                if (!ok)
+                {
+                    this.ShowPhoneNumber2Error = true;
+                    this.PhoneNumber2Error = ERROR_MESSAGES.BAD_PHONE;
+                }
+
+
+                else if (this.PhoneNumber2.Length != 10)
+                {
+                    this.ShowPhoneNumber2Error = true;
+                    this.PhoneNumber2Error = ERROR_MESSAGES.BAD_PHONE_NUMBER;
+                }
+
+
+
             }
+            else
+                this.PhoneNumber2Error = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 
@@ -782,6 +842,21 @@ namespace MyGanAPP.ViewModels
                 {
                     this.showPass = value;
                     OnPropertyChanged(nameof(ShowPass));
+                }
+            }
+        }
+
+        private bool showPass2;
+        public bool ShowPass2
+        {
+            get { return showPass2; }
+
+            set
+            {
+                if (this.showPass2 != value)
+                {
+                    this.showPass2 = value;
+                    OnPropertyChanged(nameof(ShowPass2));
                 }
             }
         }
@@ -1213,11 +1288,13 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
-      
+
         public ParentRegistrationViewModel()
         {
             EyeImg = CLOSEDEYE_PHOTO_SRC;
             ShowPass = true;
+            EyeImg2 = CLOSEDEYE_PHOTO_SRC;
+            ShowPass2 = true;
             this.SearchTerm = String.Empty;
             InitAllergies();
             Allergies = "לא נבחרו אלרגיות";
@@ -1317,6 +1394,17 @@ namespace MyGanAPP.ViewModels
 
             if (EyeImg == CLOSEDEYE_PHOTO_SRC) { EyeImg = OPENEYE_PHOTO_SRC; }
             else { EyeImg = CLOSEDEYE_PHOTO_SRC; }
+        }
+
+        public ICommand PassCommand2 => new Command(OnPass2Change);
+
+        public void OnPass2Change()
+        {
+            if (ShowPass2 == false) { ShowPass2 = true; }
+            else { ShowPass2 = false; }
+
+            if (EyeImg2 == CLOSEDEYE_PHOTO_SRC) { EyeImg2 = OPENEYE_PHOTO_SRC; }
+            else { EyeImg2 = CLOSEDEYE_PHOTO_SRC; }
         }
         public ICommand Button1PressedCommand { protected set; get; }
         public void Button1Pressed()

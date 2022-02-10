@@ -25,6 +25,11 @@ namespace MyGanAPP.ViewModels
 
         public const int APPROVED_STATUS = 1;
 
+
+        private const string OPENEYE_PHOTO_SRC = "OpenEye.png";
+        private const string CLOSEDEYE_PHOTO_SRC = "ClosedEye.png";
+
+
         #region ManagerFirstName
         private bool showManagerFirstNameError;
 
@@ -210,11 +215,24 @@ namespace MyGanAPP.ViewModels
             this.ShowPhoneNumberError = string.IsNullOrEmpty(PhoneNumber);
             if (!this.ShowPhoneNumberError)
             {
-                if (this.PhoneNumber.Length < 10)
+
+                int num;
+                bool ok = int.TryParse(PhoneNumber, out num);
+
+                if (!ok)
+                {
+                    this.ShowPhoneNumberError = true;
+                    this.PhoneNumberError = ERROR_MESSAGES.BAD_PHONE;
+                }
+
+
+                else if (this.PhoneNumber.Length != 10)
                 {
                     this.ShowPhoneNumberError = true;
                     this.PhoneNumberError = ERROR_MESSAGES.BAD_PHONE_NUMBER;
                 }
+
+
 
             }
             else
@@ -348,9 +366,41 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
+        #region pass
+        private bool showPass;
+        public bool ShowPass
+        {
+            get { return showPass; }
+
+            set
+            {
+                if (this.showPass != value)
+                {
+                    this.showPass = value;
+                    OnPropertyChanged(nameof(ShowPass));
+                }
+            }
+        }
+
+        private string imgSource1;
+        public string ImgSource1
+        {
+            get => imgSource1;
+            set
+            {
+                imgSource1 = value;
+                OnPropertyChanged("ImgSource1");
+            }
+        }
+        #endregion
+
 
         public AddManagerViewModel()
         {
+            ShowPass = true;
+            ImgSource1 = CLOSEDEYE_PHOTO_SRC;
+            PassCommand = new Command(OnShowPass);
+
             // Setup default image photo
             this.UserImgSrc = DEFAULT_PHOTO_SRC;
             this.imageFileResult = null; //mark that no picture was chosen
@@ -466,7 +516,25 @@ namespace MyGanAPP.ViewModels
             this.ShowEmailError = false;
             this.ShowPhoneNumberError = false;
             this.ShowPasswordError = false;
+
+           
         }
+
+        public ICommand PassCommand { protected set; get; }
+
+        public void OnShowPass()
+        {
+            if (ShowPass == false)
+            { ShowPass = true; }
+
+            else { ShowPass = false; }
+
+            if (imgSource1 == CLOSEDEYE_PHOTO_SRC)
+            { ImgSource1 = OPENEYE_PHOTO_SRC; }
+
+            else { ImgSource1 = CLOSEDEYE_PHOTO_SRC; }
+        }
+
 
         #region PhotoButton
 

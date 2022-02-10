@@ -2,72 +2,75 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyGanAPP.Views.ApproveUsersView"
-             FlowDirection="RightToLeft">
+             FlowDirection="RightToLeft"
+             BackgroundColor="#14746f">
+
+
     <ContentPage.Content>
 
-        <CollectionView x:Name="collectionName" 
+        
+        <Frame Padding="20" Margin="20" CornerRadius="30" BackgroundColor="#edede9">
+           
+            <CollectionView x:Name="collectionName" 
                             ItemsSource="{Binding TeachersList}" SelectionMode="Single"
                         SelectionChangedCommand="{Binding SelctionChanged}"
-                        SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName}, Path=SelectedItem}" Margin="0">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <SwipeView>
-                        <SwipeView.LeftItems>
-                            <SwipeItems SwipeBehaviorOnInvoked="RemainOpen">
+                        SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName}, Path=SelectedItem}" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems SwipeBehaviorOnInvoked="Auto">
 
-                                <SwipeItemView BackgroundColor="#e1eff6">
-                                    
-                                </SwipeItemView>
+                                    <SwipeItem Text="אשר"
+                                               BackgroundColor="#80ed99"
+                                               Command="{Binding Source={x:Reference collectionName}, Path= BindingContext.DeleteCommand}"
+                                               CommandParameter="{Binding}"/>
+                                   
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
 
-                                <SwipeItemView BackgroundColor="#c8e7ff">
-                                    
-                                    
-                                </SwipeItemView>
-                            </SwipeItems>
-                        </SwipeView.LeftItems>
-
-                        <StackLayout>
-                            <Grid Padding="20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="LightGray">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*"></RowDefinition>
-                                    <RowDefinition Height="auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <!--<Label Grid.Column="0" Grid.Row="0"
-                                   Text="שם הפעילות" FontAttributes="Bold"/>
-                            <Label Grid.Column="1" Grid.Row="0"
-                                   Text="{Binding ActivityName}"/>
-                            <Label Grid.Column="0" Grid.Row="1"
-                                   Text="עיר" FontAttributes="Bold"/>
-                            <Label Grid.Column="1" Grid.Row="1"
-                                   Text="{Binding City}"/>
-                            <Label Grid.Column="0" Grid.Row="2"
-                                   Text="רחוב" FontAttributes="Bold"/>
-                            <Label Grid.Column="1" Grid.Row="2"
-                                   Text="{Binding Street}"/>-->
+                            <SwipeView.RightItems>
+                               
+                                <SwipeItem     Text="דחה"
+                                               BackgroundColor="#e56b6f"
+                                               Command="{Binding Source={x:Reference collectionName}, Path= BindingContext.DeleteCommand}"
+                                               CommandParameter="{Binding}"/>
+                            </SwipeView.RightItems>
 
 
+                            <StackLayout>
+                                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#edede9" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="10"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="1" Grid.Row="0"
+                                   Text="שם פרטי:" FontAttributes="Bold"/>
+                                    <Label Grid.Column="2" Grid.Row="0" HorizontalOptions="Start"
+                                   Text="{Binding Fname}"/>
+                                    <Label Grid.Column="1" Grid.Row="1"
+                                   Text="שם משפחה:" FontAttributes="Bold"/>
+                                    <Label Grid.Column="2" Grid.Row="1" HorizontalOptions="Start"
+                                   Text="{Binding LastName}"/>
 
-                                <Frame Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Style="{StaticResource SmallImageFrame}">
-                                    <Image Source="{Binding PhotoURL}" Style="{StaticResource SmallImage}"/>
-                                </Frame>
+                                    <Frame Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Style="{StaticResource SmallImageFrame}">
+                                        <Image Source="{Binding PhotoURL}" Style="{StaticResource SmallImage}"/>
+                                    </Frame>
 
-                            </Grid>
-                            <BoxView HeightRequest="1.5" WidthRequest="2000" BackgroundColor="Black" Margin="0"></BoxView>
+                                </Grid>
 
-                        </StackLayout>
-                        
-
-
-                    </SwipeView>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
+                            </StackLayout>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Frame>
     </ContentPage.Content>
 </ContentPage>

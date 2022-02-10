@@ -296,12 +296,22 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
-                                            <Label Text="סיסמה" Grid.Column="0" HorizontalTextAlignment="End" Style="{StaticResource labelNameStyle}"/>
+                                            <Label Text="סיסמה" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
 
                                         </Grid>
-                                        <Entry Placeholder="סיסמה" HorizontalTextAlignment="End" MaxLength="30"  IsPassword="True" Text="{Binding Password2}" Style="{StaticResource entry}"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
 
-
+                                            <Entry Placeholder="סיסמה" HorizontalTextAlignment="Center" MaxLength="30" Grid.Column="0" Grid.Row="0" IsPassword="{Binding ShowPass2}" Text="{Binding Password2}" Style="{StaticResource entry}"/>
+                                            <ImageButton BackgroundColor="Transparent" Source="{Binding EyeImg2}" Grid.Column="1" Grid.Row="0" Command="{Binding PassCommand2}" HeightRequest="25" WidthRequest="25"></ImageButton>
+                                        </Grid>
+                                        
                                         <!-- PhoneNumber2-->
                                         <Grid>
                                             <Grid.ColumnDefinitions>
