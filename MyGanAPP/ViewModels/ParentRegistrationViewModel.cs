@@ -1198,8 +1198,8 @@ namespace MyGanAPP.ViewModels
             //check if any validation failed
             if (showBirthDateError || showChildIDError || showChildLastNameError || showChildNameError || showCodeError || showEmailError || showGenderError ||
                 showGradeError || showPasswordError || showPhoneNumberError || showUserNameError)
-
                 return false;
+           
             return true;
         }
 
@@ -1283,6 +1283,12 @@ namespace MyGanAPP.ViewModels
                     await App.Current.MainPage.Navigation.PushAsync(new LoginView());
                 }
 
+            }
+
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", "לא כל השדות מולאו כראוי!", "בסדר");
+                await App.Current.MainPage.Navigation.PopModalAsync();
             }
 
         }

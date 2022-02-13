@@ -25,7 +25,7 @@ namespace MyGanAPP.Services
         private const string DEV_ANDROID_EMULATOR_PHOTOS_URL = "http://10.0.2.2:34516/images/"; //API url when using emulator on android
         private const string DEV_ANDROID_PHYSICAL_PHOTOS_URL = "http://192.168.1.14:34516/images/"; //API url when using physucal device on android
         private const string DEV_WINDOWS_PHOTOS_URL = "http://localhost:34516/KidsPhotos/"; //API url when using windoes on development
-       
+
 
 
         private HttpClient client;
@@ -163,8 +163,8 @@ namespace MyGanAPP.Services
                     Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
                     PropertyNameCaseInsensitive = true
                 };
-              
-               HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetTeachersWithWaitStatus?kindergartenID={kindergatenID}");
+
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetTeachersWithWaitStatus?kindergartenID={kindergatenID}");
                 if (response.IsSuccessStatusCode)
                 {
                     string jsonContent = await response.Content.ReadAsStringAsync();
@@ -181,6 +181,39 @@ namespace MyGanAPP.Services
             {
                 Console.WriteLine(ee.Message);
                 return null;
+            }
+        }
+
+        //Change user status
+        public async Task<bool> ChangeUserStatus(User u/*, int statusID*/)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                    PropertyNameCaseInsensitive = true
+                };
+                string jsonObject = JsonSerializer.Serialize<User>(u, options);
+                StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+
+
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/ChangeUserStatus",content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                   return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ee)
+            {
+                Console.WriteLine(ee.Message);
+                return false;
             }
         }
 
