@@ -605,49 +605,6 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
-        #region UserName2
-        private string userName2;
-
-        public string UserName2
-        {
-            get => userName2;
-            set
-            {
-                userName2 = value;
-                OnPropertyChanged("UserName2");
-            }
-        }
-
-        #endregion
-
-        #region Password2
-        private string password2;
-
-        public string Password2
-        {
-            get => password2;
-            set
-            {
-                password2 = value;
-                OnPropertyChanged("Password2");
-            }
-        }
-        #endregion
-
-        #region Email2
-        private string email2;
-
-        public string Email2
-        {
-            get => email2;
-            set
-            {
-                email2 = value;
-                OnPropertyChanged("Email2");
-            }
-        }
-        #endregion
-
         #region PhoneNumber1
         private bool showPhoneNumberError;
 
@@ -713,74 +670,6 @@ namespace MyGanAPP.ViewModels
             }
             else
                 this.PhoneNumberError = ERROR_MESSAGES.REQUIRED_FIELD;
-        }
-        #endregion
-
-        #region PhoneNumber2
-        private bool showPhoneNumber2Error;
-
-        public bool ShowPhoneNumber2Error
-        {
-            get => showPhoneNumber2Error;
-            set
-            {
-                showPhoneNumber2Error = value;
-                OnPropertyChanged("ShowPhoneNumber2Error");
-            }
-        }
-
-        private string phoneNumber2;
-
-        public string PhoneNumber2
-        {
-            get => phoneNumber2;
-            set
-            {
-                phoneNumber2 = value;
-                ValidatePhoneNumber2();
-                OnPropertyChanged("PhoneNumber2");
-            }
-        }
-
-        private string phoneNumber2Error;
-
-        public string PhoneNumber2Error
-        {
-            get => phoneNumber2Error;
-            set
-            {
-                phoneNumber2Error = value;
-                OnPropertyChanged("PhoneNumber2Error");
-            }
-        }
-
-        private void ValidatePhoneNumber2()
-        {
-            this.ShowPhoneNumber2Error = string.IsNullOrEmpty(PhoneNumber2);
-            if (!this.ShowPhoneNumber2Error)
-            {
-
-                int num;
-                bool ok = int.TryParse(PhoneNumber2, out num);
-
-                if (!ok)
-                {
-                    this.ShowPhoneNumber2Error = true;
-                    this.PhoneNumber2Error = ERROR_MESSAGES.BAD_PHONE;
-                }
-
-
-                else if (this.PhoneNumber2.Length != 10)
-                {
-                    this.ShowPhoneNumber2Error = true;
-                    this.PhoneNumber2Error = ERROR_MESSAGES.BAD_PHONE_NUMBER;
-                }
-
-
-
-            }
-            else
-                this.PhoneNumber2Error = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 
@@ -1323,7 +1212,6 @@ namespace MyGanAPP.ViewModels
             this.ShowEmailError = false;
             this.ShowPasswordError = false;
             this.ShowPhoneNumberError = false;
-            this.ShowPhoneNumber2Error = false;
             this.ShowCodeError = false;
             this.showGradeError = false;
             this.showRelationError = false;

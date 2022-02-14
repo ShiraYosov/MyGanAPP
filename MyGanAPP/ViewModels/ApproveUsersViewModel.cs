@@ -25,6 +25,7 @@ namespace MyGanAPP.ViewModels
 
         public const int UNPERMITTED_STATUS = 1;
         public const int PERMITTED_STATUS = 2;
+        public const int WAITING_STATUS = 3;
         public ObservableCollection<StudentOfUser> StudentOfUsersList { get; }
         public ObservableCollection<User> TeachersList { get; }
 
@@ -103,7 +104,7 @@ namespace MyGanAPP.ViewModels
                 {
                     foreach (StudentOfUser sou in s.StudentOfUsers)
                     {
-                        if (sou.User.StatusId == 3)
+                        if (sou.User.StatusId == WAITING_STATUS)
                             this.StudentOfUsersList.Add(sou);
                     }
                     
@@ -131,20 +132,42 @@ namespace MyGanAPP.ViewModels
         }
 
         public ICommand DisapproveCommand => new Command(OnDisapprove);
-        public void OnDisapprove(object obj)
+        public async void OnDisapprove(object obj)
         {
+            MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
+
             if (obj is User)
             {
-                User selectedU = (User)obj;
-                selectedU.StatusId = UNPERMITTED_STATUS;
+                User u = (User)obj;
+                u.StatusId = UNPERMITTED_STATUS;
+                bool ok = await proxy.ChangeUserStatus(u);
+                if (ok) { OnRefresh(); }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "פעולה נכשלה!", "בסדר");
+                }
             }
 
             else if (obj is StudentOfUser)
             {
-                StudentOfUser selectedS = (StudentOfUser)obj;
-                selectedS.User.StatusId = UNPERMITTED_STATUS;
+                StudentOfUser u = (StudentOfUser)obj;
+                u.User.StatusId = UNPERMITTED_STATUS;
+                bool ok = await proxy.ChangeUserStatus(u.User);
+                if (ok) { OnRefresh(); }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "פעולה נכשלה!", "בסדר");
+                    //await App.Current.MainPage.Navigation.PopAsync();
+                }
+            }
+
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", "פעולה נכשלה!", "בסדר");
+                //await App.Current.MainPage.Navigation.PopModalAsync();
             }
         }
+    
 
         public ICommand ApproveCommand => new Command(OnApprove);
         public async void OnApprove(object obj)
@@ -154,24 +177,25 @@ namespace MyGanAPP.ViewModels
             if (obj is User)
             {
                 User u = (User)obj;
-                bool ok = await proxy.ChangeUserStatus(u/*, PERMITTED_STATUS*/);
+                u.StatusId = PERMITTED_STATUS;
+                bool ok = await proxy.ChangeUserStatus(u);
                 if (ok) { OnRefresh(); }
                 else
                 {
                     await App.Current.MainPage.DisplayAlert("שגיאה", "פעולה נכשלה!", "בסדר");
-                    //await App.Current.MainPage.Navigation.PopModalAsync();
                 }
             }
 
             else if (obj is StudentOfUser)
             {
                 StudentOfUser u = (StudentOfUser)obj;
-                bool ok = await proxy.ChangeUserStatus(u.User/*, PERMITTED_STATUS*/);
+                u.User.StatusId = PERMITTED_STATUS;
+                bool ok = await proxy.ChangeUserStatus(u.User);
                 if (ok) { OnRefresh(); }
                 else
                 {
                     await App.Current.MainPage.DisplayAlert("שגיאה", "פעולה נכשלה!", "בסדר");
-                    await App.Current.MainPage.Navigation.PopModalAsync();
+                    //await App.Current.MainPage.Navigation.PopAsync();
                 }
             }
 

@@ -29,6 +29,7 @@ namespace MyGanAPP.Models
         public virtual ICollection<Signature> Signatures { get; set; }
         public virtual ICollection<StudentOfUser> StudentOfUsers { get; set; }
 
+
         public string PhotoURL
         {
             get

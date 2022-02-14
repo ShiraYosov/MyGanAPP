@@ -185,7 +185,7 @@ namespace MyGanAPP.Services
         }
 
         //Change user status
-        public async Task<bool> ChangeUserStatus(User u/*, int statusID*/)
+        public async Task<bool> ChangeUserStatus(User u)
         {
             try
             {

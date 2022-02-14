@@ -22,7 +22,7 @@ namespace MyGanAPP
         public Student SelectedStudent { get; set; }
         public Kindergarten SelectedKindergarten { get; set; }
         public Group SelectedGroup { get; set; }
-        
+
         public Lookups LookupTables { get; set; }
         public App()
         {
