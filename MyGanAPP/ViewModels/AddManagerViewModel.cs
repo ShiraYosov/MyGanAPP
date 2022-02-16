@@ -458,7 +458,6 @@ namespace MyGanAPP.ViewModels
                     Fname = ManagerFirstName,
                     LastName = ManagerLastName,
                     PhoneNumber = PhoneNumber,
-                    StatusId = APPROVED_STATUS,
                 };
 
                 Kindergarten newK = new Kindergarten

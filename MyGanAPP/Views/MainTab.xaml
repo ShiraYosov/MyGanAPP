@@ -25,7 +25,7 @@
     
     <local:ManagerProfileView>
         <local:ManagerProfileView.IconImageSource>
-            <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.User}"/>
+            <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.CircleUser}"/>
         </local:ManagerProfileView.IconImageSource>
     </local:ManagerProfileView>
 

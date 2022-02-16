@@ -104,8 +104,8 @@ namespace MyGanAPP.ViewModels
                 {
                     foreach (StudentOfUser sou in s.StudentOfUsers)
                     {
-                        if (sou.User.StatusId == WAITING_STATUS)
-                            this.StudentOfUsersList.Add(sou);
+                        //if (sou.User.StatusId == WAITING_STATUS)
+                        //    this.StudentOfUsersList.Add(sou);
                     }
                     
                 }
@@ -139,7 +139,7 @@ namespace MyGanAPP.ViewModels
             if (obj is User)
             {
                 User u = (User)obj;
-                u.StatusId = UNPERMITTED_STATUS;
+                //u.StatusId = UNPERMITTED_STATUS;
                 bool ok = await proxy.ChangeUserStatus(u);
                 if (ok) { OnRefresh(); }
                 else
@@ -151,7 +151,7 @@ namespace MyGanAPP.ViewModels
             else if (obj is StudentOfUser)
             {
                 StudentOfUser u = (StudentOfUser)obj;
-                u.User.StatusId = UNPERMITTED_STATUS;
+                //u.User.StatusId = UNPERMITTED_STATUS;
                 bool ok = await proxy.ChangeUserStatus(u.User);
                 if (ok) { OnRefresh(); }
                 else
@@ -177,7 +177,7 @@ namespace MyGanAPP.ViewModels
             if (obj is User)
             {
                 User u = (User)obj;
-                u.StatusId = PERMITTED_STATUS;
+               // u.StatusId = PERMITTED_STATUS;
                 bool ok = await proxy.ChangeUserStatus(u);
                 if (ok) { OnRefresh(); }
                 else
@@ -189,7 +189,7 @@ namespace MyGanAPP.ViewModels
             else if (obj is StudentOfUser)
             {
                 StudentOfUser u = (StudentOfUser)obj;
-                u.User.StatusId = PERMITTED_STATUS;
+                //u.User.StatusId = PERMITTED_STATUS;
                 bool ok = await proxy.ChangeUserStatus(u.User);
                 if (ok) { OnRefresh(); }
                 else

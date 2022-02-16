@@ -1109,7 +1109,6 @@ namespace MyGanAPP.ViewModels
                     Fname = UserName,
                     LastName = ChildLastName,
                     PhoneNumber = PhoneNumber,
-                    StatusId = WAITING_STATUS
                 };
 
                 int groupID = GanCode.CodeToGroupID(Code);
@@ -1141,7 +1140,8 @@ namespace MyGanAPP.ViewModels
                 {
                     User = newUser,
                     Student = newStudent,
-                    RelationToStudent = ChosenRelation
+                    RelationToStudent = ChosenRelation,
+                    StatusId = WAITING_STATUS
                 };
                 newUser.StudentOfUsers.Add(sou);
 

@@ -436,7 +436,6 @@ namespace MyGanAPP.ViewModels
                     Fname = TeacherFirstName,
                     LastName = TeacherLastName,
                     PhoneNumber = PhoneNumber,
-                    StatusId = WAITING_STATUS,
                 };
 
                 int groupID = GanCode.CodeToGroupID(Code);

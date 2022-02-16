@@ -10,6 +10,7 @@ namespace MyGanAPP.Models
         {
             Groups = new HashSet<Group>();
             KindergartenManagers = new HashSet<KindergartenManager>();
+            PendingTeachers = new HashSet<PendingTeacher>();
             Signatures = new HashSet<Signature>();
             StudentOfUsers = new HashSet<StudentOfUser>();
         }
@@ -21,14 +22,12 @@ namespace MyGanAPP.Models
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public bool IsSystemManager { get; set; }
-        public int? StatusId { get; set; }
 
-        public virtual StatusType Status { get; set; }
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<KindergartenManager> KindergartenManagers { get; set; }
+        public virtual ICollection<PendingTeacher> PendingTeachers { get; set; }
         public virtual ICollection<Signature> Signatures { get; set; }
         public virtual ICollection<StudentOfUser> StudentOfUsers { get; set; }
-
 
         public string PhotoURL
         {

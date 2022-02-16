@@ -86,10 +86,13 @@ namespace MyGanAPP.ViewModels
             }
             if (this.ChildrenList.Count > 0) { Visible1 = true; }
 
-            ICollection<Group> theGroups = a.CurrUser.Groups;
-            foreach (Group g in theGroups)
+            ICollection<KindergartenManager> theGroups = a.CurrUser.KindergartenManagers;
+            foreach (KindergartenManager km in theGroups)
             {
-                this.GroupsList.Add(g);
+               foreach(Group g in km.Kindergarten.Groups)
+                {
+                    this.GroupsList.Add(g);
+                }
             }
             if (this.GroupsList.Count > 0) { Visible2 = true; }
 
