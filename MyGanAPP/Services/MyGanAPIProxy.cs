@@ -153,7 +153,7 @@ namespace MyGanAPP.Services
         }
 
         //GetTeachersList
-        public async Task<List<User>> GetTeachersWithWaitStatusAsync(int kindergatenID)
+        public async Task<List<PendingTeacher>> GetTeachersWithWaitStatusAsync(int kindergatenID)
         {
             try
             {
@@ -168,7 +168,7 @@ namespace MyGanAPP.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string jsonContent = await response.Content.ReadAsStringAsync();
-                    List<User> teachers = JsonSerializer.Deserialize<List<User>>(jsonContent, options);
+                    List<PendingTeacher> teachers = JsonSerializer.Deserialize<List<PendingTeacher>>(jsonContent, options);
 
                     return teachers;
                 }
@@ -185,7 +185,7 @@ namespace MyGanAPP.Services
         }
 
         //Change user status
-        public async Task<bool> ChangeUserStatus(User u)
+        public async Task<bool> ChangeUserStatus(object u)
         {
             try
             {
@@ -195,7 +195,7 @@ namespace MyGanAPP.Services
                     Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
                     PropertyNameCaseInsensitive = true
                 };
-                string jsonObject = JsonSerializer.Serialize<User>(u, options);
+                string jsonObject = JsonSerializer.Serialize<object>(u, options);
                 StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
 
 

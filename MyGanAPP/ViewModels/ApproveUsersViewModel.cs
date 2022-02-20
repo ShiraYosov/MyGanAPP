@@ -27,7 +27,7 @@ namespace MyGanAPP.ViewModels
         public const int PERMITTED_STATUS = 2;
         public const int WAITING_STATUS = 3;
         public ObservableCollection<StudentOfUser> StudentOfUsersList { get; }
-        public ObservableCollection<User> TeachersList { get; }
+        public ObservableCollection<PendingTeacher> TeachersList { get; }
 
         #region Visibility
         private bool visible1;
@@ -78,7 +78,7 @@ namespace MyGanAPP.ViewModels
         public ApproveUsersViewModel()
         {
             StudentOfUsersList = new ObservableCollection<StudentOfUser>();
-            TeachersList = new ObservableCollection<User>();
+            TeachersList = new ObservableCollection<PendingTeacher>();
             CreateCollection();
         }
 
@@ -119,9 +119,9 @@ namespace MyGanAPP.ViewModels
                 TeachersList.Clear();
 
                 MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
-                List<User> teachers = await proxy.GetTeachersWithWaitStatusAsync(a.SelectedKindergarten.KindergartenId);
+                List<PendingTeacher> teachers = await proxy.GetTeachersWithWaitStatusAsync(a.SelectedKindergarten.KindergartenId);
 
-                foreach (User user in teachers)
+                foreach (PendingTeacher user in teachers)
                 {
                     TeachersList.Add(user);
                 }
@@ -136,10 +136,10 @@ namespace MyGanAPP.ViewModels
         {
             MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
 
-            if (obj is User)
+            if (obj is PendingTeacher)
             {
-                User u = (User)obj;
-                //u.StatusId = UNPERMITTED_STATUS;
+                PendingTeacher u = (PendingTeacher)obj;
+                u.StatusId = UNPERMITTED_STATUS;
                 bool ok = await proxy.ChangeUserStatus(u);
                 if (ok) { OnRefresh(); }
                 else
@@ -151,7 +151,7 @@ namespace MyGanAPP.ViewModels
             else if (obj is StudentOfUser)
             {
                 StudentOfUser u = (StudentOfUser)obj;
-                //u.User.StatusId = UNPERMITTED_STATUS;
+                u.StatusId = UNPERMITTED_STATUS;
                 bool ok = await proxy.ChangeUserStatus(u.User);
                 if (ok) { OnRefresh(); }
                 else
