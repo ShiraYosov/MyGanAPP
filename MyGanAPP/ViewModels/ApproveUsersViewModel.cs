@@ -104,8 +104,8 @@ namespace MyGanAPP.ViewModels
                 {
                     foreach (StudentOfUser sou in s.StudentOfUsers)
                     {
-                        //if (sou.User.StatusId == WAITING_STATUS)
-                        //    this.StudentOfUsersList.Add(sou);
+                        if (sou.StatusId == WAITING_STATUS)
+                            this.StudentOfUsersList.Add(sou);
                     }
                     
                 }
