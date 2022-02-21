@@ -195,20 +195,45 @@ namespace MyGanAPP.Services
                     Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
                     PropertyNameCaseInsensitive = true
                 };
-                string jsonObject = JsonSerializer.Serialize<object>(u, options);
-                StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
-
-
-                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/ChangeUserStatus",content);
-
-                if (response.IsSuccessStatusCode)
+                
+                if (u is PendingTeacher)
                 {
-                   return true;
+                    PendingTeacher t = (PendingTeacher)u;
+                    string jsonObject = JsonSerializer.Serialize<PendingTeacher>(t, options);
+                    StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/ChangeTeacherStatus", content);
+
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-                else
+
+                else if (u is StudentOfUser)
                 {
-                    return false;
+                    StudentOfUser s = (StudentOfUser)u;
+                    string jsonObject = JsonSerializer.Serialize<StudentOfUser>(s, options);
+                    StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/ChangeParentStatus", content);
+
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
+
+                return false;
+
             }
             catch (Exception ee)
             {
