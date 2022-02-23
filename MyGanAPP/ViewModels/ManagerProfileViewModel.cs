@@ -16,7 +16,7 @@ using System.Collections;
 
 namespace MyGanAPP.ViewModels
 {
-     class ManagerProfileViewModel : INotifyPropertyChanged
+    class ManagerProfileViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
@@ -36,25 +36,19 @@ namespace MyGanAPP.ViewModels
                 OnPropertyChanged("UserImgSrc");
             }
         }
-        private const string DEFAULT_PHOTO_SRC = "user.png";
+
         #endregion
 
         #region Constructor
         public ManagerProfileViewModel()
         {
             App a = (App)App.Current;
-            if (a.CurrUser.PhotoURL == null)
-            {
-                userImgSrc = DEFAULT_PHOTO_SRC;
-            }
-            else
-                userImgSrc = a.CurrUser.PhotoURL;
-
+            userImgSrc = a.CurrUser.PhotoURL;
         }
 
         #endregion
 
-        
+
 
     }
 }

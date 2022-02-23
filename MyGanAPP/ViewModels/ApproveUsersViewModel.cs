@@ -12,10 +12,11 @@ using System.Linq;
 using MyGanAPP.Views;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
+using Rg.Plugins.Popup.Services;
 
 namespace MyGanAPP.ViewModels
 {
-    class ApproveUsersViewModel : INotifyPropertyChanged
+    public class ApproveUsersViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
@@ -75,6 +76,107 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
+        #region ShowUserPopup
+
+        #region Student
+        private string studentName;
+        public string StudentName
+        {
+            get => studentName;
+            set
+            {
+                studentName = value;
+                OnPropertyChanged("StudentName");
+            }
+        }
+
+        private string groupName;
+        public string GroupName
+        {
+            get => groupName;
+            set
+            {
+                groupName = value;
+                OnPropertyChanged("GroupName");
+            }
+        }
+
+        private string genderName;
+        public string GenderName
+        {
+            get => genderName;
+            set
+            {
+                genderName = value;
+                OnPropertyChanged("GenderName");
+            }
+        }
+
+        private bool studentVisible;
+
+        public bool StudentVisible
+        {
+            get => studentVisible;
+            set
+            {
+                studentVisible = value;
+                OnPropertyChanged("StudentVisible");
+            }
+        }
+        #endregion
+
+        #region User
+        private string userName;
+        public string UserName
+        {
+            get => userName;
+            set
+            {
+                userName = value;
+                OnPropertyChanged("UserName");
+            }
+        }
+
+        private string userLastName;
+        public string UserLastName
+        {
+            get => userLastName;
+            set
+            {
+                userLastName = value;
+                OnPropertyChanged("UserLastName");
+            }
+        }
+
+        private string relationType;
+        public string RelationType
+        {
+            get => relationType;
+            set
+            {
+                relationType = value;
+                OnPropertyChanged("RelationType");
+            }
+        }
+        #endregion
+
+        #region UserImgSrc
+        private string userImgSrc;
+
+        public string UserImgSrc
+        {
+            get => userImgSrc;
+            set
+            {
+                userImgSrc = value;
+                OnPropertyChanged("UserImgSrc");
+            }
+        }
+
+        #endregion
+
+        #endregion
+
         public ApproveUsersViewModel()
         {
             StudentOfUsersList = new ObservableCollection<StudentOfUser>();
@@ -83,10 +185,33 @@ namespace MyGanAPP.ViewModels
         }
 
         public ICommand SelectionChanged => new Command(OnSelection);
-        public async void OnSelection(object obj)
+        public void OnSelection(object obj)
         {
 
+            if (obj is StudentOfUser)
+            {
+                StudentOfUser selectedStudent = (StudentOfUser)obj;
+                this.StudentVisible = true;
+                this.StudentName = selectedStudent.Student.FirstName;
+                this.GenderName = selectedStudent.Student.Gender;
+                this.UserImgSrc = selectedStudent.Student.PhotoURL;
+                this.GroupName = selectedStudent.Student.Group.GroupName;
 
+                this.UserName = selectedStudent.User.Fname;
+                this.UserLastName= selectedStudent.User.LastName;
+                this.relationType = selectedStudent.RelationToStudent.RelationType;
+            }
+
+            else if (obj is PendingTeacher)
+            {
+                PendingTeacher selectedTeacher = (PendingTeacher)obj;
+                this.StudentVisible = false;
+                this.UserImgSrc = selectedTeacher.User.PhotoURL;
+                this.GroupName = selectedTeacher.Group.GroupName;
+                this.UserLastName = selectedTeacher.User.LastName;
+                this.UserName = selectedTeacher.User.Fname;
+            }
+            PopupNavigation.Instance.PushAsync(new ShowUserPopup(this));
         }
 
         private async void CreateCollection()

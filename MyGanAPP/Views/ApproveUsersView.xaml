@@ -17,7 +17,7 @@
                 <CollectionView x:Name="collectionName" 
                                 EmptyView="אין גננות בהמתנה"
                                 ItemsSource="{Binding TeachersList}" SelectionMode="Single"
-                                SelectionChangedCommand="{Binding SelctionChanged}"
+                                SelectionChangedCommand="{Binding SelectionChanged}"
                                 SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName}, Path=SelectedItem}" IsVisible="{Binding Visible2}" >
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
@@ -87,7 +87,7 @@
                 <CollectionView x:Name="collectionName2" 
                                 ItemsSource="{Binding StudentOfUsersList}" SelectionMode="Single"
                                 EmptyView="אין תלמידים בהמתנה"
-                                SelectionChangedCommand="{Binding SelctionChanged}"
+                                SelectionChangedCommand="{Binding SelectionChanged}"
                                 SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName2}, Path=SelectedItem}" IsVisible="{Binding Visible1}" >
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
