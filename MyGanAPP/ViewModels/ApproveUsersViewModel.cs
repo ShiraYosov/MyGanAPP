@@ -27,6 +27,9 @@ namespace MyGanAPP.ViewModels
         public const int UNPERMITTED_STATUS = 1;
         public const int PERMITTED_STATUS = 2;
         public const int WAITING_STATUS = 3;
+
+       
+       
         public ObservableCollection<StudentOfUser> StudentOfUsersList { get; }
         public ObservableCollection<PendingTeacher> TeachersList { get; }
 
@@ -196,7 +199,7 @@ namespace MyGanAPP.ViewModels
                 this.GenderName = selectedStudent.Student.Gender;
                 this.UserImgSrc = selectedStudent.Student.PhotoURL;
                 this.GroupName = selectedStudent.Student.Group.GroupName;
-
+                
                 this.UserName = selectedStudent.User.Fname;
                 this.UserLastName= selectedStudent.User.LastName;
                 this.relationType = selectedStudent.RelationToStudent.RelationType;
@@ -212,6 +215,7 @@ namespace MyGanAPP.ViewModels
                 this.UserName = selectedTeacher.User.Fname;
             }
             PopupNavigation.Instance.PushAsync(new ShowUserPopup(this));
+           
         }
 
         private async void CreateCollection()
@@ -224,7 +228,7 @@ namespace MyGanAPP.ViewModels
             {
                 Visible1 = true;
                 StudentOfUsersList.Clear();
-
+                
                 foreach (Student s in a.SelectedGroup.Students)
                 {
                     foreach (StudentOfUser sou in s.StudentOfUsers)

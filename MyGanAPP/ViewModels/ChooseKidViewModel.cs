@@ -24,7 +24,7 @@ namespace MyGanAPP.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
+        public const int PERMITTED_STATUS = 2;
         public ObservableCollection<Student> ChildrenList { get; }
         public ObservableCollection<Group> GroupsList { get; }
         public ObservableCollection<Kindergarten> KindergartensList { get; }
@@ -65,10 +65,23 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
+        #region MessageVisibility
+       
+        private bool messageVisible;
 
+        public bool MessageVisible
+        {
+            get => messageVisible;
+            set
+            {
+                messageVisible = value;
+                OnPropertyChanged("MessageVisible");
+            }
+        }
+        #endregion
         public ChooseKidViewModel()
         {
-            Visible1 = false; Visible2 = false; Visible3 = false;
+            Visible1 = false; Visible2 = false; Visible3 = false; MessageVisible = false;
             ChildrenList = new ObservableCollection<Student>();
             GroupsList = new ObservableCollection<Group>();
             KindergartensList = new ObservableCollection<Kindergarten>();
@@ -82,6 +95,7 @@ namespace MyGanAPP.ViewModels
             ICollection<StudentOfUser> theStudents = a.CurrUser.StudentOfUsers;
             foreach (StudentOfUser s in theStudents)
             {
+                if(s.StatusId == PERMITTED_STATUS)
                 this.ChildrenList.Add(s.Student);
             }
             if (this.ChildrenList.Count > 0) { Visible1 = true; }
@@ -99,6 +113,12 @@ namespace MyGanAPP.ViewModels
                 this.KindergartensList.Add(k.Kindergarten);
             }
             if (this.KindergartensList.Count > 0) { Visible3 = true; }
+
+            if (!Visible1 && !Visible2 && !Visible3)
+            {
+                MessageVisible = true;
+            }
+                
         }
 
         public ICommand SelectionChanged => new Command(OnSelection);
@@ -115,7 +135,6 @@ namespace MyGanAPP.ViewModels
                 a.SelectedGroup = chosenGroup;
                 await App.Current.MainPage.Navigation.PopToRootAsync();
                 await App.Current.MainPage.Navigation.PushModalAsync(new MainTab());
-                //await App.Current.MainPage.Navigation.PushAsync(new MainTab());
             }
             if (obj is Kindergarten)
             {
@@ -123,7 +142,6 @@ namespace MyGanAPP.ViewModels
                 a.SelectedKindergarten = chosenKindergarten;
                 await App.Current.MainPage.Navigation.PopToRootAsync();
                 await App.Current.MainPage.Navigation.PushModalAsync(new MainTab());
-                //await App.Current.MainPage.Navigation.PushAsync(new MainTab());
             }
             if (obj is Student)
             {
@@ -131,7 +149,6 @@ namespace MyGanAPP.ViewModels
                 a.SelectedStudent = chosenStudent;
                 await App.Current.MainPage.Navigation.PopToRootAsync();
                 await App.Current.MainPage.Navigation.PushModalAsync(new MainTab());
-                //await App.Current.MainPage.Navigation.PushAsync(new MainTab());
             }
 
         }

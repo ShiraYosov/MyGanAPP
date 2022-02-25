@@ -126,7 +126,7 @@ namespace MyGanAPP.ViewModels
             else
             {
                 await App.Current.MainPage.DisplayAlert("שגיאה", "התחברות נכשלה, בדוק שם משתמש וסיסמה ונסה שוב", "בסדר");
-                await App.Current.MainPage.Navigation.PopModalAsync();
+                //await App.Current.MainPage.Navigation.PopModalAsync();
             }
 
         }
