@@ -93,6 +93,17 @@ namespace MyGanAPP.ViewModels
             }
         }
 
+        private string studentID;
+        public string StudentID
+        {
+            get => studentID;
+            set
+            {
+                studentID = value;
+                OnPropertyChanged("StudentID");
+            }
+        }
+
         private string groupName;
         public string GroupName
         {
@@ -199,6 +210,7 @@ namespace MyGanAPP.ViewModels
                 this.GenderName = selectedStudent.Student.Gender;
                 this.UserImgSrc = selectedStudent.Student.PhotoURL;
                 this.GroupName = selectedStudent.Student.Group.GroupName;
+                this.StudentID = selectedStudent.Student.StudentId;
                 
                 this.UserName = selectedStudent.User.Fname;
                 this.UserLastName= selectedStudent.User.LastName;

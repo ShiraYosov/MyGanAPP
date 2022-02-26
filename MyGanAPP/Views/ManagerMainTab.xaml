@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:fonts="clr-namespace:Fonts"
             xmlns:local="clr-namespace:MyGanAPP.Views"
-             x:Class="MyGanAPP.Views.MainTab"
+             x:Class="MyGanAPP.Views.ManagerMainTab"
             xmlns:windows="clr-namespace:Xamarin.Forms.PlatformConfiguration.WindowsSpecific;assembly=Xamarin.Forms.Core"
             windows:TabbedPage.HeaderIconsEnabled="true"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
             SelectedTabColor="#03045e"
-            UnselectedTabColor="Black"
-            >
+            UnselectedTabColor="Black">
+
 
     <!--Pages can be added as references or inline-->
 

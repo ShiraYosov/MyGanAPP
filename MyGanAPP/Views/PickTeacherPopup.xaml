@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage 
+xmlns:pages="http://rotorgames.com"
+xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+x:Class="MyGanAPP.Views.PickTeacherPopup"
+FlowDirection="RightToLeft">
+
+    <pages:PopupPage.Animation>
+        <pages:ScaleAnimation DurationIn="400"
+                                   DurationOut="300"
+                                   EasingIn="SinOut"
+                                   EasingOut="SinIn"
+                                   HasBackgroundAnimation="True"
+                                   PositionIn="Center"
+                                   PositionOut="Center"
+                                   ScaleIn="1.2"
+                                   ScaleOut="0.8" />
+    </pages:PopupPage.Animation>
+
+
+
+
+    <StackLayout Margin="60"
+                 Padding="25"
+                 BackgroundColor="White"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Center">
+
+        <CollectionView x:Name="collectionName" 
+                                EmptyView="אין גננות במערכת"
+                                ItemsSource="{Binding TeachersList}" SelectionMode="Single"
+                                SelectionChangedCommand="{Binding SelectionChanged}"
+                                SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName}, Path=SelectedItem}" IsVisible="{Binding Visible2}" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#edede9" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="10"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="1" Grid.Row="0"
+                                   Text="שם פרטי:" FontAttributes="Bold"/>
+                            <Label Grid.Column="2" Grid.Row="0" HorizontalOptions="Start"
+                                   Text="{Binding User.Fname}"/>
+                            <Label Grid.Column="1" Grid.Row="1"
+                                   Text="שם משפחה:" FontAttributes="Bold"/>
+                            <Label Grid.Column="2" Grid.Row="1" HorizontalOptions="Start"
+                                   Text="{Binding User.LastName}"/>
+
+                            <Frame Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Style="{StaticResource SmallImageFrame}">
+                                <Image Source="{Binding User.PhotoURL}" Style="{StaticResource SmallImage}"/>
+                            </Frame>
+
+                        </Grid>
+
+                    </StackLayout>
+                    
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+
+    </StackLayout>
+
+
+</pages:PopupPage>

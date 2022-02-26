@@ -55,6 +55,19 @@ FlowDirection="RightToLeft">
             <Label Text="{Binding StudentName}" Grid.Column="1" HorizontalOptions="Start" />
         </Grid>
 
+        <!--StudentID-->
+        <Grid IsVisible="{Binding StudentVisible}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Text="תעודת זהות:" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
+            <Label Text="{Binding StudentID}" Grid.Column="1" HorizontalOptions="Start" />
+        </Grid>
+
         <!--Gender-->
         <Grid IsVisible="{Binding StudentVisible} ">
             <Grid.ColumnDefinitions>
