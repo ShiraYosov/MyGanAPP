@@ -191,6 +191,20 @@ namespace MyGanAPP.ViewModels
 
         #endregion
 
+        private object selectedItem;
+        public object SelectedItem
+        {
+            get => selectedItem;
+            set
+            {
+                if (this.selectedItem != value)
+                {
+                    this.selectedItem = value;
+                    OnPropertyChanged("SelectedItem");
+                }
+
+            }
+        }
         public ApproveUsersViewModel()
         {
             StudentOfUsersList = new ObservableCollection<StudentOfUser>();
@@ -199,35 +213,39 @@ namespace MyGanAPP.ViewModels
         }
 
         public ICommand SelectionChanged => new Command(OnSelection);
-        public void OnSelection(object obj)
+        public void OnSelection(/*object obj*/)
         {
 
-            if (obj is StudentOfUser)
+            if (SelectedItem != null)
             {
-                StudentOfUser selectedStudent = (StudentOfUser)obj;
-                this.StudentVisible = true;
-                this.StudentName = selectedStudent.Student.FirstName;
-                this.GenderName = selectedStudent.Student.Gender;
-                this.UserImgSrc = selectedStudent.Student.PhotoURL;
-                this.GroupName = selectedStudent.Student.Group.GroupName;
-                this.StudentID = selectedStudent.Student.StudentId;
-                
-                this.UserName = selectedStudent.User.Fname;
-                this.UserLastName= selectedStudent.User.LastName;
-                this.relationType = selectedStudent.RelationToStudent.RelationType;
-            }
 
-            else if (obj is PendingTeacher)
-            {
-                PendingTeacher selectedTeacher = (PendingTeacher)obj;
-                this.StudentVisible = false;
-                this.UserImgSrc = selectedTeacher.User.PhotoURL;
-                this.GroupName = selectedTeacher.Group.GroupName;
-                this.UserLastName = selectedTeacher.User.LastName;
-                this.UserName = selectedTeacher.User.Fname;
+                if (SelectedItem is StudentOfUser)
+                {
+                    StudentOfUser selectedStudent = (StudentOfUser)SelectedItem;
+                    this.StudentVisible = true;
+                    this.StudentName = selectedStudent.Student.FirstName;
+                    this.GenderName = selectedStudent.Student.Gender;
+                    this.UserImgSrc = selectedStudent.Student.PhotoURL;
+                    this.GroupName = selectedStudent.Student.Group.GroupName;
+                    this.StudentID = selectedStudent.Student.StudentId;
+
+                    this.UserName = selectedStudent.User.Fname;
+                    this.UserLastName = selectedStudent.User.LastName;
+                    this.relationType = selectedStudent.RelationToStudent.RelationType;
+                }
+
+                else if (SelectedItem is PendingTeacher)
+                {
+                    PendingTeacher selectedTeacher = (PendingTeacher)SelectedItem;
+                    this.StudentVisible = false;
+                    this.UserImgSrc = selectedTeacher.User.PhotoURL;
+                    this.GroupName = selectedTeacher.Group.GroupName;
+                    this.UserLastName = selectedTeacher.User.LastName;
+                    this.UserName = selectedTeacher.User.Fname;
+                }
+                PopupNavigation.Instance.PushAsync(new ShowUserPopup(this));
+                SelectedItem = null;
             }
-            PopupNavigation.Instance.PushAsync(new ShowUserPopup(this));
-           
         }
 
         private async void CreateCollection()

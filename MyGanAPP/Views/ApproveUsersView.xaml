@@ -7,17 +7,18 @@
 
 
     <ContentPage.Content>
-
-
-        <Frame Padding="20" Margin="20" CornerRadius="30" BackgroundColor="#edede9">
+        
+            <Frame Padding="20" Margin="20" CornerRadius="30" BackgroundColor="#edede9">
+            
             <StackLayout BackgroundColor="#edede9">
 
+                    <Label Text="החלק שמאלה או ימינה לאישור או לדחייה של המשתמש" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"></Label>
 
-
-                <CollectionView x:Name="collectionName" 
+                    <CollectionView x:Name="collectionName" 
                                 EmptyView="אין גננות בהמתנה"
                                 ItemsSource="{Binding TeachersList}" SelectionMode="Single"
                                 SelectionChangedCommand="{Binding SelectionChanged}"
+                                SelectedItem="{Binding SelectedItem}"
                                 SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName}, Path=SelectedItem}" IsVisible="{Binding Visible2}" >
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
@@ -88,6 +89,7 @@
                                 ItemsSource="{Binding StudentOfUsersList}" SelectionMode="Single"
                                 EmptyView="אין תלמידים בהמתנה"
                                 SelectionChangedCommand="{Binding SelectionChanged}"
+                                SelectedItem="{Binding SelectedItem}"
                                 SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName2}, Path=SelectedItem}" IsVisible="{Binding Visible1}" >
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
@@ -155,5 +157,6 @@
 
             </StackLayout>
         </Frame>
+       
     </ContentPage.Content>
 </ContentPage>
