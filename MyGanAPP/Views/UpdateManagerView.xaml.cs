@@ -10,19 +10,12 @@ using Xamarin.Forms.Xaml;
 namespace MyGanAPP.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ManagerProfileView : ContentPage
+    public partial class UpdateManagerView : ContentPage
     {
-        public ManagerProfileView()
+        public UpdateManagerView(ManagerProfileView context)
         {
-            this.BindingContext = new ManagerProfileViewModel();
+            this.BindingContext = context;
             InitializeComponent();
-            
-        }
-
-        
-        private void Update_Clicked(object sender, EventArgs e)
-        {
-            App.Current.MainPage.Navigation.PushAsync(new LoginView());
         }
     }
 }

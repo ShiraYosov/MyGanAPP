@@ -14,7 +14,8 @@ namespace MyGanAPP.Views
     {
         public AddManagerView()
         {
-            AddManagerViewModel vm = new AddManagerViewModel();
+            App theApp = (App)App.Current;
+            AddManagerViewModel vm = new AddManagerViewModel(theApp.CurrUser);
             vm.SetImageSourceEvent += Vm_SetImageSourceEvent;
             this.BindingContext = vm;
             InitializeComponent();

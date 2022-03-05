@@ -394,21 +394,46 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
+        //This contact is a reference to the updated or new created contact
+        private User theUser;
 
-        public AddManagerViewModel()
+        //For adding a new contact, uc will be null
+        //For updates the user contact object should be sent to the constructor
+        public AddManagerViewModel(User manager = null)
         {
+            App theApp = (App)App.Current;
+            manager = theApp.CurrUser;
+
+            if (manager == null)
+            {
+                ManagerFirstName = "";
+                ManagerLastName = "";
+                email = "";
+                phoneNumber = "";
+                password = "";
+
+                // Setup default image photo
+                this.UserImgSrc = DEFAULT_PHOTO_SRC;
+                this.imageFileResult = null; //mark that no picture was chosen
+
+            }
+
+            else
+            {
+                this.UserImgSrc = manager.PhotoURL;
+                ManagerFirstName = manager.Fname;
+                ManagerLastName = manager.LastName;
+                Email = manager.Email;
+                phoneNumber = manager.PhoneNumber;
+                password = manager.Password;
+                kindergartenName = theApp.SelectedKindergarten.Name;
+            }
+
             ShowPass = true;
             ImgSource1 = CLOSEDEYE_PHOTO_SRC;
             PassCommand = new Command(OnShowPass);
+            this.theUser = manager;
 
-            // Setup default image photo
-            this.UserImgSrc = DEFAULT_PHOTO_SRC;
-            this.imageFileResult = null; //mark that no picture was chosen
-            ManagerFirstName = "";
-            ManagerLastName = "";
-            email = "";
-            phoneNumber = "";
-            password = "";
 
             this.ManagerFirstNameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ManagerLastNameError = ERROR_MESSAGES.REQUIRED_FIELD;
@@ -419,6 +444,8 @@ namespace MyGanAPP.ViewModels
             this.showPasswordError = false;
 
         }
+
+        
 
         #region Register
 
@@ -448,35 +475,44 @@ namespace MyGanAPP.ViewModels
         {
             MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
 
-            App app = (App)App.Current;
+
             if (ValidateForm())
             {
-                User newUser = new User
-                {
-                    Email = Email,
-                    Password = Password,
-                    Fname = ManagerFirstName,
-                    LastName = ManagerLastName,
-                    PhoneNumber = PhoneNumber,
-                };
+                this.theUser.Email = Email;
+                this.theUser.Password = Password;
+                this.theUser.Fname = ManagerFirstName;
+                this.theUser.LastName = ManagerLastName;
+                this.theUser.PhoneNumber = PhoneNumber;
 
-                Kindergarten newK = new Kindergarten
+                if (this.theUser != null)
                 {
-                    Name = kindergartenName
-                };
+                    App theApp = (App)App.Current;
 
-                KindergartenManager KM = new KindergartenManager
+                    this.theUser.KindergartenManagers.Where(k => k.KindergartenId == theApp.SelectedKindergarten.KindergartenId).FirstOrDefault().Kindergarten.Name = KindergartenName;
+
+                }
+
+                else
                 {
-                    User = newUser,
-                    Kindergarten = newK
-                };
+                    Kindergarten newK = new Kindergarten
+                    {
+                        Name = kindergartenName
+                    };
 
-                newUser.KindergartenManagers.Add(KM);
+                    KindergartenManager KM = new KindergartenManager
+                    {
+                        User = theUser,
+                        Kindergarten = newK
+                    };
+
+                    theUser.KindergartenManagers.Add(KM);
+                }
+
 
 
                 ServerStatus = "מתחבר לשרת...";
                 await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
-                User newU = await proxy.Register(newUser);
+                User newU = await proxy.Register(theUser);
 
                 if (newU == null)
                 {
@@ -495,9 +531,21 @@ namespace MyGanAPP.ViewModels
                         }, $"users\\{newU.UserId}.jpg");
                     }
                     ServerStatus = "שומר נתונים...";
+
                     await App.Current.MainPage.Navigation.PopModalAsync();
-                    await App.Current.MainPage.Navigation.PopToRootAsync();
-                    await App.Current.MainPage.Navigation.PushAsync(new LoginView());
+                    if (theUser == null)
+                    {
+                        await App.Current.MainPage.Navigation.PopToRootAsync();
+                        await App.Current.MainPage.Navigation.PushAsync(new LoginView());
+                    }
+
+                    else if (theUser != null)
+                    {
+                        await App.Current.MainPage.Navigation.PopModalAsync();
+
+                        await App.Current.MainPage.Navigation.PushModalAsync(new ManagerMainTab());
+                    }
+
                 }
 
 
@@ -505,6 +553,7 @@ namespace MyGanAPP.ViewModels
         }
 
         #endregion
+
 
 
         public void ChangeBools()
@@ -516,7 +565,7 @@ namespace MyGanAPP.ViewModels
             this.ShowPhoneNumberError = false;
             this.ShowPasswordError = false;
 
-           
+
         }
 
         public ICommand PassCommand { protected set; get; }
@@ -557,7 +606,7 @@ namespace MyGanAPP.ViewModels
                     SetImageSourceEvent(imgSource);
             }
         }
-      
+
 
         //The following command handle the take photo button
         public ICommand CameraImageCommand => new Command(OnCameraImage);

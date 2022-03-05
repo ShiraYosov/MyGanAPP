@@ -146,7 +146,7 @@
                                 <ImageButton BackgroundColor="Transparent" Source="{Binding ImgSource1}" Grid.Column="1" Grid.Row="0" Command="{Binding PassCommand}" HeightRequest="25" WidthRequest="25"></ImageButton>
                             </Grid>
                            
-                            <Button Text="הרשמה" Command="{Binding RegisterCommand}" BackgroundColor="#bee9e8" TextColor="Black"  Margin="15" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
+                            <Button Text="אישור" Command="{Binding RegisterCommand}" BackgroundColor="#bee9e8" TextColor="Black"  Margin="15" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
                         </StackLayout>
                     </Frame>
                 </StackLayout>

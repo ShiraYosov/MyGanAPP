@@ -213,7 +213,7 @@ namespace MyGanAPP.ViewModels
         }
 
         public ICommand SelectionChanged => new Command(OnSelection);
-        public void OnSelection(/*object obj*/)
+        public void OnSelection()
         {
 
             if (SelectedItem != null)

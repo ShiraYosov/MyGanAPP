@@ -7,17 +7,10 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <!--<Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="שם הגן: " FontSize="20"/>
-                        <Span Text="{Binding KindergartenName}" FontSize="20" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>-->
+
 
             <!--Photo-->
-            <Grid HeightRequest="248">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.2*"/>
                     <ColumnDefinition Width="*"/>
@@ -31,97 +24,70 @@
                     <Image x:Name="theImage" Source="{Binding UserImgSrc}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" HeightRequest="170" WidthRequest="170"/>
                 </Frame>
             </Grid>
-            
-            <StackLayout Padding="0" Margin="20" HorizontalOptions="Center">
+
+            <StackLayout Padding="0" Margin="0" HorizontalOptions="Center">
                 <RefreshView x:Name="refreshView" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
                     <ScrollView>
-                        <Frame  BackgroundColor="White" HasShadow="True" Padding="0" Margin="17,0" CornerRadius="20">
+                        <Frame  BackgroundColor="White" HasShadow="True" Padding="20" Margin="15,0" CornerRadius="20" WidthRequest="280">
 
-                            <StackLayout Padding="0" Margin="10">
-                                <Label Text="פרטי משתמש" Grid.Column="1" TextDecorations="Underline" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" TextColor="Black" ></Label>
+                            <StackLayout Padding="0" Margin="8">
+                                <Label Text="פרטי משתמש" Grid.Column="1" TextDecorations="Underline" FontAttributes="Bold" FontSize="27" HorizontalOptions="Start" TextColor="Black" ></Label>
 
                                 <!-- ManagerName-->
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Label Text="שם פרטי" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
-                                    <Label Text="{Binding ManagerFirstNameError}" IsVisible="{Binding ShowManagerFirstNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
-                                </Grid>
-                                <Entry Placeholder="הקלד שם פרטי" MaxLength="30" Text="{Binding ManagerFirstName}" Style="{StaticResource entry}"/>
+                                <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="שם פרטי: " FontSize="20" FontAttributes="Bold"/>
+                                            <Span Text="{Binding ManagerFirstName}" FontSize="20" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
 
                                 <!-- ManagerLastName-->
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Label Text="שם משפחה" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
-                                    <Label Text="{Binding ManagerLastNameError}" IsVisible="{Binding ShowManagerLastNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
-                                </Grid>
-                                <Entry Placeholder="הקלד שם משפחה" MaxLength="30" Text="{Binding ManagerLastName}" Style="{StaticResource entry}"/>
+                                <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="שם משפחה: " FontSize="20" FontAttributes="Bold"/>
+                                            <Span Text="{Binding ManagerLastName}" FontSize="20" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
 
                                 <!-- Email-->
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Label Text="אימייל" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
-                                    <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
-                                </Grid>
-                                <Entry Placeholder="אימייל" MaxLength="30" Text="{Binding Email}" Style="{StaticResource entry}"/>
-
+                                <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="אימייל: " FontSize="20" FontAttributes="Bold"/>
+                                            <Span Text="{Binding Email}" FontSize="20" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                               
 
                                 <!-- PhoneNumber-->
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Label Text="מספר טלפון" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
-                                    <Label Text="{Binding PhoneNumberError}" IsVisible="{Binding ShowPhoneNumberError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
-                                </Grid>
-                                <Entry Placeholder="מספר טלפון" HorizontalTextAlignment="Start" MaxLength="30" Text="{Binding PhoneNumber}" Style="{StaticResource entry}"/>
+                                <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="מספר טלפון: " FontSize="20" FontAttributes="Bold"/>
+                                            <Span Text="{Binding PhoneNumber}" FontSize="20" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <!-- PhoneNumber-->
+                                <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="שם הגן: " FontSize="20" FontAttributes="Bold" TextColor="#4d908e"/>
+                                            <Span Text="{Binding KindergartenName}" FontSize="20" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Button Text="עדכון נתונים" Command="{Binding SaveCommand}" BackgroundColor="#bee9e8" Clicked="Update_Clicked" TextColor="Black"  Margin="15" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
 
 
-                                <!-- Password-->
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Label Text="סיסמה" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
-                                    <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
-                                </Grid>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="30"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
 
-                                    <Entry Placeholder="סיסמה" HorizontalTextAlignment="Center" MaxLength="30" Grid.Column="0" Grid.Row="0" IsPassword="{Binding ShowPass}" Text="{Binding Password}" Style="{StaticResource entry}"/>
-                                    <ImageButton BackgroundColor="Transparent" Source="{Binding ImgSource1}" Grid.Column="1" Grid.Row="0" Command="{Binding PassCommand}" HeightRequest="25" WidthRequest="25"></ImageButton>
-                                </Grid>
                             </StackLayout>
                         </Frame>
                     </ScrollView>

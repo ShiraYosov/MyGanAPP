@@ -15,6 +15,7 @@ namespace MyGanAPP.Views
         public HomePageView()
         {
             InitializeComponent();
+            
         }
 
         private void Login_Pressed(object sender, EventArgs e)

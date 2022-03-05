@@ -39,16 +39,146 @@ namespace MyGanAPP.ViewModels
 
         #endregion
 
+        #region ManagerFirstName
+
+        private string managerFirstName;
+
+        public string ManagerFirstName
+        {
+            get => managerFirstName;
+            set
+            {
+                managerFirstName = value;
+                OnPropertyChanged("ManagerFirstName");
+            }
+        }
+
+
+        #endregion
+
+        #region ManagerLastName
+
+        private string managerLastName;
+
+        public string ManagerLastName
+        {
+            get => managerLastName;
+            set
+            {
+                managerLastName = value;
+                OnPropertyChanged("ManagerLastName");
+            }
+        }
+        #endregion
+
+        #region Email
+
+        private string email;
+
+        public string Email
+        {
+            get => email;
+            set
+            {
+                email = value;
+                OnPropertyChanged("Email");
+            }
+        }
+
+
+        #endregion
+
+        #region PhoneNumber
+
+        private string phoneNumber;
+
+        public string PhoneNumber
+        {
+            get => phoneNumber;
+            set
+            {
+                phoneNumber = value;
+                OnPropertyChanged("PhoneNumber");
+            }
+        }
+
+
+        #endregion
+
+        #region KindergartenName
+
+        private string kindergartenName;
+
+        public string KindergartenName
+        {
+            get => kindergartenName;
+            set
+            {
+                kindergartenName = value;
+                OnPropertyChanged("KindergartenName");
+            }
+        }
+        #endregion
+       
+        #region Refresh
+        private bool isRefreshing;
+        public bool IsRefreshing
+        {
+            get => isRefreshing;
+            set
+            {
+                if (this.isRefreshing != value)
+                {
+                    this.isRefreshing = value;
+                    OnPropertyChanged(nameof(IsRefreshing));
+                }
+            }
+        }
+        public ICommand RefreshCommand => new Command(OnRefresh);
+        public void OnRefresh()
+        {
+            IsRefreshing = true;
+            App a = (App)App.Current;
+            User manager = a.CurrUser;
+           
+            if (manager != null)
+            {
+                userImgSrc = manager.PhotoURL;
+                ManagerFirstName = manager.Fname;
+                ManagerLastName = manager.LastName;
+                Email = manager.Email;
+                PhoneNumber = manager.PhoneNumber;
+                KindergartenName = a.SelectedKindergarten.Name;
+            }
+            IsRefreshing = false;
+        }
+        #endregion
+
         #region Constructor
         public ManagerProfileViewModel()
         {
+            IsRefreshing=false;
             App a = (App)App.Current;
-            userImgSrc = a.CurrUser.PhotoURL;
+            User manager = a.CurrUser;
+            if (manager != null)
+            {
+                userImgSrc = manager.PhotoURL;
+                ManagerFirstName = manager.Fname;
+                ManagerLastName = manager.LastName;
+                Email = manager.Email;
+                PhoneNumber = manager.PhoneNumber;
+                KindergartenName = a.SelectedKindergarten.Name;
+            }
+            
         }
 
         #endregion
 
+        public ICommand SaveCommand => new Command(OnSave);
 
-
+        public async void OnSave()
+        {
+            await App.Current.MainPage.Navigation.PushModalAsync(new Views.AddManagerView());
+        }
     }
 }
