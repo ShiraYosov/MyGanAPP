@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MyGanAPP.ViewModels;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MyGanAPP.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class UpdateManagerView : ContentPage
+    public partial class TeacherProfileView : ContentPage
     {
-        public UpdateManagerView(ManagerProfileView context)
+        public TeacherProfileView()
         {
-            this.BindingContext = context;
             InitializeComponent();
         }
     }

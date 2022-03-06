@@ -395,6 +395,25 @@ namespace MyGanAPP.ViewModels
                 OnPropertyChanged("ImgSource1");
             }
         }
+
+        #endregion
+
+        #region IsManager
+        private bool isManager;
+        public bool IsManager
+        {
+            get { return isManager; }
+
+            set
+            {
+                if (this.isManager != value)
+                {
+                    this.isManager = value;
+                    OnPropertyChanged(nameof(IsManager));
+                }
+            }
+        }
+
         #endregion
 
 
@@ -478,20 +497,47 @@ namespace MyGanAPP.ViewModels
 
         #endregion
 
-        public AddTeacherViewModel()
+        //This contact is a reference to the updated or new created contact
+        private User theUser;
+
+        //For adding a new contact, uc will be null
+        //For updates the user contact object should be sent to the constructor
+        public AddTeacherViewModel(User teacher = null)
         {
+            App theApp = (App)App.Current;
+            teacher = theApp.CurrUser;
+
+            if(teacher == null)
+            {
+                IsManager = false;
+                teacherFirstName = "";
+                teacherLastName = "";
+                email = "";
+                phoneNumber = "";
+                password = "";
+
+                // Setup default image photo
+                this.UserImgSrc = DEFAULT_PHOTO_SRC;
+                this.imageFileResult = null; //mark that no picture was chosen
+            }
+
+            else
+            {
+                IsManager = true;
+                teacherFirstName = teacher.Fname;
+                teacherLastName = teacher.LastName;
+                email = teacher.Email;
+                phoneNumber = teacher.PhoneNumber;
+                password = teacher.Password;
+                this.UserImgSrc = teacher.PhotoURL;
+            }
+
             ShowPass = true;
             ImgSource1 = CLOSEDEYE_PHOTO_SRC;
             PassCommand = new Command(OnShowPass);
 
-            // Setup default image photo
-            this.UserImgSrc = DEFAULT_PHOTO_SRC;
-            this.imageFileResult = null; //mark that no picture was chosen
-            teacherFirstName = "";
-            teacherLastName = "";
-            email = "";
-            phoneNumber = "";
-            password = "";
+            
+           
 
             this.teacherFirstNameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.teacherLastNameError = ERROR_MESSAGES.REQUIRED_FIELD;

@@ -169,6 +169,7 @@ namespace MyGanAPP.ViewModels
                 PhoneNumber = manager.PhoneNumber;
                 KindergartenName = a.SelectedKindergarten.Name;
             }
+            ((App)App.Current).RefreshUI += OnRefresh;
             
         }
 

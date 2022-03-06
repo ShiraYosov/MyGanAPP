@@ -10,7 +10,7 @@
                 <StackLayout >
                     <Image Source="logo1.png"  HeightRequest="300" ></Image>
 
-                    <Frame Style="{StaticResource logInSignUp}" BorderColor="DarkSlateGray" BackgroundColor="#bee9e8">
+                    <Frame IsVisible="{Binding IsManager}" Style="{StaticResource logInSignUp}" BorderColor="DarkSlateGray" BackgroundColor="#bee9e8">
                         <StackLayout>
                             <Grid>
                                 <Grid.ColumnDefinitions>

@@ -12,17 +12,26 @@ namespace MyGanAPP.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ManagerProfileView : ContentPage
     {
+        ManagerProfileViewModel context;
         public ManagerProfileView()
         {
-            this.BindingContext = new ManagerProfileViewModel();
+            context = new ManagerProfileViewModel();
+            this.BindingContext = context;
             InitializeComponent();
-            
+
         }
 
-        
+
         private void Update_Clicked(object sender, EventArgs e)
         {
             App.Current.MainPage.Navigation.PushAsync(new LoginView());
         }
+
+        //protected override void OnAppearing()
+        //{
+        //    base.OnAppearing();
+        //    context.OnRefresh();
+
+        //}
     }
 }

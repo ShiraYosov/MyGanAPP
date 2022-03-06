@@ -85,11 +85,16 @@ namespace MyGanAPP.ViewModels
             ChildrenList = new ObservableCollection<Student>();
             GroupsList = new ObservableCollection<Group>();
             KindergartensList = new ObservableCollection<Kindergarten>();
+            ((App)App.Current).RefreshUI += CreateCollection;
             CreateCollection();
         }
 
         private void CreateCollection()
         {
+            ChildrenList.Clear();
+            GroupsList.Clear();
+            KindergartensList.Clear();  
+
             App a = (App)App.Current;
 
             ICollection<StudentOfUser> theStudents = a.CurrUser.StudentOfUsers;

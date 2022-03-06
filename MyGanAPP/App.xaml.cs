@@ -23,6 +23,8 @@ namespace MyGanAPP
         public Kindergarten SelectedKindergarten { get; set; }
         public Group SelectedGroup { get; set; }
 
+        public event Action RefreshUI;
+
         public Lookups LookupTables { get; set; }
         public App()
         {
@@ -63,6 +65,8 @@ namespace MyGanAPP
             }
 
         }
+
+        public void UIRefresh() { this.RefreshUI.Invoke(); }
 
         protected override void OnSleep()
         {

@@ -406,6 +406,15 @@ namespace MyGanAPP.ViewModels
 
             if (manager == null)
             {
+                manager = new User()
+                {
+                    Fname = "",
+                    LastName = "",
+                    Email = "",
+                    PhoneNumber = "",
+                    Password = ""
+                };
+
                 ManagerFirstName = "";
                 ManagerLastName = "";
                 email = "";
@@ -420,6 +429,7 @@ namespace MyGanAPP.ViewModels
 
             else
             {
+               
                 this.UserImgSrc = manager.PhotoURL;
                 ManagerFirstName = manager.Fname;
                 ManagerLastName = manager.LastName;
@@ -478,16 +488,16 @@ namespace MyGanAPP.ViewModels
 
             if (ValidateForm())
             {
+                
                 this.theUser.Email = Email;
                 this.theUser.Password = Password;
                 this.theUser.Fname = ManagerFirstName;
                 this.theUser.LastName = ManagerLastName;
                 this.theUser.PhoneNumber = PhoneNumber;
 
-                if (this.theUser != null)
+                App theApp = (App)App.Current;
+                if (theApp.CurrUser != null)
                 {
-                    App theApp = (App)App.Current;
-
                     this.theUser.KindergartenManagers.Where(k => k.KindergartenId == theApp.SelectedKindergarten.KindergartenId).FirstOrDefault().Kindergarten.Name = KindergartenName;
 
                 }
@@ -541,9 +551,9 @@ namespace MyGanAPP.ViewModels
 
                     else if (theUser != null)
                     {
+                        ((App)App.Current).UIRefresh();
                         await App.Current.MainPage.Navigation.PopModalAsync();
-
-                        await App.Current.MainPage.Navigation.PushModalAsync(new ManagerMainTab());
+                        
                     }
 
                 }
