@@ -22,11 +22,7 @@ namespace MyGanAPP.Views
         }
 
 
-        private void Update_Clicked(object sender, EventArgs e)
-        {
-            App.Current.MainPage.Navigation.PushAsync(new LoginView());
-        }
-
+       
         //protected override void OnAppearing()
         //{
         //    base.OnAppearing();

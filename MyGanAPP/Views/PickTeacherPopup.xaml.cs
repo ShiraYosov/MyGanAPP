@@ -13,9 +13,9 @@ namespace MyGanAPP.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PickTeacherPopup : Rg.Plugins.Popup.Pages.PopupPage
     {
-        public PickTeacherPopup(ShowGroupsViewModel context)
+        public PickTeacherPopup( )
         {
-            this.BindingContext = context;
+            //this.BindingContext = context;
             InitializeComponent();
         }
     }

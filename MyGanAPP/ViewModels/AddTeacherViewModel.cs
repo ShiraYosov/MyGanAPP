@@ -398,24 +398,87 @@ namespace MyGanAPP.ViewModels
 
         #endregion
 
-        #region IsManager
-        private bool isManager;
-        public bool IsManager
+        #region IsConnected
+        private bool isConnected;
+        public bool IsConnected
         {
-            get { return isManager; }
+            get { return isConnected; }
 
             set
             {
-                if (this.isManager != value)
+                if (this.isConnected != value)
                 {
-                    this.isManager = value;
-                    OnPropertyChanged(nameof(IsManager));
+                    this.isConnected = value;
+                    OnPropertyChanged(nameof(IsConnected));
                 }
             }
         }
 
         #endregion
 
+
+        //This contact is a reference to the updated or new created contact
+        private User theUser;
+
+        //For adding a new contact, uc will be null
+        //For updates the user contact object should be sent to the constructor
+        public AddTeacherViewModel(User teacher = null)
+        {
+            App theApp = (App)App.Current;
+            teacher = theApp.CurrUser;
+
+            if (teacher == null)
+            {
+                IsConnected = true;
+                teacher = new User()
+                {
+                    Fname = "",
+                    LastName = "",
+                    Email = "",
+                    PhoneNumber = "",
+                    Password = ""
+                };
+
+                TeacherFirstName = "";
+                TeacherLastName = "";
+                Email = "";
+                PhoneNumber = "";
+                Password = "";
+
+                // Setup default image photo
+                this.UserImgSrc = DEFAULT_PHOTO_SRC;
+                this.imageFileResult = null; //mark that no picture was chosen
+            }
+
+            else
+            {
+                IsConnected = false;
+                TeacherFirstName = teacher.Fname;
+                TeacherLastName = teacher.LastName;
+                Email = teacher.Email;
+                PhoneNumber = teacher.PhoneNumber;
+                Password = teacher.Password;
+                this.UserImgSrc = teacher.PhotoURL;
+            }
+
+            ShowPass = true;
+            ImgSource1 = CLOSEDEYE_PHOTO_SRC;
+            PassCommand = new Command(OnShowPass);
+            this.theUser = teacher;
+
+
+
+            this.teacherFirstNameError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.teacherLastNameError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.showTeacherFirstNameError = false;
+            this.showTeacherLastNameError = false;
+            this.showEmailError = false;
+            this.showPhoneNumberError = false;
+            this.showPasswordError = false;
+
+
+
+        }
 
         #region Register
 
@@ -425,11 +488,12 @@ namespace MyGanAPP.ViewModels
 
             ValidateTeacherLastName();
             ValidateTeacherFirstName();
-            ValidateCode();
+           
             ValidateEmail();
             ValidatePassword();
             ValidatePhoneNumber();
 
+            if (IsConnected) { ValidateCode(); }
 
 
             //check if any validation failed
@@ -448,26 +512,28 @@ namespace MyGanAPP.ViewModels
             App app = (App)App.Current;
             if (ValidateForm())
             {
-                User newUser = new User
+                this.theUser.Email = Email;
+                this.theUser.Password = Password;
+                this.theUser.Fname = TeacherFirstName;
+                this.theUser.LastName = TeacherLastName;
+                this.theUser.PhoneNumber = PhoneNumber;
+
+                App theApp = (App)App.Current;
+
+                if(theApp.CurrUser == null)
                 {
-                    Email = Email,
-                    Password = Password,
-                    Fname = TeacherFirstName,
-                    LastName = TeacherLastName,
-                    PhoneNumber = PhoneNumber,
-                };
+                    int groupID = GanCode.CodeToGroupID(Code);
 
-                int groupID = GanCode.CodeToGroupID(Code);
+                    theUser.Groups.Add(new Models.Group
+                    {
+                        GroupId = groupID
+                    });
+                }
+                
 
-                newUser.Groups.Add(new Models.Group 
-                {
-                    GroupId = groupID
-                });
-
-               
                 ServerStatus = "מתחבר לשרת...";
                 await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
-                User newU = await proxy.TeacherRegister(newUser);
+                User newU = await proxy.TeacherRegister(theUser);
 
                 if (newU == null)
                 {
@@ -486,9 +552,20 @@ namespace MyGanAPP.ViewModels
                         }, $"users\\{newU.UserId}.jpg");
                     }
                     ServerStatus = "שומר נתונים...";
+
                     await App.Current.MainPage.Navigation.PopModalAsync();
-                    await App.Current.MainPage.Navigation.PopToRootAsync();
-                    await App.Current.MainPage.Navigation.PushAsync(new LoginView());
+                    if (theApp.CurrUser == null)
+                    {
+                        await App.Current.MainPage.Navigation.PopToRootAsync();
+                        await App.Current.MainPage.Navigation.PushAsync(new LoginView());
+                    }
+
+                    else if (theApp.CurrUser != null)
+                    {
+                        ((App)App.Current).UIRefresh();
+                        await App.Current.MainPage.Navigation.PopModalAsync();
+
+                    }
                 }
 
 
@@ -497,59 +574,7 @@ namespace MyGanAPP.ViewModels
 
         #endregion
 
-        //This contact is a reference to the updated or new created contact
-        private User theUser;
-
-        //For adding a new contact, uc will be null
-        //For updates the user contact object should be sent to the constructor
-        public AddTeacherViewModel(User teacher = null)
-        {
-            App theApp = (App)App.Current;
-            teacher = theApp.CurrUser;
-
-            if(teacher == null)
-            {
-                IsManager = false;
-                teacherFirstName = "";
-                teacherLastName = "";
-                email = "";
-                phoneNumber = "";
-                password = "";
-
-                // Setup default image photo
-                this.UserImgSrc = DEFAULT_PHOTO_SRC;
-                this.imageFileResult = null; //mark that no picture was chosen
-            }
-
-            else
-            {
-                IsManager = true;
-                teacherFirstName = teacher.Fname;
-                teacherLastName = teacher.LastName;
-                email = teacher.Email;
-                phoneNumber = teacher.PhoneNumber;
-                password = teacher.Password;
-                this.UserImgSrc = teacher.PhotoURL;
-            }
-
-            ShowPass = true;
-            ImgSource1 = CLOSEDEYE_PHOTO_SRC;
-            PassCommand = new Command(OnShowPass);
-
-            
-           
-
-            this.teacherFirstNameError = ERROR_MESSAGES.REQUIRED_FIELD;
-            this.teacherLastNameError = ERROR_MESSAGES.REQUIRED_FIELD;
-            this.showTeacherFirstNameError = false;
-            this.showTeacherLastNameError = false;
-            this.showEmailError = false;
-            this.showPhoneNumberError = false;
-            this.showPasswordError = false;
-
-           
-
-        }
+       
         public void ChangeBools()
         {
             this.ShowTeacherFirstNameError = false;

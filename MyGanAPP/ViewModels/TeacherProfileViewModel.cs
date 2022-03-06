@@ -16,7 +16,7 @@ using System.Collections;
 
 namespace MyGanAPP.ViewModels
 {
-    class ManagerProfileViewModel : INotifyPropertyChanged
+    internal class TeacherProfileViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
@@ -39,40 +39,41 @@ namespace MyGanAPP.ViewModels
 
         #endregion
 
-        #region ManagerFirstName
+        #region TeacherFirstName
+      
+        private string teacherFirstName;
 
-        private string managerFirstName;
-
-        public string ManagerFirstName
+        public string TeacherFirstName
         {
-            get => managerFirstName;
+            get => teacherFirstName;
             set
             {
-                managerFirstName = value;
-                OnPropertyChanged("ManagerFirstName");
+                teacherFirstName = value;
+                OnPropertyChanged("TeacherFirstName");
             }
         }
 
-
+       
         #endregion
 
-        #region ManagerLastName
+        #region TeacherLastName
+       private string teacherLastName;
 
-        private string managerLastName;
-
-        public string ManagerLastName
+        public string TeacherLastName
         {
-            get => managerLastName;
+            get => teacherLastName;
             set
             {
-                managerLastName = value;
-                OnPropertyChanged("ManagerLastName");
+                teacherLastName = value;
+                OnPropertyChanged("TeacherLastName");
             }
         }
+
+       
         #endregion
 
         #region Email
-
+       
         private string email;
 
         public string Email
@@ -85,11 +86,11 @@ namespace MyGanAPP.ViewModels
             }
         }
 
-
+       
         #endregion
 
         #region PhoneNumber
-
+       
         private string phoneNumber;
 
         public string PhoneNumber
@@ -102,24 +103,24 @@ namespace MyGanAPP.ViewModels
             }
         }
 
-
+        
         #endregion
 
-        #region KindergartenName
+        #region GroupName
 
-        private string kindergartenName;
+        private string groupName;
 
-        public string KindergartenName
+        public string GroupName
         {
-            get => kindergartenName;
+            get => groupName;
             set
             {
-                kindergartenName = value;
-                OnPropertyChanged("KindergartenName");
+                groupName = value;
+                OnPropertyChanged("GroupName");
             }
         }
         #endregion
-       
+
         #region Refresh
         private bool isRefreshing;
         public bool IsRefreshing
@@ -139,38 +140,37 @@ namespace MyGanAPP.ViewModels
         {
             IsRefreshing = true;
             App a = (App)App.Current;
-            User manager = a.CurrUser;
-           
-            if (manager != null)
+            User teacher = a.CurrUser;
+
+            if (teacher != null)
             {
-                UserImgSrc = manager.PhotoURL;
-                ManagerFirstName = manager.Fname;
-                ManagerLastName = manager.LastName;
-                Email = manager.Email;
-                PhoneNumber = manager.PhoneNumber;
-                KindergartenName = a.SelectedKindergarten.Name;
+                UserImgSrc = teacher.PhotoURL;
+                TeacherFirstName = teacher.Fname;
+                TeacherLastName = teacher.LastName;
+                Email = teacher.Email;
+                PhoneNumber = teacher.PhoneNumber;
+                GroupName = a.SelectedGroup.GroupName;
             }
             IsRefreshing = false;
         }
         #endregion
 
         #region Constructor
-        public ManagerProfileViewModel()
+        public TeacherProfileViewModel()
         {
-            IsRefreshing=false;
-            App a = (App)App.Current;
-            User manager = a.CurrUser;
-            if (manager != null)
-            {
-                UserImgSrc = manager.PhotoURL;
-                ManagerFirstName = manager.Fname;
-                ManagerLastName = manager.LastName;
-                Email = manager.Email;
-                PhoneNumber = manager.PhoneNumber;
-                KindergartenName = a.SelectedKindergarten.Name;
-            }
             ((App)App.Current).RefreshUI += OnRefresh;
-            
+            IsRefreshing = false;
+            App a = (App)App.Current;
+            User teacher = a.CurrUser;
+            if (teacher != null)
+            {
+                UserImgSrc = teacher.PhotoURL;
+                TeacherFirstName = teacher.Fname;
+                TeacherLastName = teacher.LastName;
+                Email = teacher.Email;
+                PhoneNumber = teacher.PhoneNumber;
+                GroupName = a.SelectedGroup.GroupName;
+            }
         }
 
         #endregion
@@ -179,7 +179,7 @@ namespace MyGanAPP.ViewModels
 
         public async void OnSave()
         {
-            await App.Current.MainPage.Navigation.PushModalAsync(new Views.AddManagerView());
+            await App.Current.MainPage.Navigation.PushModalAsync(new Views.AddTeacherView());
         }
     }
 }

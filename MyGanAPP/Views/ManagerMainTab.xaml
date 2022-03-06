@@ -23,19 +23,25 @@
         </Size>
     </windows:TabbedPage.HeaderIconsSize>
     
-    <local:ManagerProfileView>
+    <local:ManagerProfileView Title="פרופיל">
         <local:ManagerProfileView.IconImageSource>
             <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.CircleUser}"/>
         </local:ManagerProfileView.IconImageSource>
     </local:ManagerProfileView>
 
-    <local:ApproveUsersView>
+    <local:ApproveUsersView Title="אישור משתמשים">
         <local:ApproveUsersView.IconImageSource>
             <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.UserCheck}"/>
         </local:ApproveUsersView.IconImageSource>
     </local:ApproveUsersView>
 
-    <local:ChooseView>
+    <local:ApproveUsersView Title="קבוצות">
+        <local:ApproveUsersView.IconImageSource>
+            <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.Users}"/>
+        </local:ApproveUsersView.IconImageSource>
+    </local:ApproveUsersView>
+
+    <local:ChooseView Title="בחירת שדה ">
         <local:ChooseView.IconImageSource>
             <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.HandPointer}"/>
         </local:ChooseView.IconImageSource>

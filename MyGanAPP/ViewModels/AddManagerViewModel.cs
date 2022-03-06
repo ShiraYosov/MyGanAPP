@@ -543,13 +543,13 @@ namespace MyGanAPP.ViewModels
                     ServerStatus = "שומר נתונים...";
 
                     await App.Current.MainPage.Navigation.PopModalAsync();
-                    if (theUser == null)
+                    if (theApp.CurrUser == null)
                     {
                         await App.Current.MainPage.Navigation.PopToRootAsync();
                         await App.Current.MainPage.Navigation.PushAsync(new LoginView());
                     }
 
-                    else if (theUser != null)
+                    else if (theApp.CurrUser != null)
                     {
                         ((App)App.Current).UIRefresh();
                         await App.Current.MainPage.Navigation.PopModalAsync();

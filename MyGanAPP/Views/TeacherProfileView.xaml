@@ -1,12 +1,100 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyGanAPP.Views.TeacherProfileView">
+             x:Class="MyGanAPP.Views.TeacherProfileView"
+             BackgroundImageSource="BackgroundPic.jpg"
+             FlowDirection="RightToLeft">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+
+
+
+            <!--Photo-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="1.5*" />
+                </Grid.RowDefinitions>
+                <Frame BorderColor="white"  CornerRadius="100"  Grid.Column="1" Grid.Row="1" IsClippedToBounds="True" Padding="0" HeightRequest="170" WidthRequest="170" HorizontalOptions="Center">
+                    <Image x:Name="theImage" Source="{Binding UserImgSrc}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" HeightRequest="170" WidthRequest="170"/>
+                </Frame>
+            </Grid>
+
+            <StackLayout Padding="0" Margin="0" HorizontalOptions="Center">
+                <RefreshView x:Name="refreshView" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+                    <ScrollView>
+                        <Frame  BackgroundColor="White" HasShadow="True" Padding="20" Margin="15,0" CornerRadius="20" WidthRequest="280">
+
+                            <StackLayout Padding="0" Margin="8">
+                                <Label Text="פרטי משתמש" Grid.Column="1" TextDecorations="Underline" FontAttributes="Bold" FontSize="27" HorizontalOptions="Start" TextColor="Black" ></Label>
+
+                                <!-- ManagerName-->
+                                <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="שם פרטי: " FontSize="20" FontAttributes="Bold"/>
+                                            <Span Text="{Binding TeacherFirstName}" FontSize="20" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <!-- ManagerLastName-->
+                                <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="שם משפחה: " FontSize="20" FontAttributes="Bold"/>
+                                            <Span Text="{Binding TeacherLastName}" FontSize="20" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <!-- Email-->
+                                <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="אימייל: " FontSize="20" FontAttributes="Bold"/>
+                                            <Span Text="{Binding Email}" FontSize="20" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+
+                                <!-- PhoneNumber-->
+                                <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="מספר טלפון: " FontSize="20" FontAttributes="Bold"/>
+                                            <Span Text="{Binding PhoneNumber}" FontSize="20" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <!-- PhoneNumber-->
+                                <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="שם הגן: " FontSize="20" FontAttributes="Bold" TextColor="#4d908e"/>
+                                            <Span Text="{Binding GroupName}" FontSize="20" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Button Text="עדכון נתונים" Command="{Binding SaveCommand}" BackgroundColor="#bee9e8" TextColor="Black"  Margin="15" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
+
+
+
+                            </StackLayout>
+                        </Frame>
+                    </ScrollView>
+                </RefreshView>
+            </StackLayout>
+
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
