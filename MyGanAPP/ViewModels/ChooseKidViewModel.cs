@@ -139,21 +139,21 @@ namespace MyGanAPP.ViewModels
                 Group chosenGroup = (Group)obj;
                 a.SelectedGroup = chosenGroup;
                 await App.Current.MainPage.Navigation.PopToRootAsync();
-                await App.Current.MainPage.Navigation.PushModalAsync(new TeacherMainTab());
+                await App.Current.MainPage.Navigation.PushAsync(new TeacherMainTab());
             }
             if (obj is Kindergarten)
             {
                 Kindergarten chosenKindergarten = (Kindergarten)obj;
                 a.SelectedKindergarten = chosenKindergarten;
                 await App.Current.MainPage.Navigation.PopToRootAsync();
-                await App.Current.MainPage.Navigation.PushModalAsync(new ManagerMainTab());
+                await App.Current.MainPage.Navigation.PushAsync(new ManagerMainTab());
             }
             if (obj is Student)
             {
                 Student chosenStudent = (Student)obj;
                 a.SelectedStudent = chosenStudent;
                 await App.Current.MainPage.Navigation.PopToRootAsync();
-                await App.Current.MainPage.Navigation.PushModalAsync(new ParentMainTab());
+                await App.Current.MainPage.Navigation.PushAsync(new ParentMainTab());
             }
 
         }

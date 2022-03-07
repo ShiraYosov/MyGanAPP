@@ -552,7 +552,7 @@ namespace MyGanAPP.ViewModels
                     else if (theApp.CurrUser != null)
                     {
                         ((App)App.Current).UIRefresh();
-                        await App.Current.MainPage.Navigation.PopModalAsync();
+                        await App.Current.MainPage.Navigation.PopAsync();
                         
                     }
 

@@ -15,7 +15,6 @@ namespace MyGanAPP.Views
     {
         public PickTeacherPopup( )
         {
-            //this.BindingContext = context;
             InitializeComponent();
         }
     }

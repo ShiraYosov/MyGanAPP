@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyGanAPP.Views.ManagerProfileView"
              BackgroundImageSource="BackgroundPic.jpg"
-             FlowDirection="RightToLeft">
+             FlowDirection="RightToLeft"
+             >
     <ContentPage.Content>
         <StackLayout>
 

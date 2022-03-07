@@ -31,11 +31,14 @@
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
                                         <Frame  BorderColor="Black" CornerRadius="100"  Grid.Column="1" Grid.Row="0" IsClippedToBounds="True" Padding="0" HeightRequest="150" WidthRequest="150" HorizontalOptions="CenterAndExpand">
                                             <Image Source="{Binding PhotoURL}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" />
                                         </Frame>
+                                        <Label Text="{Binding FirstName}" Grid.Column="1" Grid.Row="1" HorizontalOptions="Center" TextColor="#22223b" FontSize="18" FontAttributes="Bold"></Label>
                                     </Grid>
+                                   
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>

@@ -179,7 +179,7 @@ namespace MyGanAPP.ViewModels
 
         public async void OnSave()
         {
-            await App.Current.MainPage.Navigation.PushModalAsync(new Views.AddTeacherView());
+            await App.Current.MainPage.Navigation.PushAsync(new Views.AddTeacherView());
         }
     }
 }
