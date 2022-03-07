@@ -2,10 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyGanAPP.Views.LoginView"
-             BackgroundColor="#bcd4e6"
+              BackgroundImageSource="HomePage.jpg"
              FlowDirection="RightToLeft">
     
-    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="אני הורה - הרשמה לגן" Order="Secondary" Priority="0" Clicked="Parent_Pressed" ></ToolbarItem>
+        <ToolbarItem Text="אני גננת - הרשמה לגן" Order="Secondary" Priority="0" Clicked="Teacher_Preseed" ></ToolbarItem>
+        <ToolbarItem Text="אני מנהל גן - פתיחת גן" Order="Secondary" Priority="1" Clicked="Manager_Pressed" ></ToolbarItem>
+    </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
 

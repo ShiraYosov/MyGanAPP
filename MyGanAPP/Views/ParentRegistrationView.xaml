@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyGanAPP.Views.ParentRegistrationView"
              FlowDirection="RightToLeft"
-             BackgroundColor="#bcd4e6">
+             BackgroundImageSource="HomePage.jpg">
     <ContentPage.Content>
         <StackLayout Style="{StaticResource Stack}">
             <ScrollView>
@@ -42,7 +42,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <ImageButton BackgroundColor="Transparent" Source="{Binding ImgSource1}" Command="{Binding Button1PressedCommand}"  Grid.Column="0" HorizontalOptions="Start" HeightRequest="25" WidthRequest="25"></ImageButton>
-                                        <Label Text="פרטי הילד\ה" Grid.Column="1" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" TextColor="Black" ></Label>
+                                        <Label Text="פרטי הילד/ה" Grid.Column="1" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" TextColor="Black" ></Label>
                                     </Grid>
 
                                     <StackLayout IsVisible="{Binding Button1}">

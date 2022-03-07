@@ -55,7 +55,7 @@ namespace MyGanAPP
             this.LookupTables = await proxy.GetLookupsAsync();
             if (LookupTables != null)
             {
-                MainPage = new NavigationPage(new HomePageView());
+                MainPage = new NavigationPage(new LoginView());
             }
             else
             {

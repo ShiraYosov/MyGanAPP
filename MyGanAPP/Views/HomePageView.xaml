@@ -2,8 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyGanAPP.Views.HomePageView"
-              BackgroundImageSource="HomePage2.jpg"
-             NavigationPage.HasNavigationBar="False">
+              BackgroundImageSource="HomePage.jpg">
+
+
+    
+    
     <ContentPage.Content>
         <StackLayout>
             <Image Source="logo1.png" HeightRequest="300" ></Image>

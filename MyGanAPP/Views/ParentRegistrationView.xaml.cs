@@ -17,6 +17,7 @@ namespace MyGanAPP.Views
         public ParentRegistrationView()
         {
             ParentRegistrationViewModel vm = new ParentRegistrationViewModel();
+            this.Title = "רישום הורה";
             vm.SetImageSourceEvent += Vm_SetImageSourceEvent;
             this.BindingContext = vm;
             InitializeComponent();

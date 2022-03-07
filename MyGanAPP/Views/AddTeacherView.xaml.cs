@@ -15,6 +15,7 @@ namespace MyGanAPP.Views
         public AddTeacherView()
         {
             AddTeacherViewModel vm = new AddTeacherViewModel();
+            this.Title = "רישום גננת";
             vm.SetImageSourceEvent += Vm_SetImageSourceEvent;
             this.BindingContext = vm;
             InitializeComponent();

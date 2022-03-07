@@ -15,6 +15,7 @@ namespace MyGanAPP.Views
         public AddManagerView()
         {
             App theApp = (App)App.Current;
+            this.Title = "רישום מנהל";
             AddManagerViewModel vm = new AddManagerViewModel(theApp.CurrUser);
             vm.SetImageSourceEvent += Vm_SetImageSourceEvent;
             this.BindingContext = vm;

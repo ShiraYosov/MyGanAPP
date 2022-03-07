@@ -15,8 +15,24 @@ namespace MyGanAPP.Views
         public LoginView()
         {
             this.BindingContext = new LoginViewModel();
+            this.Title = "התחברות";
             InitializeComponent();
             
+        }
+
+        private void Parent_Pressed(object sender, EventArgs e)
+        {
+            App.Current.MainPage.Navigation.PushAsync(new ParentRegistrationView());
+        }
+
+        private void Teacher_Preseed(object sender, EventArgs e)
+        {
+            App.Current.MainPage.Navigation.PushAsync(new AddTeacherView());
+        }
+
+        private void Manager_Pressed(object sender, EventArgs e)
+        {
+            App.Current.MainPage.Navigation.PushAsync(new AddManagerView());
         }
     }
 }
