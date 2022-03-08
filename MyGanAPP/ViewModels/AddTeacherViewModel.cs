@@ -398,18 +398,18 @@ namespace MyGanAPP.ViewModels
 
         #endregion
 
-        #region IsConnected
-        private bool isConnected;
-        public bool IsConnected
+        #region NotConnected
+        private bool notConnected;
+        public bool NotConnected
         {
-            get { return isConnected; }
+            get { return notConnected; }
 
             set
             {
-                if (this.isConnected != value)
+                if (this.notConnected != value)
                 {
-                    this.isConnected = value;
-                    OnPropertyChanged(nameof(IsConnected));
+                    this.notConnected = value;
+                    OnPropertyChanged(nameof(NotConnected));
                 }
             }
         }
@@ -429,7 +429,7 @@ namespace MyGanAPP.ViewModels
 
             if (teacher == null)
             {
-                IsConnected = true;
+                NotConnected = true;
                 teacher = new User()
                 {
                     Fname = "",
@@ -452,7 +452,7 @@ namespace MyGanAPP.ViewModels
 
             else
             {
-                IsConnected = false;
+                NotConnected = false;
                 TeacherFirstName = teacher.Fname;
                 TeacherLastName = teacher.LastName;
                 Email = teacher.Email;
@@ -493,7 +493,7 @@ namespace MyGanAPP.ViewModels
             ValidatePassword();
             ValidatePhoneNumber();
 
-            if (IsConnected) { ValidateCode(); }
+            if (NotConnected) { ValidateCode(); }
 
 
             //check if any validation failed

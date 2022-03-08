@@ -10,23 +10,12 @@ using Xamarin.Forms.Xaml;
 namespace MyGanAPP.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ManagerProfileView : ContentPage
+    public partial class ParentProfileView : ContentPage
     {
-        
-        public ManagerProfileView()
+        public ParentProfileView()
         {
-            this.BindingContext = new ManagerProfileViewModel();
+            this.BindingContext = new ParentProfileViewModel();
             InitializeComponent();
-
         }
-
-
-       
-        //protected override void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //    context.OnRefresh();
-
-        //}
     }
 }

@@ -734,22 +734,37 @@ namespace MyGanAPP.ViewModels
                 }
             }
         }
+        #endregion
 
-        private bool showPass2;
-        public bool ShowPass2
+        private bool fChecked;
+        public bool FChecked
         {
-            get { return showPass2; }
+            get { return fChecked; }
 
             set
             {
-                if (this.showPass2 != value)
+                if (this.fChecked != value)
                 {
-                    this.showPass2 = value;
-                    OnPropertyChanged(nameof(ShowPass2));
+                    this.fChecked = value;
+                    OnPropertyChanged(nameof(FChecked));
                 }
             }
         }
-        #endregion
+        private bool mChecked;
+        public bool MChecked
+        {
+            get { return mChecked; }
+
+            set
+            {
+                if (this.mChecked != value)
+                {
+                    this.mChecked = value;
+                    OnPropertyChanged(nameof(MChecked));
+                }
+            }
+        }
+        
 
         #region Allergies
 
@@ -884,11 +899,29 @@ namespace MyGanAPP.ViewModels
             }
         }
 
-        private void ValidateRelation()
-        {
-            this.ShowRelationError = (ChosenRelation == null);
-        }
+        //private void ValidateRelation()
+        //{
+        //    this.ShowRelationError = (ChosenRelation == null);
+        //}
 
+
+        #endregion
+
+        #region NotConnected
+        private bool notConnected;
+        public bool NotConnected
+        {
+            get { return notConnected; }
+
+            set
+            {
+                if (this.notConnected != value)
+                {
+                    this.notConnected = value;
+                    OnPropertyChanged(nameof(NotConnected));
+                }
+            }
+        }
 
         #endregion
 
@@ -1075,7 +1108,6 @@ namespace MyGanAPP.ViewModels
             ValidateBirthDate();
             ValidateChildLastName();
             ValidateChildName();
-            ValidateCode();
             ValidateEmail();
             ValidateGender();
             ValidatePassword();
@@ -1083,12 +1115,14 @@ namespace MyGanAPP.ViewModels
             ValidateUserName();
             ValidateGrade();
 
+            if (NotConnected) { ValidateCode(); }
+
 
             //check if any validation failed
             if (showBirthDateError || showChildIDError || showChildLastNameError || showChildNameError || showCodeError || showEmailError || showGenderError ||
                 showGradeError || showPasswordError || showPhoneNumberError || showUserNameError)
                 return false;
-           
+
             return true;
         }
 
@@ -1102,53 +1136,82 @@ namespace MyGanAPP.ViewModels
             App app = (App)App.Current;
             if (ValidateForm())
             {
-                User newUser = new User
-                {
-                    Email = Email,
-                    Password = Password,
-                    Fname = UserName,
-                    LastName = ChildLastName,
-                    PhoneNumber = PhoneNumber,
-                };
+                this.theUser.Email = Email;
+                this.theUser.Password = Password;
+                this.theUser.Fname = UserName;
+                this.theUser.LastName = ChildLastName;
+                this.theUser.PhoneNumber = PhoneNumber;
 
                 int groupID = GanCode.CodeToGroupID(Code);
 
+                this.theStudent.FirstName = ChildName;
+                this.theStudent.LastName = ChildLastName;
+                this.theStudent.BirthDate = BirthDate;
+                this.theStudent.StudentId = ChildID;
+                this.theStudent.Gender = Gender;
+                this.theStudent.GroupId = groupId;
+                this.theStudent.GradeId = ChosenGrade.GradeId;
 
-
-                Student newStudent = new Student
-                {
-                    FirstName = ChildName,
-                    LastName = ChildLastName,
-                    BirthDate = BirthDate,
-                    StudentId = ChildID,
-                    Gender = Gender,
-                    GroupId = groupId,
-                    GradeId = ChosenGrade.GradeId
-                };
-
+                this.theStudent.StudentAllergies.Clear();
                 foreach (Allergy a in selectedAllergies)
                 {
                     StudentAllergy st = new StudentAllergy
                     {
                         Allergy = a,
-                        Student = newStudent
+                        Student = theStudent
                     };
-                    newStudent.StudentAllergies.Add(st);
+                    theStudent.StudentAllergies.Add(st);
                 }
 
-                StudentOfUser sou = new StudentOfUser
+                this.theUser.StudentOfUsers.Where(st => st.StudentId == ChildID).FirstOrDefault().RelationToStudent = ChosenRelation;
+
+                App theApp = (App)App.Current;
+
+                if (theApp.CurrUser != null && theApp.SelectedStudent != null)
                 {
-                    User = newUser,
-                    Student = newStudent,
-                    RelationToStudent = ChosenRelation,
-                    StatusId = WAITING_STATUS
-                };
-                newUser.StudentOfUsers.Add(sou);
+                    this.theUser.StudentOfUsers.Where(st => st.StudentId == ChildID).FirstOrDefault().RelationToStudent = ChosenRelation;
+                }
+
+                else if (theApp.CurrUser == null && theApp.SelectedStudent == null)
+                {
+
+
+                    //Student newStudent = new Student
+                    //{
+                    //    FirstName = ChildName,
+                    //    LastName = ChildLastName,
+                    //    BirthDate = BirthDate,
+                    //    StudentId = ChildID,
+                    //    Gender = Gender,
+                    //    GroupId = groupId,
+                    //    GradeId = ChosenGrade.GradeId
+                    //};
+
+                    //foreach (Allergy a in selectedAllergies)
+                    //{
+                    //    StudentAllergy st = new StudentAllergy
+                    //    {
+                    //        Allergy = a,
+                    //        Student = newStudent
+                    //    };
+                    //    newStudent.StudentAllergies.Add(st);
+                    //}
+
+                    StudentOfUser sou = new StudentOfUser
+                    {
+                        User = theUser,
+                        Student = theStudent,
+                        RelationToStudent = ChosenRelation,
+                        StatusId = WAITING_STATUS
+                    };
+
+                    theUser.StudentOfUsers.Add(sou);
+                }
 
 
                 ServerStatus = "מתחבר לשרת...";
                 await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
-                User newU = await proxy.ParentRegister(newUser);
+                User newU = await proxy.ParentRegister(theUser);
 
                 if (newU == null)
                 {
@@ -1166,9 +1229,20 @@ namespace MyGanAPP.ViewModels
                         }, $"kids\\{newU.StudentOfUsers.FirstOrDefault().StudentId}.jpg");
                     }
                     ServerStatus = "שומר נתונים...";
+                    
                     await App.Current.MainPage.Navigation.PopModalAsync();
-                    await App.Current.MainPage.Navigation.PopToRootAsync();
-                    await App.Current.MainPage.Navigation.PushAsync(new LoginView());
+                    if (theApp.CurrUser == null)
+                    {
+                        await App.Current.MainPage.Navigation.PopToRootAsync();
+                        await App.Current.MainPage.Navigation.PushAsync(new LoginView());
+                    }
+
+                    else if (theApp.CurrUser != null)
+                    {
+                        ((App)App.Current).UIRefresh();
+                        await App.Current.MainPage.Navigation.PopAsync();
+
+                    }
                 }
 
             }
@@ -1181,26 +1255,100 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
+        //This contact is a reference to the updated or new created contact
+        private User theUser;
+        private Student theStudent;
 
-        public ParentRegistrationViewModel()
+        //For adding a new contact, uc will be null
+        //For updates the user contact object should be sent to the constructor
+        public ParentRegistrationViewModel(User parent = null, Student student = null)
         {
+            App theApp = (App)App.Current;
+            parent = theApp.CurrUser;
+            student = theApp.SelectedStudent;
+            this.selectedAllergies = new List<Allergy>();
+
+            if (parent == null && student == null)
+            {
+                NotConnected = true;
+                parent = new User()
+                {
+                    Fname = "",
+                    LastName = "",
+                    Email = "",
+                    PhoneNumber = "",
+                    Password = ""
+                };
+
+                student = new Student()
+                {
+                    FirstName = "",
+                    LastName = "",
+                    StudentId = "",
+                };
+
+                this.BirthDate = DateTime.Today;
+                // Setup default image photo
+                this.UserImgSrc = DEFAULT_PHOTO_SRC;
+                this.imageFileResult = null; //mark that no picture was chosen
+
+                
+                Allergies = "לא נבחרו אלרגיות";
+            }
+
+            else
+            {
+                NotConnected = false;
+                UserName = parent.Fname;
+                ChildLastName = parent.LastName;
+                Email = parent.Email;
+                PhoneNumber = parent.PhoneNumber;
+                Password = parent.Password;
+
+                this.UserImgSrc = student.PhotoURL;
+                ChildName = student.FirstName;
+                BirthDate = student.BirthDate;
+                ChildID = student.StudentId;
+                //ChosenGrade = student.Grade.GradeName;
+                //Gender = student.Gender;
+
+                //if (student.Gender == "נקבה")
+                //{
+                //    FChecked = true;
+                //}
+                //else { MChecked = true; }
+
+                foreach (StudentAllergy sa in student.StudentAllergies)
+                {
+                    selectedAllergies.Add(sa.Allergy);
+                }
+                
+                if(selectedAllergies.Count > 0)
+                    OnSaveAllergy();
+
+                else
+                    Allergies = "לא נבחרו אלרגיות";
+            }
+
+            this.theUser = parent;
+            this.theStudent = student;
+
             EyeImg = CLOSEDEYE_PHOTO_SRC;
             ShowPass = true;
             EyeImg2 = CLOSEDEYE_PHOTO_SRC;
-            ShowPass2 = true;
+            
             this.SearchTerm = String.Empty;
+
+
             InitAllergies();
-            Allergies = "לא נבחרו אלרגיות";
-
-
             Button1 = false;
             Button2 = false;
             ImgSource1 = Source1;
             ImgSource2 = Source1;
             Button1PressedCommand = new Command(Button1Pressed);
             Button2PressedCommand = new Command(Button2Pressed);
-            this.BirthDate = DateTime.Today;
-            this.selectedAllergies = new List<Allergy>();
+            
+            
             this.ShowChildNameError = false;
             this.ShowChildLastNameError = false;
             this.ShowChildIDError = false;
@@ -1225,9 +1373,7 @@ namespace MyGanAPP.ViewModels
             this.RelationError = ERROR_MESSAGES.REQUIRED_FIELD;
 
 
-            //Setup default image photo
-            this.UserImgSrc = DEFAULT_PHOTO_SRC;
-            this.imageFileResult = null; //mark that no picture was chosen
+            
 
         }
 
@@ -1288,16 +1434,7 @@ namespace MyGanAPP.ViewModels
             else { EyeImg = CLOSEDEYE_PHOTO_SRC; }
         }
 
-        public ICommand PassCommand2 => new Command(OnPass2Change);
-
-        public void OnPass2Change()
-        {
-            if (ShowPass2 == false) { ShowPass2 = true; }
-            else { ShowPass2 = false; }
-
-            if (EyeImg2 == CLOSEDEYE_PHOTO_SRC) { EyeImg2 = OPENEYE_PHOTO_SRC; }
-            else { EyeImg2 = CLOSEDEYE_PHOTO_SRC; }
-        }
+       
         public ICommand Button1PressedCommand { protected set; get; }
         public void Button1Pressed()
         {

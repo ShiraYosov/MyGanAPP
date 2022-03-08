@@ -10,7 +10,7 @@
                 <StackLayout >
                     <Image Source="logo1.png"  HeightRequest="300" ></Image>
 
-                    <Frame Style="{StaticResource logInSignUp}" BorderColor="DarkSlateGray" BackgroundColor="#bee9e8">
+                    <Frame IsVisible="{Binding NotConnected}" Style="{StaticResource logInSignUp}" BorderColor="DarkSlateGray" BackgroundColor="#bee9e8">
                         <StackLayout>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -138,7 +138,7 @@
 
                                         <!--Grade-->
                                         <Label Text="לאיזה גן עולה?" Style="{StaticResource labelNameStyle}"/>
-                                        <Picker ItemsSource="{Binding GradeTypes}" ItemDisplayBinding="{Binding GradeName}" SelectedItem="{Binding ChosenGrade}"></Picker>
+                                        <Picker SelectedIndex="{Binding ChosenGrade}" ItemsSource="{Binding GradeTypes}" ItemDisplayBinding="{Binding GradeName}" SelectedItem="{Binding ChosenGrade}"></Picker>
 
                                         <!--Gender-->
                                         <Grid RadioButtonGroup.SelectedValue="{Binding Gender}" RadioButtonGroup.GroupName="Gender">
@@ -152,8 +152,8 @@
                                             </Grid.RowDefinitions>
                                             <Label Text="מגדר" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
                                             <Label Text="{Binding GenderError}" IsVisible="{Binding ShowGenderError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
-                                            <RadioButton Value="נקבה" Content="נקבה" Grid.Column="0" Grid.Row="1" HorizontalOptions="Start"/>
-                                            <RadioButton Value="זכר" Content="זכר" Grid.Column="1" HorizontalOptions="Start" Grid.Row="1"/>
+                                            <RadioButton Value="נקבה"  Content="נקבה" Grid.Column="0" Grid.Row="1" HorizontalOptions="Start"/>
+                                            <RadioButton Value="זכר"  Content="זכר" Grid.Column="1" HorizontalOptions="Start" Grid.Row="1"/>
                                         </Grid>
 
                                         <!--Allergies-->
