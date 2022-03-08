@@ -1130,7 +1130,7 @@ namespace MyGanAPP.ViewModels
 
         public async void Register()
         {
-            int groupId = GanCode.CodeToGroupID(Code);
+            
             MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
 
             App app = (App)App.Current;
@@ -1142,14 +1142,12 @@ namespace MyGanAPP.ViewModels
                 this.theUser.LastName = ChildLastName;
                 this.theUser.PhoneNumber = PhoneNumber;
 
-                int groupID = GanCode.CodeToGroupID(Code);
-
                 this.theStudent.FirstName = ChildName;
                 this.theStudent.LastName = ChildLastName;
                 this.theStudent.BirthDate = BirthDate;
                 this.theStudent.StudentId = ChildID;
                 this.theStudent.Gender = Gender;
-                this.theStudent.GroupId = groupId;
+                
                 this.theStudent.GradeId = ChosenGrade.GradeId;
 
                 this.theStudent.StudentAllergies.Clear();
@@ -1196,6 +1194,9 @@ namespace MyGanAPP.ViewModels
                     //    };
                     //    newStudent.StudentAllergies.Add(st);
                     //}
+                    
+                    int groupId = GanCode.CodeToGroupID(Code);
+                    this.theStudent.GroupId = groupId;
 
                     StudentOfUser sou = new StudentOfUser
                     {
