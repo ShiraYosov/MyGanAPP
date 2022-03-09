@@ -393,8 +393,14 @@ namespace MyGanAPP.Services
 
         }
 
-        public async Task<User> ParentRegister(User user)
+        public async Task<User> ParentRegister(User user, Student student)
         {
+            RegisterUserDto registerUserDto = new RegisterUserDto()
+            {
+                User = user,
+                Student = student
+            };
+
             try
             {
                 JsonSerializerOptions options = new JsonSerializerOptions
@@ -403,7 +409,7 @@ namespace MyGanAPP.Services
                     Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
                     PropertyNameCaseInsensitive = true
                 };
-                string jsonObject = JsonSerializer.Serialize<User>(user, options);
+                string jsonObject = JsonSerializer.Serialize<RegisterUserDto>(registerUserDto, options);
                 StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/ParentRegister", content);

@@ -19,14 +19,14 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
                 </Grid.RowDefinitions>
                 <Frame BorderColor="white"  CornerRadius="100"  Grid.Column="1" Grid.Row="1" IsClippedToBounds="True" Padding="0" HeightRequest="170" WidthRequest="170" HorizontalOptions="Center">
                     <Image x:Name="theImage" Source="{Binding UserImgSrc}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" HeightRequest="170" WidthRequest="170"/>
                 </Frame>
             </Grid>
 
-            <StackLayout Padding="7" Margin="0" HorizontalOptions="Center">
+            <StackLayout Padding="0,0" Margin="0" HorizontalOptions="Center">
                 <RefreshView x:Name="refreshView" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
                     <ScrollView>
                         <Frame  BackgroundColor="White" HasShadow="True" Padding="20" Margin="15,0" CornerRadius="20" WidthRequest="280">

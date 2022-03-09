@@ -405,6 +405,18 @@ namespace MyGanAPP.ViewModels
             }
         }
 
+        private string gradeTitle;
+
+        public string GradeTitle
+        {
+            get => gradeTitle;
+            set
+            {
+                gradeTitle = value;
+                OnPropertyChanged("GradeTitle");
+            }
+        }
+
         public List<Grade> GradeTypes
         {
             get
@@ -1147,21 +1159,22 @@ namespace MyGanAPP.ViewModels
                 this.theStudent.BirthDate = BirthDate;
                 this.theStudent.StudentId = ChildID;
                 this.theStudent.Gender = Gender;
-                
                 this.theStudent.GradeId = ChosenGrade.GradeId;
+                this.theStudent.Grade = ChosenGrade;
 
                 this.theStudent.StudentAllergies.Clear();
                 foreach (Allergy a in selectedAllergies)
                 {
                     StudentAllergy st = new StudentAllergy
                     {
+                        StudentId = theStudent.StudentId,
                         Allergy = a,
+                        AllergyId = a.AllergyId,
                         Student = theStudent
                     };
                     theStudent.StudentAllergies.Add(st);
                 }
 
-                this.theUser.StudentOfUsers.Where(st => st.StudentId == ChildID).FirstOrDefault().RelationToStudent = ChosenRelation;
 
                 App theApp = (App)App.Current;
 
@@ -1212,7 +1225,7 @@ namespace MyGanAPP.ViewModels
 
                 ServerStatus = "מתחבר לשרת...";
                 await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
-                User newU = await proxy.ParentRegister(theUser);
+                User newU = await proxy.ParentRegister(theUser, theStudent);
 
                 if (newU == null)
                 {
@@ -1288,6 +1301,7 @@ namespace MyGanAPP.ViewModels
                     StudentId = "",
                 };
 
+                GradeTitle = "";
                 this.BirthDate = DateTime.Today;
                 // Setup default image photo
                 this.UserImgSrc = DEFAULT_PHOTO_SRC;
@@ -1310,7 +1324,7 @@ namespace MyGanAPP.ViewModels
                 ChildName = student.FirstName;
                 BirthDate = student.BirthDate;
                 ChildID = student.StudentId;
-                //ChosenGrade = student.Grade.GradeName;
+                //GradeTitle = student.Grade.GradeName;
                 //Gender = student.Gender;
 
                 //if (student.Gender == "נקבה")
