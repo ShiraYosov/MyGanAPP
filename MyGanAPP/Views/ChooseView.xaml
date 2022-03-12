@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyGanAPP.Views.ChooseView"
-             BackgroundImageSource="Profilebackground.jfif">
+             BackgroundImageSource="ProfileBackground.jfif"
+             AutomationProperties.IsInAccessibleTree="False">
 
     <ContentPage.Resources>
         <Style TargetType="Grid">

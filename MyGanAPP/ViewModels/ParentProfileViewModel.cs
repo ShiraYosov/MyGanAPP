@@ -55,7 +55,17 @@ namespace MyGanAPP.ViewModels
                 LastName = parent.LastName;
                 Email = parent.Email;
                 PhoneNumber = parent.PhoneNumber;
-                //GroupName = student.Group.GroupName;
+                GroupName = student.Group.GroupName;
+
+                Allergies = "";
+                foreach (StudentAllergy sa in student.StudentAllergies)
+                {
+                    Allergies += sa.Allergy.AllergyName + "," + " ";
+                }
+
+                if (student.StudentAllergies.Count == 0) { Allergies = "לא נבחרו אלרגיות"; }
+                else
+                    Allergies = Allergies.Substring(0, Allergies.Length - 2);
             }
             IsRefreshing = false;
         }
@@ -231,15 +241,15 @@ namespace MyGanAPP.ViewModels
 
         #region Grade
 
-        private string chosenGrade;
+        private string gradeName;
 
-        public string ChosenGrade
+        public string GradeName
         {
-            get => chosenGrade;
+            get => gradeName;
             set
             {
-                chosenGrade = value;
-                OnPropertyChanged("ChosenGrade");
+                gradeName = value;
+                OnPropertyChanged("GradeName");
             }
         }
 
@@ -280,7 +290,7 @@ namespace MyGanAPP.ViewModels
                 StudentID = student.StudentId;
                 BirthDate = student.BirthDate.ToShortDateString();
                 Gender = student.Gender;
-                //ChosenGrade = student.Grade.GradeName;
+                GradeName = student.Grade.GradeName;
 
                 foreach (StudentAllergy sa in student.StudentAllergies)
                 {

@@ -36,11 +36,17 @@
         </local:ApproveUsersView.IconImageSource>
     </local:ApproveUsersView>
 
-    <local:ApproveUsersView Title="קבוצות">
+    <local:ApproveUsersView Title="הודעות">
         <local:ApproveUsersView.IconImageSource>
-            <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.Users}"/>
+            <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.Message}"/>
         </local:ApproveUsersView.IconImageSource>
     </local:ApproveUsersView>
+
+    <local:KindergartenGroupsView Title="קבוצות">
+        <local:KindergartenGroupsView.IconImageSource>
+            <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.Users}"/>
+        </local:KindergartenGroupsView.IconImageSource>
+    </local:KindergartenGroupsView>
 
     <local:ChooseView Title="בחירת שדה ">
         <local:ChooseView.IconImageSource>

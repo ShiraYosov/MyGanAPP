@@ -776,7 +776,7 @@ namespace MyGanAPP.ViewModels
                 }
             }
         }
-        
+
 
         #region Allergies
 
@@ -1051,8 +1051,10 @@ namespace MyGanAPP.ViewModels
             {
                 Allergies += a.AllergyName + "," + " ";
             }
-            Allergies = Allergies.Substring(0, Allergies.Length - 2);
             if (selectedAllergies.Count == 0) { Allergies = "לא נבחרו אלרגיות"; }
+
+            else { Allergies = Allergies.Substring(0, Allergies.Length - 2); }
+
 
             await PopupNavigation.Instance.PopAsync();
         }
@@ -1142,7 +1144,7 @@ namespace MyGanAPP.ViewModels
 
         public async void Register()
         {
-            
+
             MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
 
             App app = (App)App.Current;
@@ -1186,28 +1188,6 @@ namespace MyGanAPP.ViewModels
                 else if (theApp.CurrUser == null && theApp.SelectedStudent == null)
                 {
 
-
-                    //Student newStudent = new Student
-                    //{
-                    //    FirstName = ChildName,
-                    //    LastName = ChildLastName,
-                    //    BirthDate = BirthDate,
-                    //    StudentId = ChildID,
-                    //    Gender = Gender,
-                    //    GroupId = groupId,
-                    //    GradeId = ChosenGrade.GradeId
-                    //};
-
-                    //foreach (Allergy a in selectedAllergies)
-                    //{
-                    //    StudentAllergy st = new StudentAllergy
-                    //    {
-                    //        Allergy = a,
-                    //        Student = newStudent
-                    //    };
-                    //    newStudent.StudentAllergies.Add(st);
-                    //}
-                    
                     int groupId = GanCode.CodeToGroupID(Code);
                     this.theStudent.GroupId = groupId;
 
@@ -1243,7 +1223,8 @@ namespace MyGanAPP.ViewModels
                         }, $"kids\\{newU.StudentOfUsers.FirstOrDefault().StudentId}.jpg");
                     }
                     ServerStatus = "שומר נתונים...";
-                    
+                    theApp.SelectedStudent = theStudent;
+
                     await App.Current.MainPage.Navigation.PopModalAsync();
                     if (theApp.CurrUser == null)
                     {
@@ -1307,7 +1288,7 @@ namespace MyGanAPP.ViewModels
                 this.UserImgSrc = DEFAULT_PHOTO_SRC;
                 this.imageFileResult = null; //mark that no picture was chosen
 
-                
+
                 Allergies = "לא נבחרו אלרגיות";
             }
 
@@ -1324,25 +1305,23 @@ namespace MyGanAPP.ViewModels
                 ChildName = student.FirstName;
                 BirthDate = student.BirthDate;
                 ChildID = student.StudentId;
-                //GradeTitle = student.Grade.GradeName;
-                //Gender = student.Gender;
+                ChosenGrade = student.Grade;
+                Gender = student.Gender;
 
-                //if (student.Gender == "נקבה")
-                //{
-                //    FChecked = true;
-                //}
-                //else { MChecked = true; }
 
                 foreach (StudentAllergy sa in student.StudentAllergies)
                 {
                     selectedAllergies.Add(sa.Allergy);
                 }
-                
-                if(selectedAllergies.Count > 0)
-                    OnSaveAllergy();
 
-                else
-                    Allergies = "לא נבחרו אלרגיות";
+                foreach (Allergy a in selectedAllergies)
+                {
+                    Allergies += a.AllergyName + "," + " ";
+                }
+                if (selectedAllergies.Count == 0) { Allergies = "לא נבחרו אלרגיות"; }
+
+                else { Allergies = Allergies.Substring(0, Allergies.Length - 2); }
+
             }
 
             this.theUser = parent;
@@ -1351,7 +1330,7 @@ namespace MyGanAPP.ViewModels
             EyeImg = CLOSEDEYE_PHOTO_SRC;
             ShowPass = true;
             EyeImg2 = CLOSEDEYE_PHOTO_SRC;
-            
+
             this.SearchTerm = String.Empty;
 
 
@@ -1362,8 +1341,8 @@ namespace MyGanAPP.ViewModels
             ImgSource2 = Source1;
             Button1PressedCommand = new Command(Button1Pressed);
             Button2PressedCommand = new Command(Button2Pressed);
-            
-            
+
+
             this.ShowChildNameError = false;
             this.ShowChildLastNameError = false;
             this.ShowChildIDError = false;
@@ -1388,7 +1367,7 @@ namespace MyGanAPP.ViewModels
             this.RelationError = ERROR_MESSAGES.REQUIRED_FIELD;
 
 
-            
+
 
         }
 
@@ -1449,7 +1428,7 @@ namespace MyGanAPP.ViewModels
             else { EyeImg = CLOSEDEYE_PHOTO_SRC; }
         }
 
-       
+
         public ICommand Button1PressedCommand { protected set; get; }
         public void Button1Pressed()
         {

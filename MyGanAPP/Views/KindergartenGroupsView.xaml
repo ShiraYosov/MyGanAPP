@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyGanAPP.Views.KindergartenGroupsView"
+             FlowDirection="RightToLeft"
+             BackgroundImageSource="HomePage2.jpg">
+
+
+    <ContentPage.Content>
+
+        <Frame Padding="20" Margin="35" CornerRadius="30" BackgroundColor="white">
+
+            <StackLayout BackgroundColor="White">
+
+                <Label Text="לחץ לצפייה בקבוצה:" Padding="0,10" TextDecorations="Underline" TextColor="Black" FontSize="19" FontAttributes="Bold" HorizontalOptions="Start"></Label>
+
+                <CollectionView x:Name="collectionName" 
+                                BackgroundColor="White"
+                                EmptyView="אין קבוצות קיימות במערכת"
+                                ItemsSource="{Binding GroupsList}" SelectionMode="Single"
+                                SelectionChangedCommand="{Binding SelectionChanged}"
+                                SelectedItem="{Binding SelectedItem}"
+                                SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName}, Path=SelectedItem}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <RefreshView x:Name="refreshView"
+             Command="{Binding RefreshCommand}"
+             IsRefreshing="{Binding IsRefreshing}">
+                                <SwipeView>
+                                   
+                                    <SwipeView.RightItems>
+
+                                        <SwipeItem Text="מחק קבוצה"
+                                               BackgroundColor="#e56b6f"
+                                               Command="{Binding Source={x:Reference collectionName}, Path= BindingContext.DisapproveCommand}"
+                                               CommandParameter="{Binding}"/>
+                                    </SwipeView.RightItems>
+
+
+                                    <StackLayout>
+                                        <Grid Margin="0" BackgroundColor="White">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Text="{Binding Path=GroupName, StringFormat='{0}'}" HorizontalTextAlignment="Start" HorizontalOptions="Center" FontSize="25" TextColor="Black" Grid.Row="0" Grid.Column="0"/>
+                                        </Grid>
+
+                                    </StackLayout>
+                                </SwipeView>
+                            </RefreshView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+
+
+                <Button Text="הוספת קבוצה" Command="{Binding AddGroupCommand}" BackgroundColor="#bee9e8" TextColor="Black"  Margin="15" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
+
+
+            </StackLayout>
+        </Frame>
+
+    </ContentPage.Content>
+</ContentPage>

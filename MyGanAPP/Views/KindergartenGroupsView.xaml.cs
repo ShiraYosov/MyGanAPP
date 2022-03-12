@@ -10,11 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace MyGanAPP.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ChooseView : ContentPage
+    public partial class KindergartenGroupsView : ContentPage
     {
-        public ChooseView()
+        public KindergartenGroupsView()
         {
-            this.BindingContext = new ChooseKidViewModel();
+            this.BindingContext = new KindergartenGroupsViewModel();
             InitializeComponent();
         }
     }
