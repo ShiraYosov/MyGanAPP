@@ -385,6 +385,35 @@ namespace MyGanAPP.ViewModels
             }
         }
 
+        private bool fChecked;
+        public bool FChecked
+        {
+            get { return fChecked; }
+
+            set
+            {
+                if (this.fChecked != value)
+                {
+                    this.fChecked = value;
+                    OnPropertyChanged(nameof(FChecked));
+                }
+            }
+        }
+        private bool mChecked;
+        public bool MChecked
+        {
+            get { return mChecked; }
+
+            set
+            {
+                if (this.mChecked != value)
+                {
+                    this.mChecked = value;
+                    OnPropertyChanged(nameof(MChecked));
+                }
+            }
+        }
+
         private void ValidateGender()
         {
             this.ShowGenderError = string.IsNullOrEmpty(Gender);
@@ -405,17 +434,7 @@ namespace MyGanAPP.ViewModels
             }
         }
 
-        private string gradeTitle;
-
-        public string GradeTitle
-        {
-            get => gradeTitle;
-            set
-            {
-                gradeTitle = value;
-                OnPropertyChanged("GradeTitle");
-            }
-        }
+       
 
         public List<Grade> GradeTypes
         {
@@ -747,35 +766,6 @@ namespace MyGanAPP.ViewModels
             }
         }
         #endregion
-
-        private bool fChecked;
-        public bool FChecked
-        {
-            get { return fChecked; }
-
-            set
-            {
-                if (this.fChecked != value)
-                {
-                    this.fChecked = value;
-                    OnPropertyChanged(nameof(FChecked));
-                }
-            }
-        }
-        private bool mChecked;
-        public bool MChecked
-        {
-            get { return mChecked; }
-
-            set
-            {
-                if (this.mChecked != value)
-                {
-                    this.mChecked = value;
-                    OnPropertyChanged(nameof(MChecked));
-                }
-            }
-        }
 
 
         #region Allergies
@@ -1282,7 +1272,7 @@ namespace MyGanAPP.ViewModels
                     StudentId = "",
                 };
 
-                GradeTitle = "";
+                
                 this.BirthDate = DateTime.Today;
                 // Setup default image photo
                 this.UserImgSrc = DEFAULT_PHOTO_SRC;
@@ -1305,8 +1295,13 @@ namespace MyGanAPP.ViewModels
                 ChildName = student.FirstName;
                 BirthDate = student.BirthDate;
                 ChildID = student.StudentId;
-                ChosenGrade = student.Grade;
+                StudentOfUser su = parent.StudentOfUsers.Where(s => s.StudentId == student.StudentId).FirstOrDefault();
+                ChosenRelation = RelationTypes.Where(r => r.RelationToStudentId == su.RelationToStudentId ).FirstOrDefault();   
+                ChosenGrade = GradeTypes.Where(g => g.GradeId == student.GradeId).FirstOrDefault();
                 Gender = student.Gender;
+
+                if(Gender == "נקבה") { FChecked = true; }
+                else if (Gender == "זכר") { MChecked= true; }
 
 
                 foreach (StudentAllergy sa in student.StudentAllergies)

@@ -1,14 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyGanAPP.Views.GroupTab"
-             BarBackgroundColor="#5c374c"
-             BarTextColor="White"
-             SelectedTabColor="#5c374c"
-             UnselectedTabColor="White"          
-             FlowDirection="RightToLeft"
-             NavigationPage.HasNavigationBar="False">
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:MyGanAPP.Views"
+            x:Class="MyGanAPP.Views.GroupTab"
+            FlowDirection="RightToLeft">
 
-    <!--<local:Favorites Title="המועדפים שלי" ></local:Favorites>
-    <local:EditMyPosts Title=" עריכת המודעות שלי" ></local:EditMyPosts>-->
+    <local:ShowGroupView Title="פרופיל קבוצה" ></local:ShowGroupView>
+    <!--<local:EditMyPosts Title=" עריכת המודעות שלי" ></local:EditMyPosts>-->
 </TabbedPage>

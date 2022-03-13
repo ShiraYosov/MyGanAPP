@@ -296,6 +296,37 @@ namespace MyGanAPP.Services
             }
         }
 
+        //Add New Group
+        public async Task<bool> AddGroup(Group g)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                string json = JsonSerializer.Serialize<Group>(g, options);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/AddGroup", content);
+                if (response.IsSuccessStatusCode)
+                {
+
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    bool b = JsonSerializer.Deserialize<bool>(jsonContent, options);
+                    return b;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
         public async Task<Kindergarten> AddKindergarten(Kindergarten k)
         {
             try

@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace MyGanAPP.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class GroupTab : TabbedPage
+    public partial class ShowGroupView : ContentPage
     {
-        public GroupTab()
+        public ShowGroupView()
         {
             InitializeComponent();
         }

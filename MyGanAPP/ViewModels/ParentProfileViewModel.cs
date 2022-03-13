@@ -290,6 +290,7 @@ namespace MyGanAPP.ViewModels
                 StudentID = student.StudentId;
                 BirthDate = student.BirthDate.ToShortDateString();
                 Gender = student.Gender;
+
                 GradeName = student.Grade.GradeName;
 
                 foreach (StudentAllergy sa in student.StudentAllergies)

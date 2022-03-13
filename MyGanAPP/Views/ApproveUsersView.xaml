@@ -59,11 +59,11 @@
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
-                                            <Label Grid.Column="1" Grid.Row="0" TextColor="#77c2c9"
+                                            <Label Grid.Column="1" Grid.Row="0" TextColor="Black"
                                    Text="שם פרטי:" FontAttributes="Bold"/>
                                             <Label Grid.Column="2" Grid.Row="0" HorizontalOptions="Start"
                                    Text="{Binding User.Fname}" />
-                                            <Label Grid.Column="1" Grid.Row="1" TextColor="#77c2c9"
+                                            <Label Grid.Column="1" Grid.Row="1" TextColor="Black"
                                    Text="שם משפחה:" FontAttributes="Bold"/>
                                             <Label Grid.Column="2" Grid.Row="1" HorizontalOptions="Start"
                                    Text="{Binding User.LastName}"/>
