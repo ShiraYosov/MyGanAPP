@@ -32,7 +32,7 @@
                                 <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span Text="שם משפחה: " FontSize="20" FontAttributes="Bold"/>
+                                            <Span Text="שם המורה: " FontSize="20" FontAttributes="Bold"/>
                                             <Span Text="{Binding TeacherName}" FontSize="20" />
                                         </FormattedString>
                                     </Label.FormattedText>

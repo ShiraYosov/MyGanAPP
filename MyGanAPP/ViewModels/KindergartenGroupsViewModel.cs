@@ -29,27 +29,30 @@ namespace MyGanAPP.ViewModels
         public KindergartenGroupsViewModel()
         {
             GroupsList = new ObservableCollection<Group>();
-            CreateCollection(); 
+            CreateCollection();
         }
 
         private void CreateCollection()
         {
-            
+
             GroupsList.Clear();
             App a = (App)App.Current;
 
-            ICollection<Group> theGroups = a.SelectedKindergarten.Groups;
+            KindergartenManager km = a.CurrUser.KindergartenManagers.Where(k => k.KindergartenId == a.SelectedKindergarten.KindergartenId).FirstOrDefault();
+            ICollection<Group> theGroups = km.Kindergarten.Groups;
             foreach (Group g in theGroups)
             {
                 this.GroupsList.Add(g);
             }
-           
+
 
         }
 
         public ICommand SelectionChanged => new Command(OnSelection);
         public async void OnSelection(object obj)
         {
+            App a = (App)App.Current;
+            a.SelectedGroup = (Group)obj;
             await App.Current.MainPage.Navigation.PushAsync(new GroupTab());
         }
     }

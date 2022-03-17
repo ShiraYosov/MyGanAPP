@@ -5,5 +5,6 @@
             FlowDirection="RightToLeft">
 
     <local:ShowGroupView Title="פרופיל קבוצה" ></local:ShowGroupView>
+    <local:ApproveUsersView Title="אישור משתמשים"></local:ApproveUsersView>
     <!--<local:EditMyPosts Title=" עריכת המודעות שלי" ></local:EditMyPosts>-->
 </TabbedPage>

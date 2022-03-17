@@ -284,7 +284,7 @@ namespace MyGanAPP.ViewModels
             else { Visible1 = false; }
 
 
-            if (a.SelectedKindergarten != null)
+            if (a.SelectedKindergarten != null && a.SelectedGroup == null)
             {
                 Visible2 = true;
                 TeachersList.Clear();

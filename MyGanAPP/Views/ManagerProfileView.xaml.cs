@@ -22,11 +22,6 @@ namespace MyGanAPP.Views
 
 
        
-        //protected override void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //    context.OnRefresh();
-
-        //}
+        
     }
 }

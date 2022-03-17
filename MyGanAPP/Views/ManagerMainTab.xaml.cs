@@ -16,5 +16,12 @@ namespace MyGanAPP.Views
         {
             InitializeComponent();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App a = (App)App.Current;
+            a.SelectedGroup = null;
+        }
     }
 }
