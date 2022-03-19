@@ -36,7 +36,7 @@
                             </Grid.ColumnDefinitions>
 
 
-                            <Frame BackgroundColor="#bee9e8" Grid.Row="1" Grid.Column="0" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                            <Frame Grid.Row="1" Grid.Column="0" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5" BackgroundColor="#bee9e8">
                                 <Image Source="email.jpg" HeightRequest="17" WidthRequest="17" Margin="5"/>
                             </Frame>
                             <Entry x:Name="email"  Placeholder="הכנס כתובת אימייל" FontSize="23" Text="{Binding Email}" TextColor="Black" Grid.Row="1" Grid.Column="1" HorizontalTextAlignment="Center"/>

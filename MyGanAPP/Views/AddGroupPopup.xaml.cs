@@ -6,16 +6,18 @@ using System.Threading.Tasks;
 using MyGanAPP.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Rg.Plugins.Popup.Services;
 
 namespace MyGanAPP.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ShowGroupView : ContentPage
+    public partial class AddGroupPopup :Rg.Plugins.Popup.Pages.PopupPage
     {
-        public ShowGroupView()
+        public AddGroupPopup(object context)
         {
-            this.BindingContext = new ShowGroupViewModel(); 
+            this.BindingContext = context;
             InitializeComponent();
+            
         }
     }
 }

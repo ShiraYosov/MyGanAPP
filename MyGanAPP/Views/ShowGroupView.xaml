@@ -10,69 +10,166 @@
 
 
 
-            <StackLayout Padding="0" Margin="10,30,10,30" HorizontalOptions="Center">
-                <RefreshView x:Name="refreshView" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+            <StackLayout Padding="0" Margin="10" HorizontalOptions="Center">
+
+
+                <Frame  BackgroundColor="White" HasShadow="True" Padding="20" Margin="15,0" CornerRadius="20" WidthRequest="280">
                     <ScrollView>
-                        <Frame  BackgroundColor="White" HasShadow="True" Padding="20" Margin="15,0" CornerRadius="20" WidthRequest="280">
+                        <StackLayout Padding="0" Margin="8">
+                        
+                            <Label Text="פרטי קבוצה" Grid.Column="1" TextDecorations="Underline" FontAttributes="Bold" FontSize="27" HorizontalOptions="Start" TextColor="Black" ></Label>
 
-                            <StackLayout Padding="0" Margin="8">
-                                <Label Text="פרטי משתמש" Grid.Column="1" TextDecorations="Underline" FontAttributes="Bold" FontSize="27" HorizontalOptions="Start" TextColor="Black" ></Label>
+                            <!-- GroupName-->
+                            <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="שם הקבוצה: " FontSize="20" FontAttributes="Bold"/>
+                                        <Span Text="{Binding GroupName}" FontSize="20" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
 
-                                <!-- GroupName-->
-                                <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="שם הקבוצה: " FontSize="20" FontAttributes="Bold"/>
-                                            <Span Text="{Binding GroupName}" FontSize="20" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
+                            <!-- NumberOfStudents-->
+                            <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="מספר תלמידים: " FontSize="20" FontAttributes="Bold"/>
+                                        <Span Text="{Binding NumberOfStudents}" FontSize="20" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
 
-                                <!-- TeacherName-->
-                                <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="שם המורה: " FontSize="20" FontAttributes="Bold"/>
-                                            <Span Text="{Binding TeacherName}" FontSize="20" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
+                            <!-- TeacherDetails-->
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
 
-                                <!-- NumberOfStudents-->
-                                <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="מספר תלמידים: " FontSize="20" FontAttributes="Bold"/>
-                                            <Span Text="{Binding NumberOfStudents}" FontSize="20" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
+                                <ImageButton BackgroundColor="Transparent" Source="{Binding ImgSource1}" Command="{Binding Button1PressedCommand}"  Grid.Column="0" HorizontalOptions="Start" HeightRequest="25" WidthRequest="25"></ImageButton>
+                                <Label Text="פרטי מורה" Grid.Column="1" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" TextColor="Black" ></Label>
+                            </Grid>
+
+                            <StackLayout IsVisible="{Binding Button1}">
+
+                                <Frame CornerRadius="20" BackgroundColor="#dee2ff" Padding="5" Margin="0" >
+                                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#dee2ff">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="1" Grid.Row="0" TextColor="Black"
+                                   Text="שם פרטי:" FontAttributes="Bold"/>
+                                        <Label Grid.Column="2" Grid.Row="0" HorizontalOptions="Start"
+                                   Text="{Binding TeacherFirstName}" />
+                                        <Label Grid.Column="1" Grid.Row="1" TextColor="Black"
+                                   Text="שם משפחה:" FontAttributes="Bold"/>
+                                        <Label Grid.Column="2" Grid.Row="1" HorizontalOptions="Start"
+                                   Text="{Binding TeacherLastName}"/>
+
+                                        <Label Grid.Column="1" Grid.Row="2" TextColor="Black"
+                                   Text="אימייל:" FontAttributes="Bold"/>
+                                        <Label Grid.Column="2" Grid.Row="2" HorizontalOptions="Start"
+                                   Text="{Binding Email}" />
+
+                                        <Label Grid.Column="1" Grid.Row="3" TextColor="Black"
+                                   Text="מספר טלפון:" FontAttributes="Bold"/>
+                                        <Label Grid.Column="2" Grid.Row="3" HorizontalOptions="Start"
+                                   Text="{Binding PhoneNumber}" />
 
 
-                                <!-- StudentsList-->
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="30"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
+                                        <Frame Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Style="{StaticResource SmallImageFrame}">
+                                            <Image Source="{Binding UserImgSrc}" Style="{StaticResource SmallImage}"/>
+                                        </Frame>
 
-                                    <ImageButton BackgroundColor="Transparent" Source="{Binding ImgSource1}" Command="{Binding Button1PressedCommand}"  Grid.Column="0" HorizontalOptions="Start" HeightRequest="25" WidthRequest="25"></ImageButton>
-                                    <Label Text="רשימת תלמידים:" Grid.Column="1" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" TextColor="Black" ></Label>
-                                </Grid>
-
-                                <StackLayout IsVisible="{Binding Button1}">
-                                    
-                                </StackLayout>
-
-
-
+                                    </Grid>
+                                </Frame>
                             </StackLayout>
-                        </Frame>
+
+
+                            <!-- StudentsList-->
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <ImageButton BackgroundColor="Transparent" Source="{Binding ImgSource2}" Command="{Binding Button2PressedCommand}"  Grid.Column="0" HorizontalOptions="Start" HeightRequest="25" WidthRequest="25"></ImageButton>
+                                <Label Text="רשימת תלמידים:" Grid.Column="1" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" TextColor="Black" ></Label>
+                            </Grid>
+
+                            <StackLayout IsVisible="{Binding Button2}">
+
+                                <Frame CornerRadius="20" BackgroundColor="#dee2ff"  Padding="5" >
+
+                                    <CollectionView x:Name="collectionName2" 
+                                ItemsSource="{Binding StudentsList}" SelectionMode="Single"
+                                EmptyView="אין תלמידים בהמתנה"
+                                SelectionChangedCommand="{Binding SelectionChanged}"
+                                SelectedItem="{Binding SelectedItem}"
+                                SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName2}, Path=SelectedItem}" >
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <ScrollView>
+                                                    <StackLayout>
+
+                                                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#dee2ff" >
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="*" />
+                                                                <RowDefinition Height="*"/>
+                                                                <RowDefinition Height="*"/>
+                                                                <RowDefinition Height="auto"/>
+                                                            </Grid.RowDefinitions>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*" />
+                                                                <ColumnDefinition Width="*" />
+                                                                <ColumnDefinition Width="*" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <Label Grid.Column="1" Grid.Row="0"
+                                                            Text="שם הילד:" FontAttributes="Bold"/>
+                                                            <Label Grid.Column="2" Grid.Row="0" HorizontalOptions="Start"
+                                                             Text="{Binding FirstName}"/>
+                                                            <Label Grid.Column="1" Grid.Row="1"
+                                                             Text="שם משפחה:" FontAttributes="Bold"/>
+                                                            <Label Grid.Column="2" Grid.Row="1" HorizontalOptions="Start"
+                                                             Text="{Binding LastName}"/>
+
+
+                                                            <Frame Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Style="{StaticResource SmallImageFrame}">
+                                                                <Image Source="{Binding PhotoURL}" Style="{StaticResource SmallImage}"/>
+                                                            </Frame>
+
+                                                        </Grid>
+
+                                                    </StackLayout>
+                                                </ScrollView>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+
+                                </Frame>
+                            </StackLayout>
+
+
+                        
+                    </StackLayout>
                     </ScrollView>
-                </RefreshView>
+                </Frame>
+
+
             </StackLayout>
 
 

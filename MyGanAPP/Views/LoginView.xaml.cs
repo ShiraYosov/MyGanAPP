@@ -35,6 +35,7 @@ namespace MyGanAPP.Views
             a.SelectedGroup = null;
             a.SelectedKindergarten = null;
             a.SelectedStudent = null;
+            a.CurrUser = null;
 
             App.Current.MainPage.Navigation.PushAsync(new ParentRegistrationView());
         }
@@ -45,6 +46,7 @@ namespace MyGanAPP.Views
             a.SelectedGroup = null;
             a.SelectedKindergarten = null;
             a.SelectedStudent = null;
+            a.CurrUser = null;
 
             App.Current.MainPage.Navigation.PushAsync(new AddTeacherView());
         }
@@ -55,6 +57,7 @@ namespace MyGanAPP.Views
             a.SelectedGroup = null;
             a.SelectedKindergarten = null;
             a.SelectedStudent = null;
+            a.CurrUser = null;
 
             App.Current.MainPage.Navigation.PushAsync(new AddManagerView());
         }

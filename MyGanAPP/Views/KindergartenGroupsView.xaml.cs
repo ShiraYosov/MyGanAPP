@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyGanAPP.ViewModels;
+using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,6 +17,12 @@ namespace MyGanAPP.Views
         {
             this.BindingContext = new KindergartenGroupsViewModel();
             InitializeComponent();
+        }
+
+      
+        private void AddGroup_Clicked(object sender, EventArgs e)
+        {
+            PopupNavigation.Instance.PushAsync(new AddGroupPopup(this.BindingContext));
         }
     }
 }

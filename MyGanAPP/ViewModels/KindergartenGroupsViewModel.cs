@@ -24,11 +24,45 @@ namespace MyGanAPP.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private object selectedItem;
+        public object SelectedItem
+        {
+            get => selectedItem;
+            set
+            {
+                if (this.selectedItem != value)
+                {
+                    this.selectedItem = value;
+                    OnPropertyChanged("SelectedItem");
+                }
+
+            }
+        }
+
+        #region GroupName
+        private string groupName;
+        public string GroupName
+        {
+            get => groupName;
+            set
+            {
+                if (this.groupName != value)
+                {
+                    this.groupName = value;
+                    OnPropertyChanged("GroupName");
+                }
+
+            }
+        }
+        #endregion
+
+
         public ObservableCollection<Group> GroupsList { get; }
 
         public KindergartenGroupsViewModel()
         {
             GroupsList = new ObservableCollection<Group>();
+            GroupName = "";
             CreateCollection();
         }
 
@@ -48,12 +82,48 @@ namespace MyGanAPP.ViewModels
 
         }
 
-        public ICommand SelectionChanged => new Command(OnSelection);
-        public async void OnSelection(object obj)
+        public ICommand AddGroupCommand => new Command(OnAddGroup);
+        public async void OnAddGroup()
         {
-            App a = (App)App.Current;
-            a.SelectedGroup = (Group)obj;
-            await App.Current.MainPage.Navigation.PushAsync(new GroupTab());
+            if (!string.IsNullOrEmpty(GroupName))
+            {
+                App a = (App)App.Current;
+                Group group = new Group()
+                {
+                    GroupName = GroupName,
+                    KindergartenId = a.SelectedKindergarten.KindergartenId,
+                    Kindergarten = a.SelectedKindergarten,
+                    Teacher = a.CurrUser,
+                    TeacherId = a.CurrUser.UserId
+                };
+
+                MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
+                bool success = await proxy.AddGroup(group);
+
+
+                if (!success) { await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת קבוצה נכשלה", "בסדר"); }
+                else
+                    CreateCollection();
+
+            }
+
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת קבוצה נכשלה", "בסדר");
+            }
+
+        }
+
+        public ICommand SelectionChanged => new Command(OnSelection);
+        public async void OnSelection()
+        {
+            if (SelectedItem != null && SelectedItem is Group)
+            {
+                App a = (App)App.Current;
+                a.SelectedGroup = (Group)SelectedItem;
+                await App.Current.MainPage.Navigation.PushAsync(new GroupTab());
+                SelectedItem = null;
+            }
         }
     }
 }

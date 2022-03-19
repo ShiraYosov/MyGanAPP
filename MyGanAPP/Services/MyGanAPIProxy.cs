@@ -303,6 +303,8 @@ namespace MyGanAPP.Services
             {
                 JsonSerializerOptions options = new JsonSerializerOptions
                 {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
                     PropertyNameCaseInsensitive = true
                 };
                 string json = JsonSerializer.Serialize<Group>(g, options);

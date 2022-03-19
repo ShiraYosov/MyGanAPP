@@ -22,7 +22,8 @@
                                 SelectedItem="{Binding SelectedItem}"
                                 SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName}, Path=SelectedItem}">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                         <DataTemplate>
+                            <ScrollView>
                             <RefreshView x:Name="refreshView"
              Command="{Binding RefreshCommand}"
              IsRefreshing="{Binding IsRefreshing}">
@@ -51,14 +52,16 @@
                                     </StackLayout>
                                 </SwipeView>
                             </RefreshView>
+                            </ScrollView>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
 
 
-                <Button Text="הוספת קבוצה" Command="{Binding AddGroupCommand}" BackgroundColor="#bee9e8" TextColor="Black"  Margin="15" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
+                <Button Text="הוספת קבוצה" Clicked="AddGroup_Clicked"  BackgroundColor="#bee9e8" TextColor="Black"  Margin="0" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
 
+                <Button Text="הוספת מנהל" Command="{Binding AddManagerCommand}" BackgroundColor="#dee2ff" TextColor="Black"  Margin="0" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
 
             </StackLayout>
         </Frame>
