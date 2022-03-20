@@ -115,50 +115,47 @@
 
                                 <Frame CornerRadius="20" BackgroundColor="#dee2ff"  Padding="5" >
 
-                                    <CollectionView x:Name="collectionName2" 
-                                ItemsSource="{Binding StudentsList}" SelectionMode="Single"
-                                EmptyView="אין תלמידים בהמתנה"
-                                SelectionChangedCommand="{Binding SelectionChanged}"
-                                SelectedItem="{Binding SelectedItem}"
-                                SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName2}, Path=SelectedItem}" >
-                                        <CollectionView.ItemTemplate>
+                                    <StackLayout x:Name="collectionName2" 
+                                BindableLayout.ItemsSource="{Binding StudentsList}"
+                                BindableLayout.EmptyView="אין תלמידים בהמתנה" >
+                                        <BindableLayout.ItemTemplate>
                                             <DataTemplate>
-                                                <ScrollView>
-                                                    <StackLayout>
-
-                                                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#dee2ff" >
-                                                            <Grid.RowDefinitions>
-                                                                <RowDefinition Height="*" />
-                                                                <RowDefinition Height="*"/>
-                                                                <RowDefinition Height="*"/>
-                                                                <RowDefinition Height="auto"/>
-                                                            </Grid.RowDefinitions>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="*" />
-                                                                <ColumnDefinition Width="*" />
-                                                                <ColumnDefinition Width="*" />
-                                                            </Grid.ColumnDefinitions>
-                                                            <Label Grid.Column="1" Grid.Row="0"
+                                                <StackLayout>
+                                                    <StackLayout.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding SelectionChanged}" CommandParameter="{Binding Source={x:Reference collectionName2}, Path=SelectedItem}" />
+                                                    </StackLayout.GestureRecognizers>
+                                                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#dee2ff" >
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="*" />
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="auto"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Label Grid.Column="1" Grid.Row="0"
                                                             Text="שם הילד:" FontAttributes="Bold"/>
-                                                            <Label Grid.Column="2" Grid.Row="0" HorizontalOptions="Start"
+                                                        <Label Grid.Column="2" Grid.Row="0" HorizontalOptions="Start"
                                                              Text="{Binding FirstName}"/>
-                                                            <Label Grid.Column="1" Grid.Row="1"
+                                                        <Label Grid.Column="1" Grid.Row="1"
                                                              Text="שם משפחה:" FontAttributes="Bold"/>
-                                                            <Label Grid.Column="2" Grid.Row="1" HorizontalOptions="Start"
+                                                        <Label Grid.Column="2" Grid.Row="1" HorizontalOptions="Start"
                                                              Text="{Binding LastName}"/>
 
 
-                                                            <Frame Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Style="{StaticResource SmallImageFrame}">
-                                                                <Image Source="{Binding PhotoURL}" Style="{StaticResource SmallImage}"/>
-                                                            </Frame>
+                                                        <Frame Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Style="{StaticResource SmallImageFrame}">
+                                                            <Image Source="{Binding PhotoURL}" Style="{StaticResource SmallImage}"/>
+                                                        </Frame>
 
-                                                        </Grid>
+                                                    </Grid>
 
-                                                    </StackLayout>
-                                                </ScrollView>
+                                                </StackLayout>
                                             </DataTemplate>
-                                        </CollectionView.ItemTemplate>
-                                    </CollectionView>
+                                        </BindableLayout.ItemTemplate>
+                                    </StackLayout>
 
                                 </Frame>
                             </StackLayout>

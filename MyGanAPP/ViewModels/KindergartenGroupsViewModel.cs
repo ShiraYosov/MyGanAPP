@@ -12,6 +12,7 @@ using MyGanAPP.Views;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms.Xaml;
+using Rg.Plugins.Popup.Services;
 
 namespace MyGanAPP.ViewModels
 {
@@ -85,6 +86,7 @@ namespace MyGanAPP.ViewModels
         public ICommand AddGroupCommand => new Command(OnAddGroup);
         public async void OnAddGroup()
         {
+            await PopupNavigation.Instance.PopAsync();
             if (!string.IsNullOrEmpty(GroupName))
             {
                 App a = (App)App.Current;
@@ -98,12 +100,13 @@ namespace MyGanAPP.ViewModels
                 };
 
                 MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
-                bool success = await proxy.AddGroup(group);
+                Group newGroup = await proxy.AddGroup(group);
+                GroupName = "";
 
 
-                if (!success) { await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת קבוצה נכשלה", "בסדר"); }
+                if (newGroup==null) { await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת קבוצה נכשלה", "בסדר"); }
                 else
-                    CreateCollection();
+                    this.GroupsList.Add(newGroup);
 
             }
 

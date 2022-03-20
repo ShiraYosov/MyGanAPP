@@ -191,9 +191,127 @@ namespace MyGanAPP.ViewModels
 
 
         #endregion
-       
+
         #endregion
 
+        #region SelectedItem
+        private object selectedItem;
+        public object SelectedItem
+        {
+            get => selectedItem;
+            set
+            {
+                if (this.selectedItem != value)
+                {
+                    this.selectedItem = value;
+                    OnPropertyChanged("SelectedItem");
+                }
+
+            }
+        }
+        #endregion
+
+        #region SelectedStudent
+        #region StudentImgSrc
+        private string studentImgSrc;
+
+        public string StudentImgSrc
+        {
+            get => studentImgSrc;
+            set
+            {
+                studentImgSrc = value;
+                OnPropertyChanged("StudentImgSrc");
+            }
+        }
+
+        #endregion
+
+        #region BirthDate
+
+
+        private string birthDate;
+
+        public string BirthDate
+        {
+            get => birthDate;
+            set
+            {
+                birthDate = value;
+
+                OnPropertyChanged("BirthDate");
+            }
+        }
+
+
+        #endregion
+
+        #region Gender
+
+        private string gender;
+
+        public string Gender
+        {
+            get => gender;
+            set
+            {
+                gender = value;
+
+                OnPropertyChanged("Gender");
+            }
+        }
+
+
+        #endregion
+
+        #region StudentName
+
+        private string studentName;
+
+        public string StudentName
+        {
+            get => studentName;
+            set
+            {
+                studentName = value;
+                OnPropertyChanged("StudentName");
+            }
+        }
+
+
+        #endregion
+
+        #region StudentLastName
+
+        private string studentLastName;
+
+        public string StudentLastName
+        {
+            get => studentLastName;
+            set
+            {
+                studentLastName = value;
+                OnPropertyChanged("StudentLastName");
+            }
+        }
+
+
+        #endregion
+
+        #region Allergies
+        private string allergies;
+        public string Allergies
+        {
+            get => allergies;
+            set
+            {
+                allergies = value;
+                OnPropertyChanged("Allergies");
+            }
+        }
+        #endregion
+
+        #endregion
         public ObservableCollection<Student> StudentsList { get; }
 
         public ShowGroupViewModel()
@@ -218,7 +336,33 @@ namespace MyGanAPP.ViewModels
             CreatCollection();
         }
 
-        private void CreatCollection()
+        public ICommand SelectionChanged => new Command(OnSelection);
+        public void OnSelection()
+        {
+            if(SelectedItem != null)
+            {
+                Student student = (Student)SelectedItem;    
+
+                StudentImgSrc = student.PhotoURL;
+                StudentName = student.FirstName;
+                StudentLastName = student.LastName;
+                Gender = student.Gender;
+                BirthDate = student.BirthDate.ToShortDateString();
+
+                foreach (StudentAllergy sa in student.StudentAllergies)
+                {
+                    Allergies += sa.Allergy.AllergyName + "," + " ";
+                }
+
+                if (student.StudentAllergies.Count == 0) { Allergies = "לא נבחרו אלרגיות"; }
+                else
+                    Allergies = Allergies.Substring(0, Allergies.Length - 2);
+
+                App.Current.MainPage.Navigation.PushAsync(new StudentView(this));
+            }
+        }
+
+            private void CreatCollection()
         {
             App theApp = (App)App.Current;
             bool IsApproved = false;

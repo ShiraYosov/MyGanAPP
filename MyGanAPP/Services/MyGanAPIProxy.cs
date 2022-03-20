@@ -297,7 +297,7 @@ namespace MyGanAPP.Services
         }
 
         //Add New Group
-        public async Task<bool> AddGroup(Group g)
+        public async Task<Group> AddGroup(Group g)
         {
             try
             {
@@ -310,6 +310,39 @@ namespace MyGanAPP.Services
                 string json = JsonSerializer.Serialize<Group>(g, options);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/AddGroup", content);
+                if (response.IsSuccessStatusCode)
+                {
+
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    Group gr = JsonSerializer.Deserialize<Group>(jsonContent, options);
+                    return gr;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        //Add manager to kindergarten
+        public async Task<bool> AddManager(KindergartenManager km)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                    PropertyNameCaseInsensitive = true
+                };
+                string json = JsonSerializer.Serialize<KindergartenManager>(km, options);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/AddManager", content);
                 if (response.IsSuccessStatusCode)
                 {
 

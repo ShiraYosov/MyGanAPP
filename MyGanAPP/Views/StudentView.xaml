@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyGanAPP.Views.StudentView"
+             BackgroundColor="#bcd4e6"
+             FlowDirection="RightToLeft"
+             >
+    <ContentPage.Content>
+        <StackLayout>
+
+
+
+            <!--Photo-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="1.5*" />
+                </Grid.RowDefinitions>
+                <Frame BorderColor="white"  CornerRadius="100"  Grid.Column="1" Grid.Row="1" IsClippedToBounds="True" Padding="0" HeightRequest="170" WidthRequest="170" HorizontalOptions="Center">
+                    <Image x:Name="theImage" Source="{Binding StudentImgSrc}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" HeightRequest="170" WidthRequest="170"/>
+                </Frame>
+            </Grid>
+
+            <StackLayout Padding="7" Margin="0" HorizontalOptions="Center">
+                <RefreshView x:Name="refreshView" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+                    <ScrollView>
+                        <Frame  BackgroundColor="White" HasShadow="True" Padding="20" Margin="15,0" CornerRadius="20" WidthRequest="280">
+
+                            <StackLayout Padding="0" Margin="8">
+                                <Label Text="פרטי משתמש" Grid.Column="1" TextDecorations="Underline" FontAttributes="Bold" FontSize="27" HorizontalOptions="Start" TextColor="Black" ></Label>
+
+                                <!-- StudentName-->
+                                <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="שם פרטי: " FontSize="20" FontAttributes="Bold"/>
+                                            <Span Text="{Binding StudentName}" FontSize="20" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <!-- StudentLastName-->
+                                <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="שם משפחה: " FontSize="20" FontAttributes="Bold"/>
+                                            <Span Text="{Binding StudentLastName}" FontSize="20" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                               <!-- BirthDate-->
+                                <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="יום הולדת: " FontSize="20" FontAttributes="Bold"/>
+                                            <Span Text="{Binding BirthDate}" FontSize="20" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                
+                                <!-- Gender-->
+                                <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="מגדר: " FontSize="20" FontAttributes="Bold" TextColor="#4d908e"/>
+                                            <Span Text="{Binding Gender}" FontSize="20" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <!--Allergies-->
+                                <Label TextColor="DarkSlateGray" LineBreakMode="WordWrap" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="אלרגיות התלמיד: " FontSize="16"/>
+                                            <Span Text="{Binding Allergies}" FontSize="16" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+
+
+                            </StackLayout>
+                        </Frame>
+                    </ScrollView>
+                </RefreshView>
+            </StackLayout>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

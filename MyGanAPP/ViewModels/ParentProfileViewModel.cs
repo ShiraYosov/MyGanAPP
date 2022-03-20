@@ -152,7 +152,6 @@ namespace MyGanAPP.ViewModels
 
         #endregion
 
-      
         #region StudentName
 
         private string studentName;

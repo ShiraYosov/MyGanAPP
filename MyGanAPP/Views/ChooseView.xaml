@@ -72,7 +72,7 @@
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame BackgroundColor="#ecf8f8" BorderColor="Black">
+                                    <Frame BackgroundColor="#ecf8f8" BorderColor="Black" HasShadow="False">
                                         <Grid Margin="0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
@@ -99,7 +99,7 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
 
-                                    <Frame BackgroundColor="#ecf8f8" BorderColor="Black">
+                                    <Frame BackgroundColor="#ecf8f8" BorderColor="Black" HasShadow="False">
                                         <Grid Margin="0" >
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />

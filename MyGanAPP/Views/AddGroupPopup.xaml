@@ -22,10 +22,11 @@ FlowDirection="RightToLeft">
                  Padding="25"
                  BackgroundColor="White"
                  HorizontalOptions="Center"
-                 VerticalOptions="Center">
+                 VerticalOptions="Center"
+                 WidthRequest="200">
 
-        <Label Text="הוספת קבוצה" TextColor="Black"></Label>
-        <Entry Placeholder="הקלד שם קבוצה" Text="{Binding GroupName}" FontSize="15" PlaceholderColor="Black" ></Entry>
+        <Label Text="הוספת קבוצה" TextColor="Black" FontAttributes="Bold" FontSize="23"></Label>
+        <Entry Placeholder="הקלד שם קבוצה" Text="{Binding GroupName}" FontSize="15" PlaceholderColor="Black"  ></Entry>
 
         <Button Text="הוספת קבוצה" Command="{Binding AddGroupCommand}"  BackgroundColor="#bee9e8" TextColor="Black"  Margin="0" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
 
