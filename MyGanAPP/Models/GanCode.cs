@@ -10,7 +10,7 @@ namespace MyGanAPP.Models
 
         public static string CreateGroupCode(int ID)
         {
-           return "G" + $"{HASHCODE / ID}" + "N" + $" {HASHCODE % ID}";
+           return "G" + $"{HASHCODE / ID}" + "N" + $"{HASHCODE % ID}";
             
         }
 

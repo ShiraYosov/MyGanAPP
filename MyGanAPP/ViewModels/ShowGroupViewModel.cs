@@ -102,6 +102,19 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
+        #region GroupCode
+        private string groupCode;
+        public string GroupCode
+        {
+            get => groupCode;
+            set
+            {
+                groupCode = value;
+                OnPropertyChanged("GroupCode");
+            }
+        }
+        #endregion
+
         #region NumberOfStudents
         private int numberOfStudents;
         public int NumberOfStudents
@@ -192,23 +205,6 @@ namespace MyGanAPP.ViewModels
 
         #endregion
 
-        #endregion
-
-        #region SelectedItem
-        private object selectedItem;
-        public object SelectedItem
-        {
-            get => selectedItem;
-            set
-            {
-                if (this.selectedItem != value)
-                {
-                    this.selectedItem = value;
-                    OnPropertyChanged("SelectedItem");
-                }
-
-            }
-        }
         #endregion
 
         #region SelectedStudent
@@ -325,6 +321,7 @@ namespace MyGanAPP.ViewModels
             PhoneNumber = Teacher.PhoneNumber;
             TeacherFirstName = Teacher.Fname;
             TeacherLastName = Teacher.LastName;
+            GroupCode = GanCode.CreateGroupCode(theApp.SelectedGroup.GroupId);
 
             Button1 = false;
             Button2 = false;
@@ -336,12 +333,12 @@ namespace MyGanAPP.ViewModels
             CreatCollection();
         }
 
-        public ICommand SelectionChanged => new Command(OnSelection);
-        public void OnSelection()
+        public Command<Student> SelectionChanged => new Command<Student>(OnSelection);
+        public void OnSelection(object s)
         {
-            if(SelectedItem != null)
+            if(s != null)
             {
-                Student student = (Student)SelectedItem;    
+                Student student = (Student)s;    
 
                 StudentImgSrc = student.PhotoURL;
                 StudentName = student.FirstName;
@@ -349,6 +346,7 @@ namespace MyGanAPP.ViewModels
                 Gender = student.Gender;
                 BirthDate = student.BirthDate.ToShortDateString();
 
+                Allergies = "";
                 foreach (StudentAllergy sa in student.StudentAllergies)
                 {
                     Allergies += sa.Allergy.AllergyName + "," + " ";

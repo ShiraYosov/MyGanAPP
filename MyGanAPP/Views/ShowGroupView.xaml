@@ -29,6 +29,16 @@
                                 </Label.FormattedText>
                             </Label>
 
+                            <!-- GroupCode-->
+                            <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="קוד קבוצה:" FontSize="20" FontAttributes="Bold"/>
+                                        <Span Text="{Binding GroupCode}" FontSize="20" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
                             <!-- NumberOfStudents-->
                             <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
                                 <Label.FormattedText>
@@ -50,7 +60,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <ImageButton BackgroundColor="Transparent" Source="{Binding ImgSource1}" Command="{Binding Button1PressedCommand}"  Grid.Column="0" HorizontalOptions="Start" HeightRequest="25" WidthRequest="25"></ImageButton>
-                                <Label Text="פרטי מורה" Grid.Column="1" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" TextColor="Black" ></Label>
+                                <Label Text="פרטי מורה:" Grid.Column="1" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" TextColor="Black" ></Label>
                             </Grid>
 
                             <StackLayout IsVisible="{Binding Button1}">
@@ -122,7 +132,7 @@
                                             <DataTemplate>
                                                 <StackLayout>
                                                     <StackLayout.GestureRecognizers>
-                                                        <TapGestureRecognizer Command="{Binding SelectionChanged}" CommandParameter="{Binding Source={x:Reference collectionName2}, Path=SelectedItem}" />
+                                                        <TapGestureRecognizer Command ="{Binding Source={x:Reference collectionName2}, Path= BindingContext.SelectionChanged}" CommandParameter="{Binding}" />
                                                     </StackLayout.GestureRecognizers>
                                                     <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#dee2ff" >
                                                         <Grid.RowDefinitions>

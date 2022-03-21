@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyGanAPP.Views.StudentView"
-             BackgroundColor="#bcd4e6"
+             BackgroundColor="#dee2ff"
              FlowDirection="RightToLeft"
              >
     <ContentPage.Content>
@@ -32,8 +32,7 @@
                         <Frame  BackgroundColor="White" HasShadow="True" Padding="20" Margin="15,0" CornerRadius="20" WidthRequest="280">
 
                             <StackLayout Padding="0" Margin="8">
-                                <Label Text="פרטי משתמש" Grid.Column="1" TextDecorations="Underline" FontAttributes="Bold" FontSize="27" HorizontalOptions="Start" TextColor="Black" ></Label>
-
+                                
                                 <!-- StudentName-->
                                 <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
                                     <Label.FormattedText>
@@ -68,18 +67,18 @@
                                 <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span Text="מגדר: " FontSize="20" FontAttributes="Bold" TextColor="#4d908e"/>
+                                            <Span Text="מגדר: " FontSize="20" FontAttributes="Bold" TextColor="Black"/>
                                             <Span Text="{Binding Gender}" FontSize="20" />
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
 
                                 <!--Allergies-->
-                                <Label TextColor="DarkSlateGray" LineBreakMode="WordWrap" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" >
+                                <Label LineBreakMode="WordWrap" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" >
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span Text="אלרגיות התלמיד: " FontSize="16"/>
-                                            <Span Text="{Binding Allergies}" FontSize="16" />
+                                            <Span Text="אלרגיות: " TextColor="Black" FontAttributes="Bold" FontSize="20"/>
+                                            <Span Text="{Binding Allergies}" TextColor="Black" FontSize="20" />
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>

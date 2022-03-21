@@ -14,6 +14,7 @@ namespace MyGanAPP.Views
     {
         public StudentView(object context)
         {
+            this.Title = "פרטי תלמיד";
             this.BindingContext = context;
             InitializeComponent();
         }

@@ -87,10 +87,10 @@
 
                                 <Button Text="עדכון נתונים" Command="{Binding SaveCommand}" BackgroundColor="#bee9e8" TextColor="Black"  Margin="15" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
 
-
-
                             </StackLayout>
+                            
                         </Frame>
+                        
                     </ScrollView>
                 </RefreshView>
             </StackLayout>

@@ -19,17 +19,17 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10" />
-                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="165" />
                 </Grid.RowDefinitions>
                 <Frame BorderColor="white"  CornerRadius="100"  Grid.Column="1" Grid.Row="1" IsClippedToBounds="True" Padding="0" HeightRequest="170" WidthRequest="170" HorizontalOptions="Center">
                     <Image x:Name="theImage" Source="{Binding UserImgSrc}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" HeightRequest="170" WidthRequest="170"/>
                 </Frame>
             </Grid>
 
-            <StackLayout Padding="0,0" Margin="0" HorizontalOptions="Center">
+            <StackLayout Padding="0,10" Margin="0" HorizontalOptions="Center">
                 <RefreshView x:Name="refreshView" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
                     <ScrollView>
-                        <Frame  BackgroundColor="White" HasShadow="True" Padding="20" Margin="15,0" CornerRadius="20" WidthRequest="280">
+                        <Frame  BackgroundColor="White" HasShadow="True" Padding="10" Margin="15,10" CornerRadius="20" WidthRequest="280">
 
                             <StackLayout Padding="0" Margin="8">
                                 <Label Text="פרטי משתמש" Grid.Column="1" TextDecorations="Underline" FontAttributes="Bold" FontSize="27" HorizontalOptions="Start" TextColor="Black" ></Label>
