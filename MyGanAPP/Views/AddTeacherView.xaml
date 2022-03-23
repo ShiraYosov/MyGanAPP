@@ -20,10 +20,10 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Label Text="קוד גן" Grid.Column="0" FontSize="17" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="קוד קבוצה" Grid.Column="0" FontSize="17" Style="{StaticResource labelNameStyle}"/>
                                 <Label Text="{Binding CodeError}" IsVisible="{Binding ShowCodeError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                             </Grid>
-                            <Entry  Placeholder="הקלד קוד גן" HorizontalTextAlignment="Start" MaxLength="30" Text="{Binding Code}"  Style="{StaticResource entry}"/>
+                            <Entry  Placeholder="הקלד קוד קבוצה" HorizontalTextAlignment="Start" MaxLength="30" Text="{Binding Code}"  Style="{StaticResource entry}"/>
 
                         </StackLayout>
                     </Frame>

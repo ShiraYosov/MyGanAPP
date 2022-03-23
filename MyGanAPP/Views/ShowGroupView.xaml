@@ -127,7 +127,7 @@
 
                                     <StackLayout x:Name="collectionName2" 
                                 BindableLayout.ItemsSource="{Binding StudentsList}"
-                                BindableLayout.EmptyView="אין תלמידים בהמתנה" >
+                                BindableLayout.EmptyView="אין תלמידים " >
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate>
                                                 <StackLayout>
