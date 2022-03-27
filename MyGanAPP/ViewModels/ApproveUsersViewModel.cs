@@ -330,14 +330,14 @@ namespace MyGanAPP.ViewModels
                 else
                 {
                     await App.Current.MainPage.DisplayAlert("שגיאה", "פעולה נכשלה!", "בסדר");
-                    //await App.Current.MainPage.Navigation.PopAsync();
+                   
                 }
             }
 
             else
             {
                 await App.Current.MainPage.DisplayAlert("שגיאה", "פעולה נכשלה!", "בסדר");
-                //await App.Current.MainPage.Navigation.PopModalAsync();
+                
             }
         }
 

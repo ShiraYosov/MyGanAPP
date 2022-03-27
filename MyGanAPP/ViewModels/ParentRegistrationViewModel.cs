@@ -24,8 +24,9 @@ namespace MyGanAPP.ViewModels
         public const string SHORT_PASS = "הסיסמה חייבת להכיל לפחות 6 תווים";
         public const string BAD_PHONE = "טלפון לא תקין";
         public const string BAD_DATE = "על הילד להיות מעל גיל שנה";
-        public const string BAD_PHONE_NUMBER = "מספר הטלפון חייב להכיל 10 מספרים";
+        public const string BAD_PHONE_NUMBER = "מספר הטלפון חייב להכיל 10 ספרות";
         public const string BAD_CHILDID = "תעודת זהות אינה תקינה";
+        public const string BAD_CODE = "קוד לא תקין";
     }
 
     class ParentRegistrationViewModel : INotifyPropertyChanged
@@ -743,9 +744,16 @@ namespace MyGanAPP.ViewModels
             }
         }
 
-        private void ValidateCode()
+        private async void ValidateCode()
         {
             this.ShowCodeError = string.IsNullOrEmpty(Code);
+
+            if(!ShowCodeError)
+            {
+                MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
+                int groupId = GanCode.CodeToGroupID(Code);
+                this.ShowCodeError = await proxy.CodeExist(groupId);
+            }
         }
 
         #endregion
@@ -1358,7 +1366,7 @@ namespace MyGanAPP.ViewModels
             this.BirthDateError = ERROR_MESSAGES.BAD_DATE;
             this.GenderError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.UserNameError = ERROR_MESSAGES.REQUIRED_FIELD;
-            this.CodeError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.CodeError = ERROR_MESSAGES.BAD_CODE;
             this.GradeError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.RelationError = ERROR_MESSAGES.REQUIRED_FIELD;
 

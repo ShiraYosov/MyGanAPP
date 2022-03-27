@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyGanAPP.Views.StudentView"
              BackgroundColor="#dee2ff"
-             FlowDirection="RightToLeft"
-             >
+             FlowDirection="RightToLeft">
+
     <ContentPage.Content>
         <StackLayout>
 
-
+           
 
             <!--Photo-->
             <Grid>
@@ -74,7 +74,7 @@
                                 </Label>
 
                                 <!--Allergies-->
-                                <Label LineBreakMode="WordWrap" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" >
+                                <Label LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
                                     <Label.FormattedText>
                                         <FormattedString>
                                             <Span Text="אלרגיות: " TextColor="Black" FontAttributes="Bold" FontSize="20"/>

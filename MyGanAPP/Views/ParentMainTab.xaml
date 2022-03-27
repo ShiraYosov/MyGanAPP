@@ -30,7 +30,11 @@
         </local:ParentProfileView.IconImageSource>
     </local:ParentProfileView>
 
-   
+    <local:MessagesView Title="הודעות">
+        <local:MessagesView.IconImageSource>
+            <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.Message}"/>
+        </local:MessagesView.IconImageSource>
+    </local:MessagesView>
 
     <local:ChooseView Title="בחירת שדה ">
         <local:ChooseView.IconImageSource>

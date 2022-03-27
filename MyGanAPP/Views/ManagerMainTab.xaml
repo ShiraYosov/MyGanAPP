@@ -36,11 +36,7 @@
         </local:ApproveUsersView.IconImageSource>
     </local:ApproveUsersView>
 
-    <local:ApproveUsersView Title="הודעות">
-        <local:ApproveUsersView.IconImageSource>
-            <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.Message}"/>
-        </local:ApproveUsersView.IconImageSource>
-    </local:ApproveUsersView>
+    
 
     <local:KindergartenGroupsView Title="קבוצות">
         <local:KindergartenGroupsView.IconImageSource>

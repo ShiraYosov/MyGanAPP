@@ -18,6 +18,16 @@ namespace MyGanAPP.Views
             InitializeComponent();
         }
 
-       
+        private void LogOut_Clicked(object sender, EventArgs e)
+        {
+            App a = (App)App.Current;
+            a.SelectedGroup = null;
+            a.SelectedKindergarten = null;
+            a.SelectedStudent = null;
+            a.CurrUser = null;
+
+            App.Current.MainPage.Navigation.PopToRootAsync();
+        }
+
     }
 }
