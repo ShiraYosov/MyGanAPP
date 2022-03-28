@@ -10,6 +10,7 @@ namespace MyGanAPP.Models
         {
             Groups = new HashSet<Group>();
             KindergartenManagers = new HashSet<KindergartenManager>();
+            Messages = new HashSet<Message>();
             PendingTeachers = new HashSet<PendingTeacher>();
             Photos = new HashSet<Photo>();
             Signatures = new HashSet<Signature>();
@@ -26,6 +27,7 @@ namespace MyGanAPP.Models
 
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<KindergartenManager> KindergartenManagers { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
         public virtual ICollection<PendingTeacher> PendingTeachers { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Signature> Signatures { get; set; }

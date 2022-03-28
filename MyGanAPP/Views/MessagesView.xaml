@@ -64,9 +64,6 @@
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
-
-
-<!--b-->
                 </StackLayout>
             </Frame>
         </StackLayout>
