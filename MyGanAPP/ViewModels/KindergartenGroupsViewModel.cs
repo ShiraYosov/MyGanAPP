@@ -106,7 +106,11 @@ namespace MyGanAPP.ViewModels
 
                 if (newGroup==null) { await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת קבוצה נכשלה", "בסדר"); }
                 else
+                {
                     this.GroupsList.Add(newGroup);
+                    ((App)App.Current).UIRefresh();
+                }
+                    
 
             }
 

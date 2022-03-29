@@ -11,7 +11,7 @@
 
                 <StackLayout BackgroundColor="White" Margin="5" >
 
-
+                    
                     <CollectionView x:Name="collectionName" 
                                 EmptyView="אין הודעות"
                                 ItemsSource="{Binding GroupMessages}" SelectionMode="Single"
@@ -34,29 +34,30 @@
                                         </SwipeView.RightItems>
 
 
-                                        <StackLayout>
+                                        <StackLayout Orientation="Horizontal">
                                             <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" >
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="*" />
                                                     <RowDefinition Height="*"/>
                                                     <RowDefinition Height="*"/>
-                                                    
+
                                                 </Grid.RowDefinitions>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="60" />
                                                     <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="*" />
+                                                   
                                                 </Grid.ColumnDefinitions>
-                                                <Frame Grid.Column="1" Grid.ColumnSpan="2" BorderColor="Black" CornerRadius="30">
+                                                <Frame Grid.Column="1" BorderColor="Black" CornerRadius="30">
                                                     <StackLayout >
                                                         <Label Grid.Column="1" Grid.Row="0" TextColor="Black"  Text="{Binding Content}" HorizontalOptions="Start" FontAttributes="Bold"/>
-
                                                     </StackLayout>
                                                 </Frame>
                                                 
-                                                <Frame Grid.Column="0" Grid.Row="0" Padding="10" HeightRequest="10" WidthRequest="10" IsClippedToBounds="True" CornerRadius="100">
+                                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding MessageDate}" FontSize="12" ></Label>
+                                                <Frame Grid.Column="0" Grid.Row="0" Padding="0" Margin="5"  Grid.RowSpan="1" HeightRequest="10" WidthRequest="10" IsClippedToBounds="True" CornerRadius="100">
                                                     <Image Source="{Binding User.PhotoURL}" HeightRequest="10" Aspect="AspectFill" WidthRequest="10"/>
                                                 </Frame>
+                                                <Label Grid.Row="1" Grid.Column="0" Text="{Binding User.Fname}" HorizontalOptions="Center" ></Label>
                                             </Grid>
                                         </StackLayout>
                                     </SwipeView>
