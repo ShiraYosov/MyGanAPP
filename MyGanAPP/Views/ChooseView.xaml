@@ -29,7 +29,7 @@
             <StackLayout Padding="0" Margin="35">
                 <Label Text="אנא בחר בשדה המועדף:" TextColor="Black" FontSize="20"></Label>
 
-                <Frame  BackgroundColor="Transparent" HasShadow="True" Padding="5" Margin="3" CornerRadius="15" HorizontalOptions="Center"  >
+                <Frame  BackgroundColor="Transparent" HasShadow="False" Padding="5" Margin="3" CornerRadius="15" HorizontalOptions="Center"  >
 
 
                     <StackLayout Padding="0" Margin="15">

@@ -28,8 +28,8 @@ namespace MyGanAPP.ViewModels
         public const int PERMITTED_STATUS = 2;
         public const int WAITING_STATUS = 3;
 
-       
-       
+
+
         public ObservableCollection<StudentOfUser> StudentOfUsersList { get; }
         public ObservableCollection<PendingTeacher> TeachersList { get; }
 
@@ -270,7 +270,7 @@ namespace MyGanAPP.ViewModels
             {
                 Visible1 = true;
                 StudentOfUsersList.Clear();
-                
+
                 foreach (Student s in a.SelectedGroup.Students)
                 {
                     foreach (StudentOfUser sou in s.StudentOfUsers)
@@ -313,7 +313,11 @@ namespace MyGanAPP.ViewModels
                 u.StatusId = UNPERMITTED_STATUS;
 
                 bool ok = await proxy.ChangeUserStatus(u);
-                if (ok) { OnRefresh(); }
+                if (ok)
+                {
+                    OnRefresh();
+                    ((App)App.Current).UIRefresh();
+                }
                 else
                 {
                     await App.Current.MainPage.DisplayAlert("שגיאה", "פעולה נכשלה!", "בסדר");
@@ -326,18 +330,22 @@ namespace MyGanAPP.ViewModels
                 u.StatusId = UNPERMITTED_STATUS;
 
                 bool ok = await proxy.ChangeUserStatus(u);
-                if (ok) { OnRefresh(); }
+                if (ok)
+                {
+                    OnRefresh();
+                    ((App)App.Current).UIRefresh();
+                }
                 else
                 {
                     await App.Current.MainPage.DisplayAlert("שגיאה", "פעולה נכשלה!", "בסדר");
-                   
+
                 }
             }
 
             else
             {
                 await App.Current.MainPage.DisplayAlert("שגיאה", "פעולה נכשלה!", "בסדר");
-                
+
             }
         }
 
@@ -353,7 +361,11 @@ namespace MyGanAPP.ViewModels
                 u.StatusId = PERMITTED_STATUS;
 
                 bool ok = await proxy.ChangeUserStatus(u);
-                if (ok) { OnRefresh(); }
+                if (ok)
+                {
+                    OnRefresh();
+                    ((App)App.Current).UIRefresh();
+                }
                 else
                 {
                     await App.Current.MainPage.DisplayAlert("שגיאה", "פעולה נכשלה!", "בסדר");
@@ -366,7 +378,11 @@ namespace MyGanAPP.ViewModels
                 u.StatusId = PERMITTED_STATUS;
 
                 bool ok = await proxy.ChangeUserStatus(u);
-                if (ok) { OnRefresh(); }
+                if (ok)
+                {
+                    OnRefresh();
+                    ((App)App.Current).UIRefresh();
+                }
                 else
                 {
                     await App.Current.MainPage.DisplayAlert("שגיאה", "פעולה נכשלה!", "בסדר");

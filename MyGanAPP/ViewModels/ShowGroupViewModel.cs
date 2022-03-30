@@ -130,7 +130,7 @@ namespace MyGanAPP.ViewModels
 
         #region TeacherDetails
         #region Email
-       
+
         private string email;
 
         public string Email
@@ -317,7 +317,7 @@ namespace MyGanAPP.ViewModels
             StudentsList = new ObservableCollection<Student>();
             User Teacher = theApp.SelectedGroup.Teacher;
             UserImgSrc = Teacher.PhotoURL;
-            Email=Teacher.Email;
+            Email = Teacher.Email;
             PhoneNumber = Teacher.PhoneNumber;
             TeacherFirstName = Teacher.Fname;
             TeacherLastName = Teacher.LastName;
@@ -330,15 +330,16 @@ namespace MyGanAPP.ViewModels
             Button1PressedCommand = new Command(Button1Pressed);
             Button2PressedCommand = new Command(Button2Pressed);
 
-            CreatCollection();
+            ((App)App.Current).RefreshUI += CreateCollection;
+            CreateCollection();
         }
 
         public Command<Student> SelectionChanged => new Command<Student>(OnSelection);
         public void OnSelection(object s)
         {
-            if(s != null)
+            if (s != null)
             {
-                Student student = (Student)s;    
+                Student student = (Student)s;
 
                 StudentImgSrc = student.PhotoURL;
                 StudentName = student.FirstName;
@@ -360,20 +361,21 @@ namespace MyGanAPP.ViewModels
             }
         }
 
-            private void CreatCollection()
+        private void CreateCollection()
         {
+            StudentsList.Clear();
             App theApp = (App)App.Current;
             bool IsApproved = false;
             foreach (Student student in theApp.SelectedGroup.Students)
             {
-                foreach(StudentOfUser sou in student.StudentOfUsers)
+                foreach (StudentOfUser sou in student.StudentOfUsers)
                 {
                     if (sou.StatusId == PERMITTED_STATUS)
-                        IsApproved = true;  
+                        IsApproved = true;
                 }
-               
-                if(IsApproved)  
-                StudentsList.Add(student);
+
+                if (IsApproved)
+                    StudentsList.Add(student);
 
                 IsApproved = false;
             }
