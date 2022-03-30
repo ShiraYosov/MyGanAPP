@@ -1097,6 +1097,7 @@ namespace MyGanAPP.ViewModels
                 {
                     App theApp = (App)App.Current;
                     theApp.LookupTables = await proxy.GetLookupsAsync();
+                    NewAllergy = "";
                     await App.Current.MainPage.DisplayAlert("", "הוספת אלרגיה בהצלחה!", "בסדר");
                 }
                 else if (!ok)

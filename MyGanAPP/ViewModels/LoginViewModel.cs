@@ -117,6 +117,8 @@ namespace MyGanAPP.ViewModels
 
             if (user != null)
             {
+                this.Password = "";
+                this.Email = "";
                 App a = (App)App.Current;
                 a.CurrUser = user;
 

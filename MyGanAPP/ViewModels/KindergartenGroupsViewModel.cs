@@ -102,12 +102,13 @@ namespace MyGanAPP.ViewModels
                 MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
                 Group newGroup = await proxy.AddGroup(group);
                 GroupName = "";
-
+             
 
                 if (newGroup==null) { await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת קבוצה נכשלה", "בסדר"); }
                 else
                 {
                     this.GroupsList.Add(newGroup);
+                    a.CurrUser.Groups.Add(newGroup);
                     ((App)App.Current).UIRefresh();
                 }
                     
