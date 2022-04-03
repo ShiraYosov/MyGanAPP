@@ -61,7 +61,7 @@
 
                 <Button Text="הוספת קבוצה" Clicked="AddGroup_Clicked"  BackgroundColor="#bee9e8" TextColor="Black"  Margin="0" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
 
-                <Button Text="הוספת מנהל" Command="{Binding AddManagerCommand}" BackgroundColor="#dee2ff" TextColor="Black"  Margin="0" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
+                <Button Text="הוספת מנהל" Clicked="AddManager_Clicked" BackgroundColor="#dee2ff" TextColor="Black"  Margin="0" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
 
             </StackLayout>
         </Frame>

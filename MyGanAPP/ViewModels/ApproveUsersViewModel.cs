@@ -364,7 +364,7 @@ namespace MyGanAPP.ViewModels
                 if (ok)
                 {
                     OnRefresh();
-                    ((App)App.Current).UIRefresh();
+                    //((App)App.Current).UIRefresh();
                 }
                 else
                 {

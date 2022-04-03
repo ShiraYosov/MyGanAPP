@@ -13,7 +13,7 @@
             <StackLayout Padding="0" Margin="10" HorizontalOptions="Center">
 
 
-                <Frame  BackgroundColor="White" HasShadow="True" Padding="20" Margin="15,0" CornerRadius="20" WidthRequest="280">
+                <Frame  BackgroundColor="White" HasShadow="True" Padding="20" Margin="0" CornerRadius="20" WidthRequest="280">
                     <ScrollView>
                         <StackLayout Padding="0" Margin="8">
                         

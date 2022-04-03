@@ -24,5 +24,10 @@ namespace MyGanAPP.Views
         {
             PopupNavigation.Instance.PushAsync(new AddGroupPopup(this.BindingContext));
         }
+
+        private void AddManager_Clicked(object sender, EventArgs e)
+        {
+            PopupNavigation.Instance.PushAsync(new AddManagerToKindergartenView(this.BindingContext));
+        }
     }
 }

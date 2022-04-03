@@ -13,6 +13,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms.Xaml;
 using Rg.Plugins.Popup.Services;
+using System.Security.Cryptography;
+
+
+
 
 namespace MyGanAPP.ViewModels
 {
@@ -24,6 +28,28 @@ namespace MyGanAPP.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        #region Random string
+        public static string GenerateAlphanumerical(int size)
+        {
+            char[] chars =
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
+            byte[] data = new byte[4 * size];
+            using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider())
+            {
+                crypto.GetBytes(data);
+            }
+            StringBuilder result = new StringBuilder(size);
+            for (int i = 0; i < size; i++)
+            {
+                var rnd = BitConverter.ToUInt32(data, i * 4);
+                var idx = rnd % chars.Length;
+
+                result.Append(chars[idx]);
+            }
+            return result.ToString();
+        }
+        #endregion
 
         private object selectedItem;
         public object SelectedItem
@@ -57,6 +83,76 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
+        #region ManagerInfo
+
+        #region ManagerFirstName
+
+        private string managerFirstName;
+
+        public string ManagerFirstName
+        {
+            get => managerFirstName;
+            set
+            {
+                managerFirstName = value;
+                OnPropertyChanged("ManagerFirstName");
+            }
+        }
+
+
+        #endregion
+
+        #region ManagerLastName
+
+        private string managerLastName;
+
+        public string ManagerLastName
+        {
+            get => managerLastName;
+            set
+            {
+                managerLastName = value;
+                OnPropertyChanged("ManagerLastName");
+            }
+        }
+
+
+        #endregion
+
+        #region Email
+
+        private string email;
+
+        public string Email
+        {
+            get => email;
+            set
+            {
+                email = value;
+                OnPropertyChanged("Email");
+            }
+        }
+
+        #endregion
+
+        #region PhoneNumber
+
+        private string phoneNumber;
+
+        public string PhoneNumber
+        {
+            get => phoneNumber;
+            set
+            {
+                phoneNumber = value;
+                OnPropertyChanged("PhoneNumber");
+            }
+        }
+
+        #endregion
+
+        #endregion
+
 
         public ObservableCollection<Group> GroupsList { get; }
 
@@ -83,6 +179,37 @@ namespace MyGanAPP.ViewModels
 
         }
 
+        private bool ValidateManagerInfo()
+        {
+
+            //validate user name and last name
+            if (string.IsNullOrEmpty(ManagerLastName) || !string.IsNullOrEmpty(managerFirstName) || string.IsNullOrEmpty(Email))
+            {
+                return false;
+            }
+
+            //validate phone number
+            if (this.PhoneNumber.Length != 10)
+            {
+                return false;
+            }
+
+            int num;
+            bool ok = int.TryParse(PhoneNumber, out num);
+            if (!ok)
+            {
+                return false;
+            }
+
+            //validate email
+            if (!System.Text.RegularExpressions.Regex.IsMatch(this.Email, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"))
+            {
+                return false;
+            }
+
+            return true;
+
+        }
         public ICommand AddGroupCommand => new Command(OnAddGroup);
         public async void OnAddGroup()
         {
@@ -102,17 +229,60 @@ namespace MyGanAPP.ViewModels
                 MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
                 Group newGroup = await proxy.AddGroup(group);
                 GroupName = "";
-             
 
-                if (newGroup==null) { await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת קבוצה נכשלה", "בסדר"); }
+
+                if (newGroup == null) { await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת קבוצה נכשלה", "בסדר"); }
                 else
                 {
                     this.GroupsList.Add(newGroup);
                     a.CurrUser.Groups.Add(newGroup);
                     ((App)App.Current).UIRefresh();
                 }
-                    
 
+
+            }
+
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת קבוצה נכשלה", "בסדר");
+            }
+
+        }
+
+        public ICommand AddManagerToKindergartenCommand => new Command(OnAddManager);
+        public async void OnAddManager()
+        {
+            
+            if (ValidateManagerInfo())
+            {
+                App a = (App)App.Current;
+
+                User m = new User()
+                {
+                    Fname = ManagerFirstName,
+                    LastName = ManagerLastName,
+                    Email = Email,
+                    PhoneNumber = PhoneNumber,
+                    Password= GenerateAlphanumerical(6)
+                };
+                KindergartenManager KM = new KindergartenManager
+                {
+                    User = m,
+                    Kindergarten = a.SelectedKindergarten
+                };
+
+                m.KindergartenManagers.Add(KM);
+
+                MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
+                User newU = await proxy.Register(m);
+
+                if (newU == null)
+                {
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
+                    await PopupNavigation.Instance.PopAsync();
+                } 
+                
+                
             }
 
             else

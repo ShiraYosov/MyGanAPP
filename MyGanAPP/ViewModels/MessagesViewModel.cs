@@ -44,11 +44,30 @@ namespace MyGanAPP.ViewModels
             CreateCollection();
         }
         #endregion
+
+        #region Message
+        private string message;
+        public string Message
+        {
+            get { return this.message; }
+
+            set
+            {
+                if (this.message != value)
+                {
+                    this.message = value;
+                    OnPropertyChanged(nameof(Message));
+                }
+            }
+        }
+        #endregion
         public ObservableCollection<Message> GroupMessages { get; }
 
         public MessagesViewModel()
         {
             GroupMessages = new ObservableCollection<Message>();
+            ((App)App.Current).RefreshUI += CreateCollection;
+            Message = "";
             CreateCollection();
         }
 
@@ -73,18 +92,70 @@ namespace MyGanAPP.ViewModels
 
         }
 
-        public ICommand DeleteMessageCommand => new Command(OnDelete);
-        public async void OnDelete()
+        public ICommand SendMessageCommand => new Command(OnSendMessage);
+        public async void OnSendMessage()
         {
             MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
 
-            //bool ok = await proxy.ChangeUserStatus(u);
-            //if (ok) { OnRefresh(); }
-            //else
-            //{
-            //    await App.Current.MainPage.DisplayAlert("שגיאה", "פעולה נכשלה!", "בסדר");
-            //}
+            if (!string.IsNullOrEmpty(Message))
+            {
+               
+                App a = (App)App.Current;
+                Message m = new Message()
+                {
+                    Content = Message,
+                    GroupId = a.SelectedGroup.GroupId,
+                    UserId = a.CurrUser.UserId,
+                    Group = a.SelectedGroup,
+                    User = a.CurrUser,
+                };
+
+                Message newMsg = await proxy.SendMessage(m);
+                Message = ""; 
+
+                if (newMsg != null)
+                {
+                    a.SelectedGroup.Messages.Add(newMsg);
+                    CreateCollection();
+                }
+
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "שליחת הודעה נכשלה", "בסדר");
+                }
+
+            }
 
         }
+
+        public ICommand DeleteMessageCommand => new Command<Message>(OnDelete);
+        public async void OnDelete(Message m)
+        {
+            MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
+            App a = (App)App.Current;
+
+           
+            if (m!= null && m.UserId == a.CurrUser.UserId)
+            {
+                bool success = await proxy.DeleteMessage(m.MessageId);
+               
+                if (success)
+                {
+                    a.SelectedGroup.Messages.Remove(m);
+                    CreateCollection();
+                }
+
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "מחיקת הודעה נכשלה", "בסדר");
+                }
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", "מחיקת הודעה לא אפשרית!", "בסדר");
+            }
+        }
+
+
     }
 }

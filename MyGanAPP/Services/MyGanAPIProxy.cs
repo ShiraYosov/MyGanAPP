@@ -155,33 +155,33 @@ namespace MyGanAPP.Services
         //Code exist
         public async Task<bool> CodeExist(int code)
         {
-                try
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
                 {
-                    JsonSerializerOptions options = new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    };
-                    string json = JsonSerializer.Serialize<int>(code, options);
-                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/CodeExist?code=code", content);
-                    if (response.IsSuccessStatusCode)
-                    {
+                    PropertyNameCaseInsensitive = true
+                };
+                string json = JsonSerializer.Serialize<int>(code, options);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/CodeExist?code=code", content);
+                if (response.IsSuccessStatusCode)
+                {
 
-                        string jsonContent = await response.Content.ReadAsStringAsync();
-                        bool b = JsonSerializer.Deserialize<bool>(jsonContent, options);
-                        return b;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    bool b = JsonSerializer.Deserialize<bool>(jsonContent, options);
+                    return b;
                 }
-                catch (Exception e)
+                else
                 {
-                    Console.WriteLine(e.Message);
                     return false;
                 }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
 
         //GetTeachersList
         public async Task<List<PendingTeacher>> GetTeachersWithWaitStatusAsync(int kindergatenID)
@@ -226,7 +226,7 @@ namespace MyGanAPP.Services
                     Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
                     PropertyNameCaseInsensitive = true
                 };
-                
+
                 if (u is PendingTeacher)
                 {
                     PendingTeacher t = (PendingTeacher)u;
@@ -357,6 +357,71 @@ namespace MyGanAPP.Services
             {
                 Console.WriteLine(e.Message);
                 return null;
+            }
+        }
+
+        //send message
+        public async Task<Message> SendMessage(Message m)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                    PropertyNameCaseInsensitive = true
+                };
+                string json = JsonSerializer.Serialize<Message>(m, options);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/SendMessage", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    Message message = JsonSerializer.Deserialize<Message>(jsonContent, options);
+                    return message;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        //delete message
+        
+        public async Task<bool> DeleteMessage(int messageID)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                    PropertyNameCaseInsensitive = true
+                };
+                string json = JsonSerializer.Serialize<int>(messageID, options);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/DeleteMessage", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    bool success = JsonSerializer.Deserialize<bool>(jsonContent, options);
+                    return success;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
             }
         }
 

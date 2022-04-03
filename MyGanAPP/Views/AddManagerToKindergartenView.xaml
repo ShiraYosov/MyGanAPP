@@ -26,12 +26,12 @@ FlowDirection="RightToLeft">
                  WidthRequest="200">
 
         <Label Text="הוספת מנהל" TextColor="Black" FontAttributes="Bold" FontSize="23"></Label>
-        <Entry Placeholder=" שם פרטי" Text="{Binding ManagerName}" FontSize="15" PlaceholderColor="Black"  ></Entry>
+        <Entry Placeholder=" שם פרטי" Text="{Binding ManagerFirstName}" FontSize="15" PlaceholderColor="Black"  ></Entry>
         <Entry Placeholder=" שם משפחה" Text="{Binding ManagerLastName}" FontSize="15" PlaceholderColor="Black"  ></Entry>
         <Entry Placeholder="אימייל" Text="{Binding Email}" FontSize="15" PlaceholderColor="Black"  ></Entry>
-        <Entry Placeholder=" שם מנהל" Text="{Binding ManagerName}" FontSize="15" PlaceholderColor="Black"  ></Entry>
+        <Entry Placeholder=" מספר טלפון" Text="{Binding PhoneNumber}" FontSize="15" PlaceholderColor="Black"  ></Entry>
 
-        <Button Text="הוסף מנהל" Command="{Binding AddGroupCommand}"  BackgroundColor="#bee9e8" TextColor="Black"  Margin="0" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
+        <Button Text="הוסף מנהל" Command="{Binding AddManagerToKindergartenCommand}"  BackgroundColor="#bee9e8" TextColor="Black"  Margin="0" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
 
     </StackLayout>
 
