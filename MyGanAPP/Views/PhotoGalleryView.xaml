@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyGanAPP.Views.PhotoGalleryView"
+              BackgroundColor="#bee3db"
+             FlowDirection="RightToLeft">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="תמונות" Grid.Column="1" TextDecorations="Underline" HorizontalOptions="Center" FontAttributes="Bold" FontSize="30" Margin="0,20,0,0" TextColor="Black" ></Label>
+
+            <Frame Padding="20" Margin="10" CornerRadius="30">
+
+                <StackLayout BackgroundColor="White" Margin="5" >
+                    <Button Text="הוספת אירוע " Clicked="AddEvent_Clicked"  BackgroundColor="#bee9e8" TextColor="Black"  Margin="0" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
+
+                    <CollectionView x:Name="collectionName" 
+                                BackgroundColor="White"
+                                EmptyView="אין אירועים קיימות במערכת"
+                                ItemsSource="{Binding EventList}" >
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <ScrollView>
+                                    <RefreshView x:Name="refreshView"
+                                      Command="{Binding RefreshCommand}"
+                                      IsRefreshing="{Binding IsRefreshing}">
+
+                                        <StackLayout>
+                                            <Frame BackgroundColor="#dee2e6" Padding="5" CornerRadius="25" Margin="0,5,0,5" BorderColor="DarkGray">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <ImageButton Source="PlusIcon.png" Margin="3" BackgroundColor="Transparent"
+                                         WidthRequest="35"
+                                         HeightRequest="35" />
+                                                    <StackLayout HorizontalOptions="Center">
+                                                        <Label Text="{Binding EventName}" TextColor="Black"
+                                           FontSize="22"
+                                           VerticalOptions="CenterAndExpand" />
+                                                        <Label Text="{Binding EventDate}"
+                                           FontSize="12"
+                                           VerticalOptions="CenterAndExpand" />
+
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                        
+
+                                    </RefreshView>
+                                </ScrollView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

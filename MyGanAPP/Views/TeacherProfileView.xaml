@@ -78,11 +78,12 @@
                                 <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span Text="שם הגן: " FontSize="20" FontAttributes="Bold" TextColor="#4d908e"/>
+                                            <Span Text="שם הקבוצה: " FontSize="20" FontAttributes="Bold" TextColor="#4d908e"/>
                                             <Span Text="{Binding GroupName}" FontSize="20" />
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
+                                
 
                                 <Button Text="עדכון נתונים" Command="{Binding SaveCommand}" BackgroundColor="#bee9e8" TextColor="Black"  Margin="15" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
 

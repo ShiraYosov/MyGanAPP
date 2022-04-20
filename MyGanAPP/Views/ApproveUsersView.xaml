@@ -153,8 +153,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-
-
+               
             </StackLayout>
         </Frame>
 

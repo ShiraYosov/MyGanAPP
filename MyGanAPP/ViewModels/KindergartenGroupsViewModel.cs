@@ -29,27 +29,7 @@ namespace MyGanAPP.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        #region Random string
-        public static string GenerateAlphanumerical(int size)
-        {
-            char[] chars =
-            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
-            byte[] data = new byte[4 * size];
-            using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider())
-            {
-                crypto.GetBytes(data);
-            }
-            StringBuilder result = new StringBuilder(size);
-            for (int i = 0; i < size; i++)
-            {
-                var rnd = BitConverter.ToUInt32(data, i * 4);
-                var idx = rnd % chars.Length;
-
-                result.Append(chars[idx]);
-            }
-            return result.ToString();
-        }
-        #endregion
+        
 
         private object selectedItem;
         public object SelectedItem
@@ -183,7 +163,7 @@ namespace MyGanAPP.ViewModels
         {
 
             //validate user name and last name
-            if (string.IsNullOrEmpty(ManagerLastName) || !string.IsNullOrEmpty(managerFirstName) || string.IsNullOrEmpty(Email))
+            if (string.IsNullOrEmpty(ManagerLastName) || string.IsNullOrEmpty(managerFirstName) || string.IsNullOrEmpty(Email))
             {
                 return false;
             }
@@ -244,7 +224,7 @@ namespace MyGanAPP.ViewModels
 
             else
             {
-                await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת קבוצה נכשלה", "בסדר");
+                await App.Current.MainPage.DisplayAlert("שגיאה", "לא ניתן להוסיף קבוצה ללא שם!", "בסדר");
             }
 
         }
@@ -263,11 +243,12 @@ namespace MyGanAPP.ViewModels
                     LastName = ManagerLastName,
                     Email = Email,
                     PhoneNumber = PhoneNumber,
-                    Password= GenerateAlphanumerical(6)
+                    Password= ""
                 };
                 KindergartenManager KM = new KindergartenManager
                 {
                     User = m,
+                    KindergartenId = a.SelectedKindergarten.KindergartenId,
                     Kindergarten = a.SelectedKindergarten
                 };
 
@@ -281,13 +262,25 @@ namespace MyGanAPP.ViewModels
                     await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
                     await PopupNavigation.Instance.PopAsync();
                 } 
+
+                else if(newU != null)
+                {
+                    await App.Current.MainPage.DisplayAlert("הרשמה בוצעה בהצלחה", "", "בסדר");
+                    await PopupNavigation.Instance.PopAsync();
+
+                    ManagerFirstName = "";
+                    ManagerLastName = "";
+                    Email = "";
+                    PhoneNumber = "";
+ 
+                }
                 
                 
             }
 
             else
             {
-                await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת קבוצה נכשלה", "בסדר");
+                await App.Current.MainPage.DisplayAlert("שגיאה", "לא כל פרטי המשתמש תקינים!", "בסדר");
             }
 
         }

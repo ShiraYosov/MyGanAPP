@@ -30,11 +30,11 @@
         </local:TeacherProfileView.IconImageSource>
     </local:TeacherProfileView>
 
-    <local:ApproveUsersView Title="אישור משתמשים">
-        <local:ApproveUsersView.IconImageSource>
-            <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.UserCheck}"/>
-        </local:ApproveUsersView.IconImageSource>
-    </local:ApproveUsersView>
+    <local:ShowGroupView Title="פרטי קבוצה">
+        <local:ShowGroupView.IconImageSource>
+            <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.Info}"/>
+        </local:ShowGroupView.IconImageSource>
+    </local:ShowGroupView>
 
     <local:MessagesView Title="הודעות">
         <local:MessagesView.IconImageSource>
@@ -42,6 +42,12 @@
         </local:MessagesView.IconImageSource>
     </local:MessagesView>
 
+    <local:MessagesView Title="גלריית תמונות">
+        <local:MessagesView.IconImageSource>
+            <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.Images}"/>
+        </local:MessagesView.IconImageSource>
+    </local:MessagesView>
+    
     <local:ChooseView Title="בחירת שדה ">
         <local:ChooseView.IconImageSource>
             <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.HandPointer}"/>

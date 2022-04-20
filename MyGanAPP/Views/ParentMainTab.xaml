@@ -30,11 +30,17 @@
         </local:ParentProfileView.IconImageSource>
     </local:ParentProfileView>
 
-    <local:MessagesView Title="הודעות">
-        <local:MessagesView.IconImageSource>
+    <local:ParentMessagesView Title="הודעות">
+        <local:ParentMessagesView.IconImageSource>
             <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.Message}"/>
-        </local:MessagesView.IconImageSource>
-    </local:MessagesView>
+        </local:ParentMessagesView.IconImageSource>
+    </local:ParentMessagesView>
+
+    <local:ParentMessagesView Title="גלריית תמונות">
+        <local:ParentMessagesView.IconImageSource>
+            <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.Images}"/>
+        </local:ParentMessagesView.IconImageSource>
+    </local:ParentMessagesView>
 
     <local:ChooseView Title="בחירת שדה ">
         <local:ChooseView.IconImageSource>

@@ -170,9 +170,10 @@
                                 </Frame>
                             </StackLayout>
 
+                            <Button Text="אישור משתמשים" Clicked="ApproveStudents_Clicked" BackgroundColor="#bee3db" TextColor="Black"  Margin="15,0,15,0"   FontAttributes="Bold" Padding="0" FontSize="15" CornerRadius="30"/>
 
-                        
-                    </StackLayout>
+
+                        </StackLayout>
                     </ScrollView>
                 </Frame>
 

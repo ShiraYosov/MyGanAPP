@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage 
+xmlns:pages="http://rotorgames.com"
+xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+x:Class="MyGanAPP.Views.AddEventPopup"
+FlowDirection="RightToLeft">
+
+    <pages:PopupPage.Animation>
+        <pages:ScaleAnimation DurationIn="400"
+                                   DurationOut="300"
+                                   EasingIn="SinOut"
+                                   EasingOut="SinIn"
+                                   HasBackgroundAnimation="True"
+                                   PositionIn="Center"
+                                   PositionOut="Center"
+                                   ScaleIn="1.2"
+                                   ScaleOut="0.8" />
+    </pages:PopupPage.Animation>
+
+    <StackLayout Margin="60"
+                 Padding="25"
+                 BackgroundColor="White"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Center"
+                 WidthRequest="200">
+
+        <Label Text="הוספת אירוע" TextColor="Black" FontAttributes="Bold" FontSize="23"></Label>
+        <Entry Placeholder=" שם אירוע" Text="{Binding EventName}" FontSize="15" PlaceholderColor="Black"  ></Entry>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Text="תאריך אירוע" Grid.Column="0" HorizontalTextAlignment="Start" Style="{StaticResource labelNameStyle}"/>
+        </Grid>
+        <DatePicker Date="{Binding EventDate}" Style="{StaticResource entry}"/>
+
+
+        <Button Text="הוספה" Command="{Binding AddEventCommand}"  BackgroundColor="#bee9e8" TextColor="Black"  Margin="0" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
+
+    </StackLayout>
+
+</pages:PopupPage>

@@ -360,6 +360,39 @@ namespace MyGanAPP.Services
             }
         }
 
+        // Add new photo event
+        public async Task<Event> AddEvent(Event e)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                    PropertyNameCaseInsensitive = true
+                };
+                string json = JsonSerializer.Serialize<Event>(e, options);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/AddEvent", content);
+                if (response.IsSuccessStatusCode)
+                {
+
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    Event ev = JsonSerializer.Deserialize<Event>(jsonContent, options);
+                    return ev;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
         //send message
         public async Task<Message> SendMessage(Message m)
         {

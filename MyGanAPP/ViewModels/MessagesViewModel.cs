@@ -88,6 +88,19 @@ namespace MyGanAPP.ViewModels
 
                 }
             }
+
+            if (a.SelectedStudent != null)
+            {
+
+                GroupMessages.Clear();
+
+                foreach (Message message in a.SelectedStudent.Group.Messages)
+                {
+                    GroupMessages.Add(message);
+
+                }
+            }
+
             isRefreshing = false;
 
         }

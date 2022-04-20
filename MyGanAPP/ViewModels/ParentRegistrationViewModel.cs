@@ -205,6 +205,11 @@ namespace MyGanAPP.ViewModels
                 this.ChildIDError = ERROR_MESSAGES.BAD_CHILDID;
             }
 
+            else if(ok)
+            {
+                this.ShowChildIDError = false;
+            }
+
         }
         #endregion
 
