@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyGanAPP.Views.ServerStatusPage">
+             x:Class="MyGanAPP.Views.ServerStatusPage"
+             BackgroundColor="LightBlue">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding ServerStatus}"
+        <StackLayout Orientation="Vertical">
+            
+            <Image Source="logo1.png" Margin="50,100,50,0" HeightRequest="300"  WidthRequest="300" BackgroundColor="Transparent"></Image>
+            <Label Margin="0" Padding="0" FontSize="20" FontAttributes="Bold" Text="{Binding ServerStatus}"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>

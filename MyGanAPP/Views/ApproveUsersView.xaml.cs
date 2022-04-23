@@ -15,6 +15,7 @@ namespace MyGanAPP.Views
         public ApproveUsersView()
         {
             this.BindingContext = new ApproveUsersViewModel();
+            this.Title = "אישור משתמשים";
             InitializeComponent();
            
         }

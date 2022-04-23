@@ -15,7 +15,8 @@ namespace MyGanAPP.Views
     {
         public PhotoGalleryView()
         {
-            this.BindingContext = new PhotoGalleryViewModel();
+            PhotoGalleryViewModel viewModel = new PhotoGalleryViewModel();
+            this.BindingContext = viewModel;
             InitializeComponent();
         }
 
@@ -23,5 +24,7 @@ namespace MyGanAPP.Views
         {
             PopupNavigation.Instance.PushAsync(new AddEventPopup(this.BindingContext));
         }
+
+        
     }
 }

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage 
+xmlns:pages="http://rotorgames.com"
+xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+x:Class="MyGanAPP.Views.ShowPhotoPopup"
+BackgroundClickedCommand="{Binding BackgroundClicked}"
+FlowDirection="RightToLeft">
+
+    <pages:PopupPage.Animation>
+        <pages:ScaleAnimation DurationIn="400"
+                                   DurationOut="300"
+                                   EasingIn="SinOut"
+                                   EasingOut="SinIn"
+                                   HasBackgroundAnimation="True"
+                                   PositionIn="Center"
+                                   PositionOut="Center"
+                                   ScaleIn="1.2"
+                                   ScaleOut="0.8" />
+    </pages:PopupPage.Animation>
+
+    <StackLayout Margin="60"
+                 Padding="25"
+                 BackgroundColor="White"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Center"
+                 WidthRequest="400">
+
+        <!--Photo-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Frame BorderColor="white"  Grid.Column="0" Grid.Row="0" IsClippedToBounds="True" Padding="0" HeightRequest="300" WidthRequest="300" HorizontalOptions="CenterAndExpand">
+                <Image x:Name="theImage" Source="{Binding SelectedImgSrc}" BackgroundColor="Transparent" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" HeightRequest="300" WidthRequest="300"/>
+            </Frame>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Text="{Binding DescriptionError}" IsVisible="{Binding ShowDescriptionError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+        </Grid>
+        <Entry Placeholder="אנא כתוב תיאור לתמונה" MaxLength="30" Text="{Binding PhotoDescription}" Style="{StaticResource entry}"/>
+
+        
+
+        <Button Text="הוספה" Command="{Binding AddPhotoCommand}"  BackgroundColor="#bee9e8" TextColor="Black"  Margin="0" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
+
+    </StackLayout>
+
+</pages:PopupPage>
