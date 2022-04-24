@@ -42,11 +42,11 @@
         </local:MessagesView.IconImageSource>
     </local:MessagesView>
 
-    <local:MessagesView Title="גלריית תמונות">
-        <local:MessagesView.IconImageSource>
+    <local:PhotoGalleryView Title="גלריית תמונות">
+        <local:PhotoGalleryView.IconImageSource>
             <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.Images}"/>
-        </local:MessagesView.IconImageSource>
-    </local:MessagesView>
+        </local:PhotoGalleryView.IconImageSource>
+    </local:PhotoGalleryView>
     
     <local:ChooseView Title="בחירת שדה ">
         <local:ChooseView.IconImageSource>

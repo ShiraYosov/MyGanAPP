@@ -102,7 +102,7 @@
                                 <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span Text="שם פרטי: " FontSize="20" FontAttributes="Bold"/>
+                                            <Span Text="תעודת זהות: " FontSize="20" FontAttributes="Bold"/>
                                             <Span Text="{Binding StudentID}" FontSize="20" />
                                         </FormattedString>
                                     </Label.FormattedText>

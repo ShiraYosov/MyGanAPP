@@ -36,11 +36,11 @@
         </local:ParentMessagesView.IconImageSource>
     </local:ParentMessagesView>
 
-    <local:ParentMessagesView Title="גלריית תמונות">
-        <local:ParentMessagesView.IconImageSource>
+    <local:PhotoGalleryView Title="גלריית תמונות">
+        <local:PhotoGalleryView.IconImageSource>
             <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.Images}"/>
-        </local:ParentMessagesView.IconImageSource>
-    </local:ParentMessagesView>
+        </local:PhotoGalleryView.IconImageSource>
+    </local:PhotoGalleryView>
 
     <local:ChooseView Title="בחירת שדה ">
         <local:ChooseView.IconImageSource>

@@ -193,12 +193,26 @@ namespace MyGanAPP.ViewModels
 
             EventList.Clear();
             App a = (App)App.Current;
-            if(a.SelectedStudent == null) { NotParent = true; } 
+            if(a.SelectedStudent == null)
+            { 
+                NotParent = true;
 
-            foreach (Event ev in a.SelectedGroup.Events)
+                foreach (Event ev in a.SelectedGroup.Events)
+                {
+                    this.EventList.Add(ev);
+                }
+            } 
+
+            else 
             {
-                this.EventList.Add(ev);
+                NotParent = false;
+
+                foreach (Event ev in a.SelectedStudent.Group.Events)
+                {
+                    this.EventList.Add(ev);
+                }
             }
+            
 
 
         }
@@ -216,7 +230,7 @@ namespace MyGanAPP.ViewModels
             {
                 App a = (App)App.Current;
                 Photo selectedPhoto = (Photo)pic;
-                Name = $"{selectedPhoto.User.Fname} {selectedPhoto.User.LastName}";
+                Name = selectedPhoto.Name;
                 PhotoDescription = selectedPhoto.Description;
                 SelectedImgSrc = selectedPhoto.PhotoURL;
 
@@ -351,7 +365,15 @@ namespace MyGanAPP.ViewModels
                             Name = this.imageFileResult.FullPath
                         }, $"Events\\{photo.Id}.jpg");
 
-                        theApp.SelectedGroup.Events.Where(e => e.EventId == photo.EventId).FirstOrDefault().Photos.Add(photo);
+                        if(notParent)
+                        {
+                            theApp.SelectedGroup.Events.Where(e => e.EventId == photo.EventId).FirstOrDefault().Photos.Add(photo);
+                        }
+                        else
+                        {
+                            theApp.SelectedStudent.Group.Events.Where(e => e.EventId == photo.EventId).FirstOrDefault().Photos.Add(photo);
+                        }
+                       
                         CreateCollection();
 
                     }

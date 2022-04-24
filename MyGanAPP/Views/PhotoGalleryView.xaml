@@ -13,20 +13,21 @@
             <Frame Padding="0" Margin="10" CornerRadius="30">
 
                 <StackLayout BackgroundColor="White" Margin="5" >
-                    <Button Text="הוספת אירוע " Clicked="AddEvent_Clicked"  BackgroundColor="#bee9e8" TextColor="Black"  Margin="7" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
+                    <Button Text="הוספת אירוע " IsVisible="{Binding NotParent}" Clicked="AddEvent_Clicked"  BackgroundColor="#bee9e8" TextColor="Black"  Margin="7" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
 
                     <CollectionView x:Name="collectionName" 
-                                BackgroundColor="White"
+                                BackgroundColor="White" 
                                 EmptyView="אין אירועים קיימים במערכת"
-                                ItemsSource="{Binding EventList}"
-                                >
+                                ItemsSource="{Binding EventList}">
+
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <SwipeView>
+                                <SwipeView >
                                     <SwipeView.LeftItems>
                                         <SwipeItems SwipeBehaviorOnInvoked="Auto">
 
-                                            <SwipeItem IsVisible="{Binding NotParent}" Text="מחיקת אירוע"
+                                            <SwipeItem IsVisible="{Binding NotParent}" 
+                                                       Text="מחיקת אירוע"
                                                BackgroundColor="#e56b6f"
                                                Command="{Binding Source={x:Reference collectionName}, Path= BindingContext.DeleteEventCommand}"
                                                CommandParameter="{Binding}"/>
@@ -37,7 +38,7 @@
                                     <ScrollView>
 
 
-                                        <StackLayout BackgroundColor="Transparent" >
+                                        <StackLayout BackgroundColor="White" >
                                             <Frame BackgroundColor="#dee2e6" Padding="5" CornerRadius="25" Margin="3" BorderColor="DarkGray">
                                                 <StackLayout Orientation="Horizontal">
                                                     <ImageButton Source="PlusIcon.png" Margin="3" BackgroundColor="Transparent" CommandParameter="{Binding}" Command="{Binding Source={x:Reference ThePage}, Path= BindingContext.PickImageCommand}"
