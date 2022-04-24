@@ -459,7 +459,7 @@ namespace MyGanAPP.Services
 
         //delete message
 
-        public async Task<bool> DeleteMessage(int messageID)
+        public async Task<bool> DeleteMessage(Message message)
         {
             try
             {
@@ -469,7 +469,7 @@ namespace MyGanAPP.Services
                     Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
                     PropertyNameCaseInsensitive = true
                 };
-                string json = JsonSerializer.Serialize<int>(messageID, options);
+                string json = JsonSerializer.Serialize<Message>(message, options);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/DeleteMessage", content);
                 if (response.IsSuccessStatusCode)
@@ -492,7 +492,7 @@ namespace MyGanAPP.Services
 
         //delete Event
 
-        public async Task<bool> DeleteEvent(int eventID)
+        public async Task<bool> DeleteEvent(Event ev)
         {
             try
             {
@@ -502,7 +502,7 @@ namespace MyGanAPP.Services
                     Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
                     PropertyNameCaseInsensitive = true
                 };
-                string json = JsonSerializer.Serialize<int>(eventID, options);
+                string json = JsonSerializer.Serialize<Event>(ev, options);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/DeleteEvent", content);
                 if (response.IsSuccessStatusCode)
@@ -537,7 +537,7 @@ namespace MyGanAPP.Services
                 };
                 string json = JsonSerializer.Serialize<int>(photoID, options);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/DeleteEvent", content);
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/DeletePhoto", content);
                 if (response.IsSuccessStatusCode)
                 {
                     string jsonContent = await response.Content.ReadAsStringAsync();

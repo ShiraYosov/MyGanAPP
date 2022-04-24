@@ -23,21 +23,11 @@ FlowDirection="RightToLeft">
                  BackgroundColor="White"
                  HorizontalOptions="Center"
                  VerticalOptions="Center"
-                 WidthRequest="400">
+                 WidthRequest="500">
 
         <!--Photo-->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Frame BorderColor="white"  Grid.Column="0" Grid.Row="0" IsClippedToBounds="True" Padding="0" HeightRequest="300" WidthRequest="300" HorizontalOptions="CenterAndExpand">
-                <Image x:Name="theImage" Source="{Binding SelectedImgSrc}" BackgroundColor="Transparent" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" HeightRequest="300" WidthRequest="300"/>
-            </Frame>
-        </Grid>
-
+        <Image x:Name="theImage" Source="{Binding SelectedImgSrc}" BackgroundColor="Transparent" Aspect="AspectFit" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" HeightRequest="300" WidthRequest="300"/>
+        
         <!-- StudentName-->
         <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
             <Label.FormattedText>

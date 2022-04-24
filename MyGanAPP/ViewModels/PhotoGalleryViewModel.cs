@@ -175,6 +175,11 @@ namespace MyGanAPP.ViewModels
 
         public PhotoGalleryViewModel()
         {
+            App a = (App)App.Current;
+
+            if (a.SelectedStudent != null) { Name = $"{a.SelectedStudent.FirstName} {a.SelectedStudent.LastName}"; }
+            else if(a.CurrUser != null) { Name = $"{a.CurrUser.Fname} {a.CurrUser.LastName}"; }
+
             NotParent = false;
             this.showDescriptionError = false;
             EventDate = DateTime.Now;
@@ -227,11 +232,8 @@ namespace MyGanAPP.ViewModels
             App a = (App)App.Current;
 
             Event e = (Event)ev;
-            foreach(Photo photo in e.Photos)
-            {
-                OnDeletePhoto(photo);
-            }
-            bool success = await proxy.DeleteEvent(e.EventId);
+           
+            bool success = await proxy.DeleteEvent(e);
 
             if (success)
             {
@@ -330,6 +332,7 @@ namespace MyGanAPP.ViewModels
                         Event = SelectedEvent,
                         EventId = SelectedEvent.EventId,
                         User = theApp.CurrUser,
+                        Name = Name,
                         UserId = theApp.CurrUser.UserId,
                         Description = PhotoDescription
                     };

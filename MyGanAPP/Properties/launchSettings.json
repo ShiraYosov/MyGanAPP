@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MyGanAPP": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

@@ -150,7 +150,7 @@ namespace MyGanAPP.ViewModels
            
             if (m!= null && m.UserId == a.CurrUser.UserId)
             {
-                bool success = await proxy.DeleteMessage(m.MessageId);
+                bool success = await proxy.DeleteMessage(m);
                
                 if (success)
                 {
