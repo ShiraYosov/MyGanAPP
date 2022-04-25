@@ -91,6 +91,7 @@ namespace MyGanAPP.ViewModels
 
         private void CreateCollection()
         {
+            Visible1 = false; Visible2 = false; Visible3 = false; MessageVisible = false;
             ChildrenList.Clear();
             GroupsList.Clear();
             KindergartensList.Clear();  

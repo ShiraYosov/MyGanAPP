@@ -366,22 +366,28 @@ namespace MyGanAPP.ViewModels
             StudentsList.Clear();
             App theApp = (App)App.Current;
             bool IsApproved = false;
-            foreach (Student student in theApp.SelectedGroup.Students)
+            
+            if(theApp.SelectedGroup != null)
             {
-                foreach (StudentOfUser sou in student.StudentOfUsers)
+                foreach (Student student in theApp.SelectedGroup.Students)
                 {
-                    if (sou.StatusId == PERMITTED_STATUS)
-                        IsApproved = true;
+                    foreach (StudentOfUser sou in student.StudentOfUsers)
+                    {
+                        if (sou.StatusId == PERMITTED_STATUS)
+                            IsApproved = true;
+                    }
+
+                    if (IsApproved)
+                        StudentsList.Add(student);
+
+                    IsApproved = false;
                 }
 
-                if (IsApproved)
-                    StudentsList.Add(student);
-
-                IsApproved = false;
+                NumberOfStudents = StudentsList.Count();
+                GroupName = theApp.SelectedGroup.GroupName;
             }
 
-            NumberOfStudents = StudentsList.Count();
-            GroupName = theApp.SelectedGroup.GroupName;
+            
         }
 
         public ICommand Button1PressedCommand { protected set; get; }

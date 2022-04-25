@@ -366,6 +366,7 @@ namespace MyGanAPP.ViewModels
                     Models.Group ToDelete = ((App)App.Current).CurrUser.Groups.Where(g => g.GroupId == u.GroupId).FirstOrDefault();
                     if(ToDelete != null)
                     {
+                        ((App)App.Current).CurrUser.Groups.Where(g => g.GroupId == ToDelete.GroupId).FirstOrDefault().Teacher = u.User;
                         ((App)App.Current).CurrUser.Groups.Remove(ToDelete);
                         OnRefresh();
                         ((App)App.Current).UIRefresh();

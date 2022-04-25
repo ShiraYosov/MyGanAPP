@@ -26,7 +26,7 @@
                                     <SwipeView.LeftItems>
                                         <SwipeItems SwipeBehaviorOnInvoked="Auto">
 
-                                            <SwipeItem IsVisible="{Binding NotParent}" 
+                                            <SwipeItem IsEnabled="{Binding NotParent}" 
                                                        Text="מחיקת אירוע"
                                                BackgroundColor="#e56b6f"
                                                Command="{Binding Source={x:Reference collectionName}, Path= BindingContext.DeleteEventCommand}"
