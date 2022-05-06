@@ -3,17 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:l="clr-namespace:AiForms.Layouts;assembly=AiForms.Layouts"
              x:Class="MyGanAPP.Views.PhotoGalleryView"
-            BackgroundColor="LightBlue"
+             BackgroundColor="#bde0fe"
              FlowDirection="RightToLeft"
              x:Name="ThePage">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="תמונות" Grid.Column="1" TextDecorations="Underline" HorizontalOptions="Center" FontAttributes="Bold" FontSize="30" Margin="0,20,0,0" TextColor="Black" ></Label>
 
-            <Frame Padding="0" Margin="10" CornerRadius="30">
+            <Frame Padding="0" Margin="10" CornerRadius="10">
 
                 <StackLayout BackgroundColor="White" Margin="5" >
-                    <Button Text="הוספת אירוע " IsVisible="{Binding NotParent}" Clicked="AddEvent_Clicked"  BackgroundColor="#bee9e8" TextColor="Black"  Margin="7" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
+                    <Button Text="הוספת אירוע " IsVisible="{Binding NotParent}" Clicked="AddEvent_Clicked"  BackgroundColor="#ceb1be" TextColor="Black"  Margin="7,7,7,0" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="5"/>
+                    <Button Text="התמונות שלי "   Clicked="MyPhotos_Clicked"  BackgroundColor="#fde2e4" TextColor="Black"  Margin="7,0,7,7" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="5"/>
 
                     <CollectionView x:Name="collectionName" 
                                 BackgroundColor="White" 
@@ -62,12 +63,12 @@
                                                     <l:RepeatableWrapLayout
                                                         ItemTapCommand="{Binding TapPhotoCommand}"
                                                         ItemsSource="{Binding Photos}"
-                                                        Spacing="3"
-                                                        >
+                                                        Spacing="3">
+
 
                                                         <l:RepeatableWrapLayout.ItemTemplate>
                                                             <DataTemplate>
-                                                                <StackLayout BackgroundColor="{Binding Color}" >
+                                                                <StackLayout>
                                                                     <ImageButton HeightRequest="112" BackgroundColor="Transparent" Margin="2"  Source="{Binding PhotoURL}" CommandParameter="{Binding}" Command="{Binding Source={x:Reference ThePage}, Path= BindingContext.TapPhotoCommand}"></ImageButton>
                                                                 </StackLayout>
                                                             </DataTemplate>

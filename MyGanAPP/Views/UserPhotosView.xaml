@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:AiForms.Layouts;assembly=AiForms.Layouts"
+             x:Class="MyGanAPP.Views.UserPhotosView"
+             x:Name="ThePage"
+             BackgroundColor="White"
+             FlowDirection="RightToLeft">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView HorizontalOptions="FillAndExpand">
+                <l:RepeatableWrapLayout
+                 ItemTapCommand="{Binding TapUserPhotoCommand}"
+                 ItemsSource="{Binding Photos}"
+                 Spacing="3">
+
+
+                    <l:RepeatableWrapLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout >
+                                <ImageButton HeightRequest="112" BackgroundColor="Transparent" Margin="2"  Source="{Binding PhotoURL}" CommandParameter="{Binding}" Command="{Binding Source={x:Reference ThePage}, Path= BindingContext.TapUserPhotoCommand}"></ImageButton>
+                            </StackLayout>
+                        </DataTemplate>
+                    </l:RepeatableWrapLayout.ItemTemplate>
+                </l:RepeatableWrapLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

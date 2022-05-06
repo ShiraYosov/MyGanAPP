@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage 
+xmlns:pages="http://rotorgames.com" 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+     x:Class="MyGanAPP.Views.UserPhotoPopup"
+    FlowDirection="RightToLeft">
+    <ContentPage.Content>
+        
+        <Frame CornerRadius="30" VerticalOptions="End" BackgroundColor="White">
+            <Grid VerticalOptions="End" BackgroundColor="White" Margin="5">
+               <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
+                </Grid.RowDefinitions>
+
+
+                <ImageButton Source="editPhoto.png" Grid.Column="0" Command="{Binding EditPhotoCommand}" HeightRequest="100" Grid.Row="0" BackgroundColor="White" ></ImageButton>
+                <Label Grid.Column="0" Grid.Row="1" FontSize="15" Text="עריכת תמונה" TextColor="Black" FontAttributes="Bold" HorizontalOptions="Center"></Label>
+                <ImageButton Source="deletePhoto.png" Command="{Binding DeletePhotoCommand}" HorizontalOptions="Center" Grid.Column="1" HeightRequest="90"  Grid.Row="0" BackgroundColor="White" ></ImageButton>
+                <Label Grid.Column="1" Grid.Row="1" FontSize="15" Text="מחיקת תמונה" TextColor="Black" FontAttributes="Bold" HorizontalOptions="Center"></Label>
+            </Grid>
+        </Frame>
+        
+    </ContentPage.Content>
+</pages:PopupPage>

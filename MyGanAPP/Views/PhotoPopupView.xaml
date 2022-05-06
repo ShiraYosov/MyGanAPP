@@ -4,6 +4,7 @@ xmlns:pages="http://rotorgames.com"
 xmlns="http://xamarin.com/schemas/2014/forms"
 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 x:Class="MyGanAPP.Views.PhotoPopupView"
+BackgroundClickedCommand="{Binding BackgroundClicked}"
 FlowDirection="RightToLeft">
 
     <pages:PopupPage.Animation>

@@ -25,6 +25,9 @@ namespace MyGanAPP.Views
             PopupNavigation.Instance.PushAsync(new AddEventPopup(this.BindingContext));
         }
 
-        
+        private void MyPhotos_Clicked(object sender, EventArgs e)
+        {
+            App.Current.MainPage.Navigation.PushAsync(new UserPhotosView(this.BindingContext));
+        }
     }
 }

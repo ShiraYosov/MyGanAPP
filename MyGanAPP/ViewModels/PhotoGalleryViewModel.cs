@@ -129,7 +129,7 @@ namespace MyGanAPP.ViewModels
                 OnPropertyChanged("SelectedImgSrc");
             }
         }
-        private const string DEFAULT_PHOTO_SRC = "user.png";
+
         #endregion
 
         #region ServerStatus
@@ -171,39 +171,57 @@ namespace MyGanAPP.ViewModels
         }
         #endregion
 
+        #region SelectedImg
+        private Photo selectedUserimg;
+
+        public Photo SelectedUserImg
+        {
+            get => selectedUserimg;
+            set
+            {
+                selectedUserimg = value;
+                OnPropertyChanged("SelectedUserImg");
+            }
+        }
+        #endregion
         public ObservableCollection<Event> EventList { get; }
+
+        public ObservableCollection<Photo> Photos { get; set; }
 
         public PhotoGalleryViewModel()
         {
             App a = (App)App.Current;
 
             if (a.SelectedStudent != null) { Name = $"{a.SelectedStudent.FirstName} {a.SelectedStudent.LastName}"; }
-            else if(a.CurrUser != null) { Name = $"{a.CurrUser.Fname} {a.CurrUser.LastName}"; }
+            else if (a.CurrUser != null) { Name = $"{a.CurrUser.Fname} {a.CurrUser.LastName}"; }
 
+            SelectedUserImg = null;
             NotParent = false;
             this.showDescriptionError = false;
             EventDate = DateTime.Now;
             PhotoDescription = "";
+            Photos = new ObservableCollection<Photo>();
             EventList = new ObservableCollection<Event>();
-            CreateCollection();
+            CreateEventCollection();
+            CreatePhotoCollection();
         }
 
-        private void CreateCollection()
+        private void CreateEventCollection()
         {
 
             EventList.Clear();
             App a = (App)App.Current;
-            if(a.SelectedStudent == null)
-            { 
+            if (a.SelectedStudent == null)
+            {
                 NotParent = true;
 
                 foreach (Event ev in a.SelectedGroup.Events)
                 {
                     this.EventList.Add(ev);
                 }
-            } 
+            }
 
-            else 
+            else
             {
                 NotParent = false;
 
@@ -212,10 +230,48 @@ namespace MyGanAPP.ViewModels
                     this.EventList.Add(ev);
                 }
             }
-            
+
 
 
         }
+        private void CreatePhotoCollection()
+        {
+            Photos.Clear();
+            App theApp = (App)App.Current;
+
+            if (theApp.CurrUser != null && theApp.SelectedStudent != null)
+            {
+                Models.Group studentGroup = theApp.SelectedStudent.Group;
+                foreach (Photo p in theApp.CurrUser.Photos)
+                {
+                    if (p.Event.Group.GroupId == studentGroup.GroupId)
+                        Photos.Add(p);
+                }
+            }
+
+            else if (theApp.CurrUser != null)
+            {
+                foreach (Photo p in theApp.CurrUser.Photos)
+                {
+                    if (IsEventExist(p.Event) && p.Event.GroupId == theApp.SelectedGroup.GroupId)
+                    {
+                        Photos.Add(p);
+                    }
+
+                }
+            }
+        }
+
+        private bool IsEventExist(Event e)
+        {
+            foreach (Event ev in EventList)
+            {
+                if (ev.EventId == e.EventId)
+                    return true;
+            }
+            return false;
+        }
+
 
         public ICommand BackgroundClicked => new Command(OnClick);
         public void OnClick()
@@ -239,6 +295,17 @@ namespace MyGanAPP.ViewModels
 
         }
 
+        public ICommand TapUserPhotoCommand => new Command(OnTapUserPhoto);
+        public async void OnTapUserPhoto(object pic)
+        {
+            if (pic != null)
+            {
+                this.SelectedUserImg = (Photo)pic;
+                await PopupNavigation.Instance.PushAsync(new UserPhotoPopup(this));
+            }
+
+        }
+
         public ICommand DeleteEventCommand => new Command(OnDeleteEvent);
         public async void OnDeleteEvent(object ev)
         {
@@ -246,13 +313,14 @@ namespace MyGanAPP.ViewModels
             App a = (App)App.Current;
 
             Event e = (Event)ev;
-           
+
             bool success = await proxy.DeleteEvent(e);
 
             if (success)
             {
                 a.SelectedGroup.Events.Remove(e);
-                CreateCollection();
+                CreateEventCollection();
+                CreatePhotoCollection();
             }
 
             else
@@ -262,27 +330,31 @@ namespace MyGanAPP.ViewModels
         }
 
         public ICommand DeletePhotoCommand => new Command(OnDeletePhoto);
-        public async void OnDeletePhoto(object p)
+        public async void OnDeletePhoto()
         {
+            await PopupNavigation.Instance.PopAsync();
             MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
             App a = (App)App.Current;
-            if(p is Photo)
+            if (SelectedUserImg != null)
             {
-                Photo ph = (Photo)p;
+                Photo ph = (Photo)SelectedUserImg;
                 bool success = await proxy.DeletePhoto(ph.Id);
 
                 if (success)
                 {
                     a.SelectedGroup.Events.Where(e => e.EventId == ph.EventId).FirstOrDefault().Photos.Remove(ph);
-                    CreateCollection();
+                    Photo p = a.CurrUser.Photos.Where(po => po.Id == ph.Id).FirstOrDefault();
+                    a.CurrUser.Photos.Remove(p);
+                    CreatePhotoCollection();
+                    CreateEventCollection();
                 }
 
                 else
                 {
-                    await App.Current.MainPage.DisplayAlert("שגיאה", "מחיקת הודעה נכשלה", "בסדר");
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "מחיקת תמונה נכשלה", "בסדר");
                 }
             }
-           
+
         }
         public ICommand AddEventCommand => new Command(OnAddEvent);
         public async void OnAddEvent()
@@ -325,6 +397,26 @@ namespace MyGanAPP.ViewModels
 
         }
 
+        public ICommand EditPhotoCommand => new Command(OnEditPhoto);
+        public async void OnEditPhoto()
+        {
+            this.selectedimgSrc = selectedUserimg.PhotoURL;
+            this.photoDescription = selectedUserimg.Description;
+            await PopupNavigation.Instance.PushAsync(new ShowPhotoPopup(this));
+        }
+
+        public ICommand ChangeDescriptionCommand => new Command(OnChange);
+        public async void OnChange()
+        {
+            App a = (App)App.Current;
+            Photo toChange = a.CurrUser.Photos.Where(p => p.Id == selectedUserimg.Id).FirstOrDefault();
+            toChange.Description = PhotoDescription;
+
+            await PopupNavigation.Instance.PushAsync(new ShowPhotoPopup(this));
+            PhotoDescription = "";
+
+            //add change photo description function
+        }
         public ICommand AddPhotoCommand => new Command(OnAddPhoto);
         public async void OnAddPhoto()
         {
@@ -356,6 +448,7 @@ namespace MyGanAPP.ViewModels
 
                     if (photo == null)
                     {
+                        PhotoDescription = "";
                         await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת תמונה נכשלה", "בסדר");
                     }
                     else
@@ -365,7 +458,8 @@ namespace MyGanAPP.ViewModels
                             Name = this.imageFileResult.FullPath
                         }, $"Events\\{photo.Id}.jpg");
 
-                        if(notParent)
+                        theApp.CurrUser.Photos.Add(photo);
+                        if (notParent)
                         {
                             theApp.SelectedGroup.Events.Where(e => e.EventId == photo.EventId).FirstOrDefault().Photos.Add(photo);
                         }
@@ -373,8 +467,9 @@ namespace MyGanAPP.ViewModels
                         {
                             theApp.SelectedStudent.Group.Events.Where(e => e.EventId == photo.EventId).FirstOrDefault().Photos.Add(photo);
                         }
-                       
-                        CreateCollection();
+
+                        CreatePhotoCollection();
+                        CreateEventCollection();
 
                     }
 
@@ -404,7 +499,6 @@ namespace MyGanAPP.ViewModels
             if (result != null)
             {
                 await PopupNavigation.Instance.PushAsync(new ShowPhotoPopup(this));
-
                 this.imageFileResult = result;
 
                 var stream = await result.OpenReadAsync();
