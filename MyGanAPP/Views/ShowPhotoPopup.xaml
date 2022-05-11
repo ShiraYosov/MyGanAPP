@@ -44,7 +44,7 @@ FlowDirection="RightToLeft">
 
         
 
-        <Button Text="הוספה" Command="{Binding AddPhotoCommand}"  BackgroundColor="#bee9e8" TextColor="Black"  Margin="0" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
+        <Button Text="עדכן" Command="{Binding ChangeDescriptionCommand}"  BackgroundColor="#bee9e8" TextColor="Black"  Margin="0" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
 
     </StackLayout>
 

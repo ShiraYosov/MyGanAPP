@@ -188,6 +188,8 @@ namespace MyGanAPP.ViewModels
 
         public ObservableCollection<Photo> Photos { get; set; }
 
+        public ObservableCollection<Photo> PhotosCarousel { get; set; }
+
         public PhotoGalleryViewModel()
         {
             App a = (App)App.Current;
@@ -202,6 +204,7 @@ namespace MyGanAPP.ViewModels
             PhotoDescription = "";
             Photos = new ObservableCollection<Photo>();
             EventList = new ObservableCollection<Event>();
+            PhotosCarousel = new ObservableCollection<Photo>();
             CreateEventCollection();
             CreatePhotoCollection();
         }
@@ -284,13 +287,19 @@ namespace MyGanAPP.ViewModels
         {
             if (pic != null)
             {
-                App a = (App)App.Current;
-                Photo selectedPhoto = (Photo)pic;
-                Name = selectedPhoto.Name;
-                PhotoDescription = selectedPhoto.Description;
-                SelectedImgSrc = selectedPhoto.PhotoURL;
+                Photo selectedPic = (Photo)pic;
+                PhotosCarousel.Clear();
 
-                await PopupNavigation.Instance.PushAsync(new PhotoPopupView(this));
+                PhotosCarousel.Add(selectedPic);
+                Event currEvent = this.EventList.Where(e => e.EventId == selectedPic.EventId).FirstOrDefault();
+                foreach(Photo p in currEvent.Photos )
+                {
+                    if(p.Id != selectedPic.Id)
+                    {
+                        PhotosCarousel.Add(p);
+                    }
+                }
+                await App.Current.MainPage.Navigation.PushAsync(new PhotoCarouselView(this));
             }
 
         }
@@ -409,13 +418,26 @@ namespace MyGanAPP.ViewModels
         public async void OnChange()
         {
             App a = (App)App.Current;
-            Photo toChange = a.CurrUser.Photos.Where(p => p.Id == selectedUserimg.Id).FirstOrDefault();
-            toChange.Description = PhotoDescription;
+            selectedUserimg.Description = PhotoDescription;
 
-            await PopupNavigation.Instance.PushAsync(new ShowPhotoPopup(this));
+            await PopupNavigation.Instance.PopAsync();
             PhotoDescription = "";
 
-            //add change photo description function
+            MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
+            bool ok =  await proxy.EditPhotoDescription(selectedUserimg);
+            
+            if(ok)
+            {
+                await PopupNavigation.Instance.PopAsync();
+                Photo toChange = a.CurrUser.Photos.Where(p => p.Id == selectedUserimg.Id).FirstOrDefault();
+                Photos.Where(p => p.Id == toChange.Id).FirstOrDefault().Description = selectedUserimg.Description;
+                a.CurrUser.Photos.Where(p => p.Id == toChange.Id).FirstOrDefault().Description = selectedUserimg.Description;
+                await App.Current.MainPage.DisplayAlert("", "תמונה עודכנה בהצלחה!", "בסדר");
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", "עדכון תמונה נכשל", "בסדר");
+            }
         }
         public ICommand AddPhotoCommand => new Command(OnAddPhoto);
         public async void OnAddPhoto()
@@ -498,7 +520,7 @@ namespace MyGanAPP.ViewModels
 
             if (result != null)
             {
-                await PopupNavigation.Instance.PushAsync(new ShowPhotoPopup(this));
+                await PopupNavigation.Instance.PushAsync(new PhotoPopupView(this));
                 this.imageFileResult = result;
 
                 var stream = await result.OpenReadAsync();

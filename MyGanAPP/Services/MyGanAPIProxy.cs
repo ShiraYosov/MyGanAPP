@@ -327,6 +327,37 @@ namespace MyGanAPP.Services
             }
         }
 
+        // Edit photo description
+
+        public async Task<bool> EditPhotoDescription(Photo p)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                    PropertyNameCaseInsensitive = true
+                };
+                string json = JsonSerializer.Serialize<Photo>(p, options);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/EditPhotoDescription", content);
+                if (response.IsSuccessStatusCode)
+                {
+                   
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
         //Add New Group
         public async Task<Group> AddGroup(Group g)
         {

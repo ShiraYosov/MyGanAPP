@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyGanAPP.Views.PhotoCarouselView"
+             FlowDirection="RightToLeft"
+             BackgroundColor="#bde0fe">
+    <ContentPage.Content>
+        <StackLayout>
+            <CarouselView ItemsSource="{Binding PhotosCarousel}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame HasShadow="True" BorderColor="DarkGray" CornerRadius="5" Margin="20" HeightRequest="500" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                                <StackLayout>
+                                    <!--Photo-->
+                                    <Image x:Name="theImage" Source="{Binding PhotoURL}" BackgroundColor="Transparent" Aspect="AspectFit" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" HeightRequest="300" WidthRequest="300"/>
+
+                                    <!-- StudentName-->
+                                    <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="התמונה של: " FontSize="20" FontAttributes="Bold"/>
+                                                <Span Text="{Binding Name}" FontSize="20" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <!-- PhotoDescription-->
+                                    <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="תיאור התמנה: " FontSize="20" FontAttributes="Bold"/>
+                                                <Span Text= "{Binding Description}" FontSize="20" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

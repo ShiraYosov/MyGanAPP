@@ -28,26 +28,24 @@ FlowDirection="RightToLeft">
 
         <!--Photo-->
         <Image x:Name="theImage" Source="{Binding SelectedImgSrc}" BackgroundColor="Transparent" Aspect="AspectFit" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" HeightRequest="300" WidthRequest="300"/>
-        
-        <!-- StudentName-->
-        <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
-            <Label.FormattedText>
-                <FormattedString>
-                    <Span Text="התמונה של: " FontSize="20" FontAttributes="Bold"/>
-                    <Span Text="{Binding Name}" FontSize="20" />
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
 
-        <!-- PhotoDescription-->
-        <Label TextColor="Black" LineBreakMode="WordWrap" HorizontalOptions="Start" HorizontalTextAlignment="Start" >
-            <Label.FormattedText>
-                <FormattedString>
-                    <Span Text="תיאור התמנה: " FontSize="20" FontAttributes="Bold"/>
-                    <Span Text= "{Binding PhotoDescription}" FontSize="20" />
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Text="{Binding DescriptionError}" IsVisible="{Binding ShowDescriptionError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+        </Grid>
+        <Entry Placeholder="אנא כתוב תיאור לתמונה" MaxLength="30" Text="{Binding PhotoDescription}" Style="{StaticResource entry}"/>
+
+
+
+        <Button Text="הוספה" Command="{Binding AddPhotoCommand}"  BackgroundColor="#bee9e8" TextColor="Black"  Margin="0" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
+
 
     </StackLayout>
 
