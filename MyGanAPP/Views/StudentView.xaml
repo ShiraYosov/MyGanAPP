@@ -26,8 +26,10 @@
                 </Frame>
             </Grid>
 
+            
+            
             <StackLayout Padding="7" Margin="0" HorizontalOptions="Center">
-                <RefreshView x:Name="refreshView" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+                <RefreshView x:Name="refreshView" Command="{Binding RefreshCommand}" >
                     <ScrollView>
                         <Frame  BackgroundColor="White" HasShadow="True" Padding="20" Margin="15,0" CornerRadius="20" WidthRequest="280">
 
@@ -84,11 +86,67 @@
                                 </Label>
 
 
+                               
+
 
                             </StackLayout>
                         </Frame>
                     </ScrollView>
                 </RefreshView>
+            </StackLayout>
+
+            <StackLayout Padding="7" Margin="0" HorizontalOptions="Center" >
+                <Label Text="פרטי הורים" Grid.Column="1" TextDecorations="Underline" FontAttributes="Bold" FontSize="22" HorizontalOptions="Start" TextColor="Black" ></Label>
+                <Button Text="הוספת הורה" Clicked="AddParent_Clicked" BackgroundColor="LightBlue" TextColor="Black"  Margin="0" FontAttributes="Bold" Padding="5" FontSize="17" CornerRadius="30"/>
+                <Frame BackgroundColor="White" HasShadow="True" Padding="20" Margin="15,0" CornerRadius="20" WidthRequest="280">
+
+                    <StackLayout x:Name="collectionName2" 
+                                BindableLayout.ItemsSource="{Binding StudentOfUsersList}">
+
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command ="{Binding Source={x:Reference collectionName2}, Path= BindingContext.SelectionChanged}" CommandParameter="{Binding}" />
+                                    </StackLayout.GestureRecognizers>
+                                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="1" Grid.Row="0"
+                                                            Text="שם ההורה:" FontAttributes="Bold"/>
+                                        <Label Grid.Column="2" Grid.Row="0" HorizontalOptions="Start"
+                                                             Text="{Binding Fname}"/>
+                                        <Label Grid.Column="1" Grid.Row="1"
+                                                             Text="טלפון:" FontAttributes="Bold"/>
+                                        <Label Grid.Column="2" Grid.Row="1" HorizontalOptions="Start"
+                                                             Text="{Binding PhoneNumber}"/>
+                                       
+
+
+                                        <Frame Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Style="{StaticResource SmallImageFrame}">
+                                            <Image Source="{Binding PhotoURL}" Style="{StaticResource SmallImage}"/>
+                                        </Frame>
+
+                                    </Grid>
+
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+
+                       
+                    </StackLayout>
+
+                    
+                </Frame>
             </StackLayout>
 
 

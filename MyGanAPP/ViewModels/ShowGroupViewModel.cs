@@ -13,6 +13,8 @@ using MyGanAPP.Views;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Collections;
+using Rg.Plugins.Popup;
+using Rg.Plugins.Popup.Services;
 
 namespace MyGanAPP.ViewModels
 {
@@ -277,6 +279,23 @@ namespace MyGanAPP.ViewModels
 
         #endregion
 
+        #region Student
+
+        private Student selectedStudent;
+
+        public Student SelectedStudent
+        {
+            get => selectedStudent;
+            set
+            {
+                selectedStudent = value;
+                OnPropertyChanged("SelectedStudent");
+            }
+        }
+
+
+        #endregion
+
         #region StudentLastName
 
         private string studentLastName;
@@ -308,12 +327,144 @@ namespace MyGanAPP.ViewModels
         #endregion
 
         #endregion
+
+        #region ParentInfo
+
+        #region ParentFirstName
+
+        private string parentFirstName;
+
+        public string ParentFirstName
+        {
+            get => parentFirstName;
+            set
+            {
+                parentFirstName = value;
+                OnPropertyChanged("ParentFirstName");
+            }
+        }
+
+
+        #endregion
+
+        #region ParentLastName
+
+        private string parentLastName;
+
+        public string ParentLastName
+        {
+            get =>parentLastName;
+            set
+            {
+                parentLastName = value;
+                OnPropertyChanged("ParentLastName");
+            }
+        }
+
+
+        #endregion
+
+        #region ParentEmail
+
+        private string parentemail;
+
+        public string ParentEmail
+        {
+            get => parentemail;
+            set
+            {
+                parentemail = value;
+                OnPropertyChanged("ParentEmail");
+            }
+        }
+
+        #endregion
+
+        #region ParentPhoneNumber
+
+        private string parentphoneNumber;
+
+        public string ParentPhoneNumber
+        {
+            get => parentphoneNumber;
+            set
+            {
+                parentphoneNumber = value;
+                OnPropertyChanged("ParentPhoneNumber");
+            }
+        }
+
+        #endregion
+
+        #region RelationToStudent
+
+        private RelationToStudent chosenRelation;
+
+        public RelationToStudent ChosenRelation
+        {
+            get => chosenRelation;
+            set
+            {
+                chosenRelation = value;
+                OnPropertyChanged("ChosenRelation");
+            }
+        }
+
+        public List<RelationToStudent> RelationTypes
+        {
+            get
+            {
+                App theApp = (App)App.Current;
+                List<RelationToStudent> relations = new List<RelationToStudent>();
+                foreach (RelationToStudent r in theApp.LookupTables.Relations)
+                {
+                    relations.Add(r);
+                }
+                return relations;
+            }
+        }
+        #endregion
+
+        #endregion
+
+        private bool ValidateParentInfo()
+        {
+
+            //validate user name and last name
+            if (string.IsNullOrEmpty(ParentLastName) || string.IsNullOrEmpty(ParentFirstName) || string.IsNullOrEmpty(ParentEmail) || ChosenRelation== null)
+            {
+                return false;
+            }
+
+            //validate phone number
+            if (this.ParentPhoneNumber.Length != 10)
+            {
+                return false;
+            }
+
+            int num;
+            bool ok = int.TryParse(ParentPhoneNumber, out num);
+            if (!ok)
+            {
+                return false;
+            }
+
+            //validate email
+            if (!System.Text.RegularExpressions.Regex.IsMatch(this.ParentEmail, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"))
+            {
+                return false;
+            }
+
+            return true;
+
+        }
         public ObservableCollection<Student> StudentsList { get; }
+        public ObservableCollection<User> StudentOfUsersList { get; }
 
         public ShowGroupViewModel()
         {
             App theApp = (App)App.Current;
-
+            StudentOfUsersList = new ObservableCollection<User>();
             StudentsList = new ObservableCollection<Student>();
             User Teacher = theApp.SelectedGroup.Teacher;
             UserImgSrc = Teacher.PhotoURL;
@@ -334,6 +485,71 @@ namespace MyGanAPP.ViewModels
             CreateCollection();
         }
 
+
+        public ICommand AddParentToStudentCommand => new Command(OnAddParent);
+        public async void OnAddParent()
+        {
+
+            if (ValidateParentInfo())
+            {
+                App a = (App)App.Current;
+
+                User p = new User()
+                {
+                    Fname = ParentFirstName,
+                    LastName = ParentLastName,
+                    Email = ParentEmail,
+                    PhoneNumber = ParentPhoneNumber,
+                    Password = ""
+                };
+
+
+                StudentOfUser sou = new StudentOfUser()
+                {
+                    Student = SelectedStudent,
+                    StudentId = selectedStudent.StudentId,
+                    User = p,
+                    RelationToStudent = ChosenRelation,
+                    RelationToStudentId = chosenRelation.RelationToStudentId,
+                    StatusId = PERMITTED_STATUS,
+
+                };
+              
+               p.StudentOfUsers.Add(sou);
+
+                MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
+                User newU = await proxy.ParentRegister(p,SelectedStudent);
+
+                if (newU == null)
+                {
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
+                    await PopupNavigation.Instance.PopAsync();
+                }
+
+                else if (newU != null)
+                {
+                    await App.Current.MainPage.DisplayAlert("הרשמה בוצעה בהצלחה", "", "בסדר");
+                    await PopupNavigation.Instance.PopAsync();
+                    SelectedStudent.StudentOfUsers.Add(newU.StudentOfUsers.Where(s => s.StudentId == SelectedStudent.StudentId).FirstOrDefault());
+                    StudentOfUsersList.Add(newU);
+
+                    ParentFirstName = "";
+                    ParentLastName = "";
+                    ParentEmail = "";
+                    ParentPhoneNumber = "";
+
+                }
+
+
+            }
+
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", "לא כל פרטי המשתמש תקינים!", "בסדר");
+            }
+
+        }
+
         public Command<Student> SelectionChanged => new Command<Student>(OnSelection);
         public void OnSelection(object s)
         {
@@ -341,11 +557,18 @@ namespace MyGanAPP.ViewModels
             {
                 Student student = (Student)s;
 
+                SelectedStudent = student;
                 StudentImgSrc = student.PhotoURL;
                 StudentName = student.FirstName;
                 StudentLastName = student.LastName;
                 Gender = student.Gender;
                 BirthDate = student.BirthDate.ToShortDateString();
+
+                StudentOfUsersList.Clear();
+                foreach(StudentOfUser u in student.StudentOfUsers)
+                {
+                    StudentOfUsersList.Add(u.User);
+                }
 
                 Allergies = "";
                 foreach (StudentAllergy sa in student.StudentAllergies)

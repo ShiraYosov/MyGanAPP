@@ -4,6 +4,9 @@
              x:Class="MyGanAPP.Views.ParentRegistrationView"
              FlowDirection="RightToLeft"
              BackgroundImageSource="HomePage.jpg">
+
+   
+    
     <ContentPage.Content>
         <StackLayout Style="{StaticResource Stack}">
             <ScrollView>

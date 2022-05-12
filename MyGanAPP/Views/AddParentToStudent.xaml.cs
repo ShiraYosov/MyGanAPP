@@ -11,18 +11,12 @@ using Rg.Plugins.Popup.Services;
 namespace MyGanAPP.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class StudentView : ContentPage
+    public partial class AddParentToStudent : Rg.Plugins.Popup.Pages.PopupPage
     {
-        public StudentView(object context)
+        public AddParentToStudent(Object context)
         {
-            this.Title = "פרטי תלמיד";
             this.BindingContext = context;
             InitializeComponent();
-        }
-
-        private void AddParent_Clicked(object sender, EventArgs e)
-        {
-            PopupNavigation.Instance.PushAsync(new AddParentToStudent(this.BindingContext));
         }
     }
 }
