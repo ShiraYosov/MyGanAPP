@@ -247,8 +247,12 @@ namespace MyGanAPP.ViewModels
                 Models.Group studentGroup = theApp.SelectedStudent.Group;
                 foreach (Photo p in theApp.CurrUser.Photos)
                 {
-                    if (p.Event.Group.GroupId == studentGroup.GroupId)
+                    if (IsPhotoInEvent(p, studentGroup.Events.ToList<Event>()))
+                    {
                         Photos.Add(p);
+                    }
+
+
                 }
             }
 
@@ -256,7 +260,7 @@ namespace MyGanAPP.ViewModels
             {
                 foreach (Photo p in theApp.CurrUser.Photos)
                 {
-                    if (IsEventExist(p.Event) && p.Event.GroupId == theApp.SelectedGroup.GroupId)
+                    if (IsPhotoInEvent(p, theApp.SelectedGroup.Events.ToList<Event>()))
                     {
                         Photos.Add(p);
                     }
@@ -265,15 +269,17 @@ namespace MyGanAPP.ViewModels
             }
         }
 
-        private bool IsEventExist(Event e)
+      
+        private bool IsPhotoInEvent(Photo p, List<Event> events)
         {
-            foreach (Event ev in EventList)
+            foreach (Event ev in events)
             {
-                if (ev.EventId == e.EventId)
+                if (p.EventId == ev.EventId)
                     return true;
             }
             return false;
         }
+
 
 
         public ICommand BackgroundClicked => new Command(OnClick);
@@ -292,9 +298,9 @@ namespace MyGanAPP.ViewModels
 
                 PhotosCarousel.Add(selectedPic);
                 Event currEvent = this.EventList.Where(e => e.EventId == selectedPic.EventId).FirstOrDefault();
-                foreach(Photo p in currEvent.Photos )
+                foreach (Photo p in currEvent.Photos)
                 {
-                    if(p.Id != selectedPic.Id)
+                    if (p.Id != selectedPic.Id)
                     {
                         PhotosCarousel.Add(p);
                     }
@@ -351,7 +357,15 @@ namespace MyGanAPP.ViewModels
 
                 if (success)
                 {
-                    a.SelectedGroup.Events.Where(e => e.EventId == ph.EventId).FirstOrDefault().Photos.Remove(ph);
+                    if (a.SelectedGroup != null)
+                    {
+                        a.SelectedGroup.Events.Where(e => e.EventId == ph.EventId).FirstOrDefault().Photos.Remove(ph);
+                    }
+                    else
+                    {
+                        a.SelectedStudent.Group.Events.Where(e => e.EventId == ph.EventId).FirstOrDefault().Photos.Remove(ph);
+                    }
+
                     Photo p = a.CurrUser.Photos.Where(po => po.Id == ph.Id).FirstOrDefault();
                     a.CurrUser.Photos.Remove(p);
                     CreatePhotoCollection();
@@ -376,8 +390,7 @@ namespace MyGanAPP.ViewModels
                 {
                     EventName = EventName,
                     EventDate = EventDate.ToShortDateString(),
-                    GroupId = a.SelectedGroup.GroupId,
-                    Group = a.SelectedGroup
+                    GroupId = a.SelectedGroup.GroupId
                 };
 
                 EventName = "";
@@ -424,9 +437,9 @@ namespace MyGanAPP.ViewModels
             PhotoDescription = "";
 
             MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
-            bool ok =  await proxy.EditPhotoDescription(selectedUserimg);
-            
-            if(ok)
+            bool ok = await proxy.EditPhotoDescription(selectedUserimg);
+
+            if (ok)
             {
                 await PopupNavigation.Instance.PopAsync();
                 Photo toChange = a.CurrUser.Photos.Where(p => p.Id == selectedUserimg.Id).FirstOrDefault();
@@ -457,9 +470,7 @@ namespace MyGanAPP.ViewModels
                     App theApp = (App)App.Current;
                     Photo newPhoto = new Photo()
                     {
-                        Event = SelectedEvent,
                         EventId = SelectedEvent.EventId,
-                        User = theApp.CurrUser,
                         Name = Name,
                         UserId = theApp.CurrUser.UserId,
                         Description = PhotoDescription

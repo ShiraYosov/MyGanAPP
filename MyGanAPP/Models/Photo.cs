@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using MyGanAPP.Services;
 
 namespace MyGanAPP.Models
@@ -12,7 +13,9 @@ namespace MyGanAPP.Models
         public int EventId { get; set; }
 
         public string Name { get; set; }
+        
         public virtual Event Event { get; set; }
+        
         public virtual User User { get; set; }
 
         public string PhotoURL
