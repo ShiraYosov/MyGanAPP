@@ -6,6 +6,7 @@
              FlowDirection="RightToLeft"
              >
     <ContentPage.Content>
+        <ScrollView>
         <StackLayout>
 
             <Button Text="התנתקות" TextColor="White" Margin="5" Padding="0" FontAttributes="Bold" FontSize="16" BackgroundColor="#023047" HorizontalOptions="Start" Clicked="LogOut_Clicked"></Button>
@@ -27,8 +28,8 @@
             </Grid>
 
             <StackLayout Padding="0,10" Margin="0" HorizontalOptions="Center">
-                <RefreshView x:Name="refreshView" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
-                    <ScrollView>
+             
+                    
                         <Frame  BackgroundColor="White" HasShadow="True" Padding="10" Margin="15,10" CornerRadius="20" WidthRequest="280">
 
                             <StackLayout Padding="0" Margin="8">
@@ -156,11 +157,11 @@
 
                             </StackLayout>
                         </Frame>
-                    </ScrollView>
-                </RefreshView>
+                  
             </StackLayout>
 
 
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
