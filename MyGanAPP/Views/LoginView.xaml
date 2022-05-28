@@ -45,7 +45,7 @@
                                 <Image Source="pass.png" HeightRequest="17" WidthRequest="17" Margin="5"/>
                             </Frame>
                             
-                            <Entry x:Name="pass" Placeholder="הכנס סיסמא" FontSize="23" IsPassword="{Binding ShowPass}" TextColor="Black" Text="{Binding Password}" Grid.Row="2" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                            <Entry x:Name="pass" Placeholder="הכנס סיסמה" FontSize="23" IsPassword="{Binding ShowPass}" TextColor="Black" Text="{Binding Password}" Grid.Row="2" Grid.Column="1" HorizontalTextAlignment="Center"/>
                             <ImageButton BackgroundColor="Transparent" Source="{Binding ImgSource1}" Grid.Column="2" Grid.Row="2" Command="{Binding PassCommand}" HeightRequest="25" WidthRequest="25"></ImageButton>
                         
                         </Grid>
