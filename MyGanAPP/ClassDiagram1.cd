@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="MyGanAPP.Models.Allergy">
+    <Position X="6.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAIAAACAAAAAA=</HashCode>
+      <FileName>Models\Allergy.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="StudentAllergies" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="MyGanAPP.Models.Event" Collapsed="true">
+    <Position X="14.25" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAkAAAAACAAAAAAAAAAAIAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Models\Event.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyGanAPP.Models.FileInfo" Collapsed="true">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\FileInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyGanAPP.Models.GanCode" Collapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAACAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\GanCode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyGanAPP.Models.Grade">
+    <Position X="12.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Models\Grade.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Students" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="MyGanAPP.Models.Group">
+    <Position X="13" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAMEAAgEAAAAAAAAAAAACAAAAgAAAAAAAAAABQAAAAE=</HashCode>
+      <FileName>Models\Group.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Teacher" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Events" />
+      <Property Name="Messages" />
+      <Property Name="Students" />
+      <Property Name="PendingTeachers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="MyGanAPP.Models.Kindergarten" Collapsed="true">
+    <Position X="8.5" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEgAAIAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Kindergarten.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyGanAPP.Models.KindergartenManager">
+    <Position X="8.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAgAAAAAAAAAAAAAAAgAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Models\KindergartenManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Kindergarten" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MyGanAPP.Models.Lookups">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\Lookups.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Allergies" />
+      <Property Name="Grades" />
+      <Property Name="Relations" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="MyGanAPP.Models.Message">
+    <Position X="14.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAEAEAgAAAAAAAAQAAAgAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Message.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Group" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MyGanAPP.Models.PendingTeacher">
+    <Position X="9.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAEAMAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\PendingTeacher.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Group" />
+      <Property Name="Status" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MyGanAPP.Models.Photo">
+    <Position X="11.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAgAAAgAAAAAAAAAAwAAgAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Models\Photo.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Event" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MyGanAPP.Models.RegisterUserDto">
+    <Position X="8.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAQAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\RegisterUserDto.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Student" />
+      <Property Name="StudentOfUser" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MyGanAPP.Models.RelationToStudent">
+    <Position X="6.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEEAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Models\RelationToStudent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="StudentOfUsers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="MyGanAPP.Models.StatusType">
+    <Position X="3.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAIAAAgAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\StatusType.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="PendingTeachers" />
+      <Property Name="StudentOfUsers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="MyGanAPP.Models.Student">
+    <Position X="9.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAEAAAAAACAAAEAAAQAAAAAAAAAMAAAAgECAAg=</HashCode>
+      <FileName>Models\Student.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Grade" />
+      <Property Name="Group" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="StudentAllergies" />
+      <Property Name="StudentOfUsers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="MyGanAPP.Models.StudentAllergy">
+    <Position X="9.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAgAAABAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Models\StudentAllergy.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Allergy" />
+      <Property Name="Student" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MyGanAPP.Models.StudentOfUser">
+    <Position X="6.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAMQAAAAAAAAAAAAAgAAAAAAAAEAAQAAAACAAA=</HashCode>
+      <FileName>Models\StudentOfUser.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="RelationToStudent" />
+      <Property Name="Status" />
+      <Property Name="Student" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MyGanAPP.Models.User">
+    <Position X="11.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAEAAAKAAACAAAAEAQAgAAAAAAAACAAAAAwAAEAg=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Groups" />
+      <Property Name="KindergartenManagers" />
+      <Property Name="Messages" />
+      <Property Name="PendingTeachers" />
+      <Property Name="Photos" />
+      <Property Name="StudentOfUsers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
