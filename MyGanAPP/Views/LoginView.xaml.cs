@@ -20,14 +20,7 @@ namespace MyGanAPP.Views
             
         }
 
-        //protected override void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //    App a = (App)App.Current;
-        //    a.SelectedGroup = null;
-        //    a.SelectedKindergarten = null;
-        //    a.SelectedStudent = null;
-        //}
+       
 
         private void Parent_Pressed(object sender, EventArgs e)
         {
