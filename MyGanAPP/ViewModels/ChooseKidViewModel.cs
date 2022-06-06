@@ -89,6 +89,7 @@ namespace MyGanAPP.ViewModels
             CreateCollection();
         }
 
+        //Create all lists according to the user that logged in
         private void CreateCollection()
         {
             Visible1 = false; Visible2 = false; Visible3 = false; MessageVisible = false;
@@ -98,6 +99,7 @@ namespace MyGanAPP.ViewModels
 
             App a = (App)App.Current;
 
+            //If the user is a parent
             ICollection<StudentOfUser> theStudents = a.CurrUser.StudentOfUsers;
             foreach (StudentOfUser s in theStudents)
             {
@@ -106,6 +108,7 @@ namespace MyGanAPP.ViewModels
             }
             if (this.ChildrenList.Count > 0) { Visible1 = true; }
 
+            //If the user is a teacher
             ICollection<Group> theGroups = a.CurrUser.Groups;
             foreach (Group g in theGroups)
             {
@@ -113,6 +116,7 @@ namespace MyGanAPP.ViewModels
             }
             if (this.GroupsList.Count > 0) { Visible2 = true; }
 
+            //If the user is a kindergarten manager
             ICollection<KindergartenManager> Kindergartens = a.CurrUser.KindergartenManagers;
             foreach (KindergartenManager k in Kindergartens)
             {
@@ -127,6 +131,7 @@ namespace MyGanAPP.ViewModels
                 
         }
 
+        //Send user to a profile page accoeding to his selection
         public ICommand SelectionChanged => new Command(OnSelection);
         public async void OnSelection(object obj)
         {

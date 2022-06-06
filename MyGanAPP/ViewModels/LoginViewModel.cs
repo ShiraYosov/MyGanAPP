@@ -95,6 +95,7 @@ namespace MyGanAPP.ViewModels
         public ICommand LoginCommand { protected set; get; }
         public ICommand PassCommand { protected set; get; }
 
+        //Open and close the eye icon
         public void OnShowPass()
         {
             if (ShowPass == false) 
@@ -108,13 +109,14 @@ namespace MyGanAPP.ViewModels
             else { ImgSource1 = CLOSEDEYE_PHOTO_SRC; }
         }
 
-       
+       //Login function
         public async void Login()
         {
 
             MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
             User user = await proxy.LoginAsync(Email, Password);
 
+            //Checking if user exists
             if (user != null)
             {
                 this.Password = "";
@@ -125,6 +127,7 @@ namespace MyGanAPP.ViewModels
                await App.Current.MainPage.Navigation.PushAsync(new ChooseView());
 
             }
+           
             else
             {
                 await App.Current.MainPage.DisplayAlert("שגיאה", "התחברות נכשלה, בדוק שם משתמש וסיסמה ונסה שוב", "בסדר");

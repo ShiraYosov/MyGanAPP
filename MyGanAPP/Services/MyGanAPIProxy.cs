@@ -94,7 +94,7 @@ namespace MyGanAPP.Services
 
 
 
-        //Login!
+        //This function gets user's email and password and returns an object of the user if he exists.
         public async Task<User> LoginAsync(string email, string pass)
         {
             try
@@ -123,7 +123,7 @@ namespace MyGanAPP.Services
             }
         }
 
-        //GetLookups!
+        //This function returns the Lookup tables
         public async Task<Lookups> GetLookupsAsync()
         {
             try
@@ -152,7 +152,7 @@ namespace MyGanAPP.Services
             }
         }
 
-        //Code exist
+        //this function gets a group code and checks if it exists
         public async Task<bool> CodeExist(int code)
         {
             try
@@ -183,7 +183,7 @@ namespace MyGanAPP.Services
             }
         }
 
-        //GetTeachersList
+        //this function return the pending teachers list according to the kindergarten id
         public async Task<List<PendingTeacher>> GetTeachersWithWaitStatusAsync(int kindergatenID)
         {
             try
@@ -215,7 +215,7 @@ namespace MyGanAPP.Services
             }
         }
 
-        //Change user status
+        //this function changes the status of a pending user
         public async Task<bool> ChangeUserStatus(object u)
         {
             try
@@ -226,6 +226,8 @@ namespace MyGanAPP.Services
                     Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
                     PropertyNameCaseInsensitive = true
                 };
+
+                //checking if the object is a pending teacher or a studentOfUser
 
                 if (u is PendingTeacher)
                 {
@@ -297,6 +299,7 @@ namespace MyGanAPP.Services
             }
         }
 
+        //This function adds a new allergy to the allergy list
         public async Task<bool> AddAllergy(Allergy a)
         {
             try
@@ -328,7 +331,6 @@ namespace MyGanAPP.Services
         }
 
         // Edit photo description
-
         public async Task<bool> EditPhotoDescription(Photo p)
         {
             try
@@ -344,7 +346,7 @@ namespace MyGanAPP.Services
                 HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/EditPhotoDescription", content);
                 if (response.IsSuccessStatusCode)
                 {
-                   
+
                     return true;
                 }
                 else
@@ -620,6 +622,7 @@ namespace MyGanAPP.Services
             }
         }
 
+        //This function adds new kindergaten to the data base
         public async Task<Kindergarten> AddKindergarten(Kindergarten k)
         {
             try
@@ -652,7 +655,7 @@ namespace MyGanAPP.Services
             }
         }
 
-
+        //Manaegr Register
         public async Task<User> Register(User user)
         {
             try
@@ -684,6 +687,8 @@ namespace MyGanAPP.Services
                 return null;
             }
         }
+
+        //TeacherRegister
         public async Task<User> TeacherRegister(User user)
         {
             try
@@ -717,6 +722,7 @@ namespace MyGanAPP.Services
 
         }
 
+        //Parent register
         public async Task<User> ParentRegister(User user, Student student)
         {
             RegisterUserDto registerUserDto = new RegisterUserDto()

@@ -291,7 +291,7 @@ namespace MyGanAPP.ViewModels
                 Gender = student.Gender;
 
                 GradeName = student.Grade.GradeName;
-
+                //Create allergy string
                 foreach (StudentAllergy sa in student.StudentAllergies)
                 {
                     Allergies += sa.Allergy.AllergyName + "," + " ";
@@ -304,10 +304,6 @@ namespace MyGanAPP.ViewModels
            ((App)App.Current).RefreshUI += OnRefresh;
 
         }
-
-
-
-
 
 
         public ICommand SaveCommand => new Command(OnSave);

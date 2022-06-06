@@ -397,8 +397,8 @@ namespace MyGanAPP.ViewModels
         //This contact is a reference to the updated or new created contact
         private User theUser;
 
-        //For adding a new contact, uc will be null
-        //For updates the user contact object should be sent to the constructor
+        //For adding a new manager, managegr will be null
+        //For updates the user object should be sent to the constructor
         public AddManagerViewModel(User manager = null)
         {
             App theApp = (App)App.Current;
@@ -488,7 +488,7 @@ namespace MyGanAPP.ViewModels
 
             if (ValidateForm())
             {
-                
+                // Update the fields 
                 this.theUser.Email = Email;
                 this.theUser.Password = Password;
                 this.theUser.Fname = ManagerFirstName;
@@ -496,12 +496,15 @@ namespace MyGanAPP.ViewModels
                 this.theUser.PhoneNumber = PhoneNumber;
 
                 App theApp = (App)App.Current;
+                //Checking if this is register or update
+                //If update - update kindergarten name
                 if (theApp.CurrUser != null)
                 {
                     this.theUser.KindergartenManagers.Where(k => k.KindergartenId == theApp.SelectedKindergarten.KindergartenId).FirstOrDefault().Kindergarten.Name = KindergartenName;
 
                 }
 
+                //If register - create new kindergarten object
                 else
                 {
                     Kindergarten newK = new Kindergarten
@@ -515,6 +518,7 @@ namespace MyGanAPP.ViewModels
                         Kindergarten = newK
                     };
 
+                    //Add kindergartenManager object to current user
                     theUser.KindergartenManagers.Add(KM);
                 }
 
@@ -529,6 +533,7 @@ namespace MyGanAPP.ViewModels
                     await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
                     await App.Current.MainPage.Navigation.PopModalAsync();
                 }
+                //Save details if register was successfull
                 else
                 {
                     if (this.imageFileResult != null)
@@ -580,6 +585,7 @@ namespace MyGanAPP.ViewModels
 
         public ICommand PassCommand { protected set; get; }
 
+        //Open and closed eye command
         public void OnShowPass()
         {
             if (ShowPass == false)

@@ -71,6 +71,7 @@ namespace MyGanAPP.ViewModels
             CreateCollection();
         }
 
+        //Create message collection
         private void CreateCollection()
         {
 
@@ -105,15 +106,16 @@ namespace MyGanAPP.ViewModels
 
         }
 
+        //Send message
         public ICommand SendMessageCommand => new Command(OnSendMessage);
         public async void OnSendMessage()
         {
             MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
-
+            //Validate message
             if (!string.IsNullOrEmpty(Message))
             {
-               
-                App a = (App)App.Current;
+               App a = (App)App.Current;
+                //Create new message
                 Message m = new Message()
                 {
                     Content = Message,
@@ -123,12 +125,15 @@ namespace MyGanAPP.ViewModels
                     User = a.CurrUser,
                 };
 
+                //Send message ton proxy
                 Message newMsg = await proxy.SendMessage(m);
                 Message = ""; 
 
+                //Check if the message is ok
                 if (newMsg != null)
                 {
                     a.SelectedGroup.Messages.Add(newMsg);
+                    //recreate the message collection
                     CreateCollection();
                 }
 

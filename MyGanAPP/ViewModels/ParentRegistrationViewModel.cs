@@ -1259,7 +1259,7 @@ namespace MyGanAPP.ViewModels
         private User theUser;
         private Student theStudent;
 
-        //For adding a new contact, uc will be null
+        //For adding a user, parent will be null
         //For updates the user contact object should be sent to the constructor
         public ParentRegistrationViewModel(User parent = null, Student student = null)
         {

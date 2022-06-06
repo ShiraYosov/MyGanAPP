@@ -223,6 +223,7 @@ namespace MyGanAPP.ViewModels
             CreateCollection();
         }
 
+        //Shows user popup wih his details on selection
         public ICommand SelectionChanged => new Command(OnSelection);
         public void OnSelection()
         {
@@ -260,6 +261,7 @@ namespace MyGanAPP.ViewModels
             }
         }
 
+        //Create list collection
         private async void CreateCollection()
         {
 
@@ -302,6 +304,7 @@ namespace MyGanAPP.ViewModels
             isRefreshing = false;
         }
 
+        //Disapprove user to register
         public ICommand DisapproveCommand => new Command(OnDisapprove);
         public async void OnDisapprove(object obj)
         {
@@ -349,7 +352,7 @@ namespace MyGanAPP.ViewModels
             }
         }
 
-
+        //Approve user to regiater
         public ICommand ApproveCommand => new Command(OnApprove);
         public async void OnApprove(object obj)
         {
@@ -393,14 +396,14 @@ namespace MyGanAPP.ViewModels
                 else
                 {
                     await App.Current.MainPage.DisplayAlert("שגיאה", "פעולה נכשלה!", "בסדר");
-                    //await App.Current.MainPage.Navigation.PopAsync();
+                    
                 }
             }
 
             else
             {
                 await App.Current.MainPage.DisplayAlert("שגיאה", "פעולה נכשלה!", "בסדר");
-                //await App.Current.MainPage.Navigation.PopModalAsync();
+               
             }
         }
     }

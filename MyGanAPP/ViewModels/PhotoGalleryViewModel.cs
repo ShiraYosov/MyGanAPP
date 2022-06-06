@@ -211,6 +211,7 @@ namespace MyGanAPP.ViewModels
 
         private void CreateEventCollection()
         {
+            //Create event collection according to the connected user
 
             EventList.Clear();
             App a = (App)App.Current;
@@ -239,6 +240,7 @@ namespace MyGanAPP.ViewModels
         }
         private void CreatePhotoCollection()
         {
+            //Create photo collection according to the connected user
             Photos.Clear();
             App theApp = (App)App.Current;
 
@@ -269,7 +271,7 @@ namespace MyGanAPP.ViewModels
             }
         }
 
-      
+      //this function gets a photo and list of events and checks if the photo exists in one of the events
         private bool IsPhotoInEvent(Photo p, List<Event> events)
         {
             foreach (Event ev in events)
@@ -281,13 +283,14 @@ namespace MyGanAPP.ViewModels
         }
 
 
-
+        //Popup packgroung click
         public ICommand BackgroundClicked => new Command(OnClick);
         public void OnClick()
         {
             PhotoDescription = "";
             SelectedImgSrc = null;
         }
+        //This function opens a carousel view of the current event photos
         public ICommand TapPhotoCommand => new Command(OnTapPhoto);
         public async void OnTapPhoto(object pic)
         {
@@ -321,6 +324,7 @@ namespace MyGanAPP.ViewModels
 
         }
 
+        //Delete Event
         public ICommand DeleteEventCommand => new Command(OnDeleteEvent);
         public async void OnDeleteEvent(object ev)
         {
@@ -344,6 +348,7 @@ namespace MyGanAPP.ViewModels
             }
         }
 
+        //Delete photo
         public ICommand DeletePhotoCommand => new Command(OnDeletePhoto);
         public async void OnDeletePhoto()
         {

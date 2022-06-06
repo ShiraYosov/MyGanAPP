@@ -485,15 +485,16 @@ namespace MyGanAPP.ViewModels
             CreateCollection();
         }
 
-
+        //Add a new user to an existion student
         public ICommand AddParentToStudentCommand => new Command(OnAddParent);
         public async void OnAddParent()
         {
-
+            //Validate all fields
             if (ValidateParentInfo())
             {
                 App a = (App)App.Current;
 
+                //Create new parent user
                 User p = new User()
                 {
                     Fname = ParentFirstName,
@@ -503,7 +504,7 @@ namespace MyGanAPP.ViewModels
                     Password = ""
                 };
 
-
+                //Craete new StudentOfUser object
                 StudentOfUser sou = new StudentOfUser()
                 {
                     Student = SelectedStudent,
@@ -514,12 +515,14 @@ namespace MyGanAPP.ViewModels
                     StatusId = PERMITTED_STATUS,
 
                 };
-              
-               p.StudentOfUsers.Add(sou);
+
+                //Add the StudentOfUser object to the parent
+                p.StudentOfUsers.Add(sou);
 
                 MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
                 User newU = await proxy.ParentRegister(p,SelectedStudent);
 
+                //Check if registration was ok
                 if (newU == null)
                 {
                     await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
@@ -550,6 +553,7 @@ namespace MyGanAPP.ViewModels
 
         }
 
+        //On student selection - push student info view
         public Command<Student> SelectionChanged => new Command<Student>(OnSelection);
         public void OnSelection(object s)
         {
@@ -584,6 +588,7 @@ namespace MyGanAPP.ViewModels
             }
         }
 
+        //Create Student collection
         private void CreateCollection()
         {
             StudentsList.Clear();
@@ -613,6 +618,7 @@ namespace MyGanAPP.ViewModels
             
         }
 
+        //On button press - open and close stack layout
         public ICommand Button1PressedCommand { protected set; get; }
         public void Button1Pressed()
         {

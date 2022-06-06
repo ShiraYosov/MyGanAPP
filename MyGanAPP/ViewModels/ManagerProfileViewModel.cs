@@ -175,6 +175,7 @@ namespace MyGanAPP.ViewModels
 
         #endregion
 
+        
         public ICommand SaveCommand => new Command(OnSave);
 
         public async void OnSave()

@@ -190,13 +190,17 @@ namespace MyGanAPP.ViewModels
             return true;
 
         }
+
+        //When adding new group
         public ICommand AddGroupCommand => new Command(OnAddGroup);
         public async void OnAddGroup()
         {
             await PopupNavigation.Instance.PopAsync();
+            //Validate all fields
             if (!string.IsNullOrEmpty(GroupName))
             {
                 App a = (App)App.Current;
+                //Create new group
                 Group group = new Group()
                 {
                     GroupName = GroupName,
@@ -206,11 +210,12 @@ namespace MyGanAPP.ViewModels
                     TeacherId = a.CurrUser.UserId
                 };
 
+                
                 MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
                 Group newGroup = await proxy.AddGroup(group);
                 GroupName = "";
 
-
+                //Checking if registration was ok. If not - display alert
                 if (newGroup == null) { await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת קבוצה נכשלה", "בסדר"); }
                 else
                 {
@@ -229,14 +234,16 @@ namespace MyGanAPP.ViewModels
 
         }
 
+        //When adding manager to a kindergarten
         public ICommand AddManagerToKindergartenCommand => new Command(OnAddManager);
         public async void OnAddManager()
         {
-            
+            //Validate all fields
             if (ValidateManagerInfo())
             {
                 App a = (App)App.Current;
 
+                //Create new manager
                 User m = new User()
                 {
                     Fname = ManagerFirstName,
@@ -245,6 +252,7 @@ namespace MyGanAPP.ViewModels
                     PhoneNumber = PhoneNumber,
                     Password= ""
                 };
+                //Create new kindergartenManager with the current kindergarten
                 KindergartenManager KM = new KindergartenManager
                 {
                     User = m,
@@ -252,11 +260,13 @@ namespace MyGanAPP.ViewModels
                     Kindergarten = a.SelectedKindergarten
                 };
 
+                //Add the Kindergarten Manager object to the manager usere
                 m.KindergartenManagers.Add(KM);
 
                 MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
                 User newU = await proxy.Register(m);
 
+                //Check if the register is ok
                 if (newU == null)
                 {
                     await App.Current.MainPage.DisplayAlert("שגיאה", "הרשמה נכשלה", "בסדר");
@@ -285,6 +295,7 @@ namespace MyGanAPP.ViewModels
 
         }
 
+        //On selection of a kindergarten group - sends user to group tab
         public ICommand SelectionChanged => new Command(OnSelection);
         public async void OnSelection()
         {

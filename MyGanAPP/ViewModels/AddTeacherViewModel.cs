@@ -420,8 +420,8 @@ namespace MyGanAPP.ViewModels
         //This contact is a reference to the updated or new created contact
         private User theUser;
 
-        //For adding a new contact, uc will be null
-        //For updates the user contact object should be sent to the constructor
+        //For adding a new user, teaher will be null
+        //For updates the user  object should be sent to the constructor
         public AddTeacherViewModel(User teacher = null)
         {
             App theApp = (App)App.Current;

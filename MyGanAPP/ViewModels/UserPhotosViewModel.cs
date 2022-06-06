@@ -32,11 +32,13 @@ namespace MyGanAPP.ViewModels
             CreateCollection();  
         }
 
+        //Create photo collection
         private void CreateCollection()
         {
             Photos.Clear();
             App theApp = (App)App.Current;
 
+            //adding photos according to the selected student
             if(theApp.CurrUser != null && theApp.SelectedStudent != null)
             {
                 foreach(Photo p in theApp.CurrUser.Photos)
@@ -46,6 +48,7 @@ namespace MyGanAPP.ViewModels
                 }
             }
 
+            //Adding photos according to the manage/ teacher
             else if(theApp.CurrUser != null)
             {
                 foreach (Photo p in theApp.CurrUser.Photos)
