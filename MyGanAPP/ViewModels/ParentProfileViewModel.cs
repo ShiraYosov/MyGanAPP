@@ -23,9 +23,9 @@ namespace MyGanAPP.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-      
-        
-        
+
+
+
         #region Refresh
         private bool isRefreshing;
         public bool IsRefreshing
@@ -48,7 +48,7 @@ namespace MyGanAPP.ViewModels
             User parent = a.CurrUser;
             Student student = a.SelectedStudent;
 
-            if (parent != null)
+            if (parent != null && student != null)
             {
                 UserImgSrc = student.PhotoURL;
                 UserName = parent.Fname;
@@ -112,7 +112,7 @@ namespace MyGanAPP.ViewModels
             get => lastName;
             set
             {
-               lastName = value;
+                lastName = value;
                 OnPropertyChanged("LastName");
             }
         }
@@ -187,7 +187,7 @@ namespace MyGanAPP.ViewModels
         #endregion
 
         #region BirthDate
-        
+
 
         private string birthDate;
 
@@ -197,12 +197,12 @@ namespace MyGanAPP.ViewModels
             set
             {
                 birthDate = value;
-               
+
                 OnPropertyChanged("BirthDate");
             }
         }
 
-       
+
         #endregion
 
         #region GroupName
@@ -221,7 +221,7 @@ namespace MyGanAPP.ViewModels
         #endregion
 
         #region Gender
-       
+
         private string gender;
 
         public string Gender
@@ -230,12 +230,12 @@ namespace MyGanAPP.ViewModels
             set
             {
                 gender = value;
-                
+
                 OnPropertyChanged("Gender");
             }
         }
 
-        
+
         #endregion
 
         #region Grade
@@ -271,7 +271,7 @@ namespace MyGanAPP.ViewModels
         public ParentProfileViewModel()
         {
             IsRefreshing = false;
-           
+
             App a = (App)App.Current;
             User parent = a.CurrUser;
             Student student = a.SelectedStudent;
@@ -296,7 +296,7 @@ namespace MyGanAPP.ViewModels
                 {
                     Allergies += sa.Allergy.AllergyName + "," + " ";
                 }
-                
+
                 if (student.StudentAllergies.Count == 0) { Allergies = "לא נבחרו אלרגיות"; }
                 else
                     Allergies = Allergies.Substring(0, Allergies.Length - 2);
