@@ -486,6 +486,7 @@ namespace MyGanAPP.ViewModels
             MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
 
 
+            
             if (ValidateForm())
             {
                 // Update the fields 

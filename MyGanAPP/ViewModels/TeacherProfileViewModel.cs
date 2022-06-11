@@ -181,5 +181,16 @@ namespace MyGanAPP.ViewModels
         {
             await App.Current.MainPage.Navigation.PushAsync(new Views.AddTeacherView());
         }
+
+        public ICommand LogOutCommand => new Command(OnLogout);
+
+        public async void OnLogout()
+        {
+           MyGanAPIProxy proxy = MyGanAPIProxy.CreateProxy();
+            bool ok = await proxy.Logout();
+
+        }
+
+           
     }
 }

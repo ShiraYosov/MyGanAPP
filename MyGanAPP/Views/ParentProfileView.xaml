@@ -9,7 +9,7 @@
         <ScrollView>
         <StackLayout>
 
-            <Button Text="התנתקות" TextColor="White" Margin="5" Padding="0" FontAttributes="Bold" FontSize="16" BackgroundColor="#023047" HorizontalOptions="Start" Clicked="LogOut_Clicked"></Button>
+                <Button Text="התנתקות" TextColor="White" Margin="5" Padding="0" FontAttributes="Bold" FontSize="16" BackgroundColor="#023047" HorizontalOptions="Start" Command="{Binding LogOutCommand}" Clicked="LogOut_Clicked"></Button>
 
             <!--Photo-->
             <Grid>
